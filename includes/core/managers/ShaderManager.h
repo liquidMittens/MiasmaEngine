@@ -6,7 +6,7 @@
 #include "ShaderManager.h"
 
 constexpr int SHADER_SIZE_MAX = 5000;
-#define SHADER_DIR "..\\..\\resources\\shaders\\"
+#define SHADER_DIR "resources\\shaders\\"
 
 enum class ShaderType
 {

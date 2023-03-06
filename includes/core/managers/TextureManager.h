@@ -5,7 +5,7 @@
 #include <string>
 #include <map>
 
-#define TEXTURE_DIR "..\\..\\resources\\textures\\"
+#define TEXTURE_DIR "resources\\textures\\"
 
 class Texture2D;
 
