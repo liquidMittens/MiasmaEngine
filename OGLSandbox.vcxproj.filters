@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\shaders">
+      <UniqueIdentifier>{2ef92d97-5abc-4213-874f-aea1c3eb3fb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{10e67532-87d9-4907-80e8-7526c4fde93b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{ca03f999-e1c0-491d-a5ce-05d6e3d3963c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\glad">
+      <UniqueIdentifier>{167e2f69-85f9-48ee-912f-d6879a91c048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\GLFW">
+      <UniqueIdentifier>{6176d8e1-9890-45d0-9d53-43b3399c9b76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\glad">
+      <UniqueIdentifier>{a57a67ae-ec84-4f21-b5b5-cbeb411e1ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\textures">
+      <UniqueIdentifier>{1554369b-cc9e-4f61-8ebe-79b27fa9da35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\rendering">
+      <UniqueIdentifier>{329a47d7-cbc2-4693-86bc-d56b4f33ee92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\rendering">
+      <UniqueIdentifier>{ff64f500-b5be-4c7f-a6d0-54258cadf6e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\glm">
+      <UniqueIdentifier>{62cf155a-7a1b-48bb-a445-603949ae1308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\objects">
+      <UniqueIdentifier>{4f952668-c9f4-443b-a264-c56bbf95d97b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\camera">
+      <UniqueIdentifier>{e7009870-77a4-49d0-88cf-46544155dc6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\camera">
+      <UniqueIdentifier>{5250c50e-c7fe-4163-91cc-0bb258e2a4b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\input">
+      <UniqueIdentifier>{32eb038f-be58-4a9c-ba3c-7c67ccd2d770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\utility">
+      <UniqueIdentifier>{4013f865-3d67-4d33-80b9-874fcb44fb74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\utility">
+      <UniqueIdentifier>{eda59ae3-0b8d-4d22-9ef7-792257b92445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\input">
+      <UniqueIdentifier>{81c0a389-cc95-4da0-a56e-0bce82066000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\managers">
+      <UniqueIdentifier>{fdf1fbc1-25ef-4b3a-a943-e6bf1b74f871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\managers">
+      <UniqueIdentifier>{3f4c3b1a-a4b0-4b0e-8e79-6712b37049ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\model">
+      <UniqueIdentifier>{6034404d-a1f0-41f0-ae2b-c0c498c60c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\model">
+      <UniqueIdentifier>{5716509d-3e54-458b-a40d-f23344649208}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\glad\glad.c">
+      <Filter>Source Files\core\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\camera\Camera.cpp">
+      <Filter>Source Files\core\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\input\InputManager.cpp">
+      <Filter>Source Files\core\input</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\input\KeyboardInput.cpp">
+      <Filter>Source Files\core\input</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\managers\TextureManager.cpp">
+      <Filter>Source Files\core\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\rendering\Texture2D.cpp">
+      <Filter>Source Files\core\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\rendering\MeshRenderable.cpp">
+      <Filter>Source Files\core\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\rendering\Material.cpp">
+      <Filter>Source Files\core\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\managers\ShaderManager.cpp">
+      <Filter>Source Files\core\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\rendering\GLRenderer.cpp">
+      <Filter>Source Files\core\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\model\Scene.cpp">
+      <Filter>Source Files\core\model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="includes\core\glad\glad.h">
+      <Filter>Header Files\core\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\GLFW\glfw3.h">
+      <Filter>Header Files\core\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\GLFW\glfw3native.h">
+      <Filter>Header Files\core\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\rendering\IRenderInterface.h">
+      <Filter>Header Files\core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\common.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\exponential.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\ext.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\fwd.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\geometric.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\glm.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\integer.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat2x2.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat2x3.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat2x4.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat3x2.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat3x3.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat3x4.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat4x2.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat4x3.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\mat4x4.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\matrix.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\packing.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\trigonometric.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\vec2.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\vec3.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\vec4.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\glm\vector_relational.hpp">
+      <Filter>Header Files\core\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Triangle.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Cube.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\camera\Camera.h">
+      <Filter>Header Files\core\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\input\InputManager.h">
+      <Filter>Header Files\core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\input\IInputInterface.h">
+      <Filter>Header Files\core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\input\KeyboardInput.h">
+      <Filter>Header Files\core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\managers\TextureManager.h">
+      <Filter>Header Files\core\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\rendering\Texture2D.h">
+      <Filter>Header Files\core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\rendering\MeshRenderable.h">
+      <Filter>Header Files\core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\rendering\Material.h">
+      <Filter>Header Files\core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\managers\ShaderManager.h">
+      <Filter>Header Files\core\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\rendering\GLRenderer.h">
+      <Filter>Header Files\core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Scene.h">
+      <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Rectangle.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shaders\BasicColor.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BasicColor.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BasicTexture.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BasicTexture.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BasicColorTexture.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BasicColorTexture.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\textures\stone.png">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
