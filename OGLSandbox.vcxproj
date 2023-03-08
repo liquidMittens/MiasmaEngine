@@ -146,11 +146,13 @@
     <ClCompile Include="source\core\input\KeyboardInput.cpp" />
     <ClCompile Include="source\core\managers\ShaderManager.cpp" />
     <ClCompile Include="source\core\managers\TextureManager.cpp" />
+    <ClCompile Include="source\core\model\Light.cpp" />
     <ClCompile Include="source\core\model\Scene.cpp" />
     <ClCompile Include="source\core\rendering\GLRenderer.cpp" />
     <ClCompile Include="source\core\rendering\Material.cpp" />
     <ClCompile Include="source\core\rendering\MeshRenderable.cpp" />
     <ClCompile Include="source\core\rendering\Texture2D.cpp" />
+    <ClCompile Include="source\core\utility\MeshLoader.cpp" />
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -186,15 +188,18 @@
     <ClInclude Include="includes\core\input\KeyboardInput.h" />
     <ClInclude Include="includes\core\managers\ShaderManager.h" />
     <ClInclude Include="includes\core\managers\TextureManager.h" />
+    <ClInclude Include="includes\core\model\Cube.h" />
+    <ClInclude Include="includes\core\model\Light.h" />
+    <ClInclude Include="includes\core\model\Rectangle.h" />
     <ClInclude Include="includes\core\model\Scene.h" />
-    <ClInclude Include="includes\core\objects\Cube.h" />
-    <ClInclude Include="includes\core\objects\Rectangle.h" />
-    <ClInclude Include="includes\core\objects\Triangle.h" />
+    <ClInclude Include="includes\core\model\Triangle.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer.h" />
     <ClInclude Include="includes\core\rendering\IRenderInterface.h" />
     <ClInclude Include="includes\core\rendering\Material.h" />
     <ClInclude Include="includes\core\rendering\MeshRenderable.h" />
     <ClInclude Include="includes\core\rendering\Texture2D.h" />
+    <ClInclude Include="includes\core\utility\MeshLoader.h" />
+    <ClInclude Include="includes\core\utility\tiny_obj_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\BasicColor.fs" />
@@ -203,6 +208,10 @@
     <None Include="resources\shaders\BasicColorTexture.vs" />
     <None Include="resources\shaders\BasicTexture.fs" />
     <None Include="resources\shaders\BasicTexture.vs" />
+    <None Include="resources\shaders\BlinnPhong.fs" />
+    <None Include="resources\shaders\BlinnPhong.vs" />
+    <None Include="resources\shaders\Diffuse.fs" />
+    <None Include="resources\shaders\Diffuse.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\stone.png" />

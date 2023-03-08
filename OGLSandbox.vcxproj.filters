@@ -114,6 +114,12 @@
     <ClCompile Include="source\core\model\Scene.cpp">
       <Filter>Source Files\core\model</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\utility\MeshLoader.cpp">
+      <Filter>Source Files\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\model\Light.cpp">
+      <Filter>Source Files\core\model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -197,12 +203,6 @@
     <ClInclude Include="includes\core\glm\vector_relational.hpp">
       <Filter>Header Files\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\Triangle.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\objects\Cube.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\camera\Camera.h">
       <Filter>Header Files\core\camera</Filter>
     </ClInclude>
@@ -236,8 +236,23 @@
     <ClInclude Include="includes\core\model\Scene.h">
       <Filter>Header Files\core\model</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\Rectangle.h">
-      <Filter>Header Files\core\objects</Filter>
+    <ClInclude Include="includes\core\utility\tiny_obj_loader.h">
+      <Filter>Header Files\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\utility\MeshLoader.h">
+      <Filter>Header Files\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Cube.h">
+      <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Rectangle.h">
+      <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Triangle.h">
+      <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Light.h">
+      <Filter>Header Files\core\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +272,18 @@
       <Filter>Resource Files\shaders</Filter>
     </None>
     <None Include="resources\shaders\BasicColorTexture.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BlinnPhong.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BlinnPhong.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\Diffuse.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\Diffuse.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
   </ItemGroup>

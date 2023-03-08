@@ -9,15 +9,15 @@ using namespace tdogl;
 void GLRenderer::Initialize(std::shared_ptr<tdogl::Camera> camera)
 {
 	m_camera = camera;
-}
-
-void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
-{
 	// set up framebuffer
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
+{
 	// clear buffer and depth buffer 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -26,7 +26,19 @@ void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 
 		// use the current shader of the object
 		glUseProgram(mesh->GetMaterial().GetShader());
-		// setup texture 
+		/*
+			LIGHTS
+		*/
+		// grab light information from shader
+		glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader(), "light.color"), 1, glm::value_ptr(scene->GetLights()[0]->GetLightColor()));
+		// grab light information from shader
+		glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader(), "light.position"), 1, glm::value_ptr(scene->GetLights()[0]->GetLightPosition()));
+		// grab light information from shader
+		glUniform1f(glGetUniformLocation(mesh->GetMaterial().GetShader(), "light.strength"), scene->GetLights()[0]->GetLightStrength());
+		// CAMERA POS 
+		glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader(), "cameraPosition"), 1, glm::value_ptr(m_camera->position()));
+		
+		// setup texture (get texture location "textureSample")
 		glUniform1i(glGetUniformLocation(mesh->GetMaterial().GetShader(), "textureSample"), 0);
 		// update camera transform 
 		glUniformMatrix4fv(glGetUniformLocation(mesh->GetMaterial().GetShader(), "camera"), 1, false, glm::value_ptr(m_camera->matrix()));

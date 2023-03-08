@@ -7,6 +7,7 @@
 #include "GLFW/glfw3.h"
 #include "managers/ShaderManager.h"
 #include "managers/TextureManager.h"
+#include "model/Light.h"
 
 class MeshRenderable;
 using MeshRenderableListType = std::vector<std::shared_ptr<MeshRenderable>>;
@@ -39,6 +40,7 @@ public:
 
 	std::shared_ptr<tdogl::Camera> GetCamera() { return m_camera; }
 	MeshRenderableListType GetMeshList() { return m_meshRenderableList; }
+	std::vector<std::unique_ptr<Light>>& GetLights() { return m_lights; }
 
 private:
 	std::shared_ptr<tdogl::Camera> m_camera;
@@ -58,6 +60,7 @@ private:
 	double m_currentTime;
 	int m_numFrames;
 	float m_frameTime;
+	std::vector<std::unique_ptr<Light>> m_lights;
 };
 
 #endif

@@ -10,6 +10,12 @@ using namespace tdogl;
 class MeshRenderable;
 class Scene;
 
+struct LightShaderInformation {
+	unsigned int position;
+	unsigned int color;
+	unsigned int strength;
+};
+
 class GLRenderer : public IRenderInterface
 {
 public:
@@ -22,7 +28,8 @@ public:
 private:
 	std::shared_ptr<tdogl::Camera> m_camera;
 	std::vector<std::shared_ptr<MeshRenderable>> m_meshList;
-
+	LightShaderInformation m_lightShaderInfo;
+	unsigned int m_cameraShaderPos;
 };
 
 #endif

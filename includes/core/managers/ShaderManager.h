@@ -13,6 +13,8 @@ enum class ShaderType
 	BasicColor = 0,
 	BasicTexture,
 	BasicColorTexture,
+	BlinnPhong,
+	Diffuse,
 	Unknown
 };
 

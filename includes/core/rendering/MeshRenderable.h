@@ -6,12 +6,19 @@
 #include "glm/gtc/type_ptr.hpp"
 #include <vector>
 
-constexpr int xyz_rgb_st_format_size = 8;
+constexpr int xyz_rgb_st_format_size = 8; // pos,color,texcoords
+constexpr int xyz_st_xyz_format_size = 8; // pos,texcoords,normals
+
+struct MeshRenderableCreateInfo
+{
+	const char* filename;
+	glm::mat4 preTransform;
+};
 
 class MeshRenderable
 {
 public:
-	MeshRenderable(std::vector<float> vertices, const Material& mat);
+	MeshRenderable(MeshRenderableCreateInfo *pCreateInfo, const Material& mat);
 	~MeshRenderable();
 
 	bool AttachMaterial(const Material& newMat);
