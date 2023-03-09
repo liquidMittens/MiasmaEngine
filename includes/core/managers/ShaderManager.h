@@ -15,10 +15,18 @@ enum class ShaderType
 	BasicColorTexture,
 	BlinnPhong,
 	Diffuse,
-	Unknown
+	Unknown,
+	MaxShaders
 };
 
-using ShaderMapType = std::map<ShaderType, unsigned int>;
+struct ShaderInfo
+{
+	ShaderType shaderType;
+	unsigned int shaderId;
+	std::string shaderName;
+};
+
+using ShaderMapType = std::map<ShaderType, ShaderInfo>;
 using ProgramEnum = enum class ShaderType;
 
 class ShaderManager
@@ -29,7 +37,7 @@ public:
 
 	void LoadShaderList(std::string_view dirPath);
 	void LoadShader(const std::string& shaderName, ShaderType shaderEnum);
-	int GetShaderFromMap(ShaderType shaderName);
+	ShaderInfo GetShaderFromMap(ShaderType shaderName);
 
 private:
 	ShaderManager(const ShaderManager&) = delete;

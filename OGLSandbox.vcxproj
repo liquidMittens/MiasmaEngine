@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\gui</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -128,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\gui</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -142,6 +142,14 @@
   <ItemGroup>
     <ClCompile Include="source\core\camera\Camera.cpp" />
     <ClCompile Include="source\core\glad\glad.c" />
+    <ClCompile Include="source\core\gui\GUIBuilder.cpp" />
+    <ClCompile Include="source\core\gui\imgui.cpp" />
+    <ClCompile Include="source\core\gui\imgui_demo.cpp" />
+    <ClCompile Include="source\core\gui\imgui_draw.cpp" />
+    <ClCompile Include="source\core\gui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="source\core\gui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="source\core\gui\imgui_tables.cpp" />
+    <ClCompile Include="source\core\gui\imgui_widgets.cpp" />
     <ClCompile Include="source\core\input\InputManager.cpp" />
     <ClCompile Include="source\core\input\KeyboardInput.cpp" />
     <ClCompile Include="source\core\managers\ShaderManager.cpp" />
@@ -183,6 +191,16 @@
     <ClInclude Include="includes\core\glm\vec3.hpp" />
     <ClInclude Include="includes\core\glm\vec4.hpp" />
     <ClInclude Include="includes\core\glm\vector_relational.hpp" />
+    <ClInclude Include="includes\core\gui\GUIBuilder.h" />
+    <ClInclude Include="includes\core\gui\imconfig.h" />
+    <ClInclude Include="includes\core\gui\imgui.h" />
+    <ClInclude Include="includes\core\gui\imgui_impl_glfw.h" />
+    <ClInclude Include="includes\core\gui\imgui_impl_opengl3.h" />
+    <ClInclude Include="includes\core\gui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="includes\core\gui\imgui_internal.h" />
+    <ClInclude Include="includes\core\gui\imstb_rectpack.h" />
+    <ClInclude Include="includes\core\gui\imstb_textedit.h" />
+    <ClInclude Include="includes\core\gui\imstb_truetype.h" />
     <ClInclude Include="includes\core\input\IInputInterface.h" />
     <ClInclude Include="includes\core\input\InputManager.h" />
     <ClInclude Include="includes\core\input\KeyboardInput.h" />

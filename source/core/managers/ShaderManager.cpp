@@ -93,20 +93,22 @@ void ShaderManager::LoadShader(const std::string& shaderName, ShaderType shaderE
 			glDeleteShader(vsInt);
 			glDeleteShader(fsInt);
 
+			// create new shaderInfo object
+			ShaderInfo newShader = { shaderEnum, newProgram, shaderName };
 			// add this new program to the shader manager and use shaderEnum as the calling key
-			m_shaderMap.insert(std::make_pair(shaderEnum, newProgram));
+			m_shaderMap.insert(std::make_pair(shaderEnum, newShader));
 		}
 	}
 }
 
-int ShaderManager::GetShaderFromMap(ShaderType shaderName)
+ShaderInfo ShaderManager::GetShaderFromMap(ShaderType shaderName)
 {
-	int shaderNumber = -1;
+	ShaderInfo shader = {ShaderType::Unknown, 0, "Unknown"};
 	if (m_shaderMap.size() > 0) {
 		auto shaderIter = m_shaderMap.find(shaderName);
 		if (shaderIter != m_shaderMap.end()) {
-			shaderNumber = (*shaderIter).second;
+			shader = (*shaderIter).second;
 		}
 	}
-	return shaderNumber;
+	return shader;
 }

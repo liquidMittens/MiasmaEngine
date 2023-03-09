@@ -20,7 +20,7 @@ class GLRenderer : public IRenderInterface
 {
 public:
 	// Inherited via IRenderInterface
-	virtual void Initialize(std::shared_ptr<tdogl::Camera> camera) override;
+	virtual void Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> camera) override;
 	virtual void DrawScene(std::unique_ptr<Scene>& scene) override;
 	virtual void Shutdown() override;
 
@@ -30,6 +30,7 @@ private:
 	std::vector<std::shared_ptr<MeshRenderable>> m_meshList;
 	LightShaderInformation m_lightShaderInfo;
 	unsigned int m_cameraShaderPos;
+	bool tst;
 };
 
 #endif

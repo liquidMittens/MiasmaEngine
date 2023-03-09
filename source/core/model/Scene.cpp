@@ -9,6 +9,7 @@
 #include "utility/MeshLoader.h"
 
 double Scene::m_scrollY = 0.0;
+bool Scene::m_mouseModeEnabled = false;
  
 Scene::Scene(SceneCreationInfo* creationInfo)
 {
@@ -17,8 +18,10 @@ Scene::Scene(SceneCreationInfo* creationInfo)
 	m_screenSize.y = creationInfo->screenSize.y;
 	// register callbacks 
 	glfwSetScrollCallback(m_glfwWindow, Scene::OnScroll);
+	glfwSetMouseButtonCallback(m_glfwWindow, Scene::OnMouseButton);
 	m_camera = std::make_shared<tdogl::Camera>();
 	m_camera->initcamera(45.0f, 0.1f, 100.0f, glm::vec3(0, 0, 4), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_mouseModeEnabled = false;
 }
 
 Scene::~Scene()
@@ -31,31 +34,33 @@ void Scene::EnterScene()
 	m_camera->initcamera(45.0f, 0.1f, 100.0f, glm::vec3(0, 0, 4), glm::vec2(m_screenSize.x, m_screenSize.y));
 	// create a cube mesh renderable
 	m_shaderManager.LoadShader("BasicColor", ShaderType::BasicColor);
-	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicColor) << '\n';
+	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicColor).shaderId << '\n';
 	m_shaderManager.LoadShader("BasicTexture", ShaderType::BasicTexture);
-	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicTexture) << '\n';
+	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicTexture).shaderId << '\n';
 	m_shaderManager.LoadShader("BasicColorTexture", ShaderType::BasicColorTexture);
-	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicColorTexture) << '\n';
+	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicColorTexture).shaderId << '\n';
 	m_shaderManager.LoadShader("BlinnPhong", ShaderType::BlinnPhong);
-	std::cout << "got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BlinnPhong) << '\n';
+	std::cout << "got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BlinnPhong).shaderId << '\n';
 	m_shaderManager.LoadShader("Diffuse", ShaderType::Diffuse);
-	std::cout << "got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::Diffuse) << '\n';
-	std::cout << "Got Bad Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::Unknown) << '\n';
+	std::cout << "got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::Diffuse).shaderId << '\n';
+	std::cout << "Got Bad Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::Unknown).shaderId << '\n';
 	m_textureManager.LoadTexture("stone");
 	m_textureManager.LoadTexture("banana");
 	m_textureManager.LoadTexture("cat");
 	m_textureManager.LoadTexture("crate1");
+	m_textureManager.LoadTexture("black");
+	m_textureManager.LoadTexture("unknown");
 
 	// Create using a MeshRenderable
 	Material textureColorMaterial;
 	textureColorMaterial.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
-	textureColorMaterial.AttachShader(ShaderType::BlinnPhong, m_shaderManager.GetShaderFromMap(ShaderType::BlinnPhong));
+	textureColorMaterial.AttachShader(m_shaderManager.GetShaderFromMap(ShaderType::BlinnPhong));
 	Material textureColorMaterial2;
 	textureColorMaterial2.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
-	textureColorMaterial2.AttachShader(ShaderType::Diffuse, m_shaderManager.GetShaderFromMap(ShaderType::Diffuse));
+	textureColorMaterial2.AttachShader(m_shaderManager.GetShaderFromMap(ShaderType::Diffuse));
 	Material stoneTextureMaterial;
-	stoneTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("crate1")->GetTextureName(), m_textureManager.GetTextureInfo("crate1")->GetTextureId());
-	stoneTextureMaterial.AttachShader(ShaderType::BasicTexture, m_shaderManager.GetShaderFromMap(ShaderType::BasicTexture));
+	stoneTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("black")->GetTextureName(), m_textureManager.GetTextureInfo("black")->GetTextureId());
+	stoneTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap(ShaderType::BasicTexture));
 	
 	// load two meshes
 	MeshRenderableCreateInfo createInfo;
@@ -65,8 +70,8 @@ void Scene::EnterScene()
 	teapotInfo.filename = "cat.obj";
 	teapotInfo.preTransform = 0.1f * glm::mat4(1.0f);
 	MeshRenderableCreateInfo cubeRenderable;
-	cubeRenderable.filename = "Crate1.obj";
-	cubeRenderable.preTransform = 0.2f * glm::mat4(1.0f);
+	cubeRenderable.filename = "sphere.obj";
+	cubeRenderable.preTransform = 0.05f * glm::mat4(1.0f);
 
 	std::shared_ptr<MeshRenderable> cubeMesh(new MeshRenderable(&createInfo, textureColorMaterial));
 	m_meshRenderableList.push_back(cubeMesh);
@@ -141,22 +146,21 @@ void Scene::ProcessInput(GLFWwindow* pWindow, float deltaTime)
 			m_camera->offsetPosition(deltaTime * moveSpeed * glm::vec3(0, 1, 0));
 		}
 
-		char buffer[1024];
-		memset(buffer, '\0', 1024);
+		if (!m_mouseModeEnabled) {
+			//rotate camera based on mouse movement
+			const float mouseSensitivity = 0.1f;
+			double mouseX, mouseY;
+			glfwGetCursorPos(pWindow, &mouseX, &mouseY);
+			m_camera->offsetOrientation(mouseSensitivity * (float)mouseY, mouseSensitivity * (float)mouseX);
+			glfwSetCursorPos(pWindow, 0, 0); //reset the mouse, so it doesn't go out of the window
 
-		//rotate camera based on mouse movement
-		const float mouseSensitivity = 0.1f;
-		double mouseX, mouseY;
-		glfwGetCursorPos(pWindow, &mouseX, &mouseY);
-		m_camera->offsetOrientation(mouseSensitivity * (float)mouseY, mouseSensitivity * (float)mouseX);
-		glfwSetCursorPos(pWindow, 0, 0); //reset the mouse, so it doesn't go out of the window
-
-		//increase or decrease field of view based on mouse wheel
-		float fieldOfView = m_camera->fieldOfView() + zoomSensitivity * (float)m_scrollY;
-		if (fieldOfView < 5.0f) fieldOfView = 5.0f;
-		if (fieldOfView > 130.0f) fieldOfView = 130.0f;
-		m_camera->setFieldOfView(fieldOfView);
-		m_scrollY = 0;
+			//increase or decrease field of view based on mouse wheel
+			float fieldOfView = m_camera->fieldOfView() + zoomSensitivity * (float)m_scrollY;
+			if (fieldOfView < 5.0f) fieldOfView = 5.0f;
+			if (fieldOfView > 130.0f) fieldOfView = 130.0f;
+			m_camera->setFieldOfView(fieldOfView);
+			m_scrollY = 0;
+		}
 	}
 }
 
@@ -164,4 +168,19 @@ void Scene::ProcessInput(GLFWwindow* pWindow, float deltaTime)
 void Scene::OnScroll(GLFWwindow* window, double deltaX, double deltaY)
 {
 	m_scrollY += deltaY;
+}
+
+void Scene::OnMouseButton(GLFWwindow* window, int button, int action, int mods)
+{
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
+		glfwSetCursorPos(window, 0, 0); //reset the mouse, so it doesn't go out of the window
+		std::cout << "clicked mouse button right\n";
+		m_mouseModeEnabled = !m_mouseModeEnabled;
+		if (m_mouseModeEnabled) {
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		}
+		else {
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
+	}
 }

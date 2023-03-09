@@ -25,6 +25,8 @@ struct SceneCreationInfo
 
 class Scene
 {
+	friend class GUIBuilder;
+
 public:
 	Scene(SceneCreationInfo* creationInfo);
 	~Scene();
@@ -36,11 +38,13 @@ public:
 	void ExitScene();
 	void ProcessInput(GLFWwindow* pWindow, float frameTime);
 	static void OnScroll(GLFWwindow* window, double deltaX, double deltaY);
+	static void OnMouseButton(GLFWwindow* window, int button, int action, int mods);
 
 
 	std::shared_ptr<tdogl::Camera> GetCamera() { return m_camera; }
 	MeshRenderableListType GetMeshList() { return m_meshRenderableList; }
 	std::vector<std::unique_ptr<Light>>& GetLights() { return m_lights; }
+	GLFWwindow* GetGLFWWindow() { return m_glfwWindow; }
 
 private:
 	std::shared_ptr<tdogl::Camera> m_camera;
@@ -61,6 +65,7 @@ private:
 	int m_numFrames;
 	float m_frameTime;
 	std::vector<std::unique_ptr<Light>> m_lights;
+	static bool m_mouseModeEnabled;
 };
 
 #endif

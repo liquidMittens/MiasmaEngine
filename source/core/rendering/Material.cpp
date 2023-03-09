@@ -1,8 +1,6 @@
 #include "rendering\Material.h"
 
 Material::Material() : 
-	m_shaderType(ShaderType::BasicColor),
-	m_shader(0),
 	m_textureId(0),
 	m_textureName("None")
 {
@@ -16,7 +14,6 @@ Material::~Material()
 
 Material::Material(const Material& obj)
 {
-	m_shaderType = obj.m_shaderType;
 	m_shader = obj.m_shader;
 	m_textureId = obj.m_textureId;
 	m_textureName = obj.m_textureName;
@@ -25,7 +22,6 @@ Material::Material(const Material& obj)
 Material& Material::operator=(const Material& obj)
 {
 	if (this != &obj) {
-		m_shaderType = obj.m_shaderType;
 		m_shader = obj.m_shader;
 		m_textureId = obj.m_textureId;
 		m_textureName = obj.m_textureName;
@@ -41,10 +37,9 @@ bool Material::AddTexture(std::string_view texturename, const unsigned int& text
 	return success;
 }
 
-bool Material::AttachShader(ShaderType shaderType, const unsigned int& shader)
+bool Material::AttachShader(ShaderInfo shaderInfo)
 {
 	bool success = true;
-	m_shaderType = shaderType;
-	m_shader = shader;
+	m_shader = shaderInfo;
 	return success;
 }

@@ -41,10 +41,26 @@ GLFWwindow* InitWindow()
 		if (result) {
 			glViewport(0, 0, (int)SCREEN_SIZE.x, (int)SCREEN_SIZE.y);
 			glfwSetInputMode(pWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			glfwSetInputMode(pWindow, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
 			glfwSetCursorPos(pWindow, 0, 0);
 		} 
 	}
 	return pWindow;
+}
+
+GLFWcursor* InitGLFWCursor(GLFWwindow* pWindow) {
+	GLFWcursor* pStandardCursor = glfwCreateStandardCursor(GLFW_HRESIZE_CURSOR);
+	if (pStandardCursor != nullptr) {
+		//glfwSetCursorPosCallback(pWindow, cursor_position_callback);
+		glfwSetCursor(pWindow, pStandardCursor);
+	}
+	return pStandardCursor;
+}
+
+void DestroyGLFWCursor(GLFWcursor* pCursor) {
+	if (pCursor != nullptr) {
+		glfwDestroyCursor(pCursor);
+	}
 }
 
 void calculateFrameRate(GLFWwindow* pWindow) {
@@ -66,12 +82,13 @@ void calculateFrameRate(GLFWwindow* pWindow) {
 int main(int argc, char** argv)
 {
 	GLFWwindow* pWindow = InitWindow();
+	GLFWcursor* pCursor = InitGLFWCursor(pWindow);
 	SceneCreationInfo sceneCreationInfo = { pWindow, SCREEN_SIZE };
 	std::unique_ptr<Scene> scene(new Scene(&sceneCreationInfo));
 	scene->EnterScene();
 
 	GLRenderer renderer;
-	renderer.Initialize(scene->GetCamera());
+	renderer.Initialize(pWindow, scene->GetCamera());
 	
 	float prevTime = 0.0f;
 	while (!glfwWindowShouldClose(pWindow)) {
@@ -88,6 +105,7 @@ int main(int argc, char** argv)
 
 	scene->ExitScene();
 	renderer.Shutdown();
+	DestroyGLFWCursor(pCursor);
 	glfwTerminate();
 	return 0;
 }
