@@ -20,7 +20,7 @@ Scene::Scene(SceneCreationInfo* creationInfo)
 	glfwSetScrollCallback(m_glfwWindow, Scene::OnScroll);
 	glfwSetMouseButtonCallback(m_glfwWindow, Scene::OnMouseButton);
 	m_camera = std::make_shared<tdogl::Camera>();
-	m_camera->initcamera(45.0f, 0.1f, 100.0f, glm::vec3(0, 0, 4), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_camera->initcamera(45.0f, 0.1f, 100.0f, glm::vec3(0, 0, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_mouseModeEnabled = false;
 }
 
@@ -31,62 +31,66 @@ Scene::~Scene()
 
 void Scene::EnterScene()
 {
-	m_camera->initcamera(45.0f, 0.1f, 100.0f, glm::vec3(0, 0, 4), glm::vec2(m_screenSize.x, m_screenSize.y));
-	// create a cube mesh renderable
-	m_shaderManager.LoadShader("BasicColor", ShaderType::BasicColor);
-	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicColor).shaderId << '\n';
-	m_shaderManager.LoadShader("BasicTexture", ShaderType::BasicTexture);
-	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicTexture).shaderId << '\n';
-	m_shaderManager.LoadShader("BasicColorTexture", ShaderType::BasicColorTexture);
-	std::cout << "Got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BasicColorTexture).shaderId << '\n';
-	m_shaderManager.LoadShader("BlinnPhong", ShaderType::BlinnPhong);
-	std::cout << "got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::BlinnPhong).shaderId << '\n';
-	m_shaderManager.LoadShader("Diffuse", ShaderType::Diffuse);
-	std::cout << "got Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::Diffuse).shaderId << '\n';
-	std::cout << "Got Bad Shader #: " << m_shaderManager.GetShaderFromMap(ShaderType::Unknown).shaderId << '\n';
+	m_camera->initcamera(45.0f, 0.1f, 100.0f, glm::vec3(0, 3, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_shaderManager.LoadShaderList(SHADER_DIR);
+
 	m_textureManager.LoadTexture("stone");
 	m_textureManager.LoadTexture("banana");
 	m_textureManager.LoadTexture("cat");
 	m_textureManager.LoadTexture("crate1");
 	m_textureManager.LoadTexture("black");
 	m_textureManager.LoadTexture("unknown");
+	m_textureManager.LoadTexture("cottage");
 
 	// Create using a MeshRenderable
-	Material textureColorMaterial;
-	textureColorMaterial.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
-	textureColorMaterial.AttachShader(m_shaderManager.GetShaderFromMap(ShaderType::BlinnPhong));
-	Material textureColorMaterial2;
-	textureColorMaterial2.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
-	textureColorMaterial2.AttachShader(m_shaderManager.GetShaderFromMap(ShaderType::Diffuse));
-	Material stoneTextureMaterial;
-	stoneTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("black")->GetTextureName(), m_textureManager.GetTextureInfo("black")->GetTextureId());
-	stoneTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap(ShaderType::BasicTexture));
+	Material textureBlinnMaterial;
+	textureBlinnMaterial.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
+	textureBlinnMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
+	Material textureDiffuseMaterial2;
+	textureDiffuseMaterial2.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
+	textureDiffuseMaterial2.AttachShader(m_shaderManager.GetShaderFromMap("TextureOutline"));
+	Material basicTextureMaterial;
+	basicTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("black")->GetTextureName(), m_textureManager.GetTextureInfo("black")->GetTextureId());
+	basicTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicTexture"));
+	Material textureBlinnCottageMaterial;
+	textureBlinnCottageMaterial.AddTexture(m_textureManager.GetTextureInfo("cottage")->GetTextureName(), m_textureManager.GetTextureInfo("cottage")->GetTextureId());
+	textureBlinnCottageMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
 	
 	// load two meshes
-	MeshRenderableCreateInfo createInfo;
-	createInfo.filename = "cat.obj";
-	createInfo.preTransform = 0.1f * glm::mat4(1.0f);
-	MeshRenderableCreateInfo teapotInfo;
-	teapotInfo.filename = "cat.obj";
-	teapotInfo.preTransform = 0.1f * glm::mat4(1.0f);
-	MeshRenderableCreateInfo cubeRenderable;
-	cubeRenderable.filename = "sphere.obj";
-	cubeRenderable.preTransform = 0.05f * glm::mat4(1.0f);
+	MeshRenderableCreateInfo catBlinnCreateInfo;
+	catBlinnCreateInfo.filename = "cat.obj";
+	catBlinnCreateInfo.preTransform = 0.1f * glm::mat4(1.0f);
+	catBlinnCreateInfo.meshName = "cat blinn";
+	MeshRenderableCreateInfo catDiffuseCreateInfo;
+	catDiffuseCreateInfo.filename = "cat.obj";
+	catDiffuseCreateInfo.preTransform = 0.1f * glm::mat4(1.0f);
+	catDiffuseCreateInfo.meshName = "cat Diffuse";
+	MeshRenderableCreateInfo lightTextureCreateInfo;
+	lightTextureCreateInfo.filename = "sphere.obj";
+	lightTextureCreateInfo.preTransform = 0.05f * glm::mat4(1.0f);
+	lightTextureCreateInfo.meshName = "Light Mesh";
+	MeshRenderableCreateInfo cottageMeshCreateInfo;
+	cottageMeshCreateInfo.filename = "cottage.obj";
+	cottageMeshCreateInfo.preTransform = 0.5f * glm::mat4(1.0f);
+	cottageMeshCreateInfo.meshName = "Cottage Mesh";
 
-	std::shared_ptr<MeshRenderable> cubeMesh(new MeshRenderable(&createInfo, textureColorMaterial));
-	m_meshRenderableList.push_back(cubeMesh);
+	std::shared_ptr<MeshRenderable> catMeshBlinn(new MeshRenderable(&catBlinnCreateInfo, textureBlinnMaterial));
+	m_meshRenderableList.push_back(catMeshBlinn);
 
-	std::shared_ptr<MeshRenderable> cubeMesh2(new MeshRenderable(&teapotInfo, textureColorMaterial2));
-	m_meshRenderableList.push_back(cubeMesh2);
+	std::shared_ptr<MeshRenderable> catMeshDiffuse(new MeshRenderable(&catDiffuseCreateInfo, textureDiffuseMaterial2));
+	m_meshRenderableList.push_back(catMeshDiffuse);
 
-	std::shared_ptr<MeshRenderable> lightMesh(new MeshRenderable(&cubeRenderable, stoneTextureMaterial));
+	std::shared_ptr<MeshRenderable> lightMesh(new MeshRenderable(&lightTextureCreateInfo, basicTextureMaterial));
 	m_meshRenderableList.push_back(lightMesh);
+
+	std::shared_ptr<MeshRenderable> cottageMesh(new MeshRenderable(&cottageMeshCreateInfo, textureBlinnCottageMaterial));
+	m_meshRenderableList.push_back(cottageMesh);
 
 	// create lights
 	LightCreationInfo lightCreation;
 	lightCreation.color = glm::vec3(1.0f, 1.0f, 1.0f);
-	lightCreation.pos = glm::vec3(2.0f, 4.0f, -4.0f);
-	lightCreation.lightStrength = 4.0f;
+	lightCreation.pos = glm::vec3(2.0f, 8.0f, -6.0f);
+	lightCreation.lightStrength = 10.0f;
 	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation)));
 }
 
@@ -109,7 +113,12 @@ void Scene::Update(float dt)
 
 	auto lightMesh = m_meshRenderableList.at(2);
 	lightMesh->GetTransform() = glm::mat4(1.0f);
-	lightMesh->GetTransform() = glm::translate(lightMesh->GetTransform(), { 2.0f, 4.0f, -4.0f });
+	lightMesh->GetTransform() = glm::translate(lightMesh->GetTransform(), { m_lights[0]->GetLightPosition() });
+
+	auto cottageMesh = m_meshRenderableList.at(3);
+	cottageMesh->GetTransform() = glm::mat4(1.0f);
+	cottageMesh->GetTransform() = glm::translate(cottageMesh->GetTransform(), { 2.0f, 0.0f, -14.0f });
+
 }
 
 void Scene::ExitScene()

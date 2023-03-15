@@ -153,6 +153,6 @@ void Camera::normalizeAngles() {
 void Camera::initcamera(float fov, float near, float far, glm::vec3 pos, glm::vec2 screenSize) {
 	setFieldOfView(45.0f);
 	setNearAndFarPlanes(0.1f, 100.0f);
-	setPosition(glm::vec3(0, 0, 4));
+	setPosition(pos);
 	setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
 }

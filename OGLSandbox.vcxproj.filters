@@ -346,6 +346,12 @@
     <None Include="resources\shaders\Diffuse.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
+    <None Include="resources\shaders\TextureOutline.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\TextureOutline.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\stone.png">

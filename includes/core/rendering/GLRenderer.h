@@ -25,6 +25,8 @@ public:
 	virtual void Shutdown() override;
 
 	void AddMeshRenderable(std::shared_ptr<MeshRenderable> newMesh);
+	// window resize callback
+	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 private:
 	std::shared_ptr<tdogl::Camera> m_camera;
 	std::vector<std::shared_ptr<MeshRenderable>> m_meshList;

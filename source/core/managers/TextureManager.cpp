@@ -39,7 +39,7 @@ bool TextureManager::LoadTexture(std::string filename)
 			glTextureParameteri(textureId, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // or GL_NEAREST (more pixelated)
 			glTextureParameteri(textureId, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-			m_textureMap.insert(std::make_pair(originalFilenameNoExtension, std::make_unique<Texture2D>(originalFilenameNoExtension, width, height, channel, textureData, textureId)));
+			m_textureMap.insert(std::make_pair(originalFilenameNoExtension, std::unique_ptr<Texture2D>(new Texture2D(originalFilenameNoExtension, width, height, channel, textureData, textureId))));
 			success = true;
 		}
 	}

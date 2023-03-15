@@ -48,7 +48,7 @@ void GUIBuilder::gbTestWindow()
 	ImGui::End();
 }
 
-void GUIBuilder::gbSceneInfoOverlay()
+void GUIBuilder::gbSceneInfoOverlay(std::shared_ptr<tdogl::Camera>& camera)
 {
 	static int location = 0;
 	ImGuiIO& io = ImGui::GetIO();
@@ -83,6 +83,8 @@ void GUIBuilder::gbSceneInfoOverlay()
 		else {
 			ImGui::TextColored(GUI_TEXT_RED, "Mouse Position: <invalid>");
 		}
+		ImGui::Separator();
+		ImGui::Text("Camera pos: %.1f,%.1f,%.1f", camera->position().x, camera->position().y, camera->position().z);
 		if (ImGui::BeginPopupContextWindow(0, ImGuiPopupFlags_MouseButtonLeft)) {
 			if (ImGui::MenuItem("Custom", NULL, location == -1)) location = -1;
 			if (ImGui::MenuItem("Center", NULL, location == -2)) location = -2;
@@ -104,7 +106,7 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 	ImGui::Begin("Scene Graph");
 	if (ImGui::TreeNodeEx("Scene Root", node_flags)) {
 		for (const auto& object : scene->GetMeshList()) {
-			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, "Mesh Object")) {
+			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, object->m_meshName.c_str())) {
 				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, "Material")) {
 					ImGui::Text("Shader Name: %s", object->GetMaterial().GetShader().shaderName.c_str());
 					ImGui::Text("Texture Name: %s", object->GetMaterial().GetTextureName().c_str());

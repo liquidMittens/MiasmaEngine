@@ -24,17 +24,21 @@ ShaderManager::~ShaderManager()
 void ShaderManager::LoadShaderList(std::string_view dirPath)
 {
 	if (fs::is_directory(dirPath)) {
-		for (const auto& file : fs::directory_iterator(dirPath)) {
+		for (const auto& file : fs::recursive_directory_iterator(dirPath)) {
 			if (file.is_regular_file()) {
-				std::cout << file.path().filename() << '\n';
-				std::cout << file.path().extension() << '\n';
-				std::cout << file.path().relative_path() << '\n';
+				std::string filenoExt = file.path().filename().replace_extension().string();
+				std::cout << "Found shader: " << filenoExt << '\n';
+				// we haven't loaded this shader yet so lets read, compile, and add to the map
+				if (m_shaderMap.find(filenoExt) == m_shaderMap.end()) {
+					std::cout << "LOADED shader: " << filenoExt << '\n';
+					LoadShader(filenoExt);
+				}
 			}
 		}
 	}
 }
 
-void ShaderManager::LoadShader(const std::string& shaderName, ShaderType shaderEnum)
+void ShaderManager::LoadShader(const std::string& shaderName)
 {
 	if (fs::is_directory(SHADER_DIR)) {
 		std::string vertexShaderFilename, fragmentShaderFilename;
@@ -94,20 +98,23 @@ void ShaderManager::LoadShader(const std::string& shaderName, ShaderType shaderE
 			glDeleteShader(fsInt);
 
 			// create new shaderInfo object
-			ShaderInfo newShader = { shaderEnum, newProgram, shaderName };
+			ShaderInfo newShader = { newProgram, shaderName };
 			// add this new program to the shader manager and use shaderEnum as the calling key
-			m_shaderMap.insert(std::make_pair(shaderEnum, newShader));
+			m_shaderMap.insert(std::make_pair(shaderName, newShader));
 		}
 	}
 }
 
-ShaderInfo ShaderManager::GetShaderFromMap(ShaderType shaderName)
+ShaderInfo ShaderManager::GetShaderFromMap(std::string_view shaderName)
 {
-	ShaderInfo shader = {ShaderType::Unknown, 0, "Unknown"};
+	ShaderInfo shader = {0, "Unknown"};
 	if (m_shaderMap.size() > 0) {
-		auto shaderIter = m_shaderMap.find(shaderName);
+		auto shaderIter = m_shaderMap.find(shaderName.data());
 		if (shaderIter != m_shaderMap.end()) {
 			shader = (*shaderIter).second;
+		}
+		else {
+			std::cout << "ERR: Could not load shader(" << shaderName.data() << ")\n";
 		}
 	}
 	return shader;

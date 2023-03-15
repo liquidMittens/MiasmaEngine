@@ -4,7 +4,13 @@
 
 MeshRenderable::MeshRenderable(MeshRenderableCreateInfo* pCreateInfo, const Material& mat)
 {
-
+	if (pCreateInfo->meshName.empty()) {
+		m_meshName = "Default Mesh Object";
+	}
+	else {
+		// set the mesh name if we have one
+		m_meshName = pCreateInfo->meshName;
+	}
 	m_vertices = utility::MeshLoader::LoadMeshFromFile(pCreateInfo->filename, pCreateInfo->preTransform);
 	m_material = mat;
 	// create the vbo vao objects since we have some info

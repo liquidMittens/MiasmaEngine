@@ -230,6 +230,8 @@
     <None Include="resources\shaders\BlinnPhong.vs" />
     <None Include="resources\shaders\Diffuse.fs" />
     <None Include="resources\shaders\Diffuse.vs" />
+    <None Include="resources\shaders\TextureOutline.fs" />
+    <None Include="resources\shaders\TextureOutline.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\stone.png" />

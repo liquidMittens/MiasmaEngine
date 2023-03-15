@@ -21,12 +21,11 @@ enum class ShaderType
 
 struct ShaderInfo
 {
-	ShaderType shaderType;
 	unsigned int shaderId;
 	std::string shaderName;
 };
 
-using ShaderMapType = std::map<ShaderType, ShaderInfo>;
+using ShaderMapType = std::map<std::string, ShaderInfo>;
 using ProgramEnum = enum class ShaderType;
 
 class ShaderManager
@@ -36,8 +35,8 @@ public:
 	~ShaderManager();
 
 	void LoadShaderList(std::string_view dirPath);
-	void LoadShader(const std::string& shaderName, ShaderType shaderEnum);
-	ShaderInfo GetShaderFromMap(ShaderType shaderName);
+	void LoadShader(const std::string& shaderName);
+	ShaderInfo GetShaderFromMap(std::string_view shaderName);
 
 private:
 	ShaderManager(const ShaderManager&) = delete;

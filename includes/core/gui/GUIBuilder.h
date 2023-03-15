@@ -1,6 +1,8 @@
 #ifndef GUIBUILDER_H_
 #define GUIBUILDER_H_
 #include <memory>
+#include "camera/Camera.h"
+using namespace tdogl;
 
 struct GLFWwindow;
 class Scene;
@@ -20,7 +22,7 @@ public:
 
 	// windows
 	static void gbTestWindow();
-	static void gbSceneInfoOverlay();
+	static void gbSceneInfoOverlay(std::shared_ptr<tdogl::Camera>& camera);
 	static void gbSceneObjectsInfo(std::unique_ptr<Scene>& scene);
 	static void gbShowImGuiDemoWindow();
 };

@@ -13,10 +13,12 @@ struct MeshRenderableCreateInfo
 {
 	const char* filename;
 	glm::mat4 preTransform;
+	std::string meshName;
 };
 
 class MeshRenderable
 {
+	friend class GUIBuilder;
 public:
 	MeshRenderable(MeshRenderableCreateInfo *pCreateInfo, const Material& mat);
 	~MeshRenderable();
@@ -29,6 +31,7 @@ public:
 	const unsigned int GetVertexArrayObject() { return m_vao; } 
 	glm::mat4& GetTransform() { return m_transform; }
 private: 
+	std::string m_meshName;
 	unsigned int m_vbo;
 	unsigned int m_vao;
 	Material m_material;

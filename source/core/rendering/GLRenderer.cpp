@@ -17,6 +17,7 @@ void GLRenderer::Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	GUIBuilder::gbInitializeGUI(pWindow);
+	glfwSetFramebufferSizeCallback(pWindow, GLRenderer::framebuffer_size_callback);
 }
 
 void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
@@ -56,7 +57,7 @@ void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->GetVertexCount());
 	}
-	GUIBuilder::gbSceneInfoOverlay();
+	GUIBuilder::gbSceneInfoOverlay(m_camera);
 	GUIBuilder::gbSceneObjectsInfo(scene);
 	GUIBuilder::gbRenderGUI();
 }
@@ -71,4 +72,9 @@ void GLRenderer::AddMeshRenderable(std::shared_ptr<MeshRenderable> newMesh)
 	if (newMesh) {
 		m_meshList.push_back(newMesh);
 	}
+}
+
+void GLRenderer::framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
 }
