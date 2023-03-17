@@ -2,62 +2,75 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "utility/tiny_obj_loader.h"
 #include <iostream>
+#include <unordered_map>
 
-std::vector<float> utility::MeshLoader::LoadMeshFromFile(const std::string& filename, glm::mat4 preTransform)
+
+void utility::MeshLoader::LoadMeshFromFile(MeshLoaderInformation& meshLoaderInformation, const std::string& filename, glm::mat4 preTransform)
 {
+	std::map<int, int> temp;
 	// full obj mesh information in xyz,st,xyz format
 	std::vector<float> vertexFormatData;
+	// indices
+	std::vector<int> indices;
 
 	tinyobj::attrib_t attributes;
 	std::vector<tinyobj::shape_t> shapes;
 	std::vector<tinyobj::material_t> materials;
 	std::string warning, error;
 	std::string meshFilename = MESH_DIR + filename;
+	
 	if (!tinyobj::LoadObj(&attributes, &shapes, &materials, &warning, &error, meshFilename.c_str(), MATERIAL_DIR)) {
 		std::cout << "utility::MeshLoader LoadMeshFromFile Failed: " << warning << error << '\n';
 	}
 
+	// this is our map to keep track of our non-unique vertex information
+	std::unordered_map<Vertex, unsigned int> uniqueVertexMap;
+
 	for (const auto& shape : shapes) {
 		for (const auto& index : shape.mesh.indices) {
-			glm::vec4 pos(0.0f);
+			Vertex vertex{};
+			// position
 			if (attributes.vertices.size() >= 3 && index.vertex_index >= 0) {
-				pos = {
+				vertex.pos = {
 					attributes.vertices[3 * index.vertex_index],
 					attributes.vertices[3 * index.vertex_index + 1],
-					attributes.vertices[3 * index.vertex_index + 2],
-					1
+					attributes.vertices[3 * index.vertex_index + 2]
 				};
-				pos = preTransform * pos;
-			}
-			// normals
-			glm::vec3 normal(0.0f);
-			if (attributes.normals.size() >= 3 && index.normal_index >= 0) {
-				normal = {
-					attributes.normals[3 * index.normal_index],
-					attributes.normals[3 * index.normal_index + 1],
-					attributes.normals[3 * index.normal_index + 2]
-				};
-
-				normal = glm::mat3(preTransform) * normal;
+				vertex.pos = glm::mat3(preTransform) * vertex.pos;
 			}
 
-			glm::vec2 texCoords(0.0f);
+			// texCoords
 			if (attributes.texcoords.size() >= 2 && index.texcoord_index >= 0) {
-				texCoords = {
+				vertex.texCoords = {
 					attributes.texcoords[2 * index.texcoord_index],
 					attributes.texcoords[2 * index.texcoord_index + 1],
 				};
 			}
 
-			vertexFormatData.push_back(pos.x);
-			vertexFormatData.push_back(pos.y);
-			vertexFormatData.push_back(pos.z);
-			vertexFormatData.push_back(texCoords.x);
-			vertexFormatData.push_back(texCoords.y);
-			vertexFormatData.push_back(normal.x);
-			vertexFormatData.push_back(normal.y);
-			vertexFormatData.push_back(normal.z);
+			// normals
+			if (attributes.normals.size() >= 3 && index.normal_index >= 0) {
+				vertex.normal = {
+					attributes.normals[3 * index.normal_index],
+					attributes.normals[3 * index.normal_index + 1],
+					attributes.normals[3 * index.normal_index + 2]
+				};
+
+				vertex.normal = glm::normalize(glm::mat3(preTransform) * vertex.normal);
+			}
+
+			if (uniqueVertexMap.count(vertex) == 0) {
+				uniqueVertexMap[vertex] = (unsigned int)meshLoaderInformation.vertices.size() / xyz_st_xyz_format_size;
+				meshLoaderInformation.vertices.push_back(vertex.pos.x);
+				meshLoaderInformation.vertices.push_back(vertex.pos.y);
+				meshLoaderInformation.vertices.push_back(vertex.pos.z);
+				meshLoaderInformation.vertices.push_back(vertex.texCoords.x);
+				meshLoaderInformation.vertices.push_back(vertex.texCoords.y);
+				meshLoaderInformation.vertices.push_back(vertex.normal.x);
+				meshLoaderInformation.vertices.push_back(vertex.normal.y);
+				meshLoaderInformation.vertices.push_back(vertex.normal.z);
+			}
+
+			meshLoaderInformation.indices.push_back(uniqueVertexMap[vertex]);
 		}
 	}
-	return vertexFormatData;
 }

@@ -5,7 +5,11 @@
 #include <string>
 #include <map>
 
+#ifdef _DEBUG
 #define TEXTURE_DIR "resources\\textures\\"
+#else
+#define TEXTURE_DIR "..\\..\\resources\\textures\\"
+#endif
 
 class Texture2D;
 

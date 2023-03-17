@@ -51,7 +51,6 @@ GLFWwindow* InitWindow()
 GLFWcursor* InitGLFWCursor(GLFWwindow* pWindow) {
 	GLFWcursor* pStandardCursor = glfwCreateStandardCursor(GLFW_HRESIZE_CURSOR);
 	if (pStandardCursor != nullptr) {
-		//glfwSetCursorPosCallback(pWindow, cursor_position_callback);
 		glfwSetCursor(pWindow, pStandardCursor);
 	}
 	return pStandardCursor;

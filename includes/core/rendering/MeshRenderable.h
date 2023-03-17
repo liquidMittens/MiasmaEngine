@@ -25,17 +25,21 @@ public:
 
 	bool AttachMaterial(const Material& newMat);
 
-	size_t GetVertexCount() const { return m_vertices.size() / xyz_rgb_st_format_size; }
+	size_t GetVertexCount() const { return m_vertices.size() / xyz_st_xyz_format_size; }
+	size_t GetIndicesCount() const { return m_indices.size(); }
 	Material GetMaterial() { return m_material; }
 	const unsigned int GetVertexBufferObject() { return m_vbo; }
 	const unsigned int GetVertexArrayObject() { return m_vao; } 
+	const unsigned int GetIndexBufferObject() { return m_ibo; }
 	glm::mat4& GetTransform() { return m_transform; }
 private: 
 	std::string m_meshName;
 	unsigned int m_vbo;
 	unsigned int m_vao;
+	unsigned int m_ibo;
 	Material m_material;
 	std::vector<float> m_vertices;
+	std::vector<unsigned int> m_indices;
 	glm::mat4 m_transform;
 };
 

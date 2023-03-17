@@ -20,7 +20,7 @@ Scene::Scene(SceneCreationInfo* creationInfo)
 	glfwSetScrollCallback(m_glfwWindow, Scene::OnScroll);
 	glfwSetMouseButtonCallback(m_glfwWindow, Scene::OnMouseButton);
 	m_camera = std::make_shared<tdogl::Camera>();
-	m_camera->initcamera(45.0f, 0.1f, 100.0f, glm::vec3(0, 0, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_camera->initcamera(90.0f, 0.1f, 100.0f, glm::vec3(0, 0, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_mouseModeEnabled = false;
 }
 
@@ -31,7 +31,7 @@ Scene::~Scene()
 
 void Scene::EnterScene()
 {
-	m_camera->initcamera(45.0f, 0.1f, 100.0f, glm::vec3(0, 3, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_camera->initcamera(90.0f, 0.1f, 100.0f, glm::vec3(0, 3, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_shaderManager.LoadShaderList(SHADER_DIR);
 
 	m_textureManager.LoadTexture("stone");
@@ -46,9 +46,9 @@ void Scene::EnterScene()
 	Material textureBlinnMaterial;
 	textureBlinnMaterial.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
 	textureBlinnMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
-	Material textureDiffuseMaterial2;
-	textureDiffuseMaterial2.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
-	textureDiffuseMaterial2.AttachShader(m_shaderManager.GetShaderFromMap("TextureOutline"));
+	Material textureOutline;
+	textureOutline.AddTexture(m_textureManager.GetTextureInfo("cat")->GetTextureName(), m_textureManager.GetTextureInfo("cat")->GetTextureId());
+	textureOutline.AttachShader(m_shaderManager.GetShaderFromMap("TextureOutline"));
 	Material basicTextureMaterial;
 	basicTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("black")->GetTextureName(), m_textureManager.GetTextureInfo("black")->GetTextureId());
 	basicTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicTexture"));
@@ -77,7 +77,7 @@ void Scene::EnterScene()
 	std::shared_ptr<MeshRenderable> catMeshBlinn(new MeshRenderable(&catBlinnCreateInfo, textureBlinnMaterial));
 	m_meshRenderableList.push_back(catMeshBlinn);
 
-	std::shared_ptr<MeshRenderable> catMeshDiffuse(new MeshRenderable(&catDiffuseCreateInfo, textureDiffuseMaterial2));
+	std::shared_ptr<MeshRenderable> catMeshDiffuse(new MeshRenderable(&catDiffuseCreateInfo, textureOutline));
 	m_meshRenderableList.push_back(catMeshDiffuse);
 
 	std::shared_ptr<MeshRenderable> lightMesh(new MeshRenderable(&lightTextureCreateInfo, basicTextureMaterial));
@@ -92,6 +92,13 @@ void Scene::EnterScene()
 	lightCreation.pos = glm::vec3(2.0f, 8.0f, -6.0f);
 	lightCreation.lightStrength = 10.0f;
 	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation)));
+
+	LightCreationInfo lightCreation2;
+	lightCreation2.color = glm::vec3(1.0f, 1.0f, 1.0f);
+	lightCreation2.pos = glm::vec3(-10.0f, 6.0f, 1.0f);
+	lightCreation2.lightStrength = 20.0f;
+	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation2)));
+
 }
 
 void Scene::Update(float dt)

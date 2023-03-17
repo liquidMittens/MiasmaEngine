@@ -17,7 +17,7 @@ ShaderManager::~ShaderManager()
 {
 	for (auto& shader : m_shaderMap)
 	{
-
+		glDeleteShader(shader.second.shaderId);
 	}
 }
 

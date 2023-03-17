@@ -36,15 +36,16 @@ void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 		/*
 			LIGHTS
 		*/
-		// grab light information from shader
-		glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "light.color"), 1, glm::value_ptr(scene->GetLights()[0]->GetLightColor()));
-		// grab light information from shader
-		glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "light.position"), 1, glm::value_ptr(scene->GetLights()[0]->GetLightPosition()));
-		// grab light information from shader
-		glUniform1f(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "light.strength"), scene->GetLights()[0]->GetLightStrength());
-		// CAMERA POS 
-		glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "cameraPosition"), 1, glm::value_ptr(m_camera->position()));
-		
+		for (int lightIndex = 0; lightIndex < scene->GetLights().size(); ++lightIndex) {
+			// grab light information from shader
+			glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "light.color"), 1, glm::value_ptr(scene->GetLights()[0]->GetLightColor()));
+			// grab light information from shader
+			glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "light.position"), 1, glm::value_ptr(scene->GetLights()[0]->GetLightPosition()));
+			// grab light information from shader
+			glUniform1f(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "light.strength"), scene->GetLights()[0]->GetLightStrength());
+			// CAMERA POS 
+			glUniform3fv(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "cameraPosition"), 1, glm::value_ptr(m_camera->position()));
+		}
 		// setup texture (get texture location "textureSample")
 		glUniform1i(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "textureSample"), 0);
 		// update camera transform 
@@ -54,8 +55,11 @@ void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 		glUniformMatrix4fv(glGetUniformLocation(mesh->GetMaterial().GetShader().shaderId, "model"), 1, false, glm::value_ptr(mesh->GetTransform()));
 		glBindTextureUnit(0, mesh->GetMaterial().GetTextureId());
 		glBindVertexArray(mesh->GetVertexArrayObject());
+		glBindBuffer(GL_ARRAY_BUFFER, mesh->GetVertexBufferObject());
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->GetIndexBufferObject());
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->GetVertexCount());
+		//glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->GetVertexCount());
+		glDrawElements(GL_TRIANGLES, mesh->GetIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
 	GUIBuilder::gbSceneInfoOverlay(m_camera);
 	GUIBuilder::gbSceneObjectsInfo(scene);
