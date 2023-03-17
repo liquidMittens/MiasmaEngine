@@ -42,6 +42,7 @@ void Scene::EnterScene()
 	m_textureManager.LoadTexture("yellow");
 	m_textureManager.LoadTexture("white");
 	m_textureManager.LoadTexture("unknown");
+	m_textureManager.LoadTexture("missing");
 	m_textureManager.LoadTexture("cottage");
 
 	// Create using a MeshRenderable

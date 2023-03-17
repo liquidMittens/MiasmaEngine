@@ -8,7 +8,6 @@ namespace fs = std::filesystem;
 
 TextureManager::TextureManager()
 {
-
 }
 
 TextureManager::~TextureManager()
@@ -46,22 +45,15 @@ bool TextureManager::LoadTexture(std::string filename)
 	return success;
 }
 
-unsigned int TextureManager::GetTextureId(std::string_view texturename)
-{
-	auto texture = m_textureMap.find(texturename.data());
-	unsigned int textureId = 0;
-	if (texture != m_textureMap.end()) {
-		textureId = (*texture).second->GetTextureId();
-	}
-	return textureId;
-}
-
 Texture2D* TextureManager::GetTextureInfo(std::string_view texturename)
 {
 	auto texture = m_textureMap.find(texturename.data());
 	Texture2D* textureInfo = nullptr;
 	if (texture != m_textureMap.end()) {
 		textureInfo = texture->second.get();
+	}
+	else {
+		textureInfo = m_textureMap.find("missing")->second.get();
 	}
 	return textureInfo;
 }

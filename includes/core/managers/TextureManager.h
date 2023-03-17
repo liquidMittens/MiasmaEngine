@@ -19,7 +19,6 @@ public:
 	~TextureManager();
 
 	bool LoadTexture(std::string filename);
-	unsigned int GetTextureId(std::string_view texturename);
 	Texture2D* GetTextureInfo(std::string_view texturename);
 
 private:
