@@ -29,11 +29,11 @@ Material& Material::operator=(const Material& obj)
 	return *this;
 }
 
-bool Material::AddTexture(std::string_view texturename, const unsigned int& textureId)
+bool Material::AddTexture(Texture2D* textureInfo)
 {
 	bool success = true;
-	m_textureName = texturename;
-	m_textureId = textureId;
+	m_textureName = textureInfo->GetTextureName();
+	m_textureId = textureInfo->GetTextureId();
 	return success;
 }
 

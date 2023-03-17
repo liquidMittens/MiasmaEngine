@@ -20,7 +20,7 @@
 
 #include <glm/glm.hpp>
 
-constexpr glm::vec2 SCREEN_SIZE(1024, 768);
+constexpr glm::vec2 SCREEN_SIZE(1920, 1080);
 
 namespace tdogl {
 

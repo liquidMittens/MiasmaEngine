@@ -56,7 +56,7 @@ unsigned int TextureManager::GetTextureId(std::string_view texturename)
 	return textureId;
 }
 
-const Texture2D* TextureManager::GetTextureInfo(std::string_view texturename)
+Texture2D* TextureManager::GetTextureInfo(std::string_view texturename)
 {
 	auto texture = m_textureMap.find(texturename.data());
 	Texture2D* textureInfo = nullptr;

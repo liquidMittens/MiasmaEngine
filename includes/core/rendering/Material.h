@@ -4,8 +4,7 @@
 #include <memory>
 #include <string>
 #include "managers/ShaderManager.h"
-
-class Texture2D;
+#include "rendering/Texture2D.h"
 
 class Material
 {
@@ -16,7 +15,7 @@ public:
 	Material(const Material& obj);
 	Material& operator=(const Material& obj);
 
-	bool AddTexture(std::string_view texturename, const unsigned int& textureId);
+	bool AddTexture(Texture2D* textureInfo);
 	bool AttachShader(ShaderInfo shader);
 
 	unsigned int GetTextureId() const { return m_textureId; }
