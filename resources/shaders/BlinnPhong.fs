@@ -52,7 +52,7 @@ vec3 calculatePointLight(PointLight light, vec3 normalizedNormal, vec3 fragPos, 
 	// ambient result (fragment texturecoord + ambient value)
 	vec3 ambient = 0.2f * texture(textureSample, fragmentTexCoord).rgb;
 	vec3 diffuse = light.color * diffDot * texture(textureSample, fragmentTexCoord).rgb;
-	vec3 specular = vec3(1.0) * spec * texture(textureSample, fragmentTexCoord).rgb;
+	vec3 specular = light.color * spec * texture(textureSample, fragmentTexCoord).rgb;
 
 	ambient *= attenuation;
 	diffuse *= attenuation;

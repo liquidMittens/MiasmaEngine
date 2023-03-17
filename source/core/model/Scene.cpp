@@ -40,12 +40,13 @@ void Scene::EnterScene()
 	m_textureManager.LoadTexture("crate1");
 	m_textureManager.LoadTexture("black");
 	m_textureManager.LoadTexture("yellow");
+	m_textureManager.LoadTexture("white");
 	m_textureManager.LoadTexture("unknown");
 	m_textureManager.LoadTexture("cottage");
 
 	// Create using a MeshRenderable
 	Material textureBlinnMaterial;
-	textureBlinnMaterial.AddTexture(m_textureManager.GetTextureInfo("unknown"));
+	textureBlinnMaterial.AddTexture(m_textureManager.GetTextureInfo("white"));
 	textureBlinnMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
 	Material textureOutline;
 	textureOutline.AddTexture(m_textureManager.GetTextureInfo("cat"));
@@ -58,16 +59,12 @@ void Scene::EnterScene()
 	textureBlinnCottageMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
 	
 	// load two meshes
-	MeshRenderableCreateInfo catBlinnCreateInfo;
-	catBlinnCreateInfo.filename = "cat.obj";
-	catBlinnCreateInfo.preTransform = 0.1f * glm::mat4(1.0f);
-	catBlinnCreateInfo.meshName = "cat blinn";
-	MeshRenderableCreateInfo catDiffuseCreateInfo;
-	catDiffuseCreateInfo.filename = "cat.obj";
-	catDiffuseCreateInfo.preTransform = 0.1f * glm::mat4(1.0f);
-	catDiffuseCreateInfo.meshName = "cat Diffuse";
+	MeshRenderableCreateInfo catMesh;
+	catMesh.filename = "cat.obj";
+	catMesh.preTransform = 0.1f * glm::mat4(1.0f);
+	catMesh.meshName = "cat blinn";
 	MeshRenderableCreateInfo lightTextureCreateInfo;
-	lightTextureCreateInfo.filename = "sphere.obj";
+	lightTextureCreateInfo.filename = "cube.obj";
 	lightTextureCreateInfo.preTransform = 0.05f * glm::mat4(1.0f);
 	lightTextureCreateInfo.meshName = "Light Mesh";
 	MeshRenderableCreateInfo cottageMeshCreateInfo;
@@ -75,15 +72,17 @@ void Scene::EnterScene()
 	cottageMeshCreateInfo.preTransform = 0.5f * glm::mat4(1.0f);
 	cottageMeshCreateInfo.meshName = "Cottage Mesh";
 
-	std::shared_ptr<MeshRenderable> catMeshBlinn(new MeshRenderable(&catBlinnCreateInfo, textureBlinnMaterial));
+	std::shared_ptr<MeshRenderable> catMeshBlinn(new MeshRenderable(&catMesh, textureBlinnMaterial));
 	m_meshRenderableList.push_back(catMeshBlinn);
 
-	std::shared_ptr<MeshRenderable> catMeshDiffuse(new MeshRenderable(&catDiffuseCreateInfo, textureOutline));
+	catMesh.meshName = "Cat Diffuse Outline";
+	std::shared_ptr<MeshRenderable> catMeshDiffuse(new MeshRenderable(&catMesh, textureOutline));
 	m_meshRenderableList.push_back(catMeshDiffuse);
 
 	std::shared_ptr<MeshRenderable> lightMesh(new MeshRenderable(&lightTextureCreateInfo, basicTextureMaterial));
 	m_meshRenderableList.push_back(lightMesh);
 
+	lightTextureCreateInfo.meshName = "Left Light Mesh";
 	std::shared_ptr<MeshRenderable> lightMesh2(new MeshRenderable(&lightTextureCreateInfo, basicTextureMaterial));
 	m_meshRenderableList.push_back(lightMesh2);
 
@@ -92,13 +91,13 @@ void Scene::EnterScene()
 
 	// create lights
 	LightCreationInfo lightCreation;
-	lightCreation.color = glm::vec3(1.0f, 1.0f, 1.0f);
-	lightCreation.pos = glm::vec3(2.0f, 8.0f, -6.0f);
+	lightCreation.color = glm::vec3(1.0f, 0.0f, 0.0f);
+	lightCreation.pos = glm::vec3(4.0f, 8.0f, -6.0f);
 	lightCreation.lightStrength = 10.0f;
 	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation)));
 
 	LightCreationInfo lightCreation2;
-	lightCreation2.color = glm::vec3(1.0f, 1.0f, 1.0f);
+	lightCreation2.color = glm::vec3(0.0f, 1.0f, 0.0f);
 	lightCreation2.pos = glm::vec3(-5.0f, 4.0f, -5.0f);
 	lightCreation2.lightStrength = 10.0f;
 	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation2)));
@@ -129,6 +128,7 @@ void Scene::Update(float dt)
 	auto lightMesh2 = m_meshRenderableList.at(3);
 	lightMesh2->GetTransform() = glm::mat4(1.0f);
 	lightMesh2->GetTransform() = glm::translate(lightMesh2->GetTransform(), { m_lights[1]->GetLightPosition() });
+	lightMesh2->GetTransform() = glm::scale(lightMesh2->GetTransform(), glm::vec3(1.0));
 
 	auto cottageMesh = m_meshRenderableList.at(4);
 	cottageMesh->GetTransform() = glm::mat4(1.0f);

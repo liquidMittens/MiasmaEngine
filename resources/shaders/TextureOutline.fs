@@ -1,8 +1,8 @@
 #version 450 core
 
 vec3 colorA = vec3(0.5f, 0.5f, 0.5f);
-vec3 outlineColor = vec3(0.0f, 0.0f, 1.0f);
-float litOutlineThickness = 0.001f;
+vec3 outlineColor = vec3(1.0f, 1.0f, 1.0f);
+float litOutlineThickness = 0.01f;
 float unlitOutlineThickness = 0.8f;
 
 
