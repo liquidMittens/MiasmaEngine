@@ -82,6 +82,12 @@
     <Filter Include="Source Files\core\gui">
       <UniqueIdentifier>{c50ec420-569c-4f62-a866-c645b19bcb06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\core\app">
+      <UniqueIdentifier>{2880168e-cf20-465c-886e-442ee884aea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\app">
+      <UniqueIdentifier>{42fdb3ab-b4ac-4e99-a438-a84b9aab44a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -149,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="source\core\gui\GUIBuilder.cpp">
       <Filter>Source Files\core\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\app\GLWindow.cpp">
+      <Filter>Source Files\core\app</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="includes\core\gui\GUIBuilder.h">
       <Filter>Header Files\core\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\app\GLWindow.h">
+      <Filter>Header Files\core\app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

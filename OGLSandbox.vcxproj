@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\core\app\GLWindow.cpp" />
     <ClCompile Include="source\core\camera\Camera.cpp" />
     <ClCompile Include="source\core\glad\glad.c" />
     <ClCompile Include="source\core\gui\GUIBuilder.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\core\app\GLWindow.h" />
     <ClInclude Include="includes\core\camera\Camera.h" />
     <ClInclude Include="includes\core\glad\glad.h" />
     <ClInclude Include="includes\core\GLFW\glfw3.h" />

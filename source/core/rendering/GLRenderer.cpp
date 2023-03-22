@@ -6,11 +6,15 @@
 #include "model/Scene.h"
 using namespace tdogl;
 #include "gui\GUIBuilder.h"
+#include <iostream>
 #include <sstream>
 
 void GLRenderer::Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> camera)
 {
 	m_camera = camera;
+	if (!m_camera) {
+		std::cout << "ERROR: GLRenderer Camera is NULL\n";
+	}
 	// set up framebuffer
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
@@ -23,6 +27,9 @@ void GLRenderer::Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> 
 
 void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 {
+	if (!m_camera) {
+		return; // TODO: fix this but fail gracefully for now
+	}
 	// clear buffer and depth buffer 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -74,8 +81,8 @@ void GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 		glBindBuffer(GL_ARRAY_BUFFER, mesh->GetVertexBufferObject());
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->GetIndexBufferObject());
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		//glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh->GetVertexCount());
-		glDrawElements(GL_TRIANGLES, mesh->GetIndicesCount(), GL_UNSIGNED_INT, 0);
+		
+		glDrawElements(GL_TRIANGLES, (GLsizei)mesh->GetIndicesCount(), GL_UNSIGNED_INT, 0);
 	}
 	GUIBuilder::gbSceneInfoOverlay(m_camera);
 	GUIBuilder::gbSceneObjectsInfo(scene);
