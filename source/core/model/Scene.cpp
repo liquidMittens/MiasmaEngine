@@ -33,17 +33,7 @@ void Scene::EnterScene()
 {
 	m_camera->initcamera(90.0f, 0.1f, 100.0f, glm::vec3(0, 3, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_shaderManager.LoadShaderList(SHADER_DIR);
-
-	m_textureManager.LoadTexture("stone");
-	m_textureManager.LoadTexture("banana");
-	m_textureManager.LoadTexture("cat");
-	m_textureManager.LoadTexture("crate1");
-	m_textureManager.LoadTexture("black");
-	m_textureManager.LoadTexture("yellow");
-	m_textureManager.LoadTexture("white");
-	m_textureManager.LoadTexture("unknown");
-	m_textureManager.LoadTexture("missing");
-	m_textureManager.LoadTexture("cottage");
+	m_textureManager.LoadTexturesFromDirectory(TEXTURE_DIR);
 
 	// Create using a MeshRenderable
 	Material textureBlinnMaterial;
@@ -52,9 +42,14 @@ void Scene::EnterScene()
 	Material textureOutline;
 	textureOutline.AddTexture(m_textureManager.GetTextureInfo("cat"));
 	textureOutline.AttachShader(m_shaderManager.GetShaderFromMap("TextureOutline"));
-	Material basicTextureMaterial;
-	basicTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("yellow"));
-	basicTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicTexture"));
+	// green
+	Material greenbasicTextureMaterial;
+	greenbasicTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("green"));
+	greenbasicTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicTexture"));
+	// red
+	Material redbasicTextureMaterial;
+	redbasicTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("red"));
+	redbasicTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicTexture"));
 	Material textureBlinnCottageMaterial;
 	textureBlinnCottageMaterial.AddTexture(m_textureManager.GetTextureInfo("cottage"));
 	textureBlinnCottageMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
@@ -80,11 +75,11 @@ void Scene::EnterScene()
 	std::shared_ptr<MeshRenderable> catMeshDiffuse(new MeshRenderable(&catMesh, textureOutline));
 	m_meshRenderableList.push_back(catMeshDiffuse);
 
-	std::shared_ptr<MeshRenderable> lightMesh(new MeshRenderable(&lightTextureCreateInfo, basicTextureMaterial));
+	std::shared_ptr<MeshRenderable> lightMesh(new MeshRenderable(&lightTextureCreateInfo, redbasicTextureMaterial));
 	m_meshRenderableList.push_back(lightMesh);
 
 	lightTextureCreateInfo.meshName = "Left Light Mesh";
-	std::shared_ptr<MeshRenderable> lightMesh2(new MeshRenderable(&lightTextureCreateInfo, basicTextureMaterial));
+	std::shared_ptr<MeshRenderable> lightMesh2(new MeshRenderable(&lightTextureCreateInfo, greenbasicTextureMaterial));
 	m_meshRenderableList.push_back(lightMesh2);
 
 	std::shared_ptr<MeshRenderable> cottageMesh(new MeshRenderable(&cottageMeshCreateInfo, textureBlinnCottageMaterial));
@@ -99,10 +94,9 @@ void Scene::EnterScene()
 
 	LightCreationInfo lightCreation2;
 	lightCreation2.color = glm::vec3(0.0f, 1.0f, 0.0f);
-	lightCreation2.pos = glm::vec3(-5.0f, 4.0f, -5.0f);
-	lightCreation2.lightStrength = 10.0f;
+	lightCreation2.pos = glm::vec3(-5.0f, 20.0f, -5.0f);
+	lightCreation2.lightStrength = 30.0f;
 	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation2)));
-
 }
 
 void Scene::Update(float dt)
@@ -111,7 +105,7 @@ void Scene::Update(float dt)
 	float angle = glm::radians<float>(10.0f * (float)glfwGetTime());
 	auto cubeMesh = m_meshRenderableList.at(0);
 	cubeMesh->GetTransform() = glm::mat4(1.0f);
-	cubeMesh->GetTransform() = glm::translate(cubeMesh->GetTransform(), {0.0f, 0.0f, -5.0f});
+	cubeMesh->GetTransform() = glm::translate(cubeMesh->GetTransform(), {0.0f, 0.0f, 0.0f});
 	cubeMesh->GetTransform() = glm::rotate(cubeMesh->GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
 	cubeMesh->GetTransform() = glm::rotate(cubeMesh->GetTransform(), 2.0f * angle, { 0.0f, 0.0f, 1.0f });
 	//cubeMesh->GetTransform() = glm::rotate(cubeMesh->GetTransform(), 5.0f * angle, { 1.0f, 1.0f, 0.0f });
@@ -129,7 +123,7 @@ void Scene::Update(float dt)
 	auto lightMesh2 = m_meshRenderableList.at(3);
 	lightMesh2->GetTransform() = glm::mat4(1.0f);
 	lightMesh2->GetTransform() = glm::translate(lightMesh2->GetTransform(), { m_lights[1]->GetLightPosition() });
-	lightMesh2->GetTransform() = glm::scale(lightMesh2->GetTransform(), glm::vec3(1.0));
+	//lightMesh2->GetTransform() = glm::scale(lightMesh2->GetTransform(), glm::vec3(1.0));
 
 	auto cottageMesh = m_meshRenderableList.at(4);
 	cottageMesh->GetTransform() = glm::mat4(1.0f);

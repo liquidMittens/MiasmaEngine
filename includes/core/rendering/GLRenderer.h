@@ -21,7 +21,7 @@ class GLRenderer : public IRenderInterface
 public:
 	// Inherited via IRenderInterface
 	virtual void Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> camera) override;
-	virtual void DrawScene(std::unique_ptr<Scene>& scene) override;
+	virtual bool DrawScene(std::unique_ptr<Scene>& scene) override;
 	virtual void Shutdown() override;
 
 	void AddMeshRenderable(std::shared_ptr<MeshRenderable> newMesh);

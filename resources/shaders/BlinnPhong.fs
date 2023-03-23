@@ -37,9 +37,11 @@ void main()
 }
 
 vec3 calculatePointLight(PointLight light, vec3 normalizedNormal, vec3 fragPos, vec3 viewDir) {
-
-	// get light direction
+	// get light direction (point)
 	vec3 lightDir = normalize(light.position - fragmentPosition);
+	// get light direction (directional)
+	//vec3 lightdirectionactual = vec3(1.0f, -1.0f, -0.3f);
+	//vec3 lightDir = normalize(-lightdirectionactual);
 	// diffuse shading 
 	float diffDot = max(0.0, dot(normalizedNormal, lightDir));
 	// specular shading

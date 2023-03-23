@@ -63,3 +63,9 @@ bool MeshRenderable::AttachMaterial(const Material& newMat)
 	m_material = newMat;
 	return success;
 }
+
+const glm::vec3 MeshRenderable::GetPosition()
+{
+	glm::vec3 positionVector = m_transform[3];
+	return positionVector;
+}

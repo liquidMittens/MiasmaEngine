@@ -8,6 +8,8 @@
 #include "model/Scene.h"
 
 GLWindow::GLWindow() :
+	m_window(nullptr),
+	m_cursor(nullptr),
 	m_lastTime(0.0),
 	m_currentTime(0.0),
 	m_numFrames(0),
@@ -33,40 +35,39 @@ bool GLWindow::CreateGLWindow()
 		std::cout << "Failed to create GLFWcursor!\n";
 		result = false;
 	}
-
-	// create our scene and our GLRenderer
-	SceneCreationInfo sceneInfo{ m_window, SCREEN_SIZE };
-	m_scene = std::unique_ptr<Scene>(new Scene(&sceneInfo));
-	m_scene->EnterScene();
-	m_renderer = std::unique_ptr<GLRenderer>(new GLRenderer());
-	m_renderer->Initialize(m_window, m_scene->GetCamera());
+	if (result) {
+		// create our scene and our GLRenderer
+		SceneCreationInfo sceneInfo{ m_window, SCREEN_SIZE };
+		m_scene = std::unique_ptr<Scene>(new Scene(&sceneInfo));
+		m_scene->EnterScene();
+		m_renderer = std::unique_ptr<GLRenderer>(new GLRenderer());
+		m_renderer->Initialize(m_window, m_scene->GetCamera());
+	}
 
 	return result;
 }
 
 void GLWindow::ExecuteGLWindowLoop()
 {
-	bool runLoop = true;
+	bool runWindowLoop = true;
 	if (!m_scene) {
 		std::cout << "Scene Object is NULL leaving ExecuteGLWindowLoop!!\n";
-		runLoop = false;
+		runWindowLoop = false;
 	}
-	if (runLoop) {
-		if (!m_renderer) {
-			std::cout << "GLRenderer is NULL leaving ExecuteGLWindowLoop!!\n";
-			runLoop = false;
-		}
+	if (runWindowLoop && !m_renderer) {
+		std::cout << "GLRenderer is NULL leaving ExecuteGLWindowLoop!!\n";
+		runWindowLoop = false;
 	}
 
 	float prevTime = 0.0f;
-	while (runLoop && !glfwWindowShouldClose(m_window)) {
+	while (runWindowLoop && !glfwWindowShouldClose(m_window)) {
 		// calculate delta time per frame
 		calculateFrameRate();
 		double currTime = (float)glfwGetTime();
 		double dt = currTime - prevTime;
 		m_scene->Update((float)dt);
 		glfwPollEvents();
-		m_renderer->DrawScene(m_scene);
+		runWindowLoop = m_renderer->DrawScene(m_scene);
 		glfwSwapBuffers(m_window);
 		prevTime = currTime;
 	}

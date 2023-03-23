@@ -7,10 +7,13 @@
 #include "rendering/Texture2D.h"
 
 #ifdef _DEBUG
-#define TEXTURE_DIR "resources\\textures\\"
+constexpr auto TEXTURE_DIR = "resources\\textures\\";
 #else
-#define TEXTURE_DIR "..\\..\\resources\\textures\\"
+constexpr auto TEXTURE_DIR = "..\\..\\resources\\textures\\";
 #endif
+
+constexpr auto EXT_PNG = ".png";
+constexpr auto EXT_JPG = ".jpg";
 
 class TextureManager
 {
@@ -18,10 +21,12 @@ public:
 	TextureManager();
 	~TextureManager();
 
-	bool LoadTexture(std::string filename);
+	bool LoadTexturesFromDirectory(std::string dir);
 	Texture2D* GetTextureInfo(std::string_view texturename);
 
 private:
+	bool LoadTexture(std::string filename);
+	
 	std::map<std::string, std::unique_ptr<Texture2D>> m_textureMap;
 };
 

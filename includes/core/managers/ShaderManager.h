@@ -7,9 +7,9 @@
 
 constexpr int SHADER_SIZE_MAX = 5000;
 #ifdef _DEBUG
-#define SHADER_DIR "resources\\shaders\\"
+constexpr auto SHADER_DIR = "resources\\shaders\\";
 #else
-#define SHADER_DIR "..\\..\\resources\\shaders\\"
+constexpr auto SHADER_DIR = "..\\..\\resources\\shaders\\";
 #endif
 
 enum class ShaderType

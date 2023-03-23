@@ -105,11 +105,12 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 	int ptr_id = 0;
 	ImGui::Begin("Scene Graph");
 	if (ImGui::TreeNodeEx("Scene Root", node_flags)) {
-		for (const auto& object : scene->GetMeshList()) {
-			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, object->m_meshName.c_str())) {
+		for (const auto& mesh : scene->GetMeshList()) {
+			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, mesh->m_meshName.c_str())) {
 				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, "Material")) {
-					ImGui::Text("Shader Name: %s", object->GetMaterial().GetShader().shaderName.c_str());
-					ImGui::Text("Texture Name: %s", object->GetMaterial().GetTextureName().c_str());
+					ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", mesh->GetPosition().x, mesh->GetPosition().y, mesh->GetPosition().z);
+					ImGui::Text("Shader: %s", mesh->GetMaterial().GetShader().shaderName.c_str());
+					ImGui::Text("Texture: %s", mesh->GetMaterial().GetTextureName().c_str());
 					ImGui::TreePop();
 				}
 				ImGui::TreePop();
