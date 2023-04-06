@@ -107,8 +107,14 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 	if (ImGui::TreeNodeEx("Scene Root", node_flags)) {
 		for (const auto& mesh : scene->GetMeshList()) {
 			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, mesh->m_meshName.c_str())) {
+				ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", mesh->GetPosition().x, mesh->GetPosition().y, mesh->GetPosition().z);
+				float posX = mesh->GetPosition().x, posY = mesh->GetPosition().y, posZ = mesh->GetPosition().z;
+				ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
+				ImGui::SliderFloat("Y ", &posY, SliderTransformMin, SliderTransformMax, "%.1f");
+				ImGui::SliderFloat("Z ", &posZ, SliderTransformMin, SliderTransformMax, "%.1f");
+				// set the transform if the sliders have moved
+				mesh->SetPosition(glm::vec3(posX, posY, posZ));
 				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, "Material")) {
-					ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", mesh->GetPosition().x, mesh->GetPosition().y, mesh->GetPosition().z);
 					ImGui::Text("Shader: %s", mesh->GetMaterial().GetShader().shaderName.c_str());
 					ImGui::Text("Texture: %s", mesh->GetMaterial().GetTextureName().c_str());
 					ImGui::TreePop();

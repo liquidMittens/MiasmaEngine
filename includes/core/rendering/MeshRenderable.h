@@ -32,6 +32,9 @@ public:
 	const unsigned int GetVertexArrayObject() { return m_vao; } 
 	const unsigned int GetIndexBufferObject() { return m_ibo; }
 	glm::mat4& GetTransform() { return m_transform; }
+	// TODO: these should be translations functions in their Transform class
+	void SetPosition(float x, float y, float z);
+	void SetPosition(glm::vec3 posVector);
 	const glm::vec3 GetPosition();
 private: 
 	std::string m_meshName;

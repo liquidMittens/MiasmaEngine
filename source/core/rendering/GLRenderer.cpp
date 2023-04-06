@@ -19,7 +19,9 @@ void GLRenderer::Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> 
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
+	glEnable(GL_STENCIL_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	
 	GUIBuilder::gbInitializeGUI(pWindow);
 	glfwSetFramebufferSizeCallback(pWindow, GLRenderer::framebuffer_size_callback);
@@ -30,7 +32,7 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 	bool drewFrame = true;
 	if (m_camera && scene) {
 		// clear buffer and depth buffer 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		GUIBuilder::gbFeedInput();
 		//GUIBuilder::gbShowImGuiDemoWindow();
@@ -79,9 +81,17 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			glBindVertexArray(mesh->GetVertexArrayObject());
 			glBindBuffer(GL_ARRAY_BUFFER, mesh->GetVertexBufferObject());
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->GetIndexBufferObject());
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
+			// stencil info
+			// stencil buffer is updated with 1s where the containers were drawn 
+			//glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+			//glStencilFunc(GL_ALWAYS, 1, 0xff);
+			//glStencilMask(0xff);
 			glDrawElements(GL_TRIANGLES, (GLsizei)mesh->GetIndicesCount(), GL_UNSIGNED_INT, 0);
+			// draw the upscaled containers but this time with the appropriate test function and disabling writes to the stencil buffer: 
+			//glStencilFunc(GL_NOTEQUAL, 1, 0xff);
+			//glStencilMask(0x00);
+			//glDisable(GL_DEPTH_TEST);
+			//glDrawElements(GL_TRIANGLES, (GLsizei)mesh->GetIndicesCount(), GL_UNSIGNED_INT, 0);
 		}
 		GUIBuilder::gbSceneInfoOverlay(m_camera);
 		GUIBuilder::gbSceneObjectsInfo(scene);

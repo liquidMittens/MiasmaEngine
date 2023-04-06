@@ -7,6 +7,7 @@
 #include "glm/gtc/type_ptr.hpp"
 #include <iostream>
 #include "utility/MeshLoader.h"
+#include "gui/GUIBuilder.h"
 
 double Scene::m_scrollY = 0.0;
 bool Scene::m_mouseModeEnabled = false;
@@ -53,6 +54,20 @@ void Scene::EnterScene()
 	Material textureBlinnCottageMaterial;
 	textureBlinnCottageMaterial.AddTexture(m_textureManager.GetTextureInfo("cottage"));
 	textureBlinnCottageMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
+
+	// Setup lights 
+	// create lights
+	LightCreationInfo lightCreation;
+	lightCreation.color = glm::vec3(1.0f, 0.0f, 0.0f);
+	lightCreation.pos = glm::vec3(4.0f, 8.0f, -6.0f);
+	lightCreation.lightStrength = 10.0f;
+	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation)));
+
+	LightCreationInfo lightCreation2;
+	lightCreation2.color = glm::vec3(0.0f, 1.0f, 0.0f);
+	lightCreation2.pos = glm::vec3(-5.0f, 20.0f, -5.0f);
+	lightCreation2.lightStrength = 30.0f;
+	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation2)));
 	
 	// load two meshes
 	MeshRenderableCreateInfo catMesh;
@@ -68,66 +83,41 @@ void Scene::EnterScene()
 	cottageMeshCreateInfo.preTransform = 0.5f * glm::mat4(1.0f);
 	cottageMeshCreateInfo.meshName = "Cottage Mesh";
 
+	// Setup MeshRenderable objects to be rendered
 	std::shared_ptr<MeshRenderable> catMeshBlinn(new MeshRenderable(&catMesh, textureBlinnMaterial));
+	catMeshBlinn->GetTransform() = glm::mat4(1.0f);
+	catMeshBlinn->GetTransform() = glm::translate(catMeshBlinn->GetTransform(), { 0.0f, 0.0f, 0.0f });
+	catMeshBlinn->GetTransform() = glm::rotate(catMeshBlinn->GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
 	m_meshRenderableList.push_back(catMeshBlinn);
 
 	catMesh.meshName = "Cat Diffuse Outline";
 	std::shared_ptr<MeshRenderable> catMeshDiffuse(new MeshRenderable(&catMesh, textureOutline));
+	catMeshDiffuse->GetTransform() = glm::mat4(1.0f);
+	catMeshDiffuse->GetTransform() = glm::translate(catMeshDiffuse->GetTransform(), { 10.0f, 0.0f, -5.0f });
+	catMeshDiffuse->GetTransform() = glm::rotate(catMeshDiffuse->GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
 	m_meshRenderableList.push_back(catMeshDiffuse);
 
 	std::shared_ptr<MeshRenderable> lightMesh(new MeshRenderable(&lightTextureCreateInfo, redbasicTextureMaterial));
+	lightMesh->GetTransform() = glm::mat4(1.0f);
+	lightMesh->GetTransform() = glm::translate(lightMesh->GetTransform(), { lightCreation.pos });
 	m_meshRenderableList.push_back(lightMesh);
 
 	lightTextureCreateInfo.meshName = "Left Light Mesh";
 	std::shared_ptr<MeshRenderable> lightMesh2(new MeshRenderable(&lightTextureCreateInfo, greenbasicTextureMaterial));
+	lightMesh2->GetTransform() = glm::mat4(1.0f);
+	lightMesh2->GetTransform() = glm::translate(lightMesh2->GetTransform(), { lightCreation2.pos });
 	m_meshRenderableList.push_back(lightMesh2);
 
 	std::shared_ptr<MeshRenderable> cottageMesh(new MeshRenderable(&cottageMeshCreateInfo, textureBlinnCottageMaterial));
+	cottageMesh->GetTransform() = glm::mat4(1.0f);
+	cottageMesh->GetTransform() = glm::translate(cottageMesh->GetTransform(), { 2.0f, 0.0f, -14.0f });
 	m_meshRenderableList.push_back(cottageMesh);
-
-	// create lights
-	LightCreationInfo lightCreation;
-	lightCreation.color = glm::vec3(1.0f, 0.0f, 0.0f);
-	lightCreation.pos = glm::vec3(4.0f, 8.0f, -6.0f);
-	lightCreation.lightStrength = 10.0f;
-	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation)));
-
-	LightCreationInfo lightCreation2;
-	lightCreation2.color = glm::vec3(0.0f, 1.0f, 0.0f);
-	lightCreation2.pos = glm::vec3(-5.0f, 20.0f, -5.0f);
-	lightCreation2.lightStrength = 30.0f;
-	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation2)));
 }
 
 void Scene::Update(float dt)
 {
 	ProcessInput(m_glfwWindow, dt);
 	float angle = glm::radians<float>(10.0f * (float)glfwGetTime());
-	auto cubeMesh = m_meshRenderableList.at(0);
-	cubeMesh->GetTransform() = glm::mat4(1.0f);
-	cubeMesh->GetTransform() = glm::translate(cubeMesh->GetTransform(), {0.0f, 0.0f, 0.0f});
-	cubeMesh->GetTransform() = glm::rotate(cubeMesh->GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
-	cubeMesh->GetTransform() = glm::rotate(cubeMesh->GetTransform(), 2.0f * angle, { 0.0f, 0.0f, 1.0f });
-	//cubeMesh->GetTransform() = glm::rotate(cubeMesh->GetTransform(), 5.0f * angle, { 1.0f, 1.0f, 0.0f });
-
-	auto cubeMesh2 = m_meshRenderableList.at(1);
-	cubeMesh2->GetTransform() = glm::mat4(1.0f);
-	cubeMesh2->GetTransform() = glm::translate(cubeMesh2->GetTransform(), { 10.0f, 0.0f, -5.0f });
-	cubeMesh2->GetTransform() = glm::rotate(cubeMesh2->GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
-	//cubeMesh2->GetTransform() = glm::rotate(cubeMesh2->GetTransform(), 1.0f * angle, { 1.0f, 1.0f, 0.0f });
-
-	auto lightMesh = m_meshRenderableList.at(2);
-	lightMesh->GetTransform() = glm::mat4(1.0f);
-	lightMesh->GetTransform() = glm::translate(lightMesh->GetTransform(), { m_lights[0]->GetLightPosition() });
-
-	auto lightMesh2 = m_meshRenderableList.at(3);
-	lightMesh2->GetTransform() = glm::mat4(1.0f);
-	lightMesh2->GetTransform() = glm::translate(lightMesh2->GetTransform(), { m_lights[1]->GetLightPosition() });
-	//lightMesh2->GetTransform() = glm::scale(lightMesh2->GetTransform(), glm::vec3(1.0));
-
-	auto cottageMesh = m_meshRenderableList.at(4);
-	cottageMesh->GetTransform() = glm::mat4(1.0f);
-	cottageMesh->GetTransform() = glm::translate(cottageMesh->GetTransform(), { 2.0f, 0.0f, -14.0f });
 
 }
 

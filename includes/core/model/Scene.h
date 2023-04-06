@@ -11,6 +11,7 @@
 
 class MeshRenderable;
 using MeshRenderableListType = std::vector<std::shared_ptr<MeshRenderable>>;
+using LightListType = std::vector<std::unique_ptr<Light>>;
 
 constexpr float FOV = 45.0f;
 constexpr float moveSpeed = 5.0; //units per second
@@ -64,7 +65,7 @@ private:
 	double m_currentTime;
 	int m_numFrames;
 	float m_frameTime;
-	std::vector<std::unique_ptr<Light>> m_lights;
+	LightListType m_lights;
 	static bool m_mouseModeEnabled;
 };
 

@@ -64,6 +64,18 @@ bool MeshRenderable::AttachMaterial(const Material& newMat)
 	return success;
 }
 
+void MeshRenderable::SetPosition(float x, float y, float z)
+{
+	m_transform[3].x = x;
+	m_transform[3].y = y;
+	m_transform[3].z = z;
+}
+
+void MeshRenderable::SetPosition(glm::vec3 posVector)
+{
+	m_transform[3] = glm::vec4(posVector, 1.0f);
+}
+
 const glm::vec3 MeshRenderable::GetPosition()
 {
 	glm::vec3 positionVector = m_transform[3];
