@@ -119,6 +119,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>.\libs\glfw-3.3.8\glfw3_mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copying resource to Debug Output Directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -138,6 +144,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>.\libs\glfw-3.3.8\glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\</Command>
+      <Message>Copying resource to Release Output Directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\core\app\GLWindow.cpp" />

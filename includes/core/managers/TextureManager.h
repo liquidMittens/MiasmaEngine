@@ -6,11 +6,7 @@
 #include <map>
 #include "rendering/Texture2D.h"
 
-#ifdef _DEBUG
 constexpr auto TEXTURE_DIR = "resources\\textures\\";
-#else
-constexpr auto TEXTURE_DIR = "..\\..\\resources\\textures\\";
-#endif
 
 constexpr auto EXT_PNG = ".png";
 constexpr auto EXT_JPG = ".jpg";
