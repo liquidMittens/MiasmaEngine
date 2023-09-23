@@ -4,6 +4,7 @@
 #include "rendering/Material.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "objects/Component.h"
 #include <vector>
 
 constexpr int xyz_rgb_st_format_size = 8; // pos,color,texcoords
@@ -16,10 +17,13 @@ struct MeshRenderableCreateInfo
 	std::string meshName;
 };
 
-class MeshRenderable
+class MeshRenderable : public miasma_rtti::Component
 {
 	friend class GUIBuilder;
 public:
+
+	CLASS_DECLARATION(MeshRenderable);
+
 	MeshRenderable(MeshRenderableCreateInfo *pCreateInfo, const Material& mat);
 	~MeshRenderable();
 
@@ -36,6 +40,10 @@ public:
 	void SetPosition(float x, float y, float z);
 	void SetPosition(glm::vec3 posVector);
 	const glm::vec3 GetPosition();
+
+	virtual void Start() override;
+	virtual void Update(float dt) override;
+	virtual void Shutdown() override;
 private: 
 	std::string m_meshName;
 	unsigned int m_vbo;

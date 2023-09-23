@@ -150,6 +150,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\core\app\GameApp.cpp" />
     <ClCompile Include="source\core\app\GLWindow.cpp" />
     <ClCompile Include="source\core\camera\Camera.cpp" />
     <ClCompile Include="source\core\glad\glad.c" />
@@ -167,14 +168,19 @@
     <ClCompile Include="source\core\managers\TextureManager.cpp" />
     <ClCompile Include="source\core\model\Light.cpp" />
     <ClCompile Include="source\core\model\Scene.cpp" />
+    <ClCompile Include="source\core\objects\BoxCollider.cpp" />
+    <ClCompile Include="source\core\objects\Collider.cpp" />
+    <ClCompile Include="source\core\objects\Component.cpp" />
+    <ClCompile Include="source\core\objects\GameObject.cpp" />
+    <ClCompile Include="source\core\objects\MeshRenderable.cpp" />
     <ClCompile Include="source\core\rendering\GLRenderer.cpp" />
     <ClCompile Include="source\core\rendering\Material.cpp" />
-    <ClCompile Include="source\core\rendering\MeshRenderable.cpp" />
     <ClCompile Include="source\core\rendering\Texture2D.cpp" />
     <ClCompile Include="source\core\utility\MeshLoader.cpp" />
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="includes\core\app\GameApp.h" />
     <ClInclude Include="includes\core\app\GLWindow.h" />
     <ClInclude Include="includes\core\camera\Camera.h" />
     <ClInclude Include="includes\core\glad\glad.h" />
@@ -223,10 +229,14 @@
     <ClInclude Include="includes\core\model\Rectangle.h" />
     <ClInclude Include="includes\core\model\Scene.h" />
     <ClInclude Include="includes\core\model\Triangle.h" />
+    <ClInclude Include="includes\core\objects\BoxCollider.h" />
+    <ClInclude Include="includes\core\objects\Collider.h" />
+    <ClInclude Include="includes\core\objects\Component.h" />
+    <ClInclude Include="includes\core\objects\GameObject.h" />
+    <ClInclude Include="includes\core\objects\MeshRenderable.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer.h" />
     <ClInclude Include="includes\core\rendering\IRenderInterface.h" />
     <ClInclude Include="includes\core\rendering\Material.h" />
-    <ClInclude Include="includes\core\rendering\MeshRenderable.h" />
     <ClInclude Include="includes\core\rendering\Texture2D.h" />
     <ClInclude Include="includes\core\utility\MeshLoader.h" />
     <ClInclude Include="includes\core\utility\tiny_obj_loader.h" />

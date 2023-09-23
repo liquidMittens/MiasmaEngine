@@ -10,6 +10,7 @@
 #include "model/Light.h"
 
 class MeshRenderable;
+class GLWindow;
 using MeshRenderableListType = std::vector<std::shared_ptr<MeshRenderable>>;
 using LightListType = std::vector<std::unique_ptr<Light>>;
 
@@ -20,7 +21,7 @@ constexpr float zoomSensitivity = -0.5f;
 
 struct SceneCreationInfo
 {
-	GLFWwindow* pWindow;
+	GLWindow* pWindow;
 	glm::vec2 screenSize;
 };
 
@@ -37,23 +38,16 @@ public:
 	void EnterScene();
 	void Update(float dt);
 	void ExitScene();
-	void ProcessInput(GLFWwindow* pWindow, float frameTime);
-	static void OnScroll(GLFWwindow* window, double deltaX, double deltaY);
-	static void OnMouseButton(GLFWwindow* window, int button, int action, int mods);
-
 
 	std::shared_ptr<tdogl::Camera> GetCamera() { return m_camera; }
 	MeshRenderableListType GetMeshList() { return m_meshRenderableList; }
-	std::vector<std::unique_ptr<Light>>& GetLights() { return m_lights; }
+	LightListType& GetLights() { return m_lights; }
 	GLFWwindow* GetGLFWWindow() { return m_glfwWindow; }
 
 private:
 	std::shared_ptr<tdogl::Camera> m_camera;
 	MeshRenderableListType m_meshRenderableList;
 	GLFWwindow* m_glfwWindow;
-	// camera info
-	bool m_wireframe = false;
-	static double m_scrollY;
 	glm::vec2 m_screenSize;
 	// calculate delta time per frame
 	float currTime;
@@ -66,7 +60,6 @@ private:
 	int m_numFrames;
 	float m_frameTime;
 	LightListType m_lights;
-	static bool m_mouseModeEnabled;
 };
 
 #endif

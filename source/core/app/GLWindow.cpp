@@ -1,20 +1,15 @@
 #include "app/GLWindow.h"
-#include "glad/glad.h"
+#define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
+#include "glad/glad.h"
 #include <iostream>
-#include <sstream>
 #include "camera/Camera.h"
 #include "rendering/GLRenderer.h"
 #include "model/Scene.h"
 
 GLWindow::GLWindow() :
 	m_window(nullptr),
-	m_cursor(nullptr),
-	m_lastTime(0.0),
-	m_currentTime(0.0),
-	m_numFrames(0),
-	m_frameTime(0.0f),
-	m_deltaTime(0.0)
+	m_cursor(nullptr)
 {
 
 }
@@ -35,52 +30,12 @@ bool GLWindow::CreateGLWindow()
 		std::cout << "Failed to create GLFWcursor!\n";
 		result = false;
 	}
-	if (result) {
-		// create our scene and our GLRenderer
-		SceneCreationInfo sceneInfo{ m_window, SCREEN_SIZE };
-		m_scene = std::unique_ptr<Scene>(new Scene(&sceneInfo));
-		m_scene->EnterScene();
-		m_renderer = std::unique_ptr<GLRenderer>(new GLRenderer());
-		m_renderer->Initialize(m_window, m_scene->GetCamera());
-	}
 
 	return result;
 }
 
-void GLWindow::ExecuteGLWindowLoop()
-{
-	bool runWindowLoop = true;
-	if (!m_scene) {
-		std::cout << "Scene Object is NULL leaving ExecuteGLWindowLoop!!\n";
-		runWindowLoop = false;
-	}
-	if (runWindowLoop && !m_renderer) {
-		std::cout << "GLRenderer is NULL leaving ExecuteGLWindowLoop!!\n";
-		runWindowLoop = false;
-	}
-
-	float prevTime = 0.0f;
-	while (runWindowLoop && !glfwWindowShouldClose(m_window)) {
-		// calculate delta time per frame
-		calculateFrameRate();
-		double currTime = (float)glfwGetTime();
-		double dt = currTime - prevTime;
-		m_scene->Update((float)dt);
-		glfwPollEvents();
-		runWindowLoop = m_renderer->DrawScene(m_scene);
-		glfwSwapBuffers(m_window);
-		prevTime = currTime;
-	}
-}
-
 void GLWindow::ShutdownGLWindow()
 {
-	if (m_scene) {
-		m_scene->ExitScene();
-	}
-	if (m_renderer) {
-		m_renderer->Shutdown();
-	}
 	glfwTerminate();
 }
 
@@ -113,23 +68,6 @@ bool GLWindow::InitGLWindow()
 		}
 	}
 	return result;
-}
-
-void GLWindow::calculateFrameRate()
-{
-	m_currentTime = glfwGetTime();
-	m_deltaTime = m_currentTime - m_lastTime;
-
-	if (m_deltaTime >= 1) {
-		int framerate{ std::max(1, int(m_numFrames / m_deltaTime)) };
-		std::stringstream title;
-		title << "OGLSandbox (FPS: " << framerate << " )";
-		glfwSetWindowTitle(m_window, title.str().c_str());
-		m_lastTime = m_currentTime;
-		m_numFrames = -1;
-		m_frameTime = float(1000.0 / framerate);
-	}
-	++m_numFrames;
 }
 
 bool GLWindow::InitGLFWCursor()

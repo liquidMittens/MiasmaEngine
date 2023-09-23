@@ -1,28 +1,22 @@
 #include "model/Scene.h"
-#include "rendering/MeshRenderable.h"
+#include "objects/MeshRenderable.h"
 #include "model/Cube.h"
 #include "model/Rectangle.h"
+#include "app/GLWindow.h"
 #include "rendering/Texture2D.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include <iostream>
 #include "utility/MeshLoader.h"
 #include "gui/GUIBuilder.h"
-
-double Scene::m_scrollY = 0.0;
-bool Scene::m_mouseModeEnabled = false;
  
 Scene::Scene(SceneCreationInfo* creationInfo)
 {
-	m_glfwWindow = creationInfo->pWindow;
+	m_glfwWindow = creationInfo->pWindow->GetGLFWWindow();
 	m_screenSize.x = creationInfo->screenSize.x;
 	m_screenSize.y = creationInfo->screenSize.y;
-	// register callbacks 
-	glfwSetScrollCallback(m_glfwWindow, Scene::OnScroll);
-	glfwSetMouseButtonCallback(m_glfwWindow, Scene::OnMouseButton);
 	m_camera = std::make_shared<tdogl::Camera>();
 	m_camera->initcamera(90.0f, 0.1f, 100.0f, glm::vec3(0, 0, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
-	m_mouseModeEnabled = false;
 }
 
 Scene::~Scene()
@@ -116,7 +110,6 @@ void Scene::EnterScene()
 
 void Scene::Update(float dt)
 {
-	ProcessInput(m_glfwWindow, dt);
 	float angle = glm::radians<float>(10.0f * (float)glfwGetTime());
 
 }
@@ -124,72 +117,4 @@ void Scene::Update(float dt)
 void Scene::ExitScene()
 {
 
-}
-
-void Scene::ProcessInput(GLFWwindow* pWindow, float deltaTime)
-{
-	if (pWindow != nullptr) {
-		if (glfwGetKey(pWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-			glfwSetWindowShouldClose(pWindow, true);
-		}
-		if (glfwGetKey(pWindow, GLFW_KEY_Q) == GLFW_PRESS) {
-			m_wireframe = !m_wireframe;
-		}
-		//move position of camera based on WASD keys, and XZ keys for up and down
-		if (glfwGetKey(pWindow, 'S')) {
-			m_camera->offsetPosition(deltaTime * moveSpeed * -m_camera->forward());
-		}
-		else if (glfwGetKey(pWindow, 'W')) {
-			m_camera->offsetPosition(deltaTime * moveSpeed * m_camera->forward());
-		}
-		if (glfwGetKey(pWindow, 'A')) {
-			m_camera->offsetPosition(deltaTime * moveSpeed * -m_camera->right());
-		}
-		else if (glfwGetKey(pWindow, 'D')) {
-			m_camera->offsetPosition(deltaTime * moveSpeed * m_camera->right());
-		}
-		if (glfwGetKey(pWindow, GLFW_KEY_LEFT_CONTROL)) {
-			m_camera->offsetPosition(deltaTime * moveSpeed * -glm::vec3(0, 1, 0));
-		}
-		else if (glfwGetKey(pWindow, GLFW_KEY_SPACE)) {
-			m_camera->offsetPosition(deltaTime * moveSpeed * glm::vec3(0, 1, 0));
-		}
-
-		if (!m_mouseModeEnabled) {
-			//rotate camera based on mouse movement
-			const float mouseSensitivity = 0.1f;
-			double mouseX, mouseY;
-			glfwGetCursorPos(pWindow, &mouseX, &mouseY);
-			m_camera->offsetOrientation(mouseSensitivity * (float)mouseY, mouseSensitivity * (float)mouseX);
-			glfwSetCursorPos(pWindow, 0, 0); //reset the mouse, so it doesn't go out of the window
-
-			//increase or decrease field of view based on mouse wheel
-			float fieldOfView = m_camera->fieldOfView() + zoomSensitivity * (float)m_scrollY;
-			if (fieldOfView < 5.0f) fieldOfView = 5.0f;
-			if (fieldOfView > 130.0f) fieldOfView = 130.0f;
-			m_camera->setFieldOfView(fieldOfView);
-			m_scrollY = 0;
-		}
-	}
-}
-
-// records how far the y axis has been scrolled
-void Scene::OnScroll(GLFWwindow* window, double deltaX, double deltaY)
-{
-	m_scrollY += deltaY;
-}
-
-void Scene::OnMouseButton(GLFWwindow* window, int button, int action, int mods)
-{
-	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
-		glfwSetCursorPos(window, 0, 0); //reset the mouse, so it doesn't go out of the window
-		std::cout << "clicked mouse button right\n";
-		m_mouseModeEnabled = !m_mouseModeEnabled;
-		if (m_mouseModeEnabled) {
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-		}
-		else {
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		}
-	}
 }

@@ -43,9 +43,6 @@
     <Filter Include="Header Files\core\glm">
       <UniqueIdentifier>{62cf155a-7a1b-48bb-a445-603949ae1308}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\objects">
-      <UniqueIdentifier>{4f952668-c9f4-443b-a264-c56bbf95d97b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\core\camera">
       <UniqueIdentifier>{e7009870-77a4-49d0-88cf-46544155dc6e}</UniqueIdentifier>
     </Filter>
@@ -88,6 +85,12 @@
     <Filter Include="Source Files\core\app">
       <UniqueIdentifier>{42fdb3ab-b4ac-4e99-a438-a84b9aab44a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\core\objects">
+      <UniqueIdentifier>{6f23e811-002b-4950-9b05-d921c09f7514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\objects">
+      <UniqueIdentifier>{74a297a0-970e-4b53-9b98-11e1b3f0f99d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -109,9 +112,6 @@
       <Filter>Source Files\core\managers</Filter>
     </ClCompile>
     <ClCompile Include="source\core\rendering\Texture2D.cpp">
-      <Filter>Source Files\core\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\rendering\MeshRenderable.cpp">
       <Filter>Source Files\core\rendering</Filter>
     </ClCompile>
     <ClCompile Include="source\core\rendering\Material.cpp">
@@ -158,6 +158,24 @@
     </ClCompile>
     <ClCompile Include="source\core\app\GLWindow.cpp">
       <Filter>Source Files\core\app</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\app\GameApp.cpp">
+      <Filter>Source Files\core\app</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\objects\Component.cpp">
+      <Filter>Source Files\core\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\objects\Collider.cpp">
+      <Filter>Source Files\core\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\objects\BoxCollider.cpp">
+      <Filter>Source Files\core\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\objects\GameObject.cpp">
+      <Filter>Source Files\core\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\objects\MeshRenderable.cpp">
+      <Filter>Source Files\core\objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,9 +278,6 @@
     <ClInclude Include="includes\core\rendering\Texture2D.h">
       <Filter>Header Files\core\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\rendering\MeshRenderable.h">
-      <Filter>Header Files\core\rendering</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\rendering\Material.h">
       <Filter>Header Files\core\rendering</Filter>
     </ClInclude>
@@ -325,6 +340,24 @@
     </ClInclude>
     <ClInclude Include="includes\core\app\GLWindow.h">
       <Filter>Header Files\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\app\GameApp.h">
+      <Filter>Header Files\core\app</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\GameObject.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Component.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Collider.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\BoxCollider.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\MeshRenderable.h">
+      <Filter>Header Files\core\objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

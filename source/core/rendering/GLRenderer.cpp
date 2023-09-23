@@ -1,15 +1,17 @@
-#include "rendering\GLRenderer.h"
-#include "core\glad\glad.h"
+#include "rendering/GLRenderer.h"
+#define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
-#include "rendering/MeshRenderable.h"
+#include "glad/glad.h"
+#include "objects/MeshRenderable.h"
 #include "camera/Camera.h"
 #include "model/Scene.h"
-using namespace tdogl;
-#include "gui\GUIBuilder.h"
+#include "app/GLWindow.h"
+#include "gui/GUIBuilder.h"
 #include <iostream>
 #include <sstream>
+using namespace tdogl;
 
-void GLRenderer::Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> camera)
+void GLRenderer::Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> camera)
 {
 	m_camera = camera;
 	if (!m_camera) {
@@ -23,8 +25,8 @@ void GLRenderer::Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	
-	GUIBuilder::gbInitializeGUI(pWindow);
-	glfwSetFramebufferSizeCallback(pWindow, GLRenderer::framebuffer_size_callback);
+	GUIBuilder::gbInitializeGUI(pWindow->GetGLFWWindow());
+	glfwSetFramebufferSizeCallback(pWindow->GetGLFWWindow(), GLRenderer::framebuffer_size_callback);
 }
 
 bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)

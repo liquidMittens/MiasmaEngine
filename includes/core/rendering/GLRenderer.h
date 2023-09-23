@@ -9,6 +9,7 @@ using namespace tdogl;
 
 class MeshRenderable;
 class Scene;
+struct GLFWwindow;
 
 struct LightShaderInformation {
 	unsigned int position;
@@ -20,7 +21,7 @@ class GLRenderer : public IRenderInterface
 {
 public:
 	// Inherited via IRenderInterface
-	virtual void Initialize(GLFWwindow* pWindow, std::shared_ptr<tdogl::Camera> camera) override;
+	virtual void Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> camera) override;
 	virtual bool DrawScene(std::unique_ptr<Scene>& scene) override;
 	virtual void Shutdown() override;
 

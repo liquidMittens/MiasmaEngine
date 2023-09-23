@@ -9,6 +9,9 @@ class Scene;
 
 constexpr auto SliderTransformMin = -20.0f;
 constexpr auto SliderTransformMax = 25.0f;
+constexpr auto SliderColorMin = 0.0f;
+constexpr auto SliderColorMax = 1.0f;
+constexpr auto SliderLightStrength = 50;
 
 #define GUI_TEXT_RED ImVec4(1.0f, 0.0f, 0.0f, 1.0f)
 #define GUI_TEXT_GREEN ImVec4(0.0f, 1.0f, 0.0f, 1.0f)

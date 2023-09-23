@@ -6,6 +6,7 @@ namespace fs = std::filesystem;
 #define STB_IMAGE_IMPLEMENTATION
 #include "stbimage/stb_image.h"
 #include "rendering/Texture2D.h"
+#include <format>
 
 TextureManager::TextureManager()
 {
@@ -21,7 +22,7 @@ bool TextureManager::LoadTexturesFromDirectory(std::string dir)
 	if (fs::is_directory(dir)) {
 		for (const auto& file : fs::recursive_directory_iterator(dir)) {
 			if (file.is_regular_file()) {
-				std::cout << "Loading Texture: %s" << file.path().filename().string() << "\n";
+				std::cout << std::format("Loading Texture: {}\n", file.path().filename().string());
 				LoadTexture(file.path().filename().string());
 			}
 		}

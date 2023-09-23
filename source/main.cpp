@@ -1,13 +1,18 @@
 // main 
-#include "app/GLWindow.h"
+#include "app/GameApp.h"
+#include "core/objects/Component.h"
+#include "core/objects/Collider.h"
+#include "core/objects/BoxCollider.h"
+#include "core/objects/MeshRenderable.h"
+#include "core/objects/GameObject.h"
+using namespace miasma_rtti;
 
 int main(int argc, char** argv)
 {
 	// create and execute out window loop
-	GLWindow glWindow;
-	if (glWindow.CreateGLWindow()) {
-		glWindow.ExecuteGLWindowLoop();
-		glWindow.ShutdownGLWindow();
-	}
+	GameApp game;
+	game.InitializeGameApp();
+	game.RunGameAppLoop();
+	game.ShutdownGameApp();
 	return 0;
 }
