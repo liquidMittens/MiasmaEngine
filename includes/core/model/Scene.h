@@ -8,11 +8,14 @@
 #include "managers/ShaderManager.h"
 #include "managers/TextureManager.h"
 #include "model/Light.h"
+#include "objects/MeshRenderable.h"
+#include "objects/GameObject.h"
 
 class MeshRenderable;
 class GLWindow;
-using MeshRenderableListType = std::vector<std::shared_ptr<MeshRenderable>>;
+using MeshRenderableListType = std::vector<std::shared_ptr<miasma_rtti::MeshRenderable>>;
 using LightListType = std::vector<std::unique_ptr<Light>>;
+using GameObjectsList = std::vector<std::shared_ptr<GameObject>>;
 
 constexpr float FOV = 45.0f;
 constexpr float moveSpeed = 5.0; //units per second
@@ -27,7 +30,7 @@ struct SceneCreationInfo
 
 class Scene
 {
-	friend class GUIBuilder;
+	friend class miasma_ui::GUIBuilder;
 
 public:
 	Scene(SceneCreationInfo* creationInfo);
@@ -41,12 +44,14 @@ public:
 
 	std::shared_ptr<tdogl::Camera> GetCamera() { return m_camera; }
 	MeshRenderableListType GetMeshList() { return m_meshRenderableList; }
+	GameObjectsList GetGameObjectsList() { return m_gameObjectsList; }
 	LightListType& GetLights() { return m_lights; }
 	GLFWwindow* GetGLFWWindow() { return m_glfwWindow; }
 
 private:
 	std::shared_ptr<tdogl::Camera> m_camera;
 	MeshRenderableListType m_meshRenderableList;
+	GameObjectsList m_gameObjectsList;
 	GLFWwindow* m_glfwWindow;
 	glm::vec2 m_screenSize;
 	// calculate delta time per frame

@@ -173,6 +173,7 @@
     <ClCompile Include="source\core\objects\Component.cpp" />
     <ClCompile Include="source\core\objects\GameObject.cpp" />
     <ClCompile Include="source\core\objects\MeshRenderable.cpp" />
+    <ClCompile Include="source\core\objects\Transform.cpp" />
     <ClCompile Include="source\core\rendering\GLRenderer.cpp" />
     <ClCompile Include="source\core\rendering\Material.cpp" />
     <ClCompile Include="source\core\rendering\Texture2D.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="includes\core\objects\Component.h" />
     <ClInclude Include="includes\core\objects\GameObject.h" />
     <ClInclude Include="includes\core\objects\MeshRenderable.h" />
+    <ClInclude Include="includes\core\objects\Transform.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer.h" />
     <ClInclude Include="includes\core\rendering\IRenderInterface.h" />
     <ClInclude Include="includes\core\rendering\Material.h" />

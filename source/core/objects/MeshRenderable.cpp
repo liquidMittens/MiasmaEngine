@@ -2,11 +2,16 @@
 #include "core/glad/glad.h"
 #include "utility/MeshLoader.h"
 #include <iostream>
+#include "objects/GameObject.h"
+using namespace miasma_rtti;
 
-CLASS_DEFINITION(miasma_rtti::Component, MeshRenderable);
+CLASS_DEFINITION(Component, MeshRenderable);
 
-MeshRenderable::MeshRenderable(MeshRenderableCreateInfo* pCreateInfo, const Material& mat) : 
-	Component(TO_STRING(MeshRenderable))
+MeshRenderable::MeshRenderable(GameObject* owner, MeshRenderableCreateInfo* pCreateInfo, const Material& mat) :
+	Component(owner, TO_STRING(MeshRenderable)),
+	m_vbo(0),
+	m_vao(0),
+	m_ibo(0)
 {
 	if (pCreateInfo != nullptr) {
 		if (pCreateInfo->meshName.empty()) {
@@ -51,8 +56,6 @@ MeshRenderable::MeshRenderable(MeshRenderableCreateInfo* pCreateInfo, const Mate
 		// bind GL_ELEMENT_ARRAY_BUFFER (vertex array indices)
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(unsigned int), m_indices.data(), GL_STATIC_DRAW);
-
-		m_transform = glm::identity<glm::mat4>();
 	}
 	else {
 		std::cout << "MeshRenderable CreateInfo* is NULL\n";
@@ -61,6 +64,7 @@ MeshRenderable::MeshRenderable(MeshRenderableCreateInfo* pCreateInfo, const Mate
 
 MeshRenderable::~MeshRenderable()
 {
+	std::cout << std::format("Cleaning up MeshRenderable{}\n", m_meshName.c_str());
 	glDeleteBuffers(1, &m_ibo);
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteVertexArrays(1, &m_vao);
@@ -73,24 +77,6 @@ bool MeshRenderable::AttachMaterial(const Material& newMat)
 	return success;
 }
 
-void MeshRenderable::SetPosition(float x, float y, float z)
-{
-	m_transform[3].x = x;
-	m_transform[3].y = y;
-	m_transform[3].z = z;
-}
-
-void MeshRenderable::SetPosition(glm::vec3 posVector)
-{
-	m_transform[3] = glm::vec4(posVector, 1.0f);
-}
-
-const glm::vec3 MeshRenderable::GetPosition()
-{
-	glm::vec3 positionVector = m_transform[3];
-	return positionVector;
-}
-
 void MeshRenderable::Start()
 {
 
@@ -98,7 +84,7 @@ void MeshRenderable::Start()
 
 void MeshRenderable::Update(float dt)
 {
-
+	/*gameObject->transform.GetTransform() = glm::rotate(gameObject->transform.GetTransform(), -1.0f * dt, { 0.0f, 1.0f, 0.0f });*/
 }
 
 void MeshRenderable::Shutdown()

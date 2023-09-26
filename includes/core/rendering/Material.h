@@ -20,7 +20,7 @@ public:
 
 	unsigned int GetTextureId() const { return m_textureId; }
 	std::string GetTextureName() const { return m_textureName; }
-	ShaderInfo GetShader() const { return m_shader; }
+	const ShaderInfo& GetShader() { return m_shader; }
 
 private:
 	unsigned int m_textureId;

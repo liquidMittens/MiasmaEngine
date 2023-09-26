@@ -8,6 +8,7 @@
 #include <algorithm>
 
 #define TO_STRING( x ) #x
+class GameObject;
 
 //****************
 // CLASS_DECLARATION
@@ -46,8 +47,10 @@ namespace miasma_rtti {
 	public:
 
 		static const std::size_t Type;
-		Component(std::string&& initialValue)
-			: value(initialValue) {
+		Component(GameObject* owner, std::string&& initialValue)
+			: value(initialValue), 
+			gameObject(owner)
+		{
 		}
 		virtual ~Component() = default;
 
@@ -63,6 +66,7 @@ namespace miasma_rtti {
 	public:
 
 		std::string value = "uninitialized";
+		GameObject* gameObject;
 	};
 }
 

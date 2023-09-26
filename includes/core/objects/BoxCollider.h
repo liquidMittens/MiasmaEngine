@@ -9,8 +9,8 @@ namespace miasma_rtti
 	public:
 		CLASS_DECLARATION(BoxCollider);
 
-		BoxCollider(std::string&& initialValue) : 
-			Collider(std::move(initialValue))
+		BoxCollider(GameObject* owner, std::string&& initialValue) : 
+			Collider(owner, std::move(initialValue))
 		{}
 
 		virtual void Start() override;

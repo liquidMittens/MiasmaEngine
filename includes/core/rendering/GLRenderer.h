@@ -5,9 +5,10 @@
 #include <vector>
 #include <memory>
 #include "camera/Camera.h"
+#include "objects/MeshRenderable.h"
 using namespace tdogl;
+using namespace miasma_rtti;
 
-class MeshRenderable;
 class Scene;
 struct GLFWwindow;
 
@@ -25,12 +26,10 @@ public:
 	virtual bool DrawScene(std::unique_ptr<Scene>& scene) override;
 	virtual void Shutdown() override;
 
-	void AddMeshRenderable(std::shared_ptr<MeshRenderable> newMesh);
 	// window resize callback
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 private:
 	std::shared_ptr<tdogl::Camera> m_camera;
-	std::vector<std::shared_ptr<MeshRenderable>> m_meshList;
 	LightShaderInformation m_lightShaderInfo;
 	unsigned int m_cameraShaderPos;
 	bool tst;

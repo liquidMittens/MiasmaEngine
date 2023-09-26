@@ -59,7 +59,7 @@ void utility::MeshLoader::LoadMeshFromFile(MeshLoaderInformation& meshLoaderInfo
 			}
 
 			if (uniqueVertexMap.count(vertex) == 0) {
-				uniqueVertexMap[vertex] = (unsigned int)meshLoaderInformation.vertices.size() / xyz_st_xyz_format_size;
+				uniqueVertexMap[vertex] = (unsigned int)meshLoaderInformation.vertices.size() / miasma_rtti::xyz_st_xyz_format_size;
 				meshLoaderInformation.vertices.push_back(vertex.pos.x);
 				meshLoaderInformation.vertices.push_back(vertex.pos.y);
 				meshLoaderInformation.vertices.push_back(vertex.pos.z);

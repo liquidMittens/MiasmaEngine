@@ -4,11 +4,12 @@
 #include "model/Rectangle.h"
 #include "app/GLWindow.h"
 #include "rendering/Texture2D.h"
-#include "glm/gtc/matrix_transform.hpp"
+#include "objects/GameObject.h"
 #include "glm/gtc/type_ptr.hpp"
 #include <iostream>
 #include "utility/MeshLoader.h"
 #include "gui/GUIBuilder.h"
+using namespace miasma_rtti;
  
 Scene::Scene(SceneCreationInfo* creationInfo)
 {
@@ -34,6 +35,7 @@ void Scene::EnterScene()
 	Material textureBlinnMaterial;
 	textureBlinnMaterial.AddTexture(m_textureManager.GetTextureInfo("white"));
 	textureBlinnMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
+	// outline
 	Material textureOutline;
 	textureOutline.AddTexture(m_textureManager.GetTextureInfo("cat"));
 	textureOutline.AttachShader(m_shaderManager.GetShaderFromMap("TextureOutline"));
@@ -45,6 +47,7 @@ void Scene::EnterScene()
 	Material redbasicTextureMaterial;
 	redbasicTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("red"));
 	redbasicTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicTexture"));
+	// cottage Blinn
 	Material textureBlinnCottageMaterial;
 	textureBlinnCottageMaterial.AddTexture(m_textureManager.GetTextureInfo("cottage"));
 	textureBlinnCottageMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
@@ -64,7 +67,7 @@ void Scene::EnterScene()
 	m_lights.push_back(std::unique_ptr<Light>(new Light(&lightCreation2)));
 	
 	// load two meshes
-	MeshRenderableCreateInfo catMesh;
+	miasma_rtti::MeshRenderableCreateInfo catMesh;
 	catMesh.filename = "cat.obj";
 	catMesh.preTransform = 0.1f * glm::mat4(1.0f);
 	catMesh.meshName = "cat blinn";
@@ -77,41 +80,51 @@ void Scene::EnterScene()
 	cottageMeshCreateInfo.preTransform = 0.5f * glm::mat4(1.0f);
 	cottageMeshCreateInfo.meshName = "Cottage Mesh";
 
+	// make 4 GameObjects
+	std::shared_ptr<GameObject> catBlinnObject = std::shared_ptr<GameObject>(new GameObject());
+	std::shared_ptr<GameObject> catDiffuseObject = std::shared_ptr<GameObject>(new GameObject());
+	std::shared_ptr<GameObject> cottageObject = std::shared_ptr<GameObject>(new GameObject());
+
+
 	// Setup MeshRenderable objects to be rendered
-	std::shared_ptr<MeshRenderable> catMeshBlinn(new MeshRenderable(&catMesh, textureBlinnMaterial));
-	catMeshBlinn->GetTransform() = glm::mat4(1.0f);
-	catMeshBlinn->GetTransform() = glm::translate(catMeshBlinn->GetTransform(), { 0.0f, 0.0f, 0.0f });
-	catMeshBlinn->GetTransform() = glm::rotate(catMeshBlinn->GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
-	m_meshRenderableList.push_back(catMeshBlinn);
+	catBlinnObject->AddComponent<miasma_rtti::MeshRenderable>(catBlinnObject.get(), &catMesh, textureBlinnMaterial);
+	catBlinnObject->transform.GetTransform() = glm::mat4(1.0f);
+	catBlinnObject->transform.GetTransform() = glm::translate(catBlinnObject->transform.GetTransform(), { 0.0f, 0.0f, 0.0f });
+	catBlinnObject->transform.GetTransform() = glm::rotate(catBlinnObject->transform.GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
+	m_gameObjectsList.push_back(catBlinnObject);
 
 	catMesh.meshName = "Cat Diffuse Outline";
-	std::shared_ptr<MeshRenderable> catMeshDiffuse(new MeshRenderable(&catMesh, textureOutline));
-	catMeshDiffuse->GetTransform() = glm::mat4(1.0f);
-	catMeshDiffuse->GetTransform() = glm::translate(catMeshDiffuse->GetTransform(), { 10.0f, 0.0f, -5.0f });
-	catMeshDiffuse->GetTransform() = glm::rotate(catMeshDiffuse->GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
-	m_meshRenderableList.push_back(catMeshDiffuse);
+	catDiffuseObject->AddComponent<miasma_rtti::MeshRenderable>(catDiffuseObject.get(), &catMesh, textureOutline);
+	catDiffuseObject->transform.GetTransform() = glm::mat4(1.0f);
+	catDiffuseObject->transform.GetTransform() = glm::translate(catDiffuseObject->transform.GetTransform(), { 10.0f, 0.0f, -5.0f });
+	catDiffuseObject->transform.GetTransform() = glm::rotate(catDiffuseObject->transform.GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
+	catDiffuseObject->transform.SetPosition({ 10.0f, 0.0f, -5.0f });
+	m_gameObjectsList.push_back(catDiffuseObject);
 
-	std::shared_ptr<MeshRenderable> lightMesh(new MeshRenderable(&lightTextureCreateInfo, redbasicTextureMaterial));
-	lightMesh->GetTransform() = glm::mat4(1.0f);
-	lightMesh->GetTransform() = glm::translate(lightMesh->GetTransform(), { lightCreation.pos });
-	m_meshRenderableList.push_back(lightMesh);
+	///*std::shared_ptr<miasma_rtti::MeshRenderable> lightMesh(new miasma_rtti::MeshRenderable(nullptr, &lightTextureCreateInfo, redbasicTextureMaterial));
+	//lightMesh->gameObject->transform.GetTransform() = glm::mat4(1.0f);
+	//lightMesh->gameObject->transform.GetTransform() = glm::translate(lightMesh->gameObject->transform.GetTransform(), { lightCreation.pos });
+	//m_meshRenderableList.push_back(lightMesh);
 
-	lightTextureCreateInfo.meshName = "Left Light Mesh";
-	std::shared_ptr<MeshRenderable> lightMesh2(new MeshRenderable(&lightTextureCreateInfo, greenbasicTextureMaterial));
-	lightMesh2->GetTransform() = glm::mat4(1.0f);
-	lightMesh2->GetTransform() = glm::translate(lightMesh2->GetTransform(), { lightCreation2.pos });
-	m_meshRenderableList.push_back(lightMesh2);
+	//lightTextureCreateInfo.meshName = "Left Light Mesh";
+	//std::shared_ptr<miasma_rtti::MeshRenderable> lightMesh2(new miasma_rtti::MeshRenderable(nullptr, &lightTextureCreateInfo, greenbasicTextureMaterial));
+	//lightMesh2->gameObject->transform.GetTransform() = glm::mat4(1.0f);
+	//lightMesh2->gameObject->transform.GetTransform() = glm::translate(lightMesh2->gameObject->transform.GetTransform(), { lightCreation2.pos });
+	//m_meshRenderableList.push_back(lightMesh2);*/
 
-	std::shared_ptr<MeshRenderable> cottageMesh(new MeshRenderable(&cottageMeshCreateInfo, textureBlinnCottageMaterial));
-	cottageMesh->GetTransform() = glm::mat4(1.0f);
-	cottageMesh->GetTransform() = glm::translate(cottageMesh->GetTransform(), { 2.0f, 0.0f, -14.0f });
-	m_meshRenderableList.push_back(cottageMesh);
+	cottageObject->AddComponent<miasma_rtti::MeshRenderable>(cottageObject.get(), &cottageMeshCreateInfo, textureBlinnCottageMaterial);
+	cottageObject->transform.GetTransform() = glm::mat4(1.0f);
+	cottageObject->transform.GetTransform() = glm::translate(cottageObject->transform.GetTransform(), { 2.0f, 0.0f, -14.0f });
+	m_gameObjectsList.push_back(cottageObject);
 }
 
 void Scene::Update(float dt)
 {
-	float angle = glm::radians<float>(10.0f * (float)glfwGetTime());
-
+	float angle = glm::radians<float>(10.0f * dt);
+	for (auto& gameobject : m_gameObjectsList) {
+		// update components
+		gameobject->UpdateGameObject(dt);
+	}
 }
 
 void Scene::ExitScene()

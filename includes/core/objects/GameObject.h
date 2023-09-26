@@ -5,11 +5,16 @@
 #include "Component.h"
 #include <iostream>
 #include <typeinfo>
+#include <string>
+#include "objects/Transform.h"
 using namespace miasma_rtti;
 
 class GameObject
 {
 public:
+
+	GameObject() = default;
+	~GameObject() = default;
 
 	template<typename ComponentType, typename... Args>
 	void AddComponent(Args&&... parameters);
@@ -26,9 +31,13 @@ public:
 	template<typename ComponentType>
 	std::vector<ComponentType*> GetComponents();
 
+	void UpdateGameObject(float dt);
+
 	//template<int idx, typename TType, float flt>
 	//void DoSomething();
 
+	std::string tag = "GameObject";
+	Transform transform;
 
 private:
 

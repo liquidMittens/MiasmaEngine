@@ -9,8 +9,8 @@ namespace miasma_rtti
 	public:
 		CLASS_DECLARATION(Collider);
 		// ctor
-		Collider(std::string&& initialValue) :
-			Component(std::move(initialValue))
+		Collider(GameObject* owner, std::string&& initialValue) :
+			miasma_rtti::Component(owner, std::move(initialValue))
 		{
 
 		}

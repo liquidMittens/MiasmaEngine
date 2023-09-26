@@ -5,6 +5,9 @@
 #include "core\model\Scene.h"
 #include "core\objects\MeshRenderable.h"
 #include "core\rendering\Material.h"
+#include "objects/GameObject.h"
+using namespace miasma_rtti;
+using namespace miasma_ui;
 
 void GUIBuilder::gbInitializeGUI(GLFWwindow* pWindow)
 {
@@ -105,23 +108,26 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 	int ptr_id = 0;
 	ImGui::Begin("Scene Graph");
 	if (ImGui::TreeNodeEx("Scene Root", node_flags)) {
-		for (const auto& mesh : scene->GetMeshList()) {
-			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, mesh->m_meshName.c_str())) {
-				ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", mesh->GetPosition().x, mesh->GetPosition().y, mesh->GetPosition().z);
-				float posX = mesh->GetPosition().x, posY = mesh->GetPosition().y, posZ = mesh->GetPosition().z;
-				ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
-				ImGui::SliderFloat("Y ", &posY, SliderTransformMin, SliderTransformMax, "%.1f");
-				ImGui::SliderFloat("Z ", &posZ, SliderTransformMin, SliderTransformMax, "%.1f");
-				// set the transform if the sliders have moved
-				mesh->SetPosition(glm::vec3(posX, posY, posZ));
-				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, "Material")) {
-					ImGui::Text("Shader: %s", mesh->GetMaterial().GetShader().shaderName.c_str());
-					ImGui::Text("Texture: %s", mesh->GetMaterial().GetTextureName().c_str());
+		for (const auto& gameobject : scene->GetGameObjectsList()) {
+			miasma_rtti::MeshRenderable& mesh = gameobject->GetComponent<miasma_rtti::MeshRenderable>();
+			if (&mesh != nullptr) {
+				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, mesh.m_meshName.c_str())) {
+					ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", mesh.gameObject->transform.GetPosition().x, mesh.gameObject->transform.GetPosition().y, mesh.gameObject->transform.GetPosition().z);
+					float posX = mesh.gameObject->transform.GetPosition().x, posY = mesh.gameObject->transform.GetPosition().y, posZ = mesh.gameObject->transform.GetPosition().z;
+					ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
+					ImGui::SliderFloat("Y ", &posY, SliderTransformMin, SliderTransformMax, "%.1f");
+					ImGui::SliderFloat("Z ", &posZ, SliderTransformMin, SliderTransformMax, "%.1f");
+					// set the transform if the sliders have moved
+					mesh.gameObject->transform.SetPosition(glm::vec3(posX, posY, posZ));
+					if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, "Material")) {
+						ImGui::Text("Shader: %s", mesh.GetMaterial().GetShader().shaderName.c_str());
+						ImGui::Text("Texture: %s", mesh.GetMaterial().GetTextureName().c_str());
+						ImGui::TreePop();
+					}
 					ImGui::TreePop();
 				}
-				ImGui::TreePop();
+				++ptr_id;
 			}
-			++ptr_id;
 		}
 		for (const auto& light : scene->GetLights()) {
 			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, "Light")) {
@@ -131,6 +137,7 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 				ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
 				ImGui::SliderFloat("Y ", &posY, SliderTransformMin, SliderTransformMax, "%.1f");
 				ImGui::SliderFloat("Z ", &posZ, SliderTransformMin, SliderTransformMax, "%.1f");
+				light->SetLightPosition(posX, posY, posZ);
 				// light color
 				ImGui::Text("Light Color: R: %.1f | G: %.1f | B: %.1f", light->GetLightColor().x, light->GetLightColor().y, light->GetLightColor().z);
 				float colorR = light->GetLightColor().x, colorG = light->GetLightColor().y, colorB = light->GetLightColor().z;

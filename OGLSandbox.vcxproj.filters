@@ -177,6 +177,9 @@
     <ClCompile Include="source\core\objects\MeshRenderable.cpp">
       <Filter>Source Files\core\objects</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\objects\Transform.cpp">
+      <Filter>Source Files\core\objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -357,6 +360,9 @@
       <Filter>Header Files\core\objects</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\objects\MeshRenderable.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Transform.h">
       <Filter>Header Files\core\objects</Filter>
     </ClInclude>
   </ItemGroup>
