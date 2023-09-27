@@ -1,4 +1,4 @@
-#include "core/objects/Collider.h"
+#include "core/components/Collider.h"
 using namespace miasma_rtti;
 
 CLASS_DEFINITION(Component, Collider);

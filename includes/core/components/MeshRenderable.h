@@ -3,7 +3,7 @@
 
 #include "rendering/Material.h"
 #include "glm/gtc/type_ptr.hpp"
-#include "objects/Component.h"
+#include "Component.h"
 #include <vector>
 #include "GUIBuilder.h"
 using namespace miasma_ui;

@@ -91,6 +91,12 @@
     <Filter Include="Source Files\core\objects">
       <UniqueIdentifier>{74a297a0-970e-4b53-9b98-11e1b3f0f99d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\core\components">
+      <UniqueIdentifier>{bf5e14a5-cf57-4011-b3d1-dbcc7412120c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\components">
+      <UniqueIdentifier>{15da9f3a-f472-4e9b-9165-6d44997d26bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -129,9 +135,6 @@
     <ClCompile Include="source\core\utility\MeshLoader.cpp">
       <Filter>Source Files\core\utility</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\model\Light.cpp">
-      <Filter>Source Files\core\model</Filter>
-    </ClCompile>
     <ClCompile Include="source\core\gui\imgui.cpp">
       <Filter>Source Files\core\gui</Filter>
     </ClCompile>
@@ -162,23 +165,26 @@
     <ClCompile Include="source\core\app\GameApp.cpp">
       <Filter>Source Files\core\app</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\objects\Component.cpp">
-      <Filter>Source Files\core\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\objects\Collider.cpp">
-      <Filter>Source Files\core\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\objects\BoxCollider.cpp">
-      <Filter>Source Files\core\objects</Filter>
-    </ClCompile>
     <ClCompile Include="source\core\objects\GameObject.cpp">
-      <Filter>Source Files\core\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\objects\MeshRenderable.cpp">
       <Filter>Source Files\core\objects</Filter>
     </ClCompile>
     <ClCompile Include="source\core\objects\Transform.cpp">
       <Filter>Source Files\core\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\BoxCollider.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\Collider.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\Component.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\MeshRenderable.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\PointLight.cpp">
+      <Filter>Source Files\core\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +314,6 @@
     <ClInclude Include="includes\core\model\Triangle.h">
       <Filter>Header Files\core\model</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\model\Light.h">
-      <Filter>Header Files\core\model</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\gui\imgui_impl_glfw.h">
       <Filter>Header Files\core\gui</Filter>
     </ClInclude>
@@ -350,20 +353,23 @@
     <ClInclude Include="includes\core\objects\GameObject.h">
       <Filter>Header Files\core\objects</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\Component.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\objects\Collider.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\objects\BoxCollider.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\objects\MeshRenderable.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\objects\Transform.h">
       <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\BoxCollider.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\Collider.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\Component.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\MeshRenderable.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\PointLight.h">
+      <Filter>Header Files\core\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-#include "core\objects\Component.h"
+#include "components/Component.h"
 
 using namespace miasma_rtti;
 

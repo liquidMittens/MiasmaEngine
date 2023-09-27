@@ -3,7 +3,7 @@
 #include "gui\imgui_impl_opengl3.h"
 #include "gui\imgui_impl_glfw.h"
 #include "core\model\Scene.h"
-#include "core\objects\MeshRenderable.h"
+#include "core\components\MeshRenderable.h"
 #include "core\rendering\Material.h"
 #include "objects/GameObject.h"
 using namespace miasma_rtti;
@@ -111,7 +111,8 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 		for (const auto& gameobject : scene->GetGameObjectsList()) {
 			miasma_rtti::MeshRenderable& mesh = gameobject->GetComponent<miasma_rtti::MeshRenderable>();
 			if (&mesh != nullptr) {
-				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, mesh.m_meshName.c_str())) {
+				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, gameobject->tag.c_str())) {
+					ImGui::Text("MeshName: %s", mesh.m_meshName.c_str());
 					ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", mesh.gameObject->transform.GetPosition().x, mesh.gameObject->transform.GetPosition().y, mesh.gameObject->transform.GetPosition().z);
 					float posX = mesh.gameObject->transform.GetPosition().x, posY = mesh.gameObject->transform.GetPosition().y, posZ = mesh.gameObject->transform.GetPosition().z;
 					ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
@@ -129,30 +130,33 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 				++ptr_id;
 			}
 		}
-		for (const auto& light : scene->GetLights()) {
-			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, "Light")) {
-				// light position
-				ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", light->GetLightPosition().x, light->GetLightPosition().y, light->GetLightPosition().z);
-				float posX = light->GetLightPosition().x, posY = light->GetLightPosition().y, posZ = light->GetLightPosition().z;
-				ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
-				ImGui::SliderFloat("Y ", &posY, SliderTransformMin, SliderTransformMax, "%.1f");
-				ImGui::SliderFloat("Z ", &posZ, SliderTransformMin, SliderTransformMax, "%.1f");
-				light->SetLightPosition(posX, posY, posZ);
-				// light color
-				ImGui::Text("Light Color: R: %.1f | G: %.1f | B: %.1f", light->GetLightColor().x, light->GetLightColor().y, light->GetLightColor().z);
-				float colorR = light->GetLightColor().x, colorG = light->GetLightColor().y, colorB = light->GetLightColor().z;
-				ImGui::SliderFloat("R ", &colorR, SliderColorMin, SliderColorMax, "%.1f");
-				ImGui::SliderFloat("G ", &colorG, SliderColorMin, SliderColorMax, "%.1f");
-				ImGui::SliderFloat("B ", &colorB, SliderColorMin, SliderColorMax, "%.1f");
-				light->SetLightColor(colorR, colorG, colorB);
-				// light strength
-				ImGui::Text("Light Strength: %.1f", light->GetLightStrength());
-				float lightStrength = light->GetLightStrength();
-				ImGui::SliderFloat("S ", &lightStrength, 0, SliderLightStrength, "%.1f");
-				light->SetLightStrength(lightStrength);
-				ImGui::TreePop();
+		for (auto& lightobject : scene->GetLights()) {
+			miasma_rtti::PointLight& light = lightobject->GetComponent<PointLight>();
+			if (&light != nullptr) {
+				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, lightobject->tag.c_str())) {
+					// light position
+					ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", light.GetLightPosition().x, light.GetLightPosition().y, light.GetLightPosition().z);
+					float posX = light.GetLightPosition().x, posY = light.GetLightPosition().y, posZ = light.GetLightPosition().z;
+					ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
+					ImGui::SliderFloat("Y ", &posY, SliderTransformMin, SliderTransformMax, "%.1f");
+					ImGui::SliderFloat("Z ", &posZ, SliderTransformMin, SliderTransformMax, "%.1f");
+					light.SetLightPosition(posX, posY, posZ);
+					// light color
+					ImGui::Text("Light Color: R: %.1f | G: %.1f | B: %.1f", light.GetLightColor().x, light.GetLightColor().y, light.GetLightColor().z);
+					float colorR = light.GetLightColor().x, colorG = light.GetLightColor().y, colorB = light.GetLightColor().z;
+					ImGui::SliderFloat("R ", &colorR, SliderColorMin, SliderColorMax, "%.1f");
+					ImGui::SliderFloat("G ", &colorG, SliderColorMin, SliderColorMax, "%.1f");
+					ImGui::SliderFloat("B ", &colorB, SliderColorMin, SliderColorMax, "%.1f");
+					light.SetLightColor(colorR, colorG, colorB);
+					// light strength
+					ImGui::Text("Light Strength: %.1f", light.GetLightStrength());
+					float lightStrength = light.GetLightStrength();
+					ImGui::SliderFloat("S ", &lightStrength, 0, SliderLightStrength, "%.1f");
+					light.SetLightStrength(lightStrength);
+					ImGui::TreePop();
+				}
+				++ptr_id;
 			}
-			++ptr_id;
 		}
 		ImGui::TreePop();
 	}

@@ -14,7 +14,7 @@ public:
 	glm::mat4& GetTransform() { return m_transform; }
 	void SetPosition(float x, float y, float z);
 	void SetPosition(glm::vec3 posVector);
-	const glm::vec3 GetPosition();
+	glm::vec3 GetPosition();
 
 private:
 	glm::mat4 m_transform;

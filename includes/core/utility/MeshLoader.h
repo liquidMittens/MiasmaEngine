@@ -7,7 +7,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include "glm/glm.hpp"
 #include "glm/gtx/hash.hpp"
-#include "objects/MeshRenderable.h"
+#include "components/MeshRenderable.h"
 
 namespace utility
 {

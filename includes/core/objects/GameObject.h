@@ -2,7 +2,7 @@
 #define GAMEOBJECT_H_
 #include <vector>
 #include <memory>
-#include "Component.h"
+#include "components/Component.h"
 #include <iostream>
 #include <typeinfo>
 #include <string>

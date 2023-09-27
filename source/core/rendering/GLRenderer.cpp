@@ -2,7 +2,7 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
-#include "objects/MeshRenderable.h"
+#include "components/MeshRenderable.h"
 #include "camera/Camera.h"
 #include "model/Scene.h"
 #include "app/GLWindow.h"
@@ -42,6 +42,7 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 		miasma_ui::GUIBuilder::gbFeedInput();
 		//GUIBuilder::gbShowImGuiDemoWindow();
 
+		int lightIndex = 0;
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
 			miasma_rtti::MeshRenderable& mesh = gameObject->GetComponent<miasma_rtti::MeshRenderable>();
@@ -55,26 +56,27 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			*/
 			std::stringstream lightIndexed;
 			for (int lightIndex = 0; lightIndex < scene->GetLights().size(); ++lightIndex) {
+				miasma_rtti::PointLight& light = scene->GetLights()[lightIndex]->GetComponent<PointLight>();
 				// grab light information from shader (color)
 				lightIndexed.str("");
 				lightIndexed << "light[" << lightIndex << "]";
-				glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, lightIndexed.str().append(".color").c_str()), 1, glm::value_ptr(scene->GetLights()[lightIndex]->GetLightColor()));
+				glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, lightIndexed.str().append(".color").c_str()), 1, glm::value_ptr(light.GetLightColor()));
 				// grab light information from shader (pos)
 				lightIndexed.str("");
 				lightIndexed << "light[" << lightIndex << "]";
-				glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, lightIndexed.str().append(".position").c_str()), 1, glm::value_ptr(scene->GetLights()[lightIndex]->GetLightPosition()));
+				glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, lightIndexed.str().append(".position").c_str()), 1, glm::value_ptr(light.GetLightPosition()));
 				// grab light information from shader (strength)
 				lightIndexed.str("");
 				lightIndexed << "light[" << lightIndex << "]";
-				glUniform1f(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, lightIndexed.str().append(".strength").c_str()), scene->GetLights()[lightIndex]->GetLightStrength());
+				glUniform1f(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, lightIndexed.str().append(".strength").c_str()), light.GetLightStrength());
 			}
 			// TEST: passing outline light
 			// grab light information from shader (color)
-			glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "light.color"), 1, glm::value_ptr(scene->GetLights()[0]->GetLightColor()));
+			glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "light.color"), 1, glm::value_ptr(scene->GetLights()[0]->GetComponent<PointLight>().GetLightColor()));
 			// grab light information from shader (pos)
-			glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "light.position"), 1, glm::value_ptr(scene->GetLights()[0]->GetLightColor()));
+			glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "light.position"), 1, glm::value_ptr(scene->GetLights()[0]->GetComponent<PointLight>().GetLightColor()));
 			// grab light information from shader (strength)
-			glUniform1f(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "light.strength"), scene->GetLights()[0]->GetLightStrength());
+			glUniform1f(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "light.strength"), scene->GetLights()[0]->GetComponent<PointLight>().GetLightStrength());
 
 			// CAMERA POS 
 			glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "cameraPosition"), 1, glm::value_ptr(m_camera->position()));

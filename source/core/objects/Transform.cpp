@@ -28,7 +28,7 @@ void Transform::SetPosition(glm::vec3 posVector)
 	m_transform[3] = glm::vec4(posVector, 1.0f);
 }
 
-const glm::vec3 Transform::GetPosition()
+glm::vec3 Transform::GetPosition()
 {
 	glm::vec3 positionVector = m_transform[3];
 	return positionVector;

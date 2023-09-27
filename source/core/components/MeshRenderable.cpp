@@ -1,4 +1,4 @@
-#include "core/objects/MeshRenderable.h"
+#include "core/components/MeshRenderable.h"
 #include "core/glad/glad.h"
 #include "utility/MeshLoader.h"
 #include <iostream>

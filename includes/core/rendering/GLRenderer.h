@@ -5,9 +5,7 @@
 #include <vector>
 #include <memory>
 #include "camera/Camera.h"
-#include "objects/MeshRenderable.h"
 using namespace tdogl;
-using namespace miasma_rtti;
 
 class Scene;
 struct GLFWwindow;
@@ -32,7 +30,6 @@ private:
 	std::shared_ptr<tdogl::Camera> m_camera;
 	LightShaderInformation m_lightShaderInfo;
 	unsigned int m_cameraShaderPos;
-	bool tst;
 };
 
 #endif

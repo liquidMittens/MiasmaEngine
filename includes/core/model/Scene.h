@@ -7,14 +7,14 @@
 #include "GLFW/glfw3.h"
 #include "managers/ShaderManager.h"
 #include "managers/TextureManager.h"
-#include "model/Light.h"
-#include "objects/MeshRenderable.h"
+#include "components/PointLight.h"
+#include "components/MeshRenderable.h"
 #include "objects/GameObject.h"
 
 class MeshRenderable;
 class GLWindow;
 using MeshRenderableListType = std::vector<std::shared_ptr<miasma_rtti::MeshRenderable>>;
-using LightListType = std::vector<std::unique_ptr<Light>>;
+using LightListType = std::vector<std::shared_ptr<GameObject>>;
 using GameObjectsList = std::vector<std::shared_ptr<GameObject>>;
 
 constexpr float FOV = 45.0f;
@@ -43,14 +43,12 @@ public:
 	void ExitScene();
 
 	std::shared_ptr<tdogl::Camera> GetCamera() { return m_camera; }
-	MeshRenderableListType GetMeshList() { return m_meshRenderableList; }
 	GameObjectsList GetGameObjectsList() { return m_gameObjectsList; }
 	LightListType& GetLights() { return m_lights; }
 	GLFWwindow* GetGLFWWindow() { return m_glfwWindow; }
 
 private:
 	std::shared_ptr<tdogl::Camera> m_camera;
-	MeshRenderableListType m_meshRenderableList;
 	GameObjectsList m_gameObjectsList;
 	GLFWwindow* m_glfwWindow;
 	glm::vec2 m_screenSize;
