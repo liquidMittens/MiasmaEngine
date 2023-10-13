@@ -158,6 +158,7 @@
     <ClCompile Include="source\core\components\Component.cpp" />
     <ClCompile Include="source\core\components\MeshRenderable.cpp" />
     <ClCompile Include="source\core\components\PointLight.cpp" />
+    <ClCompile Include="source\core\components\SpinObject.cpp" />
     <ClCompile Include="source\core\glad\glad.c" />
     <ClCompile Include="source\core\gui\GUIBuilder.cpp" />
     <ClCompile Include="source\core\gui\imgui.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="includes\core\components\Component.h" />
     <ClInclude Include="includes\core\components\MeshRenderable.h" />
     <ClInclude Include="includes\core\components\PointLight.h" />
+    <ClInclude Include="includes\core\components\SpinObject.h" />
     <ClInclude Include="includes\core\glad\glad.h" />
     <ClInclude Include="includes\core\GLFW\glfw3.h" />
     <ClInclude Include="includes\core\GLFW\glfw3native.h" />

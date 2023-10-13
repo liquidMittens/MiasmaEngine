@@ -186,6 +186,9 @@
     <ClCompile Include="source\core\components\PointLight.cpp">
       <Filter>Source Files\core\components</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\components\SpinObject.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -369,6 +372,9 @@
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\components\PointLight.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\SpinObject.h">
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
   </ItemGroup>

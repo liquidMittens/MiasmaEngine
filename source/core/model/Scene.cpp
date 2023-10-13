@@ -1,5 +1,6 @@
 #include "model/Scene.h"
 #include "components/MeshRenderable.h"
+#include "components/SpinObject.h"
 #include "model/Cube.h"
 #include "model/Rectangle.h"
 #include "app/GLWindow.h"
@@ -94,9 +95,10 @@ void Scene::EnterScene()
 	// Setup MeshRenderable objects to be rendered
 	catBlinnObject->tag = "CatBlinnObject";
 	catBlinnObject->AddComponent<miasma_rtti::MeshRenderable>(catBlinnObject.get(), &catMesh, textureBlinnMaterial);
-	catBlinnObject->transform.GetTransform() = glm::mat4(1.0f);
+	catBlinnObject->AddComponent<miasma_rtti::SpinObject>(catBlinnObject.get(), 5.0f);
+	catBlinnObject->transform.GetTransform() = glm::identity<glm::mat4>();
 	catBlinnObject->transform.GetTransform() = glm::translate(catBlinnObject->transform.GetTransform(), { 0.0f, 0.0f, 0.0f });
-	catBlinnObject->transform.GetTransform() = glm::rotate(catBlinnObject->transform.GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
+	catBlinnObject->GetComponent<SpinObject>().Start();
 	m_gameObjectsList.push_back(catBlinnObject);
 
 	catMesh.meshName = "Cat Diffuse Outline";
