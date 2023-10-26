@@ -28,9 +28,9 @@ Camera::Camera() :
     _position(0.0f, 0.0f, 1.0f),
     _horizontalAngle(0.0f),
     _verticalAngle(0.0f),
-    _fieldOfView(50.0f),
-    _nearPlane(0.01f),
-    _farPlane(100.0f),
+    _fieldOfView(45.0f),
+    _nearPlane(0.1f),
+    _farPlane(1000.0f),
     _viewportAspectRatio(4.0f/3.0f),
     _orthoMatrix(0.0f)
 {
@@ -122,20 +122,20 @@ glm::mat4 Camera::matrix() const {
 }
 
 glm::mat4 Camera::orthomatrix() const {
-    return ortho() * view();
+    return _orthoMatrix; // * view();
 }
 
 glm::mat4 Camera::projection() const {
     return glm::perspective(glm::radians(_fieldOfView), _viewportAspectRatio, _nearPlane, _farPlane);
 }
 
-glm::mat4 Camera::ortho() const
-{
-    return glm::ortho(0.0f, (float)SCREEN_SIZE.x, 0.0f, (float)SCREEN_SIZE.y, 0.1f, 100.0f);
-}
-
 glm::mat4 Camera::view() const {
     return orientation() * glm::translate(glm::mat4(1.0f), -_position);
+}
+
+glm::vec2 Camera::viewport() const
+{
+    return _viewport;
 }
 
 void Camera::normalizeAngles() {
@@ -151,8 +151,10 @@ void Camera::normalizeAngles() {
 }
 
 void Camera::initcamera(float fov, float near, float far, glm::vec3 pos, glm::vec2 screenSize) {
-	setFieldOfView(45.0f);
-	setNearAndFarPlanes(0.1f, 100.0f);
+	setFieldOfView(fov);
+	setNearAndFarPlanes(near, far);
 	setPosition(pos);
-	setViewportAspectRatio(SCREEN_SIZE.x / SCREEN_SIZE.y);
+	setViewportAspectRatio(screenSize.x / screenSize.y);
+    _viewport = screenSize;
+    _orthoMatrix = glm::ortho(0.0f, screenSize.x, screenSize.y, 0.0f, -1.0f, 1.0f);
 }

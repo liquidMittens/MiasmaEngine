@@ -159,6 +159,7 @@
     <ClCompile Include="source\core\components\MeshRenderable.cpp" />
     <ClCompile Include="source\core\components\PointLight.cpp" />
     <ClCompile Include="source\core\components\SpinObject.cpp" />
+    <ClCompile Include="source\core\components\Sprite2D.cpp" />
     <ClCompile Include="source\core\glad\glad.c" />
     <ClCompile Include="source\core\gui\GUIBuilder.cpp" />
     <ClCompile Include="source\core\gui\imgui.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="source\core\objects\GameObject.cpp" />
     <ClCompile Include="source\core\objects\Transform.cpp" />
     <ClCompile Include="source\core\rendering\GLRenderer.cpp" />
+    <ClCompile Include="source\core\rendering\GLRenderer2D.cpp" />
     <ClCompile Include="source\core\rendering\Material.cpp" />
     <ClCompile Include="source\core\rendering\Texture2D.cpp" />
     <ClCompile Include="source\core\utility\MeshLoader.cpp" />
@@ -190,6 +192,7 @@
     <ClInclude Include="includes\core\components\Component.h" />
     <ClInclude Include="includes\core\components\MeshRenderable.h" />
     <ClInclude Include="includes\core\components\PointLight.h" />
+    <ClInclude Include="includes\core\components\Sprite2D.h" />
     <ClInclude Include="includes\core\components\SpinObject.h" />
     <ClInclude Include="includes\core\glad\glad.h" />
     <ClInclude Include="includes\core\GLFW\glfw3.h" />
@@ -239,6 +242,7 @@
     <ClInclude Include="includes\core\objects\GameObject.h" />
     <ClInclude Include="includes\core\objects\Transform.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer.h" />
+    <ClInclude Include="includes\core\rendering\GLRenderer2D.h" />
     <ClInclude Include="includes\core\rendering\IRenderInterface.h" />
     <ClInclude Include="includes\core\rendering\Material.h" />
     <ClInclude Include="includes\core\rendering\Texture2D.h" />
@@ -250,6 +254,8 @@
     <None Include="resources\shaders\BasicColor.vs" />
     <None Include="resources\shaders\BasicColorTexture.fs" />
     <None Include="resources\shaders\BasicColorTexture.vs" />
+    <None Include="resources\shaders\BasicSprite.fs" />
+    <None Include="resources\shaders\BasicSprite.vs" />
     <None Include="resources\shaders\BasicTexture.fs" />
     <None Include="resources\shaders\BasicTexture.vs" />
     <None Include="resources\shaders\BlinnPhong.fs" />

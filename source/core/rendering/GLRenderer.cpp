@@ -11,8 +11,9 @@
 #include <sstream>
 #include "objects/GameObject.h"
 using namespace tdogl;
-using namespace miasma_rtti;
-using namespace miasma_ui;
+using namespace Miasma::Renderer;
+using namespace Miasma::RTTI;
+using namespace Miasma::UI;
 
 void GLRenderer::Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> camera)
 {
@@ -27,8 +28,8 @@ void GLRenderer::Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> ca
 	glEnable(GL_STENCIL_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	
-	miasma_ui::GUIBuilder::gbInitializeGUI(pWindow->GetGLFWWindow());
+
+	Miasma::UI::GUIBuilder::gbInitializeGUI(pWindow->GetGLFWWindow());
 	glfwSetFramebufferSizeCallback(pWindow->GetGLFWWindow(), GLRenderer::framebuffer_size_callback);
 }
 
@@ -39,13 +40,13 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 		// clear buffer and depth buffer 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		miasma_ui::GUIBuilder::gbFeedInput();
+		Miasma::UI::GUIBuilder::gbFeedInput();
 		//GUIBuilder::gbShowImGuiDemoWindow();
 
 		int lightIndex = 0;
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
-			miasma_rtti::MeshRenderable& mesh = gameObject->GetComponent<miasma_rtti::MeshRenderable>();
+			Miasma::RTTI::MeshRenderable& mesh = gameObject->GetComponent<Miasma::RTTI::MeshRenderable>();
 			if (&mesh == nullptr) {
 				continue;
 			}
@@ -56,7 +57,7 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			*/
 			std::stringstream lightIndexed;
 			for (int lightIndex = 0; lightIndex < scene->GetLights().size(); ++lightIndex) {
-				miasma_rtti::PointLight& light = scene->GetLights()[lightIndex]->GetComponent<PointLight>();
+				Miasma::RTTI::PointLight& light = scene->GetLights()[lightIndex]->GetComponent<PointLight>();
 				// grab light information from shader (color)
 				lightIndexed.str("");
 				lightIndexed << "light[" << lightIndex << "]";
@@ -86,8 +87,7 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "camera"), 1, false, glm::value_ptr(m_camera->matrix()));
 
 			// update transform
-			glm::mat4& tmpMatrix = mesh.gameObject->transform.GetTransform();
-			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "model"), 1, false, glm::value_ptr(tmpMatrix));
+			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "model"), 1, false, glm::value_ptr(gameObject->transform.GetTransform()));
 			glBindTextureUnit(0, mesh.GetMaterial().GetTextureId());
 			glBindVertexArray(mesh.GetVertexArrayObject());
 			glBindBuffer(GL_ARRAY_BUFFER, mesh.GetVertexBufferObject());
@@ -97,16 +97,21 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			//glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 			//glStencilFunc(GL_ALWAYS, 1, 0xff);
 			//glStencilMask(0xff);
-			glDrawElements(GL_TRIANGLES, (GLsizei)mesh.GetIndicesCount(), GL_UNSIGNED_INT, 0);
+			if (mesh.GetMeshDrawType() == EMeshDrawType::EMESH_TYPE_TRIANGLES) {
+				glDrawElements(GL_TRIANGLES, (GLsizei)mesh.GetIndicesCount(), GL_UNSIGNED_INT, 0);
+			}
+			else if (mesh.GetMeshDrawType() == EMeshDrawType::EMESH_TYPE_TRIANGLEARRAY) {
+				glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.GetVertexCount());
+			}
 			// draw the upscaled containers but this time with the appropriate test function and disabling writes to the stencil buffer: 
 			//glStencilFunc(GL_NOTEQUAL, 1, 0xff);
 			//glStencilMask(0x00);
 			//glDisable(GL_DEPTH_TEST);
 			//glDrawElements(GL_TRIANGLES, (GLsizei)mesh->GetIndicesCount(), GL_UNSIGNED_INT, 0);
 		}
-		miasma_ui::GUIBuilder::gbSceneInfoOverlay(m_camera);
-		miasma_ui::GUIBuilder::gbSceneObjectsInfo(scene);
-		miasma_ui::GUIBuilder::gbRenderGUI();
+		Miasma::UI::GUIBuilder::gbSceneInfoOverlay(m_camera);
+		Miasma::UI::GUIBuilder::gbSceneObjectsInfo(scene);
+		Miasma::UI::GUIBuilder::gbRenderGUI();
 	}
 	else {
 		if (!scene) {
@@ -119,7 +124,7 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 
 void GLRenderer::Shutdown()
 {
-	miasma_ui::GUIBuilder::gbShutdownGUI();
+	Miasma::UI::GUIBuilder::gbShutdownGUI();
 }
 
 void GLRenderer::framebuffer_size_callback(GLFWwindow* window, int width, int height)

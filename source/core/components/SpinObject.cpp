@@ -1,6 +1,6 @@
 #include "components/SpinObject.h"
 #include "objects/GameObject.h"
-using namespace miasma_rtti;
+using namespace Miasma::RTTI;
 
 CLASS_DEFINITION(Component, SpinObject);
 
@@ -21,7 +21,6 @@ void SpinObject::Start()
 {
 	if (gameObject != nullptr) {
 		glm::mat4 matrix = glm::identity<glm::mat4>();
-		matrix = glm::rotate(gameObject->transform.GetTransform(), -45.5f, { 1.0f, 0.0f, 0.0f });
 		gameObject->transform.GetTransform() = matrix;
 	}
 }
@@ -30,7 +29,7 @@ void SpinObject::Update(float dt)
 {
 	if (gameObject != nullptr) {
 		glm::mat4 matrix = glm::identity<glm::mat4>();
-		matrix = glm::rotate(gameObject->transform.GetTransform(), dt * m_spinSpeed, { 0.0f, 0.0f, 1.0f });
+		matrix = glm::rotate(gameObject->transform.GetTransform(), dt * m_spinSpeed, { 0.0f, 1.0f, 0.0f });
 		gameObject->transform.GetTransform() = matrix;
 	}
 }

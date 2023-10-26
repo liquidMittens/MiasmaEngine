@@ -37,7 +37,7 @@ bool childclass::IsClassType( const std::size_t classType ) const {             
         return parentclass::IsClassType( classType );                                       \
 }
 
-namespace miasma_rtti {
+namespace Miasma::RTTI {
 
 	//***************
 	// Component

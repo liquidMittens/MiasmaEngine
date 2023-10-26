@@ -189,6 +189,12 @@
     <ClCompile Include="source\core\components\SpinObject.cpp">
       <Filter>Source Files\core\components</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\rendering\GLRenderer2D.cpp">
+      <Filter>Source Files\core\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\Sprite2D.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -377,6 +383,12 @@
     <ClInclude Include="includes\core\components\SpinObject.h">
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
+    <ClInclude Include="includes\core\rendering\GLRenderer2D.h">
+      <Filter>Header Files\core\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\Sprite2D.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\BasicColor.fs">
@@ -413,6 +425,12 @@
       <Filter>Resource Files\shaders</Filter>
     </None>
     <None Include="resources\shaders\TextureOutline.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BasicSprite.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\BasicSprite.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
   </ItemGroup>

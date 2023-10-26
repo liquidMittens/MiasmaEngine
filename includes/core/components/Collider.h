@@ -2,7 +2,7 @@
 #define COLLIDER_H_
 #include "Component.h"
 
-namespace miasma_rtti
+namespace Miasma::RTTI
 {
 	class Collider : public Component
 	{
@@ -10,7 +10,7 @@ namespace miasma_rtti
 		CLASS_DECLARATION(Collider);
 		// ctor
 		Collider(GameObject* owner, std::string&& initialValue) :
-			miasma_rtti::Component(owner, std::move(initialValue))
+			Miasma::RTTI::Component(owner, std::move(initialValue))
 		{
 
 		}

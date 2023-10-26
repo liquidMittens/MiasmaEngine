@@ -16,6 +16,12 @@ Transform::~Transform()
 
 }
 
+glm::mat4 Transform::operator=(const glm::mat4& rhsMat)
+{
+	m_transform = rhsMat;
+	return m_transform;
+}
+
 void Transform::SetPosition(float x, float y, float z)
 {
 	m_transform[3].x = x;

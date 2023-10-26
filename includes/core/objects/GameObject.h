@@ -7,7 +7,7 @@
 #include <typeinfo>
 #include <string>
 #include "objects/Transform.h"
-using namespace miasma_rtti;
+using namespace Miasma::RTTI;
 
 class GameObject
 {
@@ -41,7 +41,7 @@ public:
 
 private:
 
-	std::vector<std::unique_ptr<miasma_rtti::Component>> components;
+	std::vector<std::unique_ptr<Miasma::RTTI::Component>> components;
 };
 
 template<typename ComponentType, typename... Args>
@@ -55,7 +55,7 @@ bool GameObject::RemoveComponent()
 {
 	bool found = false;
 	auto removeComponent = std::find_if(components.begin(), components.end(),
-		[componentType = ComponentType::Type](miasma_rtti::Component c) {
+		[componentType = ComponentType::Type](Miasma::RTTI::Component c) {
 			return c.IsClassType(componentType);
 		});
 	if (removeComponent != components.end()) {
@@ -73,7 +73,7 @@ int GameObject::RemoveComponents()
 	do {
 
 		auto removeComponent = std::find_if(components.begin(), components.end(),
-			[componentType = ComponentType::Type](miasma_rtti::Component c) {
+			[componentType = ComponentType::Type](Miasma::RTTI::Component c) {
 				return c.IsClassType(componentType);
 			});
 

@@ -2,11 +2,12 @@
 #define GAMEAPP_H_
 
 #include <memory>
-
+#include "core/rendering/GLRenderer.h"
+#include "core/rendering/GLRenderer2D.h"
+using namespace Miasma::Renderer;
 
 struct GLFWwindow;
 class GLWindow;
-class GLRenderer;
 class Scene;
 
 class GameApp
@@ -22,7 +23,8 @@ public:
 private:
 	std::unique_ptr<GLWindow> m_glWindow;
 	std::unique_ptr<Scene> m_currentScene;
-	std::unique_ptr<GLRenderer> m_renderer;
+	std::unique_ptr<Miasma::Renderer::GLRenderer> m_renderer;
+	std::unique_ptr<Miasma::Renderer::GLRenderer2D> m_renderer2D;
 	
 	// variables for calculating framerate
 	// fps counter

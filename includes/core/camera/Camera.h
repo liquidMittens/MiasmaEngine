@@ -143,12 +143,6 @@ namespace tdogl {
          The perspective projection transformation matrix
          */
         glm::mat4 projection() const;
-
-        /** 
-         Orthographic projection
-         
-         **/
-        glm::mat4 ortho() const;
         /**
          The translation and rotation matrix of the camera.
 
@@ -156,6 +150,11 @@ namespace tdogl {
          transformation.
          */
         glm::mat4 view() const;
+
+        /**
+         The Viewport (screen size)
+        **/
+        glm::vec2 viewport() const;
 
         /**
         Initialize the camera with given values
@@ -171,6 +170,7 @@ namespace tdogl {
         float _farPlane;
         float _viewportAspectRatio;
         glm::mat4 _orthoMatrix;
+        glm::vec2 _viewport;
 
         void normalizeAngles();
     };

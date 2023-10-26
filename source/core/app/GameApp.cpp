@@ -1,8 +1,6 @@
 #include "app/GameApp.h"
 #include "app/GLWindow.h"
 #include "core/model/Scene.h"
-#include "core/rendering/GLRenderer.h"
-
 #include <iostream>
 #include <sstream>
 
@@ -40,8 +38,10 @@ void GameApp::InitializeGameApp()
 		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE };
 		m_currentScene = std::unique_ptr<Scene>(new Scene(&sceneInfo));
 		m_currentScene->EnterScene();
-		m_renderer = std::unique_ptr<GLRenderer>(new GLRenderer());
+		m_renderer = std::unique_ptr<Miasma::Renderer::GLRenderer>(new Miasma::Renderer::GLRenderer());
 		m_renderer->Initialize(m_glWindow.get(), m_currentScene->GetCamera());
+		m_renderer2D = std::make_unique<Miasma::Renderer::GLRenderer2D>();
+		m_renderer2D->Initialize(m_glWindow.get(), m_currentScene->GetCamera());
 	}
 	else {
 		std::cout << "m_glWindow->CreateGLWindow() Failed\n";
@@ -59,6 +59,10 @@ void GameApp::RunGameAppLoop()
 		std::cout << "GLRenderer is NULL leaving ExecuteGLWindowLoop!!\n";
 		runWindowLoop = false;
 	}
+	if (runWindowLoop && !m_renderer2D) {
+		std::cout << "GLRenderer2D is NULL leaving ExecuteGLWindowLoop!!\n";
+		runWindowLoop = false;
+	}
 
 	double prevTime = 0.0;
 	while (runWindowLoop && !glfwWindowShouldClose(m_glWindow->GetGLFWWindow())) {
@@ -73,6 +77,9 @@ void GameApp::RunGameAppLoop()
 		glfwPollEvents();
 		// render and present
 		runWindowLoop = m_renderer->DrawScene(m_currentScene);
+		if (runWindowLoop) {
+			runWindowLoop = m_renderer2D->DrawScene(m_currentScene);
+		}
 		glfwSwapBuffers(m_glWindow->GetGLFWWindow());
 		prevTime = currTime;
 	}
@@ -171,6 +178,9 @@ void GameApp::ShutdownGameApp()
 	}
 	if (m_renderer) {
 		m_renderer->Shutdown();
+	}
+	if (m_renderer2D) {
+		m_renderer2D->Shutdown();
 	}
 	if (m_glWindow) {
 		m_glWindow->ShutdownGLWindow();

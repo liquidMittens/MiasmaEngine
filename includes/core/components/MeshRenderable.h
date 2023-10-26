@@ -6,13 +6,19 @@
 #include "Component.h"
 #include <vector>
 #include "GUIBuilder.h"
-using namespace miasma_ui;
+using namespace Miasma::UI;
 
-namespace miasma_rtti
+namespace Miasma::RTTI
 {
 
 constexpr int xyz_rgb_st_format_size = 8; // pos,color,texcoords
 constexpr int xyz_st_xyz_format_size = 8; // pos,texcoords,normals
+
+enum EMeshDrawType
+{
+	EMESH_TYPE_TRIANGLES = 0, 
+	EMESH_TYPE_TRIANGLEARRAY
+};
 
 struct MeshRenderableCreateInfo
 {
@@ -24,12 +30,13 @@ struct MeshRenderableCreateInfo
 
 	class MeshRenderable : public Component
 	{
-		friend class miasma_ui::GUIBuilder;
+		friend class Miasma::UI::GUIBuilder;
 	public:
 
 		CLASS_DECLARATION(MeshRenderable);
 
 		MeshRenderable(GameObject* owner, MeshRenderableCreateInfo* pCreateInfo, const Material& mat);
+		MeshRenderable(GameObject* owner, std::vector<float> vertices, std::vector<int> indices, MeshRenderableCreateInfo* pCreateInfo, const Material& mat);
 		~MeshRenderable();
 
 		bool AttachMaterial(const Material& newMat);
@@ -40,7 +47,7 @@ struct MeshRenderableCreateInfo
 		const unsigned int GetVertexBufferObject() { return m_vbo; }
 		const unsigned int GetVertexArrayObject() { return m_vao; }
 		const unsigned int GetIndexBufferObject() { return m_ibo; }
-		
+		const EMeshDrawType GetMeshDrawType() { return m_meshDrawType; }		
 
 		virtual void Start() override;
 		virtual void Update(float dt) override;
@@ -53,6 +60,7 @@ struct MeshRenderableCreateInfo
 		Material m_material;
 		std::vector<float> m_vertices;
 		std::vector<unsigned int> m_indices;
+		EMeshDrawType m_meshDrawType;
 	};
 }
 

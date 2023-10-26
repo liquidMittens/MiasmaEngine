@@ -4,7 +4,7 @@
 
 class GameObject;
 
-namespace miasma_rtti
+namespace Miasma::RTTI
 {
 	class SpinObject : public Component
 	{

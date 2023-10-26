@@ -13,7 +13,7 @@
 
 class MeshRenderable;
 class GLWindow;
-using MeshRenderableListType = std::vector<std::shared_ptr<miasma_rtti::MeshRenderable>>;
+using MeshRenderableListType = std::vector<std::shared_ptr<Miasma::RTTI::MeshRenderable>>;
 using LightListType = std::vector<std::shared_ptr<GameObject>>;
 using GameObjectsList = std::vector<std::shared_ptr<GameObject>>;
 
@@ -30,7 +30,7 @@ struct SceneCreationInfo
 
 class Scene
 {
-	friend class miasma_ui::GUIBuilder;
+	friend class Miasma::UI::GUIBuilder;
 
 public:
 	Scene(SceneCreationInfo* creationInfo);

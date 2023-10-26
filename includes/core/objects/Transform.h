@@ -11,6 +11,8 @@ public:
 	Transform(const Transform& obj);
 	~Transform();
 
+	glm::mat4 operator=(const glm::mat4& rhsMat);
+
 	glm::mat4& GetTransform() { return m_transform; }
 	void SetPosition(float x, float y, float z);
 	void SetPosition(glm::vec3 posVector);

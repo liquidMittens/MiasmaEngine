@@ -6,8 +6,8 @@
 #include "core\components\MeshRenderable.h"
 #include "core\rendering\Material.h"
 #include "objects/GameObject.h"
-using namespace miasma_rtti;
-using namespace miasma_ui;
+using namespace Miasma::RTTI;
+using namespace Miasma::UI;
 
 void GUIBuilder::gbInitializeGUI(GLFWwindow* pWindow)
 {
@@ -109,7 +109,7 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 	ImGui::Begin("Scene Graph");
 	if (ImGui::TreeNodeEx("Scene Root", node_flags)) {
 		for (const auto& gameobject : scene->GetGameObjectsList()) {
-			miasma_rtti::MeshRenderable& mesh = gameobject->GetComponent<miasma_rtti::MeshRenderable>();
+			Miasma::RTTI::MeshRenderable& mesh = gameobject->GetComponent<Miasma::RTTI::MeshRenderable>();
 			if (&mesh != nullptr) {
 				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, gameobject->tag.c_str())) {
 					ImGui::Text("MeshName: %s", mesh.m_meshName.c_str());
@@ -131,7 +131,7 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 			}
 		}
 		for (auto& lightobject : scene->GetLights()) {
-			miasma_rtti::PointLight& light = lightobject->GetComponent<PointLight>();
+			Miasma::RTTI::PointLight& light = lightobject->GetComponent<PointLight>();
 			if (&light != nullptr) {
 				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, lightobject->tag.c_str())) {
 					// light position

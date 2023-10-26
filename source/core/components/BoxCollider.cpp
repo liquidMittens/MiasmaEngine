@@ -1,5 +1,5 @@
 #include "core/components/BoxCollider.h"
-using namespace miasma_rtti;
+using namespace Miasma::RTTI;
 
 CLASS_DEFINITION(Collider, BoxCollider);
 

@@ -1,6 +1,6 @@
 #include "components/PointLight.h"
 #include "objects/GameObject.h"
-using namespace miasma_rtti;
+using namespace Miasma::RTTI;
 
 CLASS_DEFINITION(Component, PointLight);
 

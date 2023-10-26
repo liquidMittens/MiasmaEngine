@@ -6,7 +6,7 @@ using namespace tdogl;
 
 struct GLFWwindow;
 class Scene;
-namespace miasma_ui
+namespace Miasma::UI
 {
 	constexpr auto SliderTransformMin = -20.0f;
 	constexpr auto SliderTransformMax = 25.0f;
