@@ -98,6 +98,8 @@ void GUIBuilder::gbSceneInfoOverlay(std::shared_ptr<tdogl::Camera>& camera)
 			if (ImGui::MenuItem("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
+		ImGui::Separator();
+		ImGui::Text("FoV: %.1f", camera->fieldOfView());
 	}
 	ImGui::End();
 }

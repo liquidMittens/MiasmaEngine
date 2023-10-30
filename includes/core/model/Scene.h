@@ -56,7 +56,6 @@ private:
 	float currTime;
 	float m_deltaTime;
 	ShaderManager m_shaderManager;
-	TextureManager m_textureManager;
 	// fps info
 	double m_lastTime;
 	double m_currentTime;

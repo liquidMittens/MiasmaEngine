@@ -13,7 +13,11 @@ class GameObject
 {
 public:
 
-	GameObject() = default;
+	GameObject()
+	{
+		transform = glm::identity<glm::mat4>();
+	}
+
 	~GameObject() = default;
 
 	template<typename ComponentType, typename... Args>

@@ -19,7 +19,7 @@ namespace Miasma::RTTI
 		CLASS_DECLARATION(Sprite2D);
 
 		Sprite2D(GameObject* owner, const Material& mat);
-		Sprite2D(GameObject* owner, const std::string& spriteName, const Material& mat);
+		//Sprite2D(GameObject* owner, const std::string& spriteName, const Material& mat);
 		~Sprite2D();
 
 		size_t GetVertexCount() const { return m_vertices.size() / xyz_st_format; }
@@ -28,8 +28,8 @@ namespace Miasma::RTTI
 		const unsigned int GetVertexBufferObject() { return m_vbo; }
 		const unsigned int GetVertexArrayObject() { return m_vao; }
 		const unsigned int GetIndexBufferObject() { return m_ibo; }
-		const glm::vec2 GetSpriteSize() { return m_size; }
-		void SetSpriteSize(const glm::vec2& size) { m_size = size; }
+		const glm::vec2 GetSpriteSize() { return m_spriteSize; }
+		void SetSpriteSize(const glm::vec2& size) { m_spriteSize = size; }
 
 		virtual void Start() override;
 		virtual void Update(float dt) override;
@@ -43,7 +43,7 @@ namespace Miasma::RTTI
 		Material m_material;
 		std::vector<float> m_vertices;
 		std::vector<unsigned int> m_indices;
-		glm::vec2 m_size;
+		glm::vec2 m_spriteSize;
 	};
 
 

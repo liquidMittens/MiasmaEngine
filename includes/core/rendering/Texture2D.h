@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <glm/glm.hpp>
 
 class Texture2D
 {
@@ -22,6 +23,7 @@ public:
 	constexpr unsigned char* GetTextureData() const { return m_textureData; }
 	const unsigned int GetTextureId() const { return m_textureId; }
 	void SetTextureId(const unsigned int& textureId) { m_textureId = textureId; }
+	glm::vec2 GetTextureSize() const { return glm::vec2(m_width, m_height); }
 
 private:
 	std::string m_textureName;

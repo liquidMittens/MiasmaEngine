@@ -18,6 +18,10 @@ public:
 	void SetPosition(glm::vec3 posVector);
 	glm::vec3 GetPosition();
 
+	// methods 
+	void translate(const glm::vec3& pos);
+	void resetTransformMatrix();
+
 private:
 	glm::mat4 m_transform;
 };

@@ -8,6 +8,8 @@ namespace fs = std::filesystem;
 #include "rendering/Texture2D.h"
 #include <format>
 
+std::unique_ptr<TextureManager> TextureManager::m_instance = nullptr;
+
 TextureManager::TextureManager()
 {
 }

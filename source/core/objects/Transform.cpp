@@ -39,3 +39,13 @@ glm::vec3 Transform::GetPosition()
 	glm::vec3 positionVector = m_transform[3];
 	return positionVector;
 }
+
+void Transform::translate(const glm::vec3& pos)
+{
+	m_transform = glm::translate(m_transform, pos);
+}
+
+void Transform::resetTransformMatrix()
+{
+	m_transform = glm::identity<glm::mat4>();
+}

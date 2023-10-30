@@ -26,37 +26,37 @@ Scene::~Scene()
 
 void Scene::EnterScene()
 {
-	m_camera->initcamera(45.0f, 0.1f, 1000.0f, glm::vec3(0, 3, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_camera->initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(0, 3, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_shaderManager.LoadShaderList(SHADER_DIR);
-	m_textureManager.LoadTexturesFromDirectory(TEXTURE_DIR);
+	TextureManager::GetInstance().LoadTexturesFromDirectory(TEXTURE_DIR);
 
 	// Create using a MeshRenderable
 	Material textureBlinnMaterial;
-	textureBlinnMaterial.AddTexture(m_textureManager.GetTextureInfo("white"));
+	textureBlinnMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("white"));
 	textureBlinnMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
 	// outline
 	Material textureOutline;
-	textureOutline.AddTexture(m_textureManager.GetTextureInfo("cat"));
+	textureOutline.AddTexture(TextureManager::GetInstance().GetTextureInfo("cat"));
 	textureOutline.AttachShader(m_shaderManager.GetShaderFromMap("TextureOutline"));
 	// green
 	Material greenbasicTextureMaterial;
-	greenbasicTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("green"));
+	greenbasicTextureMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("green"));
 	greenbasicTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicTexture"));
 	// red
 	Material redbasicTextureMaterial;
-	redbasicTextureMaterial.AddTexture(m_textureManager.GetTextureInfo("red"));
+	redbasicTextureMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("red"));
 	redbasicTextureMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicTexture"));
 	// cottage Blinn
 	Material textureBlinnCottageMaterial;
-	textureBlinnCottageMaterial.AddTexture(m_textureManager.GetTextureInfo("cottage"));
+	textureBlinnCottageMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("cottage"));
 	textureBlinnCottageMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
 	// crate texture 
 	Material crateMaterial;
-	crateMaterial.AddTexture(m_textureManager.GetTextureInfo("crate1"));
+	crateMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("crate1"));
 	crateMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
 	// create UI material
 	Material spriteMaterial;
-	spriteMaterial.AddTexture(m_textureManager.GetTextureInfo("missing"));
+	spriteMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("reticle"));
 	spriteMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
 
 	// Setup lights 
@@ -114,50 +114,40 @@ void Scene::EnterScene()
 	catBlinnObject->tag = "CatBlinnObject";
 	catBlinnObject->AddComponent<Miasma::RTTI::MeshRenderable>(catBlinnObject.get(), &catMesh, textureBlinnMaterial);
 	catBlinnObject->AddComponent<Miasma::RTTI::SpinObject>(catBlinnObject.get(), 2.0f);
-	catBlinnObject->transform.GetTransform() = glm::identity<glm::mat4>();
-	catBlinnObject->transform.GetTransform() = glm::translate(catBlinnObject->transform.GetTransform(), { 0.0f, 0.0f, 0.0f });
+	catBlinnObject->transform.translate({ 0.0f, 0.0f, 0.0f });
 	catBlinnObject->GetComponent<SpinObject>().Start();
 	m_gameObjectsList.push_back(catBlinnObject);
 
 	catMesh.meshName = "Cat Diffuse Outline";
 	catDiffuseObject->tag = "CatDiffuseObject";
 	catDiffuseObject->AddComponent<Miasma::RTTI::MeshRenderable>(catDiffuseObject.get(), &catMesh, textureOutline);
-	catDiffuseObject->transform.GetTransform() = glm::mat4(1.0f);
-	catDiffuseObject->transform.GetTransform() = glm::translate(catDiffuseObject->transform.GetTransform(), { 10.0f, 0.0f, -5.0f });
-	catDiffuseObject->transform.SetPosition({ 10.0f, 0.0f, -5.0f });
+	catDiffuseObject->transform.translate({ 10.0f, 0.0f, -5.0f });
 	m_gameObjectsList.push_back(catDiffuseObject);
 
 	lightObject1->tag = "RedLightObject";
 	lightObject1->AddComponent<Miasma::RTTI::MeshRenderable>(lightObject1.get(), &lightTextureCreateInfo, redbasicTextureMaterial);
-	lightObject1->transform.GetTransform() = glm::mat4(1.0f);
-	lightObject1->transform.GetTransform() = glm::translate(lightObject1->transform.GetTransform(), { lightCreation.pos });
+	lightObject1->transform.translate({ lightCreation.pos });
 	m_gameObjectsList.push_back(lightObject1);
 
 	lightTextureCreateInfo.meshName = "Left Light Mesh";
 	lightObject2->tag = "GreenLightObject";
 	lightObject2->AddComponent<Miasma::RTTI::MeshRenderable>(lightObject2.get(), &lightTextureCreateInfo, greenbasicTextureMaterial);
-	lightObject2->transform.GetTransform() = glm::mat4(1.0f);
-	lightObject2->transform.GetTransform() = glm::translate(lightObject2->transform.GetTransform(), { lightCreation2.pos });
+	lightObject2->transform.translate({ lightCreation2.pos });
 	m_gameObjectsList.push_back(lightObject2);
 
 	cottageObject->tag = "CottageObject"; 
 	cottageObject->AddComponent<Miasma::RTTI::MeshRenderable>(cottageObject.get(), &cottageMeshCreateInfo, textureBlinnCottageMaterial);
-	cottageObject->transform.GetTransform() = glm::mat4(1.0f);
-	cottageObject->transform.GetTransform() = glm::translate(cottageObject->transform.GetTransform(), { 2.0f, 0.0f, -14.0f });
+	cottageObject->transform.translate({ 2.0f, 0.0f, -14.0f });
 	m_gameObjectsList.push_back(cottageObject);
 
 	crateObject->tag = "CrateObject";
 	crateObject->AddComponent<Miasma::RTTI::MeshRenderable>(crateObject.get(), &crateMeshInfo, crateMaterial);
-	crateObject->transform.GetTransform() = glm::identity<glm::mat4>();
-	crateObject->transform.GetTransform() = glm::translate(crateObject->transform.GetTransform(), {4.0f, 1.0f, -7.0f});
+	crateObject->transform.translate({4.0f, 1.0f, -7.0f});
 	m_gameObjectsList.push_back(crateObject);
 
 	quadObject->tag = "QuadObject";
+	quadObject->transform = glm::translate(quadObject->transform.GetTransform(), {960.0f, 540.0f, 1.0f });
 	quadObject->AddComponent<Miasma::RTTI::Sprite2D>(quadObject.get(), spriteMaterial);
-	quadObject->transform.GetTransform() = glm::identity<glm::mat4>();
-	quadObject->transform.GetTransform() = glm::translate(quadObject->transform.GetTransform(), {700.0f, 200.0f, 1.0f });
-	//quadObject->transform.GetTransform() = glm::scale(quadObject->transform.GetTransform(), { 128.0f, 64.0f, 1.0f });
-	quadObject->GetComponent<Miasma::RTTI::Sprite2D>().SetSpriteSize({ 128.0f, 64.0f });
 	m_gameObjectsList.push_back(quadObject);
 }
 

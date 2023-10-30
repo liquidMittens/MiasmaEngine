@@ -57,14 +57,14 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<Scene>& scene)
 			glm::vec3 currentPosition = sprite2D.gameObject->transform.GetPosition();
 			sprite2D.gameObject->transform = glm::identity<glm::mat4>();
 			// translate to sprites position 
-			sprite2D.gameObject->transform = glm::translate(sprite2D.gameObject->transform.GetTransform(), currentPosition);
+			sprite2D.gameObject->transform.translate(currentPosition);
 			// rotate and center
 			glm::vec2 spriteSize = sprite2D.GetSpriteSize();
-			sprite2D.gameObject->transform = glm::translate(sprite2D.gameObject->transform.GetTransform(), glm::vec3(0.5f * spriteSize.x, 0.5f * spriteSize.y, 0.0f));
+			sprite2D.gameObject->transform.translate(glm::vec3(0.5f * spriteSize.x, 0.5f * spriteSize.y, 0.0f));
 			sprite2D.gameObject->transform = glm::rotate(sprite2D.gameObject->transform.GetTransform(), glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			sprite2D.gameObject->transform = glm::translate(sprite2D.gameObject->transform.GetTransform(), glm::vec3(-0.5f * spriteSize.x, -0.5f * spriteSize.y, 0.0f));
-
-			// scale the sprite to size
+			sprite2D.gameObject->transform.translate(glm::vec3(-0.5f * spriteSize.x, -0.5f * spriteSize.y, 0.0f));
+			//
+			//// scale the sprite to size
 			sprite2D.gameObject->transform = glm::scale(sprite2D.gameObject->transform.GetTransform(), glm::vec3(spriteSize, 1.0f));
 
 			// set the model transform and sprite2D information
