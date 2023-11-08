@@ -20,6 +20,8 @@ public:
 
 	// methods 
 	void translate(const glm::vec3& pos);
+	void rotate(float angle, glm::vec3 axis);
+	void scale(glm::vec3 scaleVec);
 	void resetTransformMatrix();
 
 private:

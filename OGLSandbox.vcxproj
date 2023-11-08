@@ -111,13 +111,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\gui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>.\libs\glfw-3.3.8\glfw3_mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>.\libs\glfw-3.3.8\glfw3.lib;.\libs\ReactPhysics3D\lib\debug\reactphysics3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\</Command>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\gui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -142,7 +142,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>.\libs\glfw-3.3.8\glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>.\libs\glfw-3.3.8\glfw3.lib;.\libs\ReactPhysics3D\lib\release\reactphysics3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\</Command>
@@ -154,10 +154,13 @@
     <ClCompile Include="source\core\app\GLWindow.cpp" />
     <ClCompile Include="source\core\camera\Camera.cpp" />
     <ClCompile Include="source\core\components\BoxCollider.cpp" />
+    <ClCompile Include="source\core\components\CapsuleCollider.cpp" />
     <ClCompile Include="source\core\components\Collider.cpp" />
+    <ClCompile Include="source\core\components\CollisionBody.cpp" />
     <ClCompile Include="source\core\components\Component.cpp" />
     <ClCompile Include="source\core\components\MeshRenderable.cpp" />
     <ClCompile Include="source\core\components\PointLight.cpp" />
+    <ClCompile Include="source\core\components\RigidBody.cpp" />
     <ClCompile Include="source\core\components\SpinObject.cpp" />
     <ClCompile Include="source\core\components\Sprite2D.cpp" />
     <ClCompile Include="source\core\glad\glad.c" />
@@ -176,6 +179,7 @@
     <ClCompile Include="source\core\model\Scene.cpp" />
     <ClCompile Include="source\core\objects\GameObject.cpp" />
     <ClCompile Include="source\core\objects\Transform.cpp" />
+    <ClCompile Include="source\core\physics\PhysicsController.cpp" />
     <ClCompile Include="source\core\rendering\GLRenderer.cpp" />
     <ClCompile Include="source\core\rendering\GLRenderer2D.cpp" />
     <ClCompile Include="source\core\rendering\Material.cpp" />
@@ -188,10 +192,13 @@
     <ClInclude Include="includes\core\app\GLWindow.h" />
     <ClInclude Include="includes\core\camera\Camera.h" />
     <ClInclude Include="includes\core\components\BoxCollider.h" />
+    <ClInclude Include="includes\core\components\CapsuleCollider.h" />
     <ClInclude Include="includes\core\components\Collider.h" />
+    <ClInclude Include="includes\core\components\CollisionBody.h" />
     <ClInclude Include="includes\core\components\Component.h" />
     <ClInclude Include="includes\core\components\MeshRenderable.h" />
     <ClInclude Include="includes\core\components\PointLight.h" />
+    <ClInclude Include="includes\core\components\RigidBody.h" />
     <ClInclude Include="includes\core\components\Sprite2D.h" />
     <ClInclude Include="includes\core\components\SpinObject.h" />
     <ClInclude Include="includes\core\glad\glad.h" />
@@ -236,11 +243,13 @@
     <ClInclude Include="includes\core\managers\ShaderManager.h" />
     <ClInclude Include="includes\core\managers\TextureManager.h" />
     <ClInclude Include="includes\core\model\Cube.h" />
+    <ClInclude Include="includes\core\model\Quad.h" />
     <ClInclude Include="includes\core\model\Rectangle.h" />
     <ClInclude Include="includes\core\model\Scene.h" />
     <ClInclude Include="includes\core\model\Triangle.h" />
     <ClInclude Include="includes\core\objects\GameObject.h" />
     <ClInclude Include="includes\core\objects\Transform.h" />
+    <ClInclude Include="includes\core\physics\PhysicsController.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer2D.h" />
     <ClInclude Include="includes\core\rendering\IRenderInterface.h" />

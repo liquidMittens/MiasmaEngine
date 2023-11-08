@@ -8,11 +8,11 @@ out vec3 fragmentPosition;
 out vec3 fragmentNormal; 
 
 uniform mat4 model;
-uniform mat4 camera;
+uniform mat4 viewproj;
 
 void main()
 {
-	gl_Position = camera * model * vec4(vertexPosition, 1.0);
+	gl_Position = viewproj * model * vec4(vertexPosition, 1.0);
 	fragmentTexCoord = vec2(vertexTexCoord.x, 1.0 - vertexTexCoord.y);
 	fragmentPosition = (model * vec4(vertexPosition, 1.0)).xyz;
 	fragmentNormal = mat3(model) * vertexNormal;

@@ -19,6 +19,8 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include "Component.h"
+using namespace Miasma::RTTI;
 
 constexpr glm::vec2 SCREEN_SIZE(1920, 1080);
 
@@ -32,9 +34,17 @@ namespace tdogl {
 
      Includes the perspective projection matrix.
      */
-    class Camera {
+    class Camera : public Component {
     public:
-        Camera();
+
+        CLASS_DECLARATION(Camera);
+
+        Camera(GameObject* owner);
+        ~Camera();
+
+        virtual void Start() override;
+        virtual void Update(float dt) override;
+        virtual void Shutdown() override;
 
         /**
          The position of the camera.

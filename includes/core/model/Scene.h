@@ -42,13 +42,13 @@ public:
 	void Update(float dt);
 	void ExitScene();
 
-	std::shared_ptr<tdogl::Camera> GetCamera() { return m_camera; }
+	std::shared_ptr<GameObject> GetCamera() { return m_camera; }
 	GameObjectsList GetGameObjectsList() { return m_gameObjectsList; }
 	LightListType& GetLights() { return m_lights; }
 	GLFWwindow* GetGLFWWindow() { return m_glfwWindow; }
 
 private:
-	std::shared_ptr<tdogl::Camera> m_camera;
+	std::shared_ptr<GameObject> m_camera;
 	GameObjectsList m_gameObjectsList;
 	GLFWwindow* m_glfwWindow;
 	glm::vec2 m_screenSize;

@@ -9,11 +9,9 @@ namespace Miasma::RTTI
 	public:
 		CLASS_DECLARATION(Collider);
 		// ctor
-		Collider(GameObject* owner, std::string&& initialValue) :
-			Miasma::RTTI::Component(owner, std::move(initialValue))
-		{
+		Collider(GameObject* owner, std::string&& initialValue);
 
-		}
+		~Collider();
 
 		virtual void Start() override;
 		virtual void Update(float dt) override;

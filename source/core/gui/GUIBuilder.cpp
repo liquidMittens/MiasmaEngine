@@ -51,7 +51,7 @@ void GUIBuilder::gbTestWindow()
 	ImGui::End();
 }
 
-void GUIBuilder::gbSceneInfoOverlay(std::shared_ptr<tdogl::Camera>& camera)
+void GUIBuilder::gbSceneInfoOverlay(tdogl::Camera& camera)
 {
 	static int location = 0;
 	ImGuiIO& io = ImGui::GetIO();
@@ -87,7 +87,7 @@ void GUIBuilder::gbSceneInfoOverlay(std::shared_ptr<tdogl::Camera>& camera)
 			ImGui::TextColored(GUI_TEXT_RED, "Mouse Position: <invalid>");
 		}
 		ImGui::Separator();
-		ImGui::Text("Camera pos: %.1f,%.1f,%.1f", camera->position().x, camera->position().y, camera->position().z);
+		ImGui::Text("Camera pos: %.1f,%.1f,%.1f", camera.position().x, camera.position().y, camera.position().z);
 		if (ImGui::BeginPopupContextWindow(0, ImGuiPopupFlags_MouseButtonLeft)) {
 			if (ImGui::MenuItem("Custom", NULL, location == -1)) location = -1;
 			if (ImGui::MenuItem("Center", NULL, location == -2)) location = -2;
@@ -99,7 +99,7 @@ void GUIBuilder::gbSceneInfoOverlay(std::shared_ptr<tdogl::Camera>& camera)
 			ImGui::EndPopup();
 		}
 		ImGui::Separator();
-		ImGui::Text("FoV: %.1f", camera->fieldOfView());
+		ImGui::Text("FoV: %.1f", camera.fieldOfView());
 	}
 	ImGui::End();
 }

@@ -45,6 +45,16 @@ void Transform::translate(const glm::vec3& pos)
 	m_transform = glm::translate(m_transform, pos);
 }
 
+void Transform::rotate(float angle, glm::vec3 axis)
+{
+	m_transform = glm::rotate(m_transform, angle, axis);
+}
+
+void Transform::scale(glm::vec3 scaleVec)
+{
+	m_transform = glm::scale(m_transform, scaleVec);
+}
+
 void Transform::resetTransformMatrix()
 {
 	m_transform = glm::identity<glm::mat4>();

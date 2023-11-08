@@ -15,12 +15,19 @@ using namespace Miasma::Renderer;
 using namespace Miasma::RTTI;
 using namespace Miasma::UI;
 
-void GLRenderer::Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> camera)
+
+GLRenderer::GLRenderer()
 {
-	m_camera = camera;
-	if (!m_camera) {
-		std::cout << "ERROR: GLRenderer Camera is NULL\n";
-	}
+
+}
+
+GLRenderer::~GLRenderer()
+{
+
+}
+
+void GLRenderer::Initialize(GLWindow* pWindow)
+{
 	// set up framebuffer
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
@@ -36,7 +43,9 @@ void GLRenderer::Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> ca
 bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 {
 	bool drewFrame = true;
-	if (m_camera && scene) {
+	if (scene) {
+		// get the camera 
+		tdogl::Camera camera = scene->GetCamera()->GetComponent<Camera>();
 		// clear buffer and depth buffer 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -80,11 +89,11 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			glUniform1f(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "light.strength"), scene->GetLights()[0]->GetComponent<PointLight>().GetLightStrength());
 
 			// CAMERA POS 
-			glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "cameraPosition"), 1, glm::value_ptr(m_camera->position()));
+			glUniform3fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "cameraPosition"), 1, glm::value_ptr(camera.position()));
 			// setup texture (get texture location "textureSample")
 			glUniform1i(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "textureSample"), 0);
 			// update camera transform 
-			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "camera"), 1, false, glm::value_ptr(m_camera->matrix()));
+			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "viewproj"), 1, false, glm::value_ptr(camera.matrix()));
 
 			// update transform
 			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "model"), 1, false, glm::value_ptr(gameObject->transform.GetTransform()));
@@ -109,7 +118,7 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			//glDisable(GL_DEPTH_TEST);
 			//glDrawElements(GL_TRIANGLES, (GLsizei)mesh->GetIndicesCount(), GL_UNSIGNED_INT, 0);
 		}
-		Miasma::UI::GUIBuilder::gbSceneInfoOverlay(m_camera);
+		Miasma::UI::GUIBuilder::gbSceneInfoOverlay(camera);
 		Miasma::UI::GUIBuilder::gbSceneObjectsInfo(scene);
 		Miasma::UI::GUIBuilder::gbRenderGUI();
 	}

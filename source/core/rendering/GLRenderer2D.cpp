@@ -13,13 +13,19 @@
 using namespace Miasma::Renderer;
 
 
-// Inherited via IRenderInterface
-void GLRenderer2D::Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> camera)
+GLRenderer2D::GLRenderer2D()
 {
-	m_camera = camera;
-	if (!m_camera) {
-		std::cout << "ERROR: GLRenderer Camera is NULL\n";
-	}
+
+}
+
+GLRenderer2D::~GLRenderer2D()
+{
+
+}
+
+// Inherited via IRenderInterface
+void GLRenderer2D::Initialize(GLWindow* pWindow)
+{
 	// set up framebuffer
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
@@ -34,9 +40,9 @@ void GLRenderer2D::Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> 
 bool GLRenderer2D::DrawScene(std::unique_ptr<Scene>& scene)
 {
 	bool drewFrame = true;
-	if (m_camera && scene) {
-		// clear buffer and depth buffer 
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	if (scene) {
+		// get the camera 
+		tdogl::Camera camera = scene->GetCamera()->GetComponent<Camera>();
 
 		int lightIndex = 0;
 		// loop through and render all of our meshes
@@ -51,7 +57,7 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<Scene>& scene)
 			// setup texture (get texture location "textureSample")
 			glUniform1i(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "textureSample"), 0);
 			// update camera transform 
-			glUniformMatrix4fv(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "orthoprojection"), 1, false, glm::value_ptr(m_camera->orthomatrix()));
+			glUniformMatrix4fv(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "viewproj"), 1, false, glm::value_ptr(camera.orthomatrix()));
 
 			// save current position
 			glm::vec3 currentPosition = sprite2D.gameObject->transform.GetPosition();

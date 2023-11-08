@@ -5,11 +5,11 @@ layout (location = 2) in vec2 vertexTexCoord;
 layout (location = 0) out vec3 fragmentColor;
 layout (location = 1) out vec2 fragmentTexCoord;
 uniform mat4 model;
-uniform mat4 camera;
+uniform mat4 viewproj;
 
 void main()
 {
-	gl_Position = camera * model * vec4(vertexPosition, 1.0);
+	gl_Position = viewproj * model * vec4(vertexPosition, 1.0);
 	fragmentColor = vertexColor;
 	fragmentTexCoord = vec2(vertexTexCoord.x, 1.0 - vertexTexCoord.y);
 }

@@ -63,7 +63,7 @@ MeshRenderable::MeshRenderable(GameObject* owner, MeshRenderableCreateInfo* pCre
 	}
 }
 
-MeshRenderable::MeshRenderable(GameObject* owner, std::vector<float> vertices, std::vector<int> indices, MeshRenderableCreateInfo* pCreateInfo, const Material& mat) :
+MeshRenderable::MeshRenderable(GameObject* owner, std::vector<float> vertices, std::vector<unsigned int> indices, MeshRenderableCreateInfo* pCreateInfo, const Material& mat) :
 	Component(owner, TO_STRING(MeshRenderable)),
 	m_vbo(0),
 	m_vao(0),

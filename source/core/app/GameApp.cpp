@@ -33,15 +33,14 @@ void GameApp::InitializeGameApp()
 		glfwSetScrollCallback(m_glWindow->GetGLFWWindow(), GameApp::OnScroll);
 		glfwSetMouseButtonCallback(m_glWindow->GetGLFWWindow(), GameApp::OnMouseButton);
 		m_mouseModeEnabled = false;
-
 		// create our scene and our GLRenderer
 		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE };
-		m_currentScene = std::unique_ptr<Scene>(new Scene(&sceneInfo));
+		m_currentScene = std::make_unique<Scene>(&sceneInfo);
 		m_currentScene->EnterScene();
-		m_renderer = std::unique_ptr<Miasma::Renderer::GLRenderer>(new Miasma::Renderer::GLRenderer());
-		m_renderer->Initialize(m_glWindow.get(), m_currentScene->GetCamera());
+		m_renderer = std::make_unique<Miasma::Renderer::GLRenderer>();
+		m_renderer->Initialize(m_glWindow.get());
 		m_renderer2D = std::make_unique<Miasma::Renderer::GLRenderer2D>();
-		m_renderer2D->Initialize(m_glWindow.get(), m_currentScene->GetCamera());
+		m_renderer2D->Initialize(m_glWindow.get());
 	}
 	else {
 		std::cout << "m_glWindow->CreateGLWindow() Failed\n";
@@ -74,6 +73,7 @@ void GameApp::RunGameAppLoop()
 		ProcessInput(m_glWindow->GetGLFWWindow(), (float)dt);
 		// update scene and objects
 		m_currentScene->Update((float)dt);
+		PhysicsController::GetInstance().UpdatePhysicsSimulation((float)dt);
 		glfwPollEvents();
 		// render and present
 		runWindowLoop = m_renderer->DrawScene(m_currentScene);
@@ -88,7 +88,7 @@ void GameApp::RunGameAppLoop()
 void GameApp::ProcessInput(GLFWwindow* pWindow, float deltaTime)
 {
 	if (pWindow != nullptr) {
-		auto camera = m_currentScene->GetCamera();
+		auto& camera = m_currentScene->GetCamera()->GetComponent<Camera>();
 		if (glfwGetKey(pWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 			glfwSetWindowShouldClose(pWindow, true);
 		}
@@ -97,22 +97,22 @@ void GameApp::ProcessInput(GLFWwindow* pWindow, float deltaTime)
 		}
 		//move position of camera based on WASD keys, and XZ keys for up and down
 		if (glfwGetKey(pWindow, 'S')) {
-			camera->offsetPosition(deltaTime * moveSpeed * -camera->forward());
+			camera.offsetPosition(deltaTime * moveSpeed * -camera.forward());
 		}
 		else if (glfwGetKey(pWindow, 'W')) {
-			camera->offsetPosition(deltaTime * moveSpeed * camera->forward());
+			camera.offsetPosition(deltaTime * moveSpeed * camera.forward());
 		}
 		if (glfwGetKey(pWindow, 'A')) {
-			camera->offsetPosition(deltaTime * moveSpeed * -camera->right());
+			camera.offsetPosition(deltaTime * moveSpeed * -camera.right());
 		}
 		else if (glfwGetKey(pWindow, 'D')) {
-			camera->offsetPosition(deltaTime * moveSpeed * camera->right());
+			camera.offsetPosition(deltaTime * moveSpeed * camera.right());
 		}
 		if (glfwGetKey(pWindow, GLFW_KEY_LEFT_CONTROL)) {
-			camera->offsetPosition(deltaTime * moveSpeed * -glm::vec3(0, 1, 0));
+			camera.offsetPosition(deltaTime * moveSpeed * -glm::vec3(0, 1, 0));
 		}
 		else if (glfwGetKey(pWindow, GLFW_KEY_SPACE)) {
-			camera->offsetPosition(deltaTime * moveSpeed * glm::vec3(0, 1, 0));
+			camera.offsetPosition(deltaTime * moveSpeed * glm::vec3(0, 1, 0));
 		}
 
 		if (!m_mouseModeEnabled) {
@@ -120,14 +120,14 @@ void GameApp::ProcessInput(GLFWwindow* pWindow, float deltaTime)
 			const float mouseSensitivity = 0.1f;
 			double mouseX, mouseY;
 			glfwGetCursorPos(pWindow, &mouseX, &mouseY);
-			camera->offsetOrientation(mouseSensitivity * (float)mouseY, mouseSensitivity * (float)mouseX);
+			camera.offsetOrientation(mouseSensitivity * (float)mouseY, mouseSensitivity * (float)mouseX);
 			glfwSetCursorPos(pWindow, 0, 0); //reset the mouse, so it doesn't go out of the window
 
 			//increase or decrease field of view based on mouse wheel
-			float fieldOfView = camera->fieldOfView() + zoomSensitivity * (float)m_scrollY;
+			float fieldOfView = camera.fieldOfView() + zoomSensitivity * (float)m_scrollY;
 			if (fieldOfView < 5.0f) fieldOfView = 5.0f;
 			if (fieldOfView > 130.0f) fieldOfView = 130.0f;
-			camera->setFieldOfView(fieldOfView);
+			camera.setFieldOfView(fieldOfView);
 			m_scrollY = 0;
 		}
 	}
@@ -182,6 +182,7 @@ void GameApp::ShutdownGameApp()
 	if (m_renderer2D) {
 		m_renderer2D->Shutdown();
 	}
+	PhysicsController::GetInstance().ShutdownPhysicsController();
 	if (m_glWindow) {
 		m_glWindow->ShutdownGLWindow();
 	}

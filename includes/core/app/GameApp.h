@@ -5,6 +5,8 @@
 #include "core/rendering/GLRenderer.h"
 #include "core/rendering/GLRenderer2D.h"
 using namespace Miasma::Renderer;
+#include "physics/PhysicsController.h"
+using namespace Miasma::Physics;
 
 struct GLFWwindow;
 class GLWindow;

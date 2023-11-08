@@ -21,20 +21,18 @@ namespace Miasma::Renderer
 	class GLRenderer : public Miasma::Renderer::IRenderInterface
 	{
 	public:
-		GLRenderer() = default;
-		~GLRenderer() = default;
+		GLRenderer();
+		~GLRenderer();
 
 		// Inherited via IRenderInterface
-		virtual void Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> camera) override;
+		virtual void Initialize(GLWindow* pWindow) override;
 		virtual bool DrawScene(std::unique_ptr<Scene>& scene) override;
 		virtual void Shutdown() override;
 
 		// window resize callback
 		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 	private:
-		std::shared_ptr<tdogl::Camera> m_camera;
-		LightShaderInformation m_lightShaderInfo;
-		unsigned int m_cameraShaderPos;
+		
 	};
 }
 #endif

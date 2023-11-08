@@ -97,6 +97,12 @@
     <Filter Include="Header Files\core\components">
       <UniqueIdentifier>{15da9f3a-f472-4e9b-9165-6d44997d26bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\core\physics">
+      <UniqueIdentifier>{627cdc94-5cbf-453f-875a-0598c6b00ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\physics">
+      <UniqueIdentifier>{c29c64b1-63f3-470c-a311-3fc203f18efc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -193,6 +199,18 @@
       <Filter>Source Files\core\rendering</Filter>
     </ClCompile>
     <ClCompile Include="source\core\components\Sprite2D.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\physics\PhysicsController.cpp">
+      <Filter>Source Files\core\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\CollisionBody.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\RigidBody.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\CapsuleCollider.cpp">
       <Filter>Source Files\core\components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -387,6 +405,21 @@
       <Filter>Header Files\core\rendering</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\components\Sprite2D.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Quad.h">
+      <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\physics\PhysicsController.h">
+      <Filter>Header Files\core\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\CollisionBody.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\RigidBody.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\CapsuleCollider.h">
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
   </ItemGroup>

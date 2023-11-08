@@ -36,7 +36,7 @@ struct MeshRenderableCreateInfo
 		CLASS_DECLARATION(MeshRenderable);
 
 		MeshRenderable(GameObject* owner, MeshRenderableCreateInfo* pCreateInfo, const Material& mat);
-		MeshRenderable(GameObject* owner, std::vector<float> vertices, std::vector<int> indices, MeshRenderableCreateInfo* pCreateInfo, const Material& mat);
+		MeshRenderable(GameObject* owner, std::vector<float> vertices, std::vector<unsigned int> indices, MeshRenderableCreateInfo* pCreateInfo, const Material& mat);
 		~MeshRenderable();
 
 		bool AttachMaterial(const Material& newMat);

@@ -10,7 +10,7 @@ namespace Miasma::Renderer
 {
 	class IRenderInterface
 	{
-		virtual void Initialize(GLWindow* pWindow, std::shared_ptr<tdogl::Camera> camera) = 0;
+		virtual void Initialize(GLWindow* pWindow) = 0;
 		virtual bool DrawScene(std::unique_ptr<Scene>& scene) = 0;
 		virtual void Shutdown() = 0;
 	};

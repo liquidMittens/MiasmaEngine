@@ -24,7 +24,10 @@ using namespace tdogl;
 
 static const float MaxVerticalAngle = 85.0f; //must be less than 90 to avoid gimbal lock
 
-Camera::Camera() :
+CLASS_DEFINITION(Component, Camera);
+
+Camera::Camera(GameObject* owner) :
+    Component(owner, TO_STRING(Camera)),
     _position(0.0f, 0.0f, 1.0f),
     _horizontalAngle(0.0f),
     _verticalAngle(0.0f),
@@ -32,8 +35,29 @@ Camera::Camera() :
     _nearPlane(0.1f),
     _farPlane(1000.0f),
     _viewportAspectRatio(4.0f/3.0f),
-    _orthoMatrix(0.0f)
+    _orthoMatrix(0.0f),
+    _viewport(800.0f, 600.0f)
 {
+}
+
+Camera::~Camera()
+{
+
+}
+
+void Camera::Start()
+{
+
+}
+
+void Camera::Update(float dt)
+{
+
+}
+
+void Camera::Shutdown()
+{
+
 }
 
 const glm::vec3& Camera::position() const {
