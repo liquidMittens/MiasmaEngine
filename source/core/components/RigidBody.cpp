@@ -20,7 +20,7 @@ RigidBody::RigidBody(GameObject* owner, rp3d::BodyType type) :
 		m_rigidBody->setType(type);
 		m_rigidBody->setMass(rp3d::decimal(30.0));
 		m_rigidBody->setLinearDamping(rp3d::decimal(0.99));
-		m_rigidBody->setAngularDamping(rp3d::decimal(0.0));
+		m_rigidBody->setAngularDamping(rp3d::decimal(0.5));
 		m_rigidBody->setLinearLockAxisFactor(rp3d::Vector3(1, 1, 1));
 		m_rigidBody->setAngularLockAxisFactor(rp3d::Vector3(0, 0, 0));
 		PhysicsController::GetInstance().AddRigidBodyToList(this);

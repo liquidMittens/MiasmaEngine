@@ -38,7 +38,7 @@ void Scene::EnterScene()
 	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(10.0f, 30.0f, -10.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_camera->AddComponent<RigidBody>(m_camera.get());
 	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
-	m_camera->GetComponent<RigidBody>().GetRigidBody()->setMass(rp3d::decimal(80.0));
+	m_camera->GetComponent<RigidBody>().GetRigidBody()->setMass(rp3d::decimal(100.0));
 	m_camera->GetComponent<CapsuleCollider>().GetCollider()->getMaterial().setFrictionCoefficient(rp3d::decimal(0.8));
 
 	m_shaderManager.LoadShaderList(SHADER_DIR);

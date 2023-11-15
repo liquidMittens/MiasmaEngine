@@ -124,11 +124,13 @@ void GameApp::ProcessInput(GLFWwindow* pWindow, float deltaTime)
 			isAnyMovementPressed = true;
 		}
 
+		if (glfwGetKey(pWindow, GLFW_KEY_SPACE) == GLFW_PRESS) {
+			rp3d::Vector3 jumpForceVec = jumpForce * rp3d::Vector3(0.0f, camera.up().y, 0.0f);
+			cameraBody.ApplyForce(jumpForceVec);
+		}
+
 		if (glfwGetKey(pWindow, GLFW_KEY_LEFT_CONTROL)) {
 			camera.offsetPosition(deltaTime * moveSpeed * -glm::vec3(0, 1, 0));
-		}
-		else if (glfwGetKey(pWindow, GLFW_KEY_SPACE)) {
-			camera.offsetPosition(deltaTime * moveSpeed * glm::vec3(0, 1, 0));
 		}
 
 		if (!m_mouseModeEnabled) {
