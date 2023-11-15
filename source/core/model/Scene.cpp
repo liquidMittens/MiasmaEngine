@@ -34,9 +34,12 @@ Scene::~Scene()
 
 void Scene::EnterScene()
 {
-	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(0, 3, 14), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_camera->tag = "Camera";
+	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(10.0f, 30.0f, -10.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_camera->AddComponent<RigidBody>(m_camera.get());
-	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 3.0f, 5.0f);
+	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
+	m_camera->GetComponent<RigidBody>().GetRigidBody()->setMass(rp3d::decimal(80.0));
+	m_camera->GetComponent<CapsuleCollider>().GetCollider()->getMaterial().setFrictionCoefficient(rp3d::decimal(0.8));
 
 	m_shaderManager.LoadShaderList(SHADER_DIR);
 	TextureManager::GetInstance().LoadTexturesFromDirectory(TEXTURE_DIR);
@@ -73,6 +76,9 @@ void Scene::EnterScene()
 	Material spriteReticle;
 	spriteReticle.AddTexture(TextureManager::GetInstance().GetTextureInfo("reticle"));
 	spriteReticle.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
+	Material textureDefault;
+	textureDefault.AddTexture(TextureManager::GetInstance().GetTextureInfo("missing"));
+	textureDefault.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
 	// 3d sprite material
 	Material sprite3dQuad;
 	sprite3dQuad.AddTexture(TextureManager::GetInstance().GetTextureInfo("enemy"));
@@ -171,9 +177,7 @@ void Scene::EnterScene()
 	floorObject->AddComponent<Miasma::RTTI::MeshRenderable>(floorObject.get(), &floorMeshCreateInfo, greybasicTextureMaterial);
 	floorObject->transform.translate({ 0.0f, 0.0f, 0.0f });
 	floorObject->AddComponent<RigidBody>(floorObject.get(), rp3d::BodyType::STATIC);
-	//floorObject->GetComponent<RigidBody>().GetCollider()->enableGravity(false);
-	//floorObject->GetComponent<RigidBody>().GetCollider()->setMass(0.0);
-	floorObject->AddComponent<BoxCollider>(floorObject.get(), glm::vec3(10.0f, 0.5f, 10.0f));
+	floorObject->AddComponent<BoxCollider>(floorObject.get(), glm::vec3(40.0f, 1.0f, 40.0f));
 	m_gameObjectsList.push_back(floorObject);
 
 	crateObject->tag = "CrateObject";
@@ -187,7 +191,7 @@ void Scene::EnterScene()
 	crateObject2->AddComponent<Miasma::RTTI::MeshRenderable>(crateObject2.get(), &crateMeshInfo, crateMaterial);
 	crateObject2->transform.translate({ -5.0f, 30.0f, -5.0f });
 	crateObject2->AddComponent<RigidBody>(crateObject2.get());
-	crateObject2->AddComponent<CapsuleCollider>(crateObject2.get(), 2.0f, 1.0f);
+	crateObject2->AddComponent<BoxCollider>(crateObject2.get(), glm::vec3(1.0f, 1.0f, 1.0f));
 	m_gameObjectsList.push_back(crateObject2);
 
 	quadObject->tag = "Reticle";
@@ -200,6 +204,13 @@ void Scene::EnterScene()
 	quad3dObject->transform.translate({5.0f, 2.0f, 5.0f});
 	quad3dObject->transform.scale({1.64f, 2.28f, 1.f});
 	m_gameObjectsList.push_back(quad3dObject);
+
+	// add a texture to the screen
+	/*std::shared_ptr<GameObject> textureObject = std::make_shared<GameObject>();
+	textureObject->tag = "TextureObject";
+	textureObject->transform.translate({ 960.0f, 192.0f, 1.0f });
+	textureObject->AddComponent<Sprite2D>(textureObject.get(), textureDefault);
+	m_gameObjectsList.push_back(textureObject);*/
 }
 
 void Scene::Update(float dt)
@@ -214,4 +225,5 @@ void Scene::ExitScene()
 {
 	m_gameObjectsList.clear();
 	m_lights.clear();
+	m_camera.reset(); // reset the camera pointer since scene is shutting down
 }

@@ -19,6 +19,7 @@
 #include <cmath>
 #include "camera/Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "objects/GameObject.h"
 
 using namespace tdogl;
 
@@ -52,7 +53,9 @@ void Camera::Start()
 
 void Camera::Update(float dt)
 {
-
+    //_position = gameObject->transform.GetPosition();
+    //_position.y += CAMERA_HEIGHT_OFFSET;
+    std::cout << std::format("RigidBody({}:{}): pos: ({},{},{})\n", gameObject->tag, "Dynamic", gameObject->transform.GetPosition().x, gameObject->transform.GetPosition().y, gameObject->transform.GetPosition().z);
 }
 
 void Camera::Shutdown()
@@ -61,15 +64,18 @@ void Camera::Shutdown()
 }
 
 const glm::vec3& Camera::position() const {
-    return _position;
+    //return _position;
+    return gameObject->transform.GetPosition();
 }
 
 void Camera::setPosition(const glm::vec3& position) {
     _position = position;
+    gameObject->transform.SetPosition(position);
 }
 
 void Camera::offsetPosition(const glm::vec3& offset) {
-    _position += offset;
+    //_position += offset;
+    gameObject->transform.translate(offset);
 }
 
 float Camera::fieldOfView() const {
@@ -110,8 +116,8 @@ void Camera::offsetOrientation(float upAngle, float rightAngle) {
 }
 
 void Camera::lookAt(glm::vec3 position) {
-    assert(position != _position);
-    glm::vec3 direction = glm::normalize(position - _position);
+    assert(position != gameObject->transform.GetPosition());
+    glm::vec3 direction = glm::normalize(position - gameObject->transform.GetPosition());
     _verticalAngle = glm::radians(asinf(-direction.y));
     _horizontalAngle = -glm::radians(atan2f(-direction.x, -direction.z));
     normalizeAngles();
@@ -131,6 +137,14 @@ glm::vec3 Camera::forward() const {
     return glm::vec3(forward);
 }
 
+glm::vec3 Camera::forward_novertical_axis() const
+{
+    glm::mat4 orientation(1.0f);
+    orientation = glm::rotate(orientation, glm::radians(_horizontalAngle), glm::vec3(0, 1, 0));
+    glm::vec4 forward = glm::inverse(orientation) * glm::vec4(0, 0, -1, 1);
+    return glm::vec3(forward);
+}
+
 glm::vec3 Camera::right() const {
     glm::vec4 right = glm::inverse(orientation()) * glm::vec4(1,0,0,1);
     return glm::vec3(right);
@@ -146,7 +160,7 @@ glm::mat4 Camera::matrix() const {
 }
 
 glm::mat4 Camera::orthomatrix() const {
-    return _orthoMatrix; // * view();
+    return _orthoMatrix;
 }
 
 glm::mat4 Camera::projection() const {
@@ -154,7 +168,7 @@ glm::mat4 Camera::projection() const {
 }
 
 glm::mat4 Camera::view() const {
-    return orientation() * glm::translate(glm::mat4(1.0f), -_position);
+    return orientation() * glm::translate(glm::mat4(1.0f), -gameObject->transform.GetPosition());
 }
 
 glm::vec2 Camera::viewport() const

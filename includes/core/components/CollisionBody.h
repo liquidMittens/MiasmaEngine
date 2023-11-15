@@ -20,12 +20,11 @@ namespace Miasma::RTTI
 		virtual void Update(float dt) override;
 		virtual void Shutdown() override;
 
-		rp3d::Transform& GetCurrentTransform() { return m_transform; }
+		const rp3d::Transform& GetCurrentTransform() { return m_collisionBody->getTransform(); }
 		rp3d::CollisionBody* GetCollider() { return m_collisionBody; }
 
 	private:
 		rp3d::CollisionBody* m_collisionBody;
-		rp3d::Transform m_transform;
 	};
 
 }

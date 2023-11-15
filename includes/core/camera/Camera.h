@@ -23,6 +23,7 @@
 using namespace Miasma::RTTI;
 
 constexpr glm::vec2 SCREEN_SIZE(1920, 1080);
+constexpr float CAMERA_HEIGHT_OFFSET = 5.0f;
 
 namespace tdogl {
 
@@ -128,6 +129,10 @@ namespace tdogl {
 
         /** A unit vector representing the direction the camera is facing */
         glm::vec3 forward() const;
+
+        /** A unit vector representing the direction the camera is facing */
+        /* NOTE: this method ignores the vertical axis and just uses the forward vectors horizontal */
+        glm::vec3 forward_novertical_axis() const;
 
         /** A unit vector representing the direction to the right of the camera*/
         glm::vec3 right() const;

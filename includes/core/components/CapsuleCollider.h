@@ -17,6 +17,8 @@ namespace Miasma::RTTI
 		virtual void Update(float dt) override;
 		virtual void Shutdown() override;
 
+		rp3d::Collider* GetCollider() { return m_collider; }
+
 	private:
 		rp3d::CapsuleShape* m_capsuleShape;
 		rp3d::Collider* m_collider;

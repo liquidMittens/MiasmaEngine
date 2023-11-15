@@ -72,8 +72,8 @@ void GameApp::RunGameAppLoop()
 		// get input
 		ProcessInput(m_glWindow->GetGLFWWindow(), (float)dt);
 		// update scene and objects
-		m_currentScene->Update((float)dt);
 		PhysicsController::GetInstance().UpdatePhysicsSimulation((float)dt);
+		m_currentScene->Update((float)dt);
 		glfwPollEvents();
 		// render and present
 		runWindowLoop = m_renderer->DrawScene(m_currentScene);
@@ -88,7 +88,10 @@ void GameApp::RunGameAppLoop()
 void GameApp::ProcessInput(GLFWwindow* pWindow, float deltaTime)
 {
 	if (pWindow != nullptr) {
+		bool isAnyMovementPressed = false;
 		auto& camera = m_currentScene->GetCamera()->GetComponent<Camera>();
+		RigidBody& cameraBody = m_currentScene->GetCamera()->GetComponent<RigidBody>();
+
 		if (glfwGetKey(pWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 			glfwSetWindowShouldClose(pWindow, true);
 		}
@@ -96,18 +99,31 @@ void GameApp::ProcessInput(GLFWwindow* pWindow, float deltaTime)
 			m_wireframe = !m_wireframe;
 		}
 		//move position of camera based on WASD keys, and XZ keys for up and down
-		if (glfwGetKey(pWindow, 'S')) {
-			camera.offsetPosition(deltaTime * moveSpeed * -camera.forward());
+		if (glfwGetKey(pWindow, GLFW_KEY_S)) {
+			rp3d::Vector3 forceDir = moveSpeed * rp3d::Vector3(-camera.forward_novertical_axis().x, -camera.forward_novertical_axis().y, -camera.forward_novertical_axis().z);
+			cameraBody.ApplyForce(forceDir);
+			//camera.offsetPosition(deltaTime * moveSpeed * -camera.forward());
+			isAnyMovementPressed = true;
 		}
-		else if (glfwGetKey(pWindow, 'W')) {
-			camera.offsetPosition(deltaTime * moveSpeed * camera.forward());
+		if (glfwGetKey(pWindow, GLFW_KEY_W)) {
+			rp3d::Vector3 forceDir = moveSpeed * rp3d::Vector3(camera.forward_novertical_axis().x, camera.forward_novertical_axis().y, camera.forward_novertical_axis().z);
+			cameraBody.ApplyForce(forceDir);
+			//camera.offsetPosition(deltaTime * moveSpeed * camera.forward());
+			isAnyMovementPressed = true;
 		}
-		if (glfwGetKey(pWindow, 'A')) {
-			camera.offsetPosition(deltaTime * moveSpeed * -camera.right());
+		if (glfwGetKey(pWindow, GLFW_KEY_A)) {
+			rp3d::Vector3 forceDir = moveSpeed * rp3d::Vector3(-camera.right().x, -camera.right().y, -camera.right().z);
+			cameraBody.ApplyForce(forceDir);
+			//camera.offsetPosition(deltaTime * moveSpeed * -camera.right());
+			isAnyMovementPressed = true;
 		}
-		else if (glfwGetKey(pWindow, 'D')) {
-			camera.offsetPosition(deltaTime * moveSpeed * camera.right());
+		if (glfwGetKey(pWindow, GLFW_KEY_D)) {
+			rp3d::Vector3 forceDir = moveSpeed * rp3d::Vector3(camera.right().x, camera.right().y, camera.right().z);
+			cameraBody.ApplyForce(forceDir);
+			//camera.offsetPosition(deltaTime * moveSpeed * camera.right());
+			isAnyMovementPressed = true;
 		}
+
 		if (glfwGetKey(pWindow, GLFW_KEY_LEFT_CONTROL)) {
 			camera.offsetPosition(deltaTime * moveSpeed * -glm::vec3(0, 1, 0));
 		}

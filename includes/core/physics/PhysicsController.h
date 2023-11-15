@@ -36,6 +36,7 @@ namespace Miasma::Physics
 
 		rp3d::PhysicsCommon& GetPhysicsCommon() { return m_physicsCommon; }
 		rp3d::PhysicsWorld* GetPhysicsWorld() { return m_physicsWorld; }
+		long double GetAccumulator() const { return accumulator; }
 
 		/// This method is called when some contacts occur
 		virtual void onContact(const CallbackData& callbackData) override;

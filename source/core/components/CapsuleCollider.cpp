@@ -20,13 +20,15 @@ CapsuleCollider::CapsuleCollider(GameObject* owner, float radius, float height) 
 	}
 	else if (&rigidBody != nullptr) {
 		m_capsuleShape = PhysicsController::GetInstance().GetPhysicsCommon().createCapsuleShape(radius, height);
-		m_collider = rigidBody.GetCollider()->addCollider(m_capsuleShape, rp3d::Transform::identity());
+		m_collider = rigidBody.GetRigidBody()->addCollider(m_capsuleShape, rp3d::Transform::identity());
 	}
+	m_collider->getMaterial().setBounciness(rp3d::decimal(0.0));
+	m_collider->getMaterial().setFrictionCoefficient(rp3d::decimal(0.75));
 }
 
 CapsuleCollider::~CapsuleCollider()
 {
-
+	PhysicsController::GetInstance().GetPhysicsCommon().destroyCapsuleShape(m_capsuleShape);
 }
 
 void CapsuleCollider::Start()

@@ -9,11 +9,13 @@ PhysicsController::PhysicsController() :
 	m_physicsWorld(nullptr),
 	accumulator(0)
 {
-	/*rp3d::PhysicsWorld::WorldSettings settings;
+	rp3d::PhysicsWorld::WorldSettings settings;
 	settings.defaultVelocitySolverNbIterations = 20;
-	settings.isSleepingEnabled = false;
-	settings.gravity = rp3d::Vector3(0, -9.81, 0);*/
-	m_physicsWorld = m_physicsCommon.createPhysicsWorld();
+	//settings.isSleepingEnabled = false;
+	settings.gravity = rp3d::Vector3(0.0f, -9.81f, 0.0f);
+	settings.defaultFrictionCoefficient = 0.75;
+	settings.restitutionVelocityThreshold = 0.5;
+	m_physicsWorld = m_physicsCommon.createPhysicsWorld(settings);
 	assert(m_physicsWorld != nullptr);
 }
 
@@ -83,7 +85,7 @@ void PhysicsController::UpdatePhysicsSimulation(float dt)
 
 void PhysicsController::ShutdownPhysicsController()
 {
-
+	m_physicsCommon.destroyPhysicsWorld(m_physicsWorld);
 }
 
 // This method is called when some contacts occur

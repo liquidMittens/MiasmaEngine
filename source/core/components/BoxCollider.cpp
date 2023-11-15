@@ -21,14 +21,15 @@ BoxCollider::BoxCollider(GameObject* owner, glm::vec3 halfExtents) :
 	}
 	else if (&rigidBody != nullptr) {
 		m_boxShape = PhysicsController::GetInstance().GetPhysicsCommon().createBoxShape(rp3d::Vector3(halfExtents.x, halfExtents.y, halfExtents.z));
-		m_collider = rigidBody.GetCollider()->addCollider(m_boxShape, rp3d::Transform::identity());
+		m_collider = rigidBody.GetRigidBody()->addCollider(m_boxShape, rp3d::Transform::identity());
 	}
-	
+	m_collider->getMaterial().setBounciness(rp3d::decimal(0.0));
+	m_collider->getMaterial().setFrictionCoefficient(rp3d::decimal(0.75));
 }
 
 BoxCollider::~BoxCollider()
 {
-
+	PhysicsController::GetInstance().GetPhysicsCommon().destroyBoxShape(m_boxShape);
 }
 
 void BoxCollider::Start()
