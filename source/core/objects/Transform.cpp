@@ -1,7 +1,9 @@
 #include "objects/Transform.h"
 
 Transform::Transform() :
-	m_transform(1.0f)
+	m_transform(1.0f),
+	_verticalAngle(0.0f),
+	_horizontalAngle(0.0f)
 {
 
 }
@@ -58,4 +60,29 @@ void Transform::scale(glm::vec3 scaleVec)
 void Transform::resetTransformMatrix()
 {
 	m_transform = glm::identity<glm::mat4>();
+}
+
+glm::vec3 Transform::forward() const {
+	glm::vec4 forward = glm::inverse(orientation()) * glm::vec4(0, 0, -1, 1);
+	return glm::vec3(forward);
+}
+
+glm::vec3 Transform::right() const {
+	glm::vec4 right = glm::inverse(orientation()) * glm::vec4(1, 0, 0, 1);
+	return glm::vec3(right);
+}
+
+glm::vec3 Transform::up() const {
+	glm::vec4 up = glm::inverse(orientation()) * glm::vec4(0, 1, 0, 1);
+	return glm::vec3(up);
+}
+
+
+/** private matrix calculation methods **/
+
+glm::mat4 Transform::orientation() const {
+	glm::mat4 orientation(1.0f);
+	orientation = glm::rotate(orientation, glm::radians(_verticalAngle), glm::vec3(1, 0, 0));
+	orientation = glm::rotate(orientation, glm::radians(_horizontalAngle), glm::vec3(0, 1, 0));
+	return orientation;
 }

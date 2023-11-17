@@ -35,11 +35,9 @@ Scene::~Scene()
 void Scene::EnterScene()
 {
 	m_camera->tag = "Camera";
-	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(10.0f, 30.0f, -10.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(10.0f, 5.0f, -10.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_camera->AddComponent<RigidBody>(m_camera.get());
 	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
-	m_camera->GetComponent<RigidBody>().GetRigidBody()->setMass(rp3d::decimal(100.0));
-	m_camera->GetComponent<CapsuleCollider>().GetCollider()->getMaterial().setFrictionCoefficient(rp3d::decimal(0.8));
 
 	m_shaderManager.LoadShaderList(SHADER_DIR);
 	TextureManager::GetInstance().LoadTexturesFromDirectory(TEXTURE_DIR);
@@ -82,7 +80,7 @@ void Scene::EnterScene()
 	// 3d sprite material
 	Material sprite3dQuad;
 	sprite3dQuad.AddTexture(TextureManager::GetInstance().GetTextureInfo("enemy"));
-	sprite3dQuad.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
+	sprite3dQuad.AttachShader(m_shaderManager.GetShaderFromMap("Billboard"));
 
 	// Setup lights 
 	// create lights
@@ -185,12 +183,14 @@ void Scene::EnterScene()
 	crateObject->transform.translate({4.0f, 10.0f, -7.0f});
 	crateObject->AddComponent<RigidBody>(crateObject.get());
 	crateObject->AddComponent<BoxCollider>(crateObject.get(), glm::vec3(1.0f, 1.0f, 1.0f));
+	crateObject->GetComponent<RigidBody>().GetRigidBody()->setMass(rp3d::decimal(200.0));
 	m_gameObjectsList.push_back(crateObject);
 
 	crateObject2->tag = "crateObject2";
 	crateObject2->AddComponent<Miasma::RTTI::MeshRenderable>(crateObject2.get(), &crateMeshInfo, crateMaterial);
 	crateObject2->transform.translate({ -5.0f, 30.0f, -5.0f });
 	crateObject2->AddComponent<RigidBody>(crateObject2.get());
+	crateObject2->GetComponent<RigidBody>().GetRigidBody()->setMass(rp3d::decimal(200.0));
 	crateObject2->AddComponent<BoxCollider>(crateObject2.get(), glm::vec3(1.0f, 1.0f, 1.0f));
 	m_gameObjectsList.push_back(crateObject2);
 
@@ -201,7 +201,7 @@ void Scene::EnterScene()
 
 	quad3dObject->tag = "3DQuad";
 	quad3dObject->AddComponent<Miasma::RTTI::MeshRenderable>(quad3dObject.get(), Quad::vertices, Quad::indices, &quadMeshInfo, sprite3dQuad);
-	quad3dObject->transform.translate({5.0f, 2.0f, 5.0f});
+	quad3dObject->transform.translate({5.0f, 15.0f, 5.0f});
 	quad3dObject->transform.scale({1.64f, 2.28f, 1.f});
 	m_gameObjectsList.push_back(quad3dObject);
 

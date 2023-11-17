@@ -94,6 +94,8 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			glUniform1i(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "textureSample"), 0);
 			// update camera transform 
 			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "viewproj"), 1, false, glm::value_ptr(camera.matrix()));
+			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "view"), 1, false, glm::value_ptr(camera.view()));
+			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "proj"), 1, false, glm::value_ptr(camera.projection()));
 
 			// update transform
 			glUniformMatrix4fv(glGetUniformLocation(mesh.GetMaterial().GetShader().shaderId, "model"), 1, false, glm::value_ptr(gameObject->transform.GetTransform()));

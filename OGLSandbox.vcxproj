@@ -267,6 +267,8 @@
     <None Include="resources\shaders\BasicSprite.vs" />
     <None Include="resources\shaders\BasicTexture.fs" />
     <None Include="resources\shaders\BasicTexture.vs" />
+    <None Include="resources\shaders\Billboard.fs" />
+    <None Include="resources\shaders\Billboard.vs" />
     <None Include="resources\shaders\BlinnPhong.fs" />
     <None Include="resources\shaders\BlinnPhong.vs" />
     <None Include="resources\shaders\Diffuse.fs" />

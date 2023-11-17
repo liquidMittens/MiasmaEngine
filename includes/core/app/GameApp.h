@@ -6,6 +6,7 @@
 #include "core/rendering/GLRenderer2D.h"
 using namespace Miasma::Renderer;
 #include "physics/PhysicsController.h"
+#include <GLFW/glfw3.h>
 using namespace Miasma::Physics;
 
 struct GLFWwindow;
@@ -24,9 +25,9 @@ public:
 
 private:
 	std::unique_ptr<GLWindow> m_glWindow;
-	std::unique_ptr<Scene> m_currentScene;
 	std::unique_ptr<Miasma::Renderer::GLRenderer> m_renderer;
 	std::unique_ptr<Miasma::Renderer::GLRenderer2D> m_renderer2D;
+	static std::unique_ptr<Scene> m_currentScene;
 	
 	// variables for calculating framerate
 	// fps counter
@@ -44,6 +45,7 @@ private:
 	void ProcessInput(GLFWwindow* pWindow, float frameTime);
 	static void OnScroll(GLFWwindow* window, double deltaX, double deltaY);
 	static void OnMouseButton(GLFWwindow* window, int button, int action, int mods);
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
 #endif

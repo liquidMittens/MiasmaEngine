@@ -155,6 +155,14 @@ glm::vec3 Camera::up() const {
     return glm::vec3(up);
 }
 
+glm::vec3 Camera::up_novertical_axis() const
+{
+    glm::mat4 orientation(1.0f);
+    orientation = glm::rotate(orientation, glm::radians(_horizontalAngle), glm::vec3(0, 1, 0));
+    glm::vec4 up = glm::vec4(0, 1, 0, 1);
+    return glm::vec3(up);
+}
+
 glm::mat4 Camera::matrix() const {
     return projection() * view();
 }

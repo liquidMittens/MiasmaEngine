@@ -466,6 +466,12 @@
     <None Include="resources\shaders\BasicSprite.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
+    <None Include="resources\shaders\Billboard.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\Billboard.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\stone.png">

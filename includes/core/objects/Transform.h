@@ -24,8 +24,18 @@ public:
 	void scale(glm::vec3 scaleVec);
 	void resetTransformMatrix();
 
+	glm::vec3 forward() const;
+	glm::vec3 right() const;
+	glm::vec3 up() const;
+
 private:
 	glm::mat4 m_transform;
+	float _horizontalAngle;
+	float _verticalAngle;
+
+	// private methods to do matrix calculations
+	glm::mat4 orientation() const;
+
 };
 
 #endif

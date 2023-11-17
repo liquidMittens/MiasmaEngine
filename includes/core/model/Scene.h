@@ -18,8 +18,8 @@ using LightListType = std::vector<std::shared_ptr<GameObject>>;
 using GameObjectsList = std::vector<std::shared_ptr<GameObject>>;
 
 constexpr float FOV = 45.0f;
-constexpr float moveSpeed = 450.0; //units per second
-constexpr float jumpForce = 3000.0;
+constexpr float moveSpeed = 2500.0;
+constexpr float jumpForce = 100000.0;
 constexpr float zoomSensitivity = -0.5f;
 
 
