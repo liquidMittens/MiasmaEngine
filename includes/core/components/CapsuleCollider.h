@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "reactphysics3d.h"
 
-namespace Miasma::RTTI
+namespace Miasma::Component
 {
 	class CapsuleCollider : public Component
 	{

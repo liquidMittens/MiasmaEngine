@@ -1,7 +1,7 @@
 #include "CapsuleCollider.h"
 #include "objects/GameObject.h"
 #include "physics/PhysicsController.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 using namespace Miasma::Physics;
 
 CLASS_DEFINITION(Component, CapsuleCollider);
@@ -16,7 +16,7 @@ CapsuleCollider::CapsuleCollider(GameObject* owner, float radius, float height) 
 	RigidBody& rigidBody = owner->GetComponent<RigidBody>();
 	if (&body != nullptr) {
 		m_capsuleShape = PhysicsController::GetInstance().GetPhysicsCommon().createCapsuleShape(radius, height);
-		m_collider = body.GetCollider()->addCollider(m_capsuleShape, rp3d::Transform::identity());
+		m_collider = body.GetCollisionBody()->addCollider(m_capsuleShape, rp3d::Transform::identity());
 	}
 	else if (&rigidBody != nullptr) {
 		m_capsuleShape = PhysicsController::GetInstance().GetPhysicsCommon().createCapsuleShape(radius, height);

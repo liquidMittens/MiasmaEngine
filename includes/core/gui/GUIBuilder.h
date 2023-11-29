@@ -5,7 +5,7 @@
 using namespace tdogl;
 
 struct GLFWwindow;
-class Scene;
+class IScene;
 namespace Miasma::UI
 {
 	constexpr auto SliderTransformMin = -20.0f;
@@ -30,7 +30,7 @@ namespace Miasma::UI
 		// windows
 		static void gbTestWindow();
 		static void gbSceneInfoOverlay(tdogl::Camera& camera);
-		static void gbSceneObjectsInfo(std::unique_ptr<Scene>& scene);
+		static void gbSceneObjectsInfo(std::unique_ptr<IScene>& scene);
 		static void gbShowImGuiDemoWindow();
 	};
 }

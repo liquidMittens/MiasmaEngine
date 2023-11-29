@@ -213,6 +213,21 @@
     <ClCompile Include="source\core\components\CapsuleCollider.cpp">
       <Filter>Source Files\core\components</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\components\CollisionBody2D.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\RigidBody2D.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\BoxCollider2D.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\model\IScene.cpp">
+      <Filter>Source Files\core\model</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\model\ChaosGameScene.cpp">
+      <Filter>Source Files\core\model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -421,6 +436,21 @@
     </ClInclude>
     <ClInclude Include="includes\core\components\CapsuleCollider.h">
       <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\CollisionBody2D.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\RigidBody2D.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\BoxCollider2D.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\IScene.h">
+      <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\ChaosGameScene.h">
+      <Filter>Header Files\core\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
+#include "objects/GameObject.h"
 #include "components/MeshRenderable.h"
 #include "camera/Camera.h"
 #include "model/Scene.h"
@@ -9,10 +10,9 @@
 #include "gui/GUIBuilder.h"
 #include <iostream>
 #include <sstream>
-#include "objects/GameObject.h"
 using namespace tdogl;
 using namespace Miasma::Renderer;
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 using namespace Miasma::UI;
 
 
@@ -40,7 +40,7 @@ void GLRenderer::Initialize(GLWindow* pWindow)
 	glfwSetFramebufferSizeCallback(pWindow->GetGLFWWindow(), GLRenderer::framebuffer_size_callback);
 }
 
-bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
+bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)
 {
 	bool drewFrame = true;
 	if (scene) {
@@ -55,10 +55,12 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 		int lightIndex = 0;
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
-			Miasma::RTTI::MeshRenderable& mesh = gameObject->GetComponent<Miasma::RTTI::MeshRenderable>();
-			if (&mesh == nullptr) {
+			Miasma::Component::MeshRenderable& mesh = gameObject->GetComponent<Miasma::Component::MeshRenderable>();
+			if (!gameObject->IsActive() || &mesh == nullptr || !gameObject->transform.isDirty()) {
 				continue;
 			}
+			// we rendered this already we're not dirty anymore
+			gameObject->transform.setIsDirty(false);
 			// use the current shader of the object
 			glUseProgram(mesh.GetMaterial().GetShader().shaderId);
 			/*
@@ -66,7 +68,7 @@ bool GLRenderer::DrawScene(std::unique_ptr<Scene>& scene)
 			*/
 			std::stringstream lightIndexed;
 			for (int lightIndex = 0; lightIndex < scene->GetLights().size(); ++lightIndex) {
-				Miasma::RTTI::PointLight& light = scene->GetLights()[lightIndex]->GetComponent<PointLight>();
+				Miasma::Component::PointLight& light = scene->GetLights()[lightIndex]->GetComponent<PointLight>();
 				// grab light information from shader (color)
 				lightIndexed.str("");
 				lightIndexed << "light[" << lightIndex << "]";

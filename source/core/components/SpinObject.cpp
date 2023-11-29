@@ -1,6 +1,6 @@
 #include "components/SpinObject.h"
 #include "objects/GameObject.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 
 CLASS_DEFINITION(Component, SpinObject);
 

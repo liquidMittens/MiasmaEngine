@@ -4,14 +4,14 @@
 #include "camera/Camera.h"
 using namespace tdogl;
 
-class Scene;
+class IScene;
 class GLWindow;
 namespace Miasma::Renderer
 {
 	class IRenderInterface
 	{
 		virtual void Initialize(GLWindow* pWindow) = 0;
-		virtual bool DrawScene(std::unique_ptr<Scene>& scene) = 0;
+		virtual bool DrawScene(std::unique_ptr<IScene>& scene) = 0;
 		virtual void Shutdown() = 0;
 	};
 

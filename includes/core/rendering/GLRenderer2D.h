@@ -6,7 +6,7 @@
 #include "camera/Camera.h"
 using namespace tdogl;
 
-class Scene;
+class IScene;
 struct GLFWwindow;
 
 namespace Miasma::Renderer
@@ -19,7 +19,7 @@ namespace Miasma::Renderer
 
 		// Inherited via IRenderInterface
 		virtual void Initialize(GLWindow* pWindow) override;
-		virtual bool DrawScene(std::unique_ptr<Scene>& scene) override;
+		virtual bool DrawScene(std::unique_ptr<IScene>& scene) override;
 		virtual void Shutdown() override;
 
 		// window resize callback

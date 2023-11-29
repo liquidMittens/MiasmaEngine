@@ -11,7 +11,7 @@ using namespace Miasma::Physics;
 
 struct GLFWwindow;
 class GLWindow;
-class Scene;
+class IScene;
 
 class GameApp
 {
@@ -27,7 +27,7 @@ private:
 	std::unique_ptr<GLWindow> m_glWindow;
 	std::unique_ptr<Miasma::Renderer::GLRenderer> m_renderer;
 	std::unique_ptr<Miasma::Renderer::GLRenderer2D> m_renderer2D;
-	static std::unique_ptr<Scene> m_currentScene;
+	static std::unique_ptr<IScene> m_currentScene;
 	
 	// variables for calculating framerate
 	// fps counter

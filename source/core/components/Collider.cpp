@@ -1,10 +1,10 @@
 #include "core/components/Collider.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 
 CLASS_DEFINITION(Component, Collider);
 
 Collider::Collider(GameObject* owner, std::string&& initialValue) :
-	Miasma::RTTI::Component(owner, std::move(initialValue))
+	Miasma::Component::Component(owner, std::move(initialValue))
 {
 
 }

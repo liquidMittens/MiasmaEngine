@@ -4,7 +4,7 @@
 #include "reactphysics3d/reactphysics3d.h"
 #include "glm/glm.hpp"
 
-namespace Miasma::RTTI
+namespace Miasma::Component
 {
 	class RigidBody : public Component
 	{

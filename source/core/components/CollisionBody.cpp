@@ -2,7 +2,7 @@
 #include "objects/GameObject.h"
 #include "physics/PhysicsController.h"
 #include <iostream>
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 using namespace Miasma::Physics;
 
 CLASS_DEFINITION(Component, CollisionBody);

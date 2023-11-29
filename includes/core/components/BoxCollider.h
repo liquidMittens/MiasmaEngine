@@ -5,7 +5,7 @@
 #include "reactphysics3d/collision/Collider.h"
 #include "glm/glm.hpp"
 
-namespace Miasma::RTTI
+namespace Miasma::Component
 {
 	class BoxCollider : public Collider
 	{

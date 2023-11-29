@@ -5,7 +5,7 @@
 #include "objects/GameObject.h"
 
 
-namespace Miasma::RTTI
+namespace Miasma::Component
 {
 	struct LightCreationInfo
 	{
@@ -60,5 +60,5 @@ namespace Miasma::RTTI
 		glm::vec3 m_color;
 		float m_lightStrength;
 	};
-} // Miasma::RTTI
+} // Miasma::Component
 #endif

@@ -7,15 +7,16 @@
 #include <typeinfo>
 #include <string>
 #include "objects/Transform.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 
 class GameObject
 {
 public:
 
-	GameObject()
+	GameObject() :
+		transform(glm::identity<glm::mat4>()),
+		active(true)
 	{
-		transform = glm::identity<glm::mat4>();
 	}
 
 	~GameObject() = default;
@@ -37,6 +38,9 @@ public:
 
 	void UpdateGameObject(float dt);
 
+	void SetActive(bool isActive);
+	bool IsActive() const { return active; }
+
 	//template<int idx, typename TType, float flt>
 	//void DoSomething();
 
@@ -44,8 +48,8 @@ public:
 	Transform transform;
 
 private:
-
-	std::vector<std::unique_ptr<Miasma::RTTI::Component>> components;
+	bool active;
+	std::vector<std::unique_ptr<Miasma::Component::Component>> components;
 };
 
 template<typename ComponentType, typename... Args>
@@ -59,7 +63,7 @@ bool GameObject::RemoveComponent()
 {
 	bool found = false;
 	auto removeComponent = std::find_if(components.begin(), components.end(),
-		[componentType = ComponentType::Type](Miasma::RTTI::Component c) {
+		[componentType = ComponentType::Type](Miasma::Component::Component c) {
 			return c.IsClassType(componentType);
 		});
 	if (removeComponent != components.end()) {
@@ -77,7 +81,7 @@ int GameObject::RemoveComponents()
 	do {
 
 		auto removeComponent = std::find_if(components.begin(), components.end(),
-			[componentType = ComponentType::Type](Miasma::RTTI::Component c) {
+			[componentType = ComponentType::Type](Miasma::Component::Component c) {
 				return c.IsClassType(componentType);
 			});
 

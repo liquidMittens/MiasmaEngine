@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "reactphysics3d/reactphysics3d.h"
 
-namespace Miasma::RTTI
+namespace Miasma::Component
 {
 
 	class CollisionBody : public Component
@@ -21,7 +21,7 @@ namespace Miasma::RTTI
 		virtual void Shutdown() override;
 
 		const rp3d::Transform& GetCurrentTransform() { return m_collisionBody->getTransform(); }
-		rp3d::CollisionBody* GetCollider() { return m_collisionBody; }
+		rp3d::CollisionBody* GetCollisionBody() { return m_collisionBody; }
 
 	private:
 		rp3d::CollisionBody* m_collisionBody;

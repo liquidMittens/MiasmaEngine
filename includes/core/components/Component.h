@@ -37,7 +37,7 @@ bool childclass::IsClassType( const std::size_t classType ) const {             
         return parentclass::IsClassType( classType );                                       \
 }
 
-namespace Miasma::RTTI {
+namespace Miasma::Component {
 
 	//***************
 	// Component
@@ -49,7 +49,8 @@ namespace Miasma::RTTI {
 		static const std::size_t Type;
 		Component(GameObject* owner, std::string&& initialValue)
 			: value(initialValue), 
-			gameObject(owner)
+			gameObject(owner), 
+			active(true)
 		{
 		}
 		virtual ~Component() = default;
@@ -63,10 +64,15 @@ namespace Miasma::RTTI {
 		virtual void Update(float dt) = 0;
 		virtual void Shutdown() = 0;
 
+		void SetActive(bool isActive) { active = isActive; }
+		bool IsActive() const { return active; }
 	public:
 
 		std::string value = "uninitialized";
 		GameObject* gameObject;
+
+	protected:
+		bool active;
 	};
 }
 

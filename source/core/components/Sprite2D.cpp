@@ -2,7 +2,7 @@
 #include "core/glad/glad.h"
 #include "objects/GameObject.h"
 #include "managers/TextureManager.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 
 
 CLASS_DEFINITION(Component, Sprite2D);

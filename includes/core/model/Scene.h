@@ -1,68 +1,24 @@
 #ifndef SCENE_H_
 #define SCENE_H_
-
-#include <memory>
-#include "camera/Camera.h"
-#include <vector>
-#include "GLFW/glfw3.h"
-#include "managers/ShaderManager.h"
-#include "managers/TextureManager.h"
+#include "IScene.h"
 #include "components/PointLight.h"
-#include "components/MeshRenderable.h"
 #include "objects/GameObject.h"
 
-class MeshRenderable;
-class GLWindow;
-using MeshRenderableListType = std::vector<std::shared_ptr<Miasma::RTTI::MeshRenderable>>;
-using LightListType = std::vector<std::shared_ptr<GameObject>>;
-using GameObjectsList = std::vector<std::shared_ptr<GameObject>>;
-
-constexpr float FOV = 45.0f;
-constexpr float moveSpeed = 2500.0;
-constexpr float jumpForce = 100000.0;
-constexpr float zoomSensitivity = -0.5f;
-
-
-struct SceneCreationInfo
-{
-	GLWindow* pWindow;
-	glm::vec2 screenSize;
-};
-
-class Scene
+class Scene : public IScene
 {
 	friend class Miasma::UI::GUIBuilder;
 
 public:
 	Scene(SceneCreationInfo* creationInfo);
 	~Scene();
-	Scene(const Scene&) = delete;
-	Scene& operator=(const Scene&) = delete;
+	/*Scene(const Scene&) = delete;
+	Scene& operator=(const Scene&) = delete;*/
 
-	void EnterScene();
-	void Update(float dt);
-	void ExitScene();
-
-	std::shared_ptr<GameObject> GetCamera() { return m_camera; }
-	GameObjectsList GetGameObjectsList() { return m_gameObjectsList; }
-	LightListType& GetLights() { return m_lights; }
-	GLFWwindow* GetGLFWWindow() { return m_glfwWindow; }
+	void EnterScene() override;
+	void Update(float dt) override;
+	void ExitScene() override;
 
 private:
-	std::shared_ptr<GameObject> m_camera;
-	GameObjectsList m_gameObjectsList;
-	GLFWwindow* m_glfwWindow;
-	glm::vec2 m_screenSize;
-	// calculate delta time per frame
-	float currTime;
-	float m_deltaTime;
-	ShaderManager m_shaderManager;
-	// fps info
-	double m_lastTime;
-	double m_currentTime;
-	int m_numFrames;
-	float m_frameTime;
-	LightListType m_lights;
 };
 
 #endif

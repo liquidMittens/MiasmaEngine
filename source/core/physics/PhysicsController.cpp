@@ -7,6 +7,7 @@ std::unique_ptr<PhysicsController> PhysicsController::m_instance = nullptr;
 
 PhysicsController::PhysicsController() : 
 	m_physicsWorld(nullptr),
+	m_physicsWorld2D(nullptr),
 	accumulator(0)
 {
 	rp3d::PhysicsWorld::WorldSettings settings;
@@ -17,6 +18,11 @@ PhysicsController::PhysicsController() :
 	settings.restitutionVelocityThreshold = 0.5;
 	m_physicsWorld = m_physicsCommon.createPhysicsWorld(settings);
 	assert(m_physicsWorld != nullptr);
+
+	// create 2d world
+	b2Vec2 gravity;
+	gravity.Set(0.0f, -10.0f);
+	m_physicsWorld2D = new b2World(gravity);
 }
 
 PhysicsController::~PhysicsController()
@@ -61,26 +67,10 @@ void PhysicsController::UpdatePhysicsSimulation(float dt)
 	while (accumulator >= timeStep) {
 		// Update the Dynamics world with a constant time step
 		m_physicsWorld->update(timeStep);
+		m_physicsWorld2D->Step(timeStep, velocityIterations, positionIterations);
 		// Decrease the accumulated time
 		accumulator -= timeStep;
 	}
-
-	//m_physicsWorld->update(timeStep);
-	//// Get the updated position of the body 
-	//if (m_collisionBodyList.size() >= 2) {
-	//	for (unsigned int idx = 0; idx < m_collisionBodyList.size(); ++idx) {
-	//		rp3d::CollisionBody* body = m_collisionBodyList[idx]->GetCollider();
-	//		const rp3d::Transform& transform = body->getTransform();
-	//		const rp3d::Vector3& position = transform.getPosition();
-
-	//		// Display the position of the body 
-	//		std::cout << "Body Position: (" << position.x << ", " <<
-	//			position.y << ", " << position.z << ")" << std::endl;
-	//	}
-	//	//m_physicsWorld->testOverlap(m_collisionBodyList[0], m_collisionBodyList[1]);
-	//}
-	
-	//printf("collision = %s\n",  ? "=============================================================" : "false");
 }
 
 void PhysicsController::ShutdownPhysicsController()

@@ -2,7 +2,7 @@
 #include "components/CollisionBody.h"
 #include "objects/GameObject.h"
 #include "physics/PhysicsController.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 using namespace Miasma::Physics;
 
 CLASS_DEFINITION(Collider, BoxCollider);
@@ -17,7 +17,7 @@ BoxCollider::BoxCollider(GameObject* owner, glm::vec3 halfExtents) :
 	RigidBody& rigidBody = owner->GetComponent<RigidBody>();
 	if (&body != nullptr) {
 		m_boxShape = PhysicsController::GetInstance().GetPhysicsCommon().createBoxShape(rp3d::Vector3(halfExtents.x, halfExtents.y, halfExtents.z));
-		m_collider = body.GetCollider()->addCollider(m_boxShape, rp3d::Transform::identity());
+		m_collider = body.GetCollisionBody()->addCollider(m_boxShape, rp3d::Transform::identity());
 	}
 	else if (&rigidBody != nullptr) {
 		m_boxShape = PhysicsController::GetInstance().GetPhysicsCommon().createBoxShape(rp3d::Vector3(halfExtents.x, halfExtents.y, halfExtents.z));

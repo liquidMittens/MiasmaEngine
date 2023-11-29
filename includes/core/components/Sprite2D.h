@@ -7,11 +7,11 @@
 #include "GUIBuilder.h"
 using namespace Miasma::UI;
 
-namespace Miasma::RTTI
+namespace Miasma::Component
 {
 	constexpr int xyz_st_format = 5;
 
-	class Sprite2D : public Miasma::RTTI::Component
+	class Sprite2D : public Miasma::Component::Component
 	{
 		friend class Miasma::UI::GUIBuilder;
 	public: 

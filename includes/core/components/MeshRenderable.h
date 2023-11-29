@@ -8,7 +8,7 @@
 #include "GUIBuilder.h"
 using namespace Miasma::UI;
 
-namespace Miasma::RTTI
+namespace Miasma::Component
 {
 
 constexpr int xyz_rgb_st_format_size = 8; // pos,color,texcoords

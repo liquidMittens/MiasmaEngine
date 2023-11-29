@@ -5,10 +5,14 @@
 #include "components/CollisionBody.h"
 #include "components/RigidBody.h"
 #include <vector>
-using namespace Miasma::RTTI;
+#include "box2d.h"
+using namespace Miasma::Component;
 
 namespace Miasma::Physics
 {
+	constexpr int velocityIterations = 6;
+	constexpr int positionIterations = 2;
+
 	class PhysicsController : public rp3d::CollisionCallback
 	{
 	public:
@@ -36,6 +40,7 @@ namespace Miasma::Physics
 
 		rp3d::PhysicsCommon& GetPhysicsCommon() { return m_physicsCommon; }
 		rp3d::PhysicsWorld* GetPhysicsWorld() { return m_physicsWorld; }
+		b2World* GetPhysics2DWorld() { return m_physicsWorld2D; }
 		long double GetAccumulator() const { return accumulator; }
 
 		/// This method is called when some contacts occur
@@ -45,6 +50,7 @@ namespace Miasma::Physics
 		static std::unique_ptr<PhysicsController> m_instance;
 		rp3d::PhysicsCommon m_physicsCommon;
 		rp3d::PhysicsWorld* m_physicsWorld;
+		b2World* m_physicsWorld2D;
 		std::vector<CollisionBody*> m_collisionBodyList;
 		std::vector<RigidBody*> m_rigidBodyList;
 		long double accumulator;

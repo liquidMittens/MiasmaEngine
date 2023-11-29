@@ -1,12 +1,14 @@
 #include "app/GameApp.h"
 #include "app/GLWindow.h"
-#include "core/model/Scene.h"
+#include "model/IScene.h"
+#include "model/Scene.h"
+#include "model/ChaosGameScene.h"
 #include <iostream>
 #include <sstream>
 
 double GameApp::m_scrollY = 0.0;
 bool GameApp::m_mouseModeEnabled = false;
-std::unique_ptr<Scene> GameApp::m_currentScene = nullptr;
+std::unique_ptr<IScene> GameApp::m_currentScene = nullptr;
 
 GameApp::GameApp() :
 	m_lastTime(0.0),
@@ -37,7 +39,7 @@ void GameApp::InitializeGameApp()
 		m_mouseModeEnabled = false;
 		// create our scene and our GLRenderer
 		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE };
-		m_currentScene = std::make_unique<Scene>(&sceneInfo);
+		m_currentScene = std::make_unique<ChaosGameScene>(&sceneInfo);
 		m_currentScene->EnterScene();
 		m_renderer = std::make_unique<Miasma::Renderer::GLRenderer>();
 		m_renderer->Initialize(m_glWindow.get());

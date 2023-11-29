@@ -2,7 +2,7 @@
 #define COLLIDER_H_
 #include "Component.h"
 
-namespace Miasma::RTTI
+namespace Miasma::Component
 {
 	class Collider : public Component
 	{

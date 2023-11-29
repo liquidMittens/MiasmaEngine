@@ -3,7 +3,8 @@
 Transform::Transform() :
 	m_transform(1.0f),
 	_verticalAngle(0.0f),
-	_horizontalAngle(0.0f)
+	_horizontalAngle(0.0f),
+	m_dirtyMatrix(false)
 {
 
 }
@@ -11,6 +12,15 @@ Transform::Transform() :
 Transform::Transform(const Transform& obj)
 {
 	m_transform = obj.m_transform;
+}
+
+Transform::Transform(const glm::mat4 mat) :
+	m_transform(1.0f),
+	_verticalAngle(0.0f),
+	_horizontalAngle(0.0f),
+	m_dirtyMatrix(false)
+{
+	m_transform = mat;
 }
 
 Transform::~Transform()
@@ -34,6 +44,7 @@ void Transform::SetPosition(float x, float y, float z)
 void Transform::SetPosition(glm::vec3 posVector)
 {
 	m_transform[3] = glm::vec4(posVector, 1.0f);
+	m_dirtyMatrix = true;
 }
 
 glm::vec3 Transform::GetPosition()
@@ -45,21 +56,25 @@ glm::vec3 Transform::GetPosition()
 void Transform::translate(const glm::vec3& pos)
 {
 	m_transform = glm::translate(m_transform, pos);
+	m_dirtyMatrix = true;
 }
 
 void Transform::rotate(float angle, glm::vec3 axis)
 {
 	m_transform = glm::rotate(m_transform, angle, axis);
+	m_dirtyMatrix = true;
 }
 
 void Transform::scale(glm::vec3 scaleVec)
 {
 	m_transform = glm::scale(m_transform, scaleVec);
+	m_dirtyMatrix = true;
 }
 
 void Transform::resetTransformMatrix()
 {
 	m_transform = glm::identity<glm::mat4>();
+	m_dirtyMatrix = true;
 }
 
 glm::vec3 Transform::forward() const {
@@ -79,7 +94,6 @@ glm::vec3 Transform::up() const {
 
 
 /** private matrix calculation methods **/
-
 glm::mat4 Transform::orientation() const {
 	glm::mat4 orientation(1.0f);
 	orientation = glm::rotate(orientation, glm::radians(_verticalAngle), glm::vec3(1, 0, 0));

@@ -20,7 +20,7 @@
 
 #include <glm/glm.hpp>
 #include "Component.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 
 constexpr glm::vec2 SCREEN_SIZE(1920, 1080);
 constexpr float CAMERA_HEIGHT_OFFSET = 5.0f;

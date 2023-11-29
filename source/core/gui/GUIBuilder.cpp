@@ -6,7 +6,7 @@
 #include "core\components\MeshRenderable.h"
 #include "core\rendering\Material.h"
 #include "objects/GameObject.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
 using namespace Miasma::UI;
 
 void GUIBuilder::gbInitializeGUI(GLFWwindow* pWindow)
@@ -104,17 +104,20 @@ void GUIBuilder::gbSceneInfoOverlay(tdogl::Camera& camera)
 	ImGui::End();
 }
 
-void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
+void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<IScene>& scene)
 {
 	ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanFullWidth;
 	int ptr_id = 0;
 	ImGui::Begin("Scene Graph");
 	if (ImGui::TreeNodeEx("Scene Root", node_flags)) {
 		for (const auto& gameobject : scene->GetGameObjectsList()) {
-			Miasma::RTTI::MeshRenderable& mesh = gameobject->GetComponent<Miasma::RTTI::MeshRenderable>();
+			Miasma::Component::MeshRenderable& mesh = gameobject->GetComponent<Miasma::Component::MeshRenderable>();
 			if (&mesh != nullptr) {
 				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, gameobject->tag.c_str())) {
 					ImGui::Text("MeshName: %s", mesh.m_meshName.c_str());
+					bool objectActive = gameobject->IsActive();
+					ImGui::Checkbox("Active ", &objectActive);
+					gameobject->SetActive(objectActive);
 					ImGui::Text("Pos: X: %.1f | Y: %.1f | Z: %.1f", mesh.gameObject->transform.GetPosition().x, mesh.gameObject->transform.GetPosition().y, mesh.gameObject->transform.GetPosition().z);
 					float posX = mesh.gameObject->transform.GetPosition().x, posY = mesh.gameObject->transform.GetPosition().y, posZ = mesh.gameObject->transform.GetPosition().z;
 					ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
@@ -133,7 +136,7 @@ void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<Scene>& scene)
 			}
 		}
 		for (auto& lightobject : scene->GetLights()) {
-			Miasma::RTTI::PointLight& light = lightobject->GetComponent<PointLight>();
+			Miasma::Component::PointLight& light = lightobject->GetComponent<PointLight>();
 			if (&light != nullptr) {
 				if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, node_flags, lightobject->tag.c_str())) {
 					// light position

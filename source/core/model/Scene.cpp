@@ -6,7 +6,6 @@
 #include "rendering/Texture2D.h"
 #include "objects/GameObject.h"
 #include "glm/gtc/type_ptr.hpp"
-#include <iostream>
 #include "utility/MeshLoader.h"
 #include "gui/GUIBuilder.h"
 #include "model/Quad.h"
@@ -14,17 +13,12 @@
 #include "RigidBody.h"
 #include "BoxCollider.h"
 #include "CapsuleCollider.h"
-using namespace Miasma::RTTI;
+using namespace Miasma::Component;
  
-Scene::Scene(SceneCreationInfo* creationInfo)
+Scene::Scene(SceneCreationInfo* creationInfo) : 
+	IScene(creationInfo)
 {
-	m_glfwWindow = creationInfo->pWindow->GetGLFWWindow();
-	m_screenSize.x = creationInfo->screenSize.x;
-	m_screenSize.y = creationInfo->screenSize.y;
-	m_camera = std::make_shared<GameObject>();
-	// attach the camera component
-	m_camera->AddComponent<tdogl::Camera>(m_camera.get());
-	m_gameObjectsList.push_back(m_camera);
+	
 }
 
 Scene::~Scene()
@@ -34,13 +28,11 @@ Scene::~Scene()
 
 void Scene::EnterScene()
 {
-	m_camera->tag = "Camera";
-	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(10.0f, 5.0f, -10.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
+	// enters the scene and initializes the camera 
+	IScene::EnterScene();
+
 	m_camera->AddComponent<RigidBody>(m_camera.get());
 	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
-
-	m_shaderManager.LoadShaderList(SHADER_DIR);
-	TextureManager::GetInstance().LoadTexturesFromDirectory(TEXTURE_DIR);
 
 	// Create using a MeshRenderable
 	Material textureBlinnMaterial;
@@ -72,7 +64,7 @@ void Scene::EnterScene()
 	crateMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
 	// create UI material
 	Material spriteReticle;
-	spriteReticle.AddTexture(TextureManager::GetInstance().GetTextureInfo("reticle"));
+	spriteReticle.AddTexture(TextureManager::GetInstance().GetTextureInfo("whitedot"));
 	spriteReticle.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
 	Material textureDefault;
 	textureDefault.AddTexture(TextureManager::GetInstance().GetTextureInfo("missing"));
@@ -143,43 +135,43 @@ void Scene::EnterScene()
 
 	// Setup MeshRenderable objects to be rendered
 	catBlinnObject->tag = "CatBlinnObject";
-	catBlinnObject->AddComponent<Miasma::RTTI::MeshRenderable>(catBlinnObject.get(), &catMesh, textureBlinnMaterial);
-	catBlinnObject->AddComponent<Miasma::RTTI::SpinObject>(catBlinnObject.get(), 2.0f);
+	catBlinnObject->AddComponent<Miasma::Component::MeshRenderable>(catBlinnObject.get(), &catMesh, textureBlinnMaterial);
+	catBlinnObject->AddComponent<Miasma::Component::SpinObject>(catBlinnObject.get(), 2.0f);
 	catBlinnObject->GetComponent<SpinObject>().Start();
 	catBlinnObject->transform.translate({ 0.0f, 1.0f, 0.0f });
 	m_gameObjectsList.push_back(catBlinnObject);
 
 	catMesh.meshName = "Cat Diffuse Outline";
 	catDiffuseObject->tag = "CatDiffuseObject";
-	catDiffuseObject->AddComponent<Miasma::RTTI::MeshRenderable>(catDiffuseObject.get(), &catMesh, textureOutline);
+	catDiffuseObject->AddComponent<Miasma::Component::MeshRenderable>(catDiffuseObject.get(), &catMesh, textureOutline);
 	catDiffuseObject->transform.translate({ 6.0f, 1.0f, -5.0f });
 	m_gameObjectsList.push_back(catDiffuseObject);
 
 	lightObject1->tag = "WhiteLightObject";
-	lightObject1->AddComponent<Miasma::RTTI::MeshRenderable>(lightObject1.get(), &lightTextureCreateInfo, redbasicTextureMaterial);
+	lightObject1->AddComponent<Miasma::Component::MeshRenderable>(lightObject1.get(), &lightTextureCreateInfo, redbasicTextureMaterial);
 	lightObject1->transform.translate({ lightCreation.pos });
 	m_gameObjectsList.push_back(lightObject1);
 
 	lightTextureCreateInfo.meshName = "Left Light Mesh";
 	lightObject2->tag = "BlueLightObject";
-	lightObject2->AddComponent<Miasma::RTTI::MeshRenderable>(lightObject2.get(), &lightTextureCreateInfo, greenbasicTextureMaterial);
+	lightObject2->AddComponent<Miasma::Component::MeshRenderable>(lightObject2.get(), &lightTextureCreateInfo, greenbasicTextureMaterial);
 	lightObject2->transform.translate({ lightCreation2.pos });
 	m_gameObjectsList.push_back(lightObject2);
 
 	/*cottageObject->tag = "CottageObject"; 
-	cottageObject->AddComponent<Miasma::RTTI::MeshRenderable>(cottageObject.get(), &cottageMeshCreateInfo, textureBlinnCottageMaterial);
+	cottageObject->AddComponent<Miasma::Component::MeshRenderable>(cottageObject.get(), &cottageMeshCreateInfo, textureBlinnCottageMaterial);
 	cottageObject->transform.translate({ 2.0f, 0.0f, -14.0f });
 	m_gameObjectsList.push_back(cottageObject);*/
 
 	floorObject->tag = "FloorObject";
-	floorObject->AddComponent<Miasma::RTTI::MeshRenderable>(floorObject.get(), &floorMeshCreateInfo, greybasicTextureMaterial);
+	floorObject->AddComponent<Miasma::Component::MeshRenderable>(floorObject.get(), &floorMeshCreateInfo, greybasicTextureMaterial);
 	floorObject->transform.translate({ 0.0f, 0.0f, 0.0f });
 	floorObject->AddComponent<RigidBody>(floorObject.get(), rp3d::BodyType::STATIC);
 	floorObject->AddComponent<BoxCollider>(floorObject.get(), glm::vec3(40.0f, 1.0f, 40.0f));
 	m_gameObjectsList.push_back(floorObject);
 
 	crateObject->tag = "CrateObject";
-	crateObject->AddComponent<Miasma::RTTI::MeshRenderable>(crateObject.get(), &crateMeshInfo, crateMaterial);
+	crateObject->AddComponent<Miasma::Component::MeshRenderable>(crateObject.get(), &crateMeshInfo, crateMaterial);
 	crateObject->transform.translate({4.0f, 10.0f, -7.0f});
 	crateObject->AddComponent<RigidBody>(crateObject.get());
 	crateObject->AddComponent<BoxCollider>(crateObject.get(), glm::vec3(1.0f, 1.0f, 1.0f));
@@ -187,7 +179,7 @@ void Scene::EnterScene()
 	m_gameObjectsList.push_back(crateObject);
 
 	crateObject2->tag = "crateObject2";
-	crateObject2->AddComponent<Miasma::RTTI::MeshRenderable>(crateObject2.get(), &crateMeshInfo, crateMaterial);
+	crateObject2->AddComponent<Miasma::Component::MeshRenderable>(crateObject2.get(), &crateMeshInfo, crateMaterial);
 	crateObject2->transform.translate({ -5.0f, 30.0f, -5.0f });
 	crateObject2->AddComponent<RigidBody>(crateObject2.get());
 	crateObject2->GetComponent<RigidBody>().GetRigidBody()->setMass(rp3d::decimal(200.0));
@@ -196,11 +188,11 @@ void Scene::EnterScene()
 
 	quadObject->tag = "Reticle";
 	quadObject->transform.translate({960.0f, 540.0f, 1.0f });
-	quadObject->AddComponent<Miasma::RTTI::Sprite2D>(quadObject.get(), spriteReticle);
+	quadObject->AddComponent<Miasma::Component::Sprite2D>(quadObject.get(), spriteReticle);
 	m_gameObjectsList.push_back(quadObject);
 
 	quad3dObject->tag = "3DQuad";
-	quad3dObject->AddComponent<Miasma::RTTI::MeshRenderable>(quad3dObject.get(), Quad::vertices, Quad::indices, &quadMeshInfo, sprite3dQuad);
+	quad3dObject->AddComponent<Miasma::Component::MeshRenderable>(quad3dObject.get(), Quad::vertices, Quad::indices, &quadMeshInfo, sprite3dQuad);
 	quad3dObject->transform.translate({5.0f, 15.0f, 5.0f});
 	quad3dObject->transform.scale({1.64f, 2.28f, 1.f});
 	m_gameObjectsList.push_back(quad3dObject);
@@ -215,15 +207,12 @@ void Scene::EnterScene()
 
 void Scene::Update(float dt)
 {
-	for (auto& gameobject : m_gameObjectsList) {
-		// update components
-		gameobject->UpdateGameObject(dt);
-	}
+	// updates the gameobjects components
+	IScene::Update(dt);
 }
 
 void Scene::ExitScene()
 {
-	m_gameObjectsList.clear();
-	m_lights.clear();
-	m_camera.reset(); // reset the camera pointer since scene is shutting down
+	// exits the scene by clearing the gameobjects, lights, and resets the camera
+	IScene::ExitScene();
 }

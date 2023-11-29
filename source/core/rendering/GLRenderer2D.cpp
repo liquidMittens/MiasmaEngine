@@ -1,7 +1,8 @@
-#include "core/rendering/GLRenderer2D.h"
+#include "rendering/GLRenderer2D.h"
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
+#include "glm/gtc/type_ptr.hpp"
 #include "objects/GameObject.h"
 #include "components/Sprite2D.h"
 #include "camera/Camera.h"
@@ -37,7 +38,7 @@ void GLRenderer2D::Initialize(GLWindow* pWindow)
 	glfwSetFramebufferSizeCallback(pWindow->GetGLFWWindow(), GLRenderer2D::framebuffer_size_callback);
 }
 
-bool GLRenderer2D::DrawScene(std::unique_ptr<Scene>& scene)
+bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 {
 	bool drewFrame = true;
 	if (scene) {
@@ -47,7 +48,7 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<Scene>& scene)
 		int lightIndex = 0;
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
-			Miasma::RTTI::Sprite2D& sprite2D = gameObject->GetComponent<Miasma::RTTI::Sprite2D>();
+			Miasma::Component::Sprite2D& sprite2D = gameObject->GetComponent<Miasma::Component::Sprite2D>();
 			if (&sprite2D == nullptr) {
 				continue;
 			}
