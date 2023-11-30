@@ -16,3 +16,5 @@ Simple OpenGL rendering engine using C++.  Just a project to mess around with di
 - GLFW 3.8 
 - glm https://github.com/g-truc/glm
 - stb_image https://github.com/nothings/stb
+- ReactPhysics3D https://www.reactphysics3d.com/documentation.html
+- Box2D https://box2d.org/documentation/
