@@ -3,6 +3,8 @@
 #include "rendering/IRenderInterface.h"
 #include <vector>
 #include <memory>
+#include "objects/GameObject.h"
+#include "Sprite2D.h"
 #include "camera/Camera.h"
 using namespace tdogl;
 
@@ -32,7 +34,7 @@ namespace Miasma::Renderer
 		// window resize callback
 		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 	private:
-		
+		void RenderSprite(std::unique_ptr<IScene>& scene, std::shared_ptr<GameObject> gameObject);
 	};
 }
 #endif

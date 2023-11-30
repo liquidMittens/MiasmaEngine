@@ -13,6 +13,7 @@
 #include "RigidBody.h"
 #include "BoxCollider.h"
 #include "CapsuleCollider.h"
+#include "FPSCameraMovement.h"
 using namespace Miasma::Component;
  
 Scene::Scene(SceneCreationInfo* creationInfo) : 
@@ -33,6 +34,7 @@ void Scene::EnterScene()
 
 	m_camera->AddComponent<RigidBody>(m_camera.get());
 	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
+	m_camera->AddComponent<FPSCameraMovement>(m_camera.get(), m_glfwWindow);
 
 	// Create using a MeshRenderable
 	Material textureBlinnMaterial;
@@ -64,7 +66,7 @@ void Scene::EnterScene()
 	crateMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
 	// create UI material
 	Material spriteReticle;
-	spriteReticle.AddTexture(TextureManager::GetInstance().GetTextureInfo("whitedot"));
+	spriteReticle.AddTexture(TextureManager::GetInstance().GetTextureInfo("reticle"));
 	spriteReticle.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
 	Material textureDefault;
 	textureDefault.AddTexture(TextureManager::GetInstance().GetTextureInfo("missing"));
@@ -200,7 +202,7 @@ void Scene::EnterScene()
 	// add a texture to the screen
 	/*std::shared_ptr<GameObject> textureObject = std::make_shared<GameObject>();
 	textureObject->tag = "TextureObject";
-	textureObject->transform.translate({ 960.0f, 192.0f, 1.0f });
+	textureObject->transform.translate({ 100.0f, 192.0f, 1.0f });
 	textureObject->AddComponent<Sprite2D>(textureObject.get(), textureDefault);
 	m_gameObjectsList.push_back(textureObject);*/
 }

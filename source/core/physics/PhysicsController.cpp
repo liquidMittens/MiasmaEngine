@@ -2,6 +2,7 @@
 using namespace Miasma::Physics;
 #include "glm/glm.hpp"
 #include "GLFW/glfw3.h"
+#include "util.h"
 
 std::unique_ptr<PhysicsController> PhysicsController::m_instance = nullptr;
 
@@ -17,11 +18,11 @@ PhysicsController::PhysicsController() :
 	settings.defaultFrictionCoefficient = 0.75;
 	settings.restitutionVelocityThreshold = 0.5;
 	m_physicsWorld = m_physicsCommon.createPhysicsWorld(settings);
-	assert(m_physicsWorld != nullptr);
+	MIASMA_ASSERT(m_physicsWorld != nullptr && "createPhysicsWorld() FAILED");
 
 	// create 2d world
 	b2Vec2 gravity;
-	gravity.Set(0.0f, -10.0f);
+	gravity.Set(0.0f, 10.0f);
 	m_physicsWorld2D = new b2World(gravity);
 }
 

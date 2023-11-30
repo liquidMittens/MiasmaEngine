@@ -11,7 +11,7 @@ namespace Miasma::Component
 	public:
 		CLASS_DECLARATION(BoxCollider2D);
 
-		BoxCollider2D(GameObject* owner, glm::vec2 size);
+		BoxCollider2D(GameObject* owner);
 		~BoxCollider2D();
 
 		// behavior functions

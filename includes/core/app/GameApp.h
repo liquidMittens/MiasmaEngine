@@ -35,17 +35,9 @@ private:
 	int m_numFrames;
 	float m_frameTime;
 	double m_deltaTime;
-
-	// camera info
-	bool m_wireframe = false;
-	static double m_scrollY;
-	static bool m_mouseModeEnabled;
+	bool m_render2DMode;
 
 	void calculateFrameRate();
-	void ProcessInput(GLFWwindow* pWindow, float frameTime);
-	static void OnScroll(GLFWwindow* window, double deltaX, double deltaY);
-	static void OnMouseButton(GLFWwindow* window, int button, int action, int mods);
-	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
 #endif

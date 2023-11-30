@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -160,6 +160,7 @@
     <ClCompile Include="source\core\components\CollisionBody.cpp" />
     <ClCompile Include="source\core\components\CollisionBody2D.cpp" />
     <ClCompile Include="source\core\components\Component.cpp" />
+    <ClCompile Include="source\core\components\FPSCameraMovement.cpp" />
     <ClCompile Include="source\core\components\MeshRenderable.cpp" />
     <ClCompile Include="source\core\components\PointLight.cpp" />
     <ClCompile Include="source\core\components\RigidBody.cpp" />
@@ -181,6 +182,7 @@
     <ClCompile Include="source\core\managers\TextureManager.cpp" />
     <ClCompile Include="source\core\model\ChaosGameScene.cpp" />
     <ClCompile Include="source\core\model\IScene.cpp" />
+    <ClCompile Include="source\core\model\MainScene.cpp" />
     <ClCompile Include="source\core\model\Scene.cpp" />
     <ClCompile Include="source\core\objects\GameObject.cpp" />
     <ClCompile Include="source\core\objects\Transform.cpp" />
@@ -203,6 +205,7 @@
     <ClInclude Include="includes\core\components\CollisionBody.h" />
     <ClInclude Include="includes\core\components\CollisionBody2D.h" />
     <ClInclude Include="includes\core\components\Component.h" />
+    <ClInclude Include="includes\core\components\FPSCameraMovement.h" />
     <ClInclude Include="includes\core\components\MeshRenderable.h" />
     <ClInclude Include="includes\core\components\PointLight.h" />
     <ClInclude Include="includes\core\components\RigidBody.h" />
@@ -253,6 +256,7 @@
     <ClInclude Include="includes\core\model\Cube.h" />
     <ClInclude Include="includes\core\model\ChaosGameScene.h" />
     <ClInclude Include="includes\core\model\IScene.h" />
+    <ClInclude Include="includes\core\model\MainScene.h" />
     <ClInclude Include="includes\core\model\Quad.h" />
     <ClInclude Include="includes\core\model\Rectangle.h" />
     <ClInclude Include="includes\core\model\Scene.h" />
@@ -267,6 +271,7 @@
     <ClInclude Include="includes\core\rendering\Texture2D.h" />
     <ClInclude Include="includes\core\utility\MeshLoader.h" />
     <ClInclude Include="includes\core\utility\tiny_obj_loader.h" />
+    <ClInclude Include="includes\core\utility\util.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\BasicColor.fs" />

@@ -44,8 +44,11 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 	if (scene) {
 		// get the camera 
 		tdogl::Camera camera = scene->GetCamera()->GetComponent<Camera>();
+		// clear buffer and depth buffer 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		int lightIndex = 0;
+		GUIBuilder::gbFeedInput();
+
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
 			Miasma::Component::Sprite2D& sprite2D = gameObject->GetComponent<Miasma::Component::Sprite2D>();
@@ -83,6 +86,8 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 
 			glDrawElements(GL_TRIANGLES, (GLsizei)sprite2D.GetIndicesCount(), GL_UNSIGNED_INT, 0);
 		}
+		GUIBuilder::gbSceneInfoOverlay(camera);
+		GUIBuilder::gbRenderGUI();
 	}
 	else {
 		if (!scene) {

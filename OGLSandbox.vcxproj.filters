@@ -228,6 +228,12 @@
     <ClCompile Include="source\core\model\ChaosGameScene.cpp">
       <Filter>Source Files\core\model</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\model\MainScene.cpp">
+      <Filter>Source Files\core\model</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\FPSCameraMovement.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -451,6 +457,15 @@
     </ClInclude>
     <ClInclude Include="includes\core\model\ChaosGameScene.h">
       <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\utility\util.h">
+      <Filter>Header Files\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\MainScene.h">
+      <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\FPSCameraMovement.h">
+      <Filter>Header Files\core\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

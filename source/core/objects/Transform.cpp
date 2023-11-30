@@ -59,6 +59,12 @@ void Transform::translate(const glm::vec3& pos)
 	m_dirtyMatrix = true;
 }
 
+void Transform::translate(const glm::vec2& pos)
+{
+	m_transform = glm::translate(m_transform, glm::vec3(pos.x, pos.y, 1.0f));
+	m_dirtyMatrix = true;
+}
+
 void Transform::rotate(float angle, glm::vec3 axis)
 {
 	m_transform = glm::rotate(m_transform, angle, axis);

@@ -1,6 +1,5 @@
 #include "model/IScene.h"
 #include "app/GLWindow.h"
-#include "camera/Camera.h"
 #include "objects/GameObject.h"
 #include <iostream>
 
