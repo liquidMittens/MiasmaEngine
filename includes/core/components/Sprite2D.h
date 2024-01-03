@@ -19,6 +19,7 @@ namespace Miasma::Component
 		CLASS_DECLARATION(Sprite2D);
 
 		Sprite2D(GameObject* owner, const Material& mat);
+		Sprite2D(GameObject* owner, const Material& mat, std::string&& initialValue);
 		//Sprite2D(GameObject* owner, const std::string& spriteName, const Material& mat);
 		~Sprite2D();
 

@@ -5,8 +5,9 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "objects/GameObject.h"
 #include "components/Sprite2D.h"
+#include "components/AnimatedSprite2D.h"
 #include "camera/Camera.h"
-#include "model/Scene.h"
+#include "model/IScene.h"
 #include "app/GLWindow.h"
 #include "gui/GUIBuilder.h"
 #include <iostream>
@@ -52,6 +53,7 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
 			Miasma::Component::Sprite2D& sprite2D = gameObject->GetComponent<Miasma::Component::Sprite2D>();
+			Miasma::Component::AnimatedSprite2D& animatedSprite = gameObject->GetComponent<AnimatedSprite2D>();
 			if (&sprite2D == nullptr) {
 				continue;
 			}
@@ -76,6 +78,14 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 			//
 			//// scale the sprite to size
 			sprite2D.gameObject->transform = glm::scale(sprite2D.gameObject->transform.GetTransform(), glm::vec3(spriteSize, 1.0f));
+
+			// set frame Index uniform if we have a valid animated sprite
+			if (&animatedSprite != nullptr && !animatedSprite.IsAnimationFinished()) {
+				glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "currentFrameIndex"), animatedSprite.GetCurrentFrameIndex());
+				glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_COLUMNS"), animatedSprite.GetAnimationInfo().frameSizeX);
+				glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_ROWS"), animatedSprite.GetAnimationInfo().frameSizeY);
+				std::cout << std::format("Current Frame: {}\n", animatedSprite.GetCurrentFrameIndex());
+			}
 
 			// set the model transform and sprite2D information
 			glUniformMatrix4fv(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "model"), 1, false, glm::value_ptr(gameObject->transform.GetTransform()));

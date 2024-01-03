@@ -135,7 +135,7 @@
     <ClCompile Include="source\core\rendering\GLRenderer.cpp">
       <Filter>Source Files\core\rendering</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\model\Scene.cpp">
+    <ClCompile Include="source\core\model\SandboxScene.cpp">
       <Filter>Source Files\core\model</Filter>
     </ClCompile>
     <ClCompile Include="source\core\utility\MeshLoader.cpp">
@@ -232,6 +232,9 @@
       <Filter>Source Files\core\model</Filter>
     </ClCompile>
     <ClCompile Include="source\core\components\FPSCameraMovement.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\AnimatedSprite2D.cpp">
       <Filter>Source Files\core\components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -344,7 +347,7 @@
     <ClInclude Include="includes\core\rendering\GLRenderer.h">
       <Filter>Header Files\core\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\model\Scene.h">
+    <ClInclude Include="includes\core\model\SandboxScene.h">
       <Filter>Header Files\core\model</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\utility\tiny_obj_loader.h">
@@ -467,6 +470,9 @@
     <ClInclude Include="includes\core\components\FPSCameraMovement.h">
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
+    <ClInclude Include="includes\core\components\AnimatedSprite2D.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\BasicColor.fs">
@@ -515,6 +521,12 @@
       <Filter>Resource Files\shaders</Filter>
     </None>
     <None Include="resources\shaders\Billboard.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\AnimatedSprite.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\AnimatedSprite.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
   </ItemGroup>

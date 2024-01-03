@@ -1,4 +1,4 @@
-#include "model/Scene.h"
+#include "model/SandboxScene.h"
 #include "app/GLWindow.h"
 #include "MeshRenderable.h"
 #include "SpinObject.h"
@@ -16,18 +16,18 @@
 #include "FPSCameraMovement.h"
 using namespace Miasma::Component;
  
-Scene::Scene(SceneCreationInfo* creationInfo) : 
+SandboxScene::SandboxScene(SceneCreationInfo* creationInfo) :
 	IScene(creationInfo)
 {
 	
 }
 
-Scene::~Scene()
+SandboxScene::~SandboxScene()
 {
 
 }
 
-void Scene::EnterScene()
+void SandboxScene::EnterScene()
 {
 	// enters the scene and initializes the camera 
 	IScene::EnterScene();
@@ -207,13 +207,13 @@ void Scene::EnterScene()
 	m_gameObjectsList.push_back(textureObject);*/
 }
 
-void Scene::Update(float dt)
+void SandboxScene::Update(float dt)
 {
 	// updates the gameobjects components
 	IScene::Update(dt);
 }
 
-void Scene::ExitScene()
+void SandboxScene::ExitScene()
 {
 	// exits the scene by clearing the gameobjects, lights, and resets the camera
 	IScene::ExitScene();

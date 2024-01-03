@@ -55,7 +55,7 @@ void Camera::Update(float dt)
 {
     //_position = gameObject->transform.GetPosition();
     //_position.y += CAMERA_HEIGHT_OFFSET;
-    std::cout << std::format("RigidBody({}:{}): pos: ({},{},{})\n", gameObject->tag, "Dynamic", gameObject->transform.GetPosition().x, gameObject->transform.GetPosition().y, gameObject->transform.GetPosition().z);
+    //std::cout << std::format("RigidBody({}:{}): pos: ({},{},{})\n", gameObject->tag, "Dynamic", gameObject->transform.GetPosition().x, gameObject->transform.GetPosition().y, gameObject->transform.GetPosition().z);
 }
 
 void Camera::Shutdown()

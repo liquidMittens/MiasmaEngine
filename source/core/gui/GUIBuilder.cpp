@@ -2,7 +2,7 @@
 #include "gui\imgui.h"
 #include "gui\imgui_impl_opengl3.h"
 #include "gui\imgui_impl_glfw.h"
-#include "core\model\Scene.h"
+#include "core\model\SandboxScene.h"
 #include "core\components\MeshRenderable.h"
 #include "core\rendering\Material.h"
 #include "objects/GameObject.h"

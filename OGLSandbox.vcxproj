@@ -153,6 +153,7 @@
     <ClCompile Include="source\core\app\GameApp.cpp" />
     <ClCompile Include="source\core\app\GLWindow.cpp" />
     <ClCompile Include="source\core\camera\Camera.cpp" />
+    <ClCompile Include="source\core\components\AnimatedSprite2D.cpp" />
     <ClCompile Include="source\core\components\BoxCollider.cpp" />
     <ClCompile Include="source\core\components\BoxCollider2D.cpp" />
     <ClCompile Include="source\core\components\CapsuleCollider.cpp" />
@@ -183,7 +184,7 @@
     <ClCompile Include="source\core\model\ChaosGameScene.cpp" />
     <ClCompile Include="source\core\model\IScene.cpp" />
     <ClCompile Include="source\core\model\MainScene.cpp" />
-    <ClCompile Include="source\core\model\Scene.cpp" />
+    <ClCompile Include="source\core\model\SandboxScene.cpp" />
     <ClCompile Include="source\core\objects\GameObject.cpp" />
     <ClCompile Include="source\core\objects\Transform.cpp" />
     <ClCompile Include="source\core\physics\PhysicsController.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="includes\core\app\GameApp.h" />
     <ClInclude Include="includes\core\app\GLWindow.h" />
     <ClInclude Include="includes\core\camera\Camera.h" />
+    <ClInclude Include="includes\core\components\AnimatedSprite2D.h" />
     <ClInclude Include="includes\core\components\BoxCollider.h" />
     <ClInclude Include="includes\core\components\BoxCollider2D.h" />
     <ClInclude Include="includes\core\components\CapsuleCollider.h" />
@@ -259,7 +261,7 @@
     <ClInclude Include="includes\core\model\MainScene.h" />
     <ClInclude Include="includes\core\model\Quad.h" />
     <ClInclude Include="includes\core\model\Rectangle.h" />
-    <ClInclude Include="includes\core\model\Scene.h" />
+    <ClInclude Include="includes\core\model\SandboxScene.h" />
     <ClInclude Include="includes\core\model\Triangle.h" />
     <ClInclude Include="includes\core\objects\GameObject.h" />
     <ClInclude Include="includes\core\objects\Transform.h" />
@@ -274,6 +276,8 @@
     <ClInclude Include="includes\core\utility\util.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\shaders\AnimatedSprite.fs" />
+    <None Include="resources\shaders\AnimatedSprite.vs" />
     <None Include="resources\shaders\BasicColor.fs" />
     <None Include="resources\shaders\BasicColor.vs" />
     <None Include="resources\shaders\BasicColorTexture.fs" />

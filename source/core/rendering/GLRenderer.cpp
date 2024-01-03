@@ -4,7 +4,8 @@
 #include "glad/glad.h"
 #include "components/MeshRenderable.h"
 #include "camera/Camera.h"
-#include "model/Scene.h"
+#include "model/IScene.h"
+#include "components/PointLight.h"
 #include "app/GLWindow.h"
 #include "gui/GUIBuilder.h"
 #include <iostream>

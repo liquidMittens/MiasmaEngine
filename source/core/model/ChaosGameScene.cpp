@@ -89,7 +89,10 @@ void ChaosGameScene::Update(float dt)
 		m_gameObjectsList.push_back(newPoint);
 		currentPosition = halfwayPosition;
 	}
+#ifdef _DEBUG
 	std::cout << std::format("points: {}\n", m_gameObjectsList.size());
+#endif
+
 }
 
 void ChaosGameScene::ExitScene()
