@@ -28,6 +28,7 @@ namespace Miasma::Renderer
 
 		// Inherited via IRenderInterface
 		virtual void Initialize(GLWindow* pWindow) override;
+		virtual void DrawTextObjects(Miasma::Component::Text* textComponent) override;
 		virtual bool DrawScene(std::unique_ptr<IScene>& scene) override;
 		virtual void Shutdown() override;
 

@@ -237,6 +237,9 @@
     <ClCompile Include="source\core\components\AnimatedSprite2D.cpp">
       <Filter>Source Files\core\components</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\components\Text.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -471,6 +474,9 @@
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\components\AnimatedSprite2D.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\Text.h">
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
   </ItemGroup>

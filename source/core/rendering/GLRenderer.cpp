@@ -2,6 +2,8 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
+#define GLT_IMPLEMENTATION
+#include "glText/gltext.h"
 #include "components/MeshRenderable.h"
 #include "camera/Camera.h"
 #include "model/IScene.h"
@@ -39,6 +41,14 @@ void GLRenderer::Initialize(GLWindow* pWindow)
 
 	Miasma::UI::GUIBuilder::gbInitializeGUI(pWindow->GetGLFWWindow());
 	glfwSetFramebufferSizeCallback(pWindow->GetGLFWWindow(), GLRenderer::framebuffer_size_callback);
+}
+
+void GLRenderer::DrawTextObjects(Miasma::Component::Text* textComponent)
+{
+	gltBeginDraw();
+	gltColor(textComponent->GetTextColor().x, textComponent->GetTextColor().y, textComponent->GetTextColor().z, 1.0f);
+	gltDrawText2D(textComponent->GetGLTtext(), textComponent->gameObject->transform.GetPosition().x, textComponent->gameObject->transform.GetPosition().y, textComponent->GetTextScale());
+	gltEndDraw();
 }
 
 bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)

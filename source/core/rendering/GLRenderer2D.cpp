@@ -2,10 +2,13 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
+#define GLT_IMPLEMENTATION
+#include "glText/gltext.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "objects/GameObject.h"
 #include "components/Sprite2D.h"
 #include "components/AnimatedSprite2D.h"
+#include "Text.h"
 #include "camera/Camera.h"
 #include "model/IScene.h"
 #include "app/GLWindow.h"
@@ -37,6 +40,15 @@ void GLRenderer2D::Initialize(GLWindow* pWindow)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glfwSetFramebufferSizeCallback(pWindow->GetGLFWWindow(), GLRenderer2D::framebuffer_size_callback);
+	gltInit();
+}
+
+void GLRenderer2D::DrawTextObjects(Miasma::Component::Text* textComponent)
+{
+	gltBeginDraw();
+	gltColor(textComponent->GetTextColor().x, textComponent->GetTextColor().y, textComponent->GetTextColor().z, 1.0f);
+	gltDrawText2D(textComponent->GetGLTtext(), textComponent->gameObject->transform.GetPosition().x, textComponent->gameObject->transform.GetPosition().y, textComponent->GetTextScale());
+	gltEndDraw();
 }
 
 bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
@@ -54,9 +66,15 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 		for (auto& gameObject : scene->GetGameObjectsList()) {
 			Miasma::Component::Sprite2D& sprite2D = gameObject->GetComponent<Miasma::Component::Sprite2D>();
 			Miasma::Component::AnimatedSprite2D& animatedSprite = gameObject->GetComponent<AnimatedSprite2D>();
+			Miasma::Component::Text& textComponent = gameObject->GetComponent<Miasma::Component::Text>();
+			// check if its a text object
+			if (&textComponent != nullptr) {
+				DrawTextObjects(&textComponent);
+			}
 			if (&sprite2D == nullptr) {
 				continue;
 			}
+
 			// use the current shader of the object
 			glUseProgram(sprite2D.GetMaterial().GetShader().shaderId);
 
@@ -111,6 +129,7 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 
 void GLRenderer2D::Shutdown()
 {
+	gltTerminate();	
 }
 
 void GLRenderer2D::framebuffer_size_callback(GLFWwindow* window, int width, int height)
