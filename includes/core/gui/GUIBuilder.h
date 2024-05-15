@@ -31,6 +31,7 @@ namespace Miasma::UI
 		static void gbTestWindow();
 		static void gbSceneInfoOverlay(tdogl::Camera& camera);
 		static void gbSceneObjectsInfo(std::unique_ptr<IScene>& scene);
+		static void gbSceneGraph(std::unique_ptr<IScene>& scene);
 		static void gbShowImGuiDemoWindow();
 	};
 }

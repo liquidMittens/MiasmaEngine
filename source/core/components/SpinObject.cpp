@@ -27,7 +27,6 @@ void SpinObject::Start()
 void SpinObject::Update(float dt)
 {
 	if (gameObject != nullptr) {
-		glm::mat4 matrix = glm::identity<glm::mat4>();
 		gameObject->transform.rotate(dt * m_spinSpeed, { 0.0f, 1.0f, 0.0f });
 	}
 }

@@ -23,6 +23,7 @@ struct SceneCreationInfo
 {
 	GLWindow* pWindow;
 	glm::vec2 screenSize;
+	bool scene2dRenderer;
 };
 
 class IScene
@@ -52,6 +53,7 @@ protected:
 	ShaderManager m_shaderManager;
 	GLFWwindow* m_glfwWindow;
 	glm::vec2 m_screenSize;
+	bool m_2dRenderer;
 };
 
 #endif

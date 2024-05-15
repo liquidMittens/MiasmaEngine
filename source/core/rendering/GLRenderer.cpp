@@ -41,6 +41,7 @@ void GLRenderer::Initialize(GLWindow* pWindow)
 
 	Miasma::UI::GUIBuilder::gbInitializeGUI(pWindow->GetGLFWWindow());
 	glfwSetFramebufferSizeCallback(pWindow->GetGLFWWindow(), GLRenderer::framebuffer_size_callback);
+	gltInit();
 }
 
 void GLRenderer::DrawTextObjects(Miasma::Component::Text* textComponent)
@@ -68,6 +69,8 @@ bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)
 		for (auto& gameObject : scene->GetGameObjectsList()) {
 			MeshRenderable& mesh = gameObject->GetComponent<MeshRenderable>();
 			Sprite2D& sprite = gameObject->GetComponent<Sprite2D>();
+			Miasma::Component::Text& textComponent = gameObject->GetComponent<Miasma::Component::Text>();
+
 			if (!gameObject->IsActive()) {
 				continue;
 			}
@@ -126,12 +129,17 @@ bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)
 					glDrawArrays(GL_TRIANGLES, 0, (GLsizei)mesh.GetVertexCount());
 				}
 			}
+			// sprite rendering
 			if (&sprite != nullptr) {
 				RenderSprite(scene, gameObject);
 			}
+			// text rendering
+			if (&textComponent != nullptr) {
+				DrawTextObjects(&textComponent);
+			}
 		}
 		Miasma::UI::GUIBuilder::gbSceneInfoOverlay(camera);
-		Miasma::UI::GUIBuilder::gbSceneObjectsInfo(scene);
+		Miasma::UI::GUIBuilder::gbSceneGraph(scene);
 		Miasma::UI::GUIBuilder::gbRenderGUI();
 	}
 	else {
@@ -184,6 +192,7 @@ void GLRenderer::RenderSprite(std::unique_ptr<IScene>& scene, std::shared_ptr<Ga
 void GLRenderer::Shutdown()
 {
 	Miasma::UI::GUIBuilder::gbShutdownGUI();
+	gltTerminate();
 }
 
 void GLRenderer::framebuffer_size_callback(GLFWwindow* window, int width, int height)

@@ -15,7 +15,8 @@ GameApp::GameApp() :
 	m_numFrames(0),
 	m_frameTime(0.0f),
 	m_deltaTime(0.0),
-	m_render2DMode(false)
+	m_render2DMode(false),
+	m_mouseModeEnabled(false)
 {
 
 }
@@ -32,8 +33,8 @@ void GameApp::InitializeGameApp()
 	bool createWindowResult = m_glWindow->CreateGLWindow();
 	if (createWindowResult) {
 		// create our scene and our GLRenderer
-		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE };
-		m_render2DMode = true;
+		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE, true };
+		m_render2DMode = sceneInfo.scene2dRenderer;
 		m_currentScene = std::make_unique<MainScene>(&sceneInfo);
 		m_currentScene->EnterScene();
 		m_renderer = std::make_unique<Miasma::Renderer::GLRenderer>();
@@ -44,6 +45,28 @@ void GameApp::InitializeGameApp()
 	else {
 		std::cout << "m_glWindow->CreateGLWindow() Failed\n";
 	}
+}
+
+void GameApp::ProcessInput()
+{
+	// quit application
+	if (glfwGetKey(m_glWindow.get()->GetGLFWWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(m_glWindow.get()->GetGLFWWindow(), true);
+	}
+
+	// switch mouse modes
+	if (glfwGetKey(m_glWindow.get()->GetGLFWWindow(), GLFW_KEY_TAB) == GLFW_PRESS) {
+		glfwSetCursorPos(m_glWindow.get()->GetGLFWWindow(), 0, 0); //reset the mouse, so it doesn't go out of the window
+		std::cout << "clicked TAB key\n";
+		m_mouseModeEnabled = !m_mouseModeEnabled;
+		if (m_mouseModeEnabled) {
+			glfwSetInputMode(m_glWindow.get()->GetGLFWWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		}
+		else {
+			glfwSetInputMode(m_glWindow.get()->GetGLFWWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
+	}
+
 }
 
 void GameApp::RunGameAppLoop()
@@ -68,9 +91,8 @@ void GameApp::RunGameAppLoop()
 		calculateFrameRate();
 		double currTime = (float)glfwGetTime();
 		double dt = currTime - prevTime;
-		// get input
-		//ProcessInput(m_glWindow->GetGLFWWindow(), (float)dt);
 		// update scene and objects
+		ProcessInput();
 		PhysicsController::GetInstance().UpdatePhysicsSimulation((float)dt);
 		m_currentScene->Update((float)dt);
 		glfwPollEvents();

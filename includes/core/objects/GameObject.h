@@ -34,7 +34,7 @@ public:
 	ComponentType& GetComponent();
 
 	template<typename ComponentType>
-	std::vector<ComponentType*> GetComponents();
+	std::vector<ComponentType*> GetComponentsOfType();
 
 	void UpdateGameObject(float dt);
 
@@ -47,9 +47,9 @@ public:
 	std::string tag = "GameObject";
 	Transform transform;
 
+	std::vector<std::unique_ptr<Component>> components;
 private:
 	bool active;
-	std::vector<std::unique_ptr<Miasma::Component::Component>> components;
 };
 
 template<typename ComponentType, typename... Args>
@@ -107,7 +107,7 @@ ComponentType& GameObject::GetComponent() {
 }
 
 template<typename ComponentType>
-std::vector<ComponentType*> GameObject::GetComponents()
+std::vector<ComponentType*> GameObject::GetComponentsOfType()
 {
 	std::vector< ComponentType* > componentsOfType;
 	for (auto&& component : components) {

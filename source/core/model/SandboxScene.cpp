@@ -3,6 +3,7 @@
 #include "MeshRenderable.h"
 #include "SpinObject.h"
 #include "Sprite2D.h"
+#include "Text.h"
 #include "rendering/Texture2D.h"
 #include "objects/GameObject.h"
 #include "glm/gtc/type_ptr.hpp"
@@ -133,13 +134,14 @@ void SandboxScene::EnterScene()
 	std::shared_ptr<GameObject> crateObject2 = std::make_shared<GameObject>();
 	std::shared_ptr<GameObject> quadObject = std::make_shared<GameObject>();
 	std::shared_ptr<GameObject> quad3dObject = std::make_shared<GameObject>();
+	std::shared_ptr<GameObject> testText = std::make_shared<GameObject>();
 
 
 	// Setup MeshRenderable objects to be rendered
 	catBlinnObject->tag = "CatBlinnObject";
 	catBlinnObject->AddComponent<Miasma::Component::MeshRenderable>(catBlinnObject.get(), &catMesh, textureBlinnMaterial);
 	catBlinnObject->AddComponent<Miasma::Component::SpinObject>(catBlinnObject.get(), 2.0f);
-	catBlinnObject->GetComponent<SpinObject>().Start();
+	//catBlinnObject->GetComponent<SpinObject>().Start();
 	catBlinnObject->transform.translate({ 0.0f, 1.0f, 0.0f });
 	m_gameObjectsList.push_back(catBlinnObject);
 
@@ -198,6 +200,11 @@ void SandboxScene::EnterScene()
 	quad3dObject->transform.translate({5.0f, 15.0f, 5.0f});
 	quad3dObject->transform.scale({1.64f, 2.28f, 1.f});
 	m_gameObjectsList.push_back(quad3dObject);
+
+	testText->tag = "TextObject";
+	testText->transform.translate(glm::vec3(500.0f, 600.0f, -2.0f));
+	testText->AddComponent<Text>(testText.get(), "Hello World!", glm::vec3(1.0f, 0.0f, 0.0f));
+	m_gameObjectsList.push_back(testText);
 
 	// add a texture to the screen
 	/*std::shared_ptr<GameObject> textureObject = std::make_shared<GameObject>();

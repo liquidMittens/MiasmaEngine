@@ -62,7 +62,7 @@ Sprite2D::Sprite2D(GameObject* owner, const Material& mat) :
 }
 
 Sprite2D::Sprite2D(GameObject* owner, const Material& mat, std::string&& initialValue) :
-	Component(owner, TO_STRING(initialValue)),
+	Component(owner, TO_STRING(Sprite2D)),
 	m_vbo(0),
 	m_vao(0),
 	m_ibo(0)
@@ -167,7 +167,9 @@ Sprite2D::Sprite2D(GameObject* owner, const Material& mat, std::string&& initial
 
 Sprite2D::~Sprite2D()
 {
-
+	glDeleteBuffers(1, &m_vao);
+	glDeleteBuffers(1, &m_vbo);
+	glDeleteBuffers(1, &m_ibo);
 }
 
 void Sprite2D::Start()

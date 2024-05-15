@@ -20,6 +20,7 @@ public:
 	~GameApp();
 
 	void InitializeGameApp();
+	void ProcessInput();
 	void RunGameAppLoop();
 	void ShutdownGameApp();
 
@@ -36,6 +37,7 @@ private:
 	float m_frameTime;
 	double m_deltaTime;
 	bool m_render2DMode;
+	bool m_mouseModeEnabled;
 
 	void calculateFrameRate();
 };

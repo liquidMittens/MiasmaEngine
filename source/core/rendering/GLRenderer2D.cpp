@@ -67,54 +67,58 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 			Miasma::Component::Sprite2D& sprite2D = gameObject->GetComponent<Miasma::Component::Sprite2D>();
 			Miasma::Component::AnimatedSprite2D& animatedSprite = gameObject->GetComponent<AnimatedSprite2D>();
 			Miasma::Component::Text& textComponent = gameObject->GetComponent<Miasma::Component::Text>();
-			// check if its a text object
-			if (&textComponent != nullptr) {
-				DrawTextObjects(&textComponent);
-			}
-			if (&sprite2D == nullptr) {
+			
+			if (!gameObject->IsActive()) {
 				continue;
 			}
 
-			// use the current shader of the object
-			glUseProgram(sprite2D.GetMaterial().GetShader().shaderId);
+			// sprite2D and animated sprite rendering
+			if (&sprite2D != nullptr) {
+				// use the current shader of the object
+				glUseProgram(sprite2D.GetMaterial().GetShader().shaderId);
 
-			// setup texture (get texture location "textureSample")
-			glUniform1i(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "textureSample"), 0);
-			// update camera transform 
-			glUniformMatrix4fv(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "viewproj"), 1, false, glm::value_ptr(camera.orthomatrix()));
+				// setup texture (get texture location "textureSample")
+				glUniform1i(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "textureSample"), 0);
+				// update camera transform 
+				glUniformMatrix4fv(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "viewproj"), 1, false, glm::value_ptr(camera.orthomatrix()));
 
-			// save current position
-			glm::vec3 currentPosition = sprite2D.gameObject->transform.GetPosition();
-			sprite2D.gameObject->transform = glm::identity<glm::mat4>();
-			// translate to sprites position 
-			sprite2D.gameObject->transform.translate(currentPosition);
-			// rotate and center
-			glm::vec2 spriteSize = sprite2D.GetSpriteSize();
-			sprite2D.gameObject->transform.translate(glm::vec3(0.5f * spriteSize.x, 0.5f * spriteSize.y, 0.0f));
-			sprite2D.gameObject->transform = glm::rotate(sprite2D.gameObject->transform.GetTransform(), glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-			sprite2D.gameObject->transform.translate(glm::vec3(-0.5f * spriteSize.x, -0.5f * spriteSize.y, 0.0f));
-			//
-			//// scale the sprite to size
-			sprite2D.gameObject->transform = glm::scale(sprite2D.gameObject->transform.GetTransform(), glm::vec3(spriteSize, 1.0f));
+				// save current position
+				glm::vec3 currentPosition = sprite2D.gameObject->transform.GetPosition();
+				sprite2D.gameObject->transform = glm::identity<glm::mat4>();
+				// translate to sprites position 
+				sprite2D.gameObject->transform.translate(currentPosition);
+				// rotate and center
+				glm::vec2 spriteSize = sprite2D.GetSpriteSize();
+				sprite2D.gameObject->transform.translate(glm::vec3(0.5f * spriteSize.x, 0.5f * spriteSize.y, 0.0f));
+				sprite2D.gameObject->transform = glm::rotate(sprite2D.gameObject->transform.GetTransform(), glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+				sprite2D.gameObject->transform.translate(glm::vec3(-0.5f * spriteSize.x, -0.5f * spriteSize.y, 0.0f));
+				//
+				//// scale the sprite to size
+				sprite2D.gameObject->transform = glm::scale(sprite2D.gameObject->transform.GetTransform(), glm::vec3(spriteSize, 1.0f));
 
-			// set frame Index uniform if we have a valid animated sprite
-			if (&animatedSprite != nullptr && !animatedSprite.IsAnimationFinished()) {
-				glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "currentFrameIndex"), animatedSprite.GetCurrentFrameIndex());
-				glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_COLUMNS"), animatedSprite.GetAnimationInfo().frameSizeX);
-				glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_ROWS"), animatedSprite.GetAnimationInfo().frameSizeY);
-				std::cout << std::format("Current Frame: {}\n", animatedSprite.GetCurrentFrameIndex());
+				// set frame Index uniform if we have a valid animated sprite
+				if (&animatedSprite != nullptr && !animatedSprite.IsAnimationFinished()) {
+					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "currentFrameIndex"), animatedSprite.GetCurrentFrameIndex());
+					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_COLUMNS"), animatedSprite.GetAnimationInfo().frameSizeX);
+					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_ROWS"), animatedSprite.GetAnimationInfo().frameSizeY);
+					std::cout << std::format("Current Frame: {}\n", animatedSprite.GetCurrentFrameIndex());
+				}
+
+				// set the model transform and sprite2D information
+				glUniformMatrix4fv(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "model"), 1, false, glm::value_ptr(gameObject->transform.GetTransform()));
+				glBindTextureUnit(0, sprite2D.GetMaterial().GetTextureId());
+				glBindVertexArray(sprite2D.GetVertexArrayObject());
+				glBindBuffer(GL_ARRAY_BUFFER, sprite2D.GetVertexBufferObject());
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sprite2D.GetIndexBufferObject());
+
+				glDrawElements(GL_TRIANGLES, (GLsizei)sprite2D.GetIndicesCount(), GL_UNSIGNED_INT, 0);
 			}
-
-			// set the model transform and sprite2D information
-			glUniformMatrix4fv(glGetUniformLocation(sprite2D.GetMaterial().GetShader().shaderId, "model"), 1, false, glm::value_ptr(gameObject->transform.GetTransform()));
-			glBindTextureUnit(0, sprite2D.GetMaterial().GetTextureId());
-			glBindVertexArray(sprite2D.GetVertexArrayObject());
-			glBindBuffer(GL_ARRAY_BUFFER, sprite2D.GetVertexBufferObject());
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sprite2D.GetIndexBufferObject());
-
-			glDrawElements(GL_TRIANGLES, (GLsizei)sprite2D.GetIndicesCount(), GL_UNSIGNED_INT, 0);
+			// text rendering
+			if (&textComponent != nullptr) {
+				DrawTextObjects(&textComponent);
+			}
 		}
-		GUIBuilder::gbSceneInfoOverlay(camera);
+		GUIBuilder::gbSceneGraph(scene);
 		GUIBuilder::gbRenderGUI();
 	}
 	else {

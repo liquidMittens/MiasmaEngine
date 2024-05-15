@@ -2,6 +2,7 @@
 #include "gui\imgui.h"
 #include "gui\imgui_impl_opengl3.h"
 #include "gui\imgui_impl_glfw.h"
+#include "gui\imgui_stdlib.h"
 #include "core\model\SandboxScene.h"
 #include "core\components\MeshRenderable.h"
 #include "core\rendering\Material.h"
@@ -104,9 +105,51 @@ void GUIBuilder::gbSceneInfoOverlay(tdogl::Camera& camera)
 	ImGui::End();
 }
 
+void GUIBuilder::gbSceneGraph(std::unique_ptr<IScene>& scene)
+{
+	ImGuiTreeNodeFlags scene_graph_flags = ImGuiTreeNodeFlags_SpanFullWidth;
+	int ptr_id = 0;
+	ImGui::Begin("Scene Graph");
+	if (ImGui::TreeNodeEx("Scene Graph", scene_graph_flags)) {
+		for (const auto& gameObject : scene->GetGameObjectsList()) {
+			if (ImGui::TreeNodeEx((void*)(intptr_t)ptr_id, scene_graph_flags, gameObject->tag.c_str())) {
+				// BASE GAMEOBJECT INFO
+				bool objectActive = gameObject->IsActive();
+				ImGui::Checkbox("Active ", &objectActive);
+				gameObject->SetActive(objectActive);
+				// tag
+				std::string tagString{ gameObject->tag };
+				ImGui::InputText("Tag", &tagString);
+				gameObject->tag = tagString;
+				ImGui::BeginGroup();
+				// draw transform info
+				ImGui::Text("Position: X: %.1f | Y: %.1f | Z: %.1f", gameObject->transform.GetPosition().x, gameObject->transform.GetPosition().y, gameObject->transform.GetPosition().z);
+				float posX = gameObject->transform.GetPosition().x, posY = gameObject->transform.GetPosition().y, posZ = gameObject->transform.GetPosition().z;
+				ImGui::SliderFloat("X ", &posX, SliderTransformMin, SliderTransformMax, "%.1f");
+				ImGui::SliderFloat("Y ", &posY, SliderTransformMin, SliderTransformMax, "%.1f");
+				ImGui::SliderFloat("Z ", &posZ, SliderTransformMin, SliderTransformMax, "%.1f");
+				// set if any transforms have been changed
+				gameObject->transform.SetPosition(glm::vec3(posX, posY, posZ));
+				ImGui::EndGroup();
+
+				ImGui::SeparatorText("Components");
+				// loop through the components
+				for (auto& component : gameObject->components) {
+					ImGui::Text(component->value.c_str());
+				}
+				ImGui::Separator();
+				ImGui::TreePop();
+			}
+			++ptr_id;
+		}
+		ImGui::TreePop();
+	}
+	ImGui::End();
+}
+
 void GUIBuilder::gbSceneObjectsInfo(std::unique_ptr<IScene>& scene)
 {
-	ImGuiTreeNodeFlags node_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanFullWidth;
+	ImGuiTreeNodeFlags node_flags =  ImGuiTreeNodeFlags_SpanFullWidth;
 	int ptr_id = 0;
 	ImGui::Begin("Scene Graph");
 	if (ImGui::TreeNodeEx("Scene Root", node_flags)) {

@@ -39,9 +39,6 @@ void FPSCameraMovement::Update(float dt)
 		auto& camera = gameObject->GetComponent<Camera>();
 		RigidBody& cameraBody = gameObject->GetComponent<RigidBody>();
 
-		if (glfwGetKey(m_glfwWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-			glfwSetWindowShouldClose(m_glfwWindow, true);
-		}
 		if (glfwGetKey(m_glfwWindow, GLFW_KEY_Q) == GLFW_PRESS) {
 			m_wireframe = !m_wireframe;
 		}
@@ -75,17 +72,6 @@ void FPSCameraMovement::Update(float dt)
 			RigidBody& cameraBody = gameObject->GetComponent<RigidBody>();
 			rp3d::Vector3 jumpForceVec = jumpForce * rp3d::Vector3(0.0f, camera.up_novertical_axis().y, 0.0f);
 			cameraBody.ApplyForce(jumpForceVec);
-		}
-		if (glfwGetKey(m_glfwWindow, GLFW_KEY_TAB)) {
-			glfwSetCursorPos(m_glfwWindow, 0, 0); //reset the mouse, so it doesn't go out of the window
-			std::cout << "clicked TAB key\n";
-			m_mouseModeEnabled = !m_mouseModeEnabled;
-			if (m_mouseModeEnabled) {
-				glfwSetInputMode(m_glfwWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			}
-			else {
-				glfwSetInputMode(m_glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-			}
 		}
 
 		if (glfwGetKey(m_glfwWindow, GLFW_KEY_LEFT_CONTROL)) {
