@@ -12,7 +12,7 @@ IScene::IScene(SceneCreationInfo* creationInfo)
 	// attach the camera component
 	m_camera->AddComponent<tdogl::Camera>(m_camera.get());
 	m_camera->tag = "MainCamera";
-	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(10.0f, 5.0f, -10.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
+	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(0.0f, 0.0f, 10.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_gameObjectsList.push_back(m_camera);
 
 	m_shaderManager.LoadShaderList(SHADER_DIR);

@@ -63,7 +63,9 @@ void FPSCameraMovement::Update(float dt)
 			glm::vec3 relativeDirection = (normalizedVelocity.z * camera.forward_novertical_axis() + normalizedVelocity.x * camera.right());
 			velocity.x = relativeDirection.x * moveSpeed;
 			velocity.z = relativeDirection.z * moveSpeed;
-			cameraBody.ApplyForce(rp3d::Vector3(velocity.x, 0.0, velocity.z));
+			if (&cameraBody != nullptr) {
+				cameraBody.ApplyForce(rp3d::Vector3(velocity.x, 0.0, velocity.z));
+			}
 		}
 
 		if (glfwGetKey(m_glfwWindow, GLFW_KEY_SPACE) == GLFW_PRESS)

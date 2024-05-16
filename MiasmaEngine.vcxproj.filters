@@ -243,6 +243,9 @@
     <ClCompile Include="source\core\gui\imgui_stdlib.cpp">
       <Filter>Source Files\core\gui</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\model\DoomScene.cpp">
+      <Filter>Source Files\core\model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -362,13 +365,7 @@
     <ClInclude Include="includes\core\utility\MeshLoader.h">
       <Filter>Header Files\core\utility</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\model\Cube.h">
-      <Filter>Header Files\core\model</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\model\Rectangle.h">
-      <Filter>Header Files\core\model</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\model\Triangle.h">
       <Filter>Header Files\core\model</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\gui\imgui_impl_glfw.h">
@@ -437,9 +434,6 @@
     <ClInclude Include="includes\core\components\Sprite2D.h">
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\model\Quad.h">
-      <Filter>Header Files\core\model</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\physics\PhysicsController.h">
       <Filter>Header Files\core\physics</Filter>
     </ClInclude>
@@ -484,6 +478,18 @@
     </ClInclude>
     <ClInclude Include="includes\core\gui\imgui_stdlib.h">
       <Filter>Header Files\core\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\DoomScene.h">
+      <Filter>Header Files\core\model</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Triangle.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Quad.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\model\Cube.h">
+      <Filter>Header Files\core\objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

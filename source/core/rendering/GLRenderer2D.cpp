@@ -32,7 +32,7 @@ GLRenderer2D::~GLRenderer2D()
 void GLRenderer2D::Initialize(GLWindow* pWindow)
 {
 	// set up framebuffer
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glEnable(GL_STENCIL_TEST);

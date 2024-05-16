@@ -4,6 +4,7 @@
 #include "model/SandboxScene.h"
 #include "model/ChaosGameScene.h"
 #include "model/MainScene.h"
+#include "model/DoomScene.h"
 #include <iostream>
 #include <sstream>
 
@@ -33,9 +34,9 @@ void GameApp::InitializeGameApp()
 	bool createWindowResult = m_glWindow->CreateGLWindow();
 	if (createWindowResult) {
 		// create our scene and our GLRenderer
-		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE, true };
+		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE, false };
 		m_render2DMode = sceneInfo.scene2dRenderer;
-		m_currentScene = std::make_unique<MainScene>(&sceneInfo);
+		m_currentScene = std::make_unique<DoomScene>(&sceneInfo);
 		m_currentScene->EnterScene();
 		m_renderer = std::make_unique<Miasma::Renderer::GLRenderer>();
 		m_renderer->Initialize(m_glWindow.get());

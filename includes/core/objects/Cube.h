@@ -5,7 +5,7 @@ namespace Cube
 {
 	// cube vertices
 	// x,y,z,r,g,b,s,t
-	std::vector<float> vertices = {
+	static std::vector<float> vertices = {
 		-0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,	// bottom
 		0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
 		0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
@@ -54,7 +54,7 @@ namespace Cube
 		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 		-0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f
 	};
-	size_t cubeVertices = vertices.size() / 8;
+	static size_t cubeVertices = vertices.size() / 8;
 }
 
 #endif

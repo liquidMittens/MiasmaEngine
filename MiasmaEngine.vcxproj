@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility;.\includes\core\objects;.\includes\core\rendering;.\includes\core\model</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility;.\includes\core\objects;.\includes\core\rendering;.\includes\core\model</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -185,6 +185,7 @@
     <ClCompile Include="source\core\managers\ShaderManager.cpp" />
     <ClCompile Include="source\core\managers\TextureManager.cpp" />
     <ClCompile Include="source\core\model\ChaosGameScene.cpp" />
+    <ClCompile Include="source\core\model\DoomScene.cpp" />
     <ClCompile Include="source\core\model\IScene.cpp" />
     <ClCompile Include="source\core\model\MainScene.cpp" />
     <ClCompile Include="source\core\model\SandboxScene.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="includes\core\managers\TextureManager.h" />
     <ClInclude Include="includes\core\model\Cube.h" />
     <ClInclude Include="includes\core\model\ChaosGameScene.h" />
+    <ClInclude Include="includes\core\model\DoomScene.h" />
     <ClInclude Include="includes\core\model\IScene.h" />
     <ClInclude Include="includes\core\model\MainScene.h" />
     <ClInclude Include="includes\core\model\Quad.h" />
