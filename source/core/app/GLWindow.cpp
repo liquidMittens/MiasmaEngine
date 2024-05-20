@@ -5,7 +5,6 @@
 #include <iostream>
 #include "camera/Camera.h"
 #include "rendering/GLRenderer.h"
-#include "model/SandboxScene.h"
 
 GLWindow::GLWindow() :
 	m_window(nullptr),

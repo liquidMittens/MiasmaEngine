@@ -1,4 +1,4 @@
-#include "model/ChaosGameScene.h"
+#include "ChaosGameScene.h"
 #include "objects/GameObject.h"
 #include <random>
 

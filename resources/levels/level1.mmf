@@ -1,0 +1,5 @@
+# map definition 
+
+# sector <id> <index> <num walls> <floor Y> <ceiling Y> 
+
+wall <x0> <y0> <x1> <y1> <portal?>

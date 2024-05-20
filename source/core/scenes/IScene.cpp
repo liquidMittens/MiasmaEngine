@@ -1,6 +1,6 @@
-#include "model/IScene.h"
+#include "IScene.h"
 #include "app/GLWindow.h"
-#include "objects/GameObject.h"
+#include "GameObject.h"
 #include <iostream>
 
 IScene::IScene(SceneCreationInfo* creationInfo)

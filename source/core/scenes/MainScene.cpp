@@ -1,5 +1,5 @@
-#include "model/MainScene.h"
-#include "objects/GameObject.h"
+#include "MainScene.h"
+#include "GameObject.h"
 #include "RigidBody2D.h"
 #include "CollisionBody2D.h"
 #include "Sprite2D.h"

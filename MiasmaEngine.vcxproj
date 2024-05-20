@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility;.\includes\core\objects;.\includes\core\rendering;.\includes\core\model</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility;.\includes\core\objects;.\includes\core\rendering;.\includes\core\model;.\includes\core\scenes</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility;.\includes\core\objects;.\includes\core\rendering;.\includes\core\model</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility;.\includes\core\objects;.\includes\core\rendering;.\includes\core\model;.\includes\core\scenes</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -165,6 +165,7 @@
     <ClCompile Include="source\core\components\FPSCameraMovement.cpp" />
     <ClCompile Include="source\core\components\MeshRenderable.cpp" />
     <ClCompile Include="source\core\components\PointLight.cpp" />
+    <ClCompile Include="source\core\components\Quad3d.cpp" />
     <ClCompile Include="source\core\components\RigidBody.cpp" />
     <ClCompile Include="source\core\components\RigidBody2D.cpp" />
     <ClCompile Include="source\core\components\SpinObject.cpp" />
@@ -184,11 +185,6 @@
     <ClCompile Include="source\core\input\KeyboardInput.cpp" />
     <ClCompile Include="source\core\managers\ShaderManager.cpp" />
     <ClCompile Include="source\core\managers\TextureManager.cpp" />
-    <ClCompile Include="source\core\model\ChaosGameScene.cpp" />
-    <ClCompile Include="source\core\model\DoomScene.cpp" />
-    <ClCompile Include="source\core\model\IScene.cpp" />
-    <ClCompile Include="source\core\model\MainScene.cpp" />
-    <ClCompile Include="source\core\model\SandboxScene.cpp" />
     <ClCompile Include="source\core\objects\GameObject.cpp" />
     <ClCompile Include="source\core\objects\Transform.cpp" />
     <ClCompile Include="source\core\physics\PhysicsController.cpp" />
@@ -196,7 +192,12 @@
     <ClCompile Include="source\core\rendering\GLRenderer2D.cpp" />
     <ClCompile Include="source\core\rendering\Material.cpp" />
     <ClCompile Include="source\core\rendering\Texture2D.cpp" />
+    <ClCompile Include="source\core\scenes\ChaosGameScene.cpp" />
+    <ClCompile Include="source\core\scenes\IScene.cpp" />
+    <ClCompile Include="source\core\scenes\MainScene.cpp" />
+    <ClCompile Include="source\core\scenes\SandboxScene.cpp" />
     <ClCompile Include="source\core\utility\MeshLoader.cpp" />
+    <ClCompile Include="source\core\utility\MiasmaMapLoader.cpp" />
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +215,7 @@
     <ClInclude Include="includes\core\components\FPSCameraMovement.h" />
     <ClInclude Include="includes\core\components\MeshRenderable.h" />
     <ClInclude Include="includes\core\components\PointLight.h" />
+    <ClInclude Include="includes\core\components\Quad3D.h" />
     <ClInclude Include="includes\core\components\RigidBody.h" />
     <ClInclude Include="includes\core\components\RigidBody2D.h" />
     <ClInclude Include="includes\core\components\Sprite2D.h" />
@@ -262,15 +264,10 @@
     <ClInclude Include="includes\core\managers\ShaderManager.h" />
     <ClInclude Include="includes\core\managers\TextureManager.h" />
     <ClInclude Include="includes\core\model\Cube.h" />
-    <ClInclude Include="includes\core\model\ChaosGameScene.h" />
-    <ClInclude Include="includes\core\model\DoomScene.h" />
-    <ClInclude Include="includes\core\model\IScene.h" />
-    <ClInclude Include="includes\core\model\MainScene.h" />
     <ClInclude Include="includes\core\model\Quad.h" />
-    <ClInclude Include="includes\core\model\Rectangle.h" />
-    <ClInclude Include="includes\core\model\SandboxScene.h" />
     <ClInclude Include="includes\core\model\Triangle.h" />
     <ClInclude Include="includes\core\objects\GameObject.h" />
+    <ClInclude Include="includes\core\objects\Rectangle.h" />
     <ClInclude Include="includes\core\objects\Transform.h" />
     <ClInclude Include="includes\core\physics\PhysicsController.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer.h" />
@@ -278,7 +275,12 @@
     <ClInclude Include="includes\core\rendering\IRenderInterface.h" />
     <ClInclude Include="includes\core\rendering\Material.h" />
     <ClInclude Include="includes\core\rendering\Texture2D.h" />
+    <ClInclude Include="includes\core\scenes\ChaosGameScene.h" />
+    <ClInclude Include="includes\core\scenes\IScene.h" />
+    <ClInclude Include="includes\core\scenes\MainScene.h" />
+    <ClInclude Include="includes\core\scenes\SandboxScene.h" />
     <ClInclude Include="includes\core\utility\MeshLoader.h" />
+    <ClInclude Include="includes\core\utility\MiasmaMapLoader.h" />
     <ClInclude Include="includes\core\utility\tiny_obj_loader.h" />
     <ClInclude Include="includes\core\utility\util.h" />
   </ItemGroup>

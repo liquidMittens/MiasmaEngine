@@ -3,10 +3,10 @@
 #include "gui\imgui_impl_opengl3.h"
 #include "gui\imgui_impl_glfw.h"
 #include "gui\imgui_stdlib.h"
-#include "core\model\SandboxScene.h"
-#include "core\components\MeshRenderable.h"
-#include "core\rendering\Material.h"
-#include "objects/GameObject.h"
+#include "SandboxScene.h"
+#include "MeshRenderable.h"
+#include "Material.h"
+#include "GameObject.h"
 using namespace Miasma::Component;
 using namespace Miasma::UI;
 
@@ -77,7 +77,7 @@ void GUIBuilder::gbSceneInfoOverlay(tdogl::Camera& camera)
 	}
 	ImGui::SetNextWindowBgAlpha(0.25f); // transparent bg
 	if (ImGui::Begin("Scene info", NULL, window_flags)) {
-		ImGui::TextColored(GUI_TEXT_BLACK, "-Scene Information-");
+		ImGui::Text("-Scene Information-");
 		ImGui::Separator();
 		ImGui::Text("FPS: %f", io.Framerate);
 		ImGui::Separator();

@@ -67,12 +67,6 @@
     <Filter Include="Source Files\core\managers">
       <UniqueIdentifier>{3f4c3b1a-a4b0-4b0e-8e79-6712b37049ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\model">
-      <UniqueIdentifier>{6034404d-a1f0-41f0-ae2b-c0c498c60c65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\model">
-      <UniqueIdentifier>{5716509d-3e54-458b-a40d-f23344649208}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\core\gui">
       <UniqueIdentifier>{c93a62f8-7902-48a4-b60e-2b016d6534ff}</UniqueIdentifier>
     </Filter>
@@ -102,6 +96,12 @@
     </Filter>
     <Filter Include="Source Files\core\physics">
       <UniqueIdentifier>{c29c64b1-63f3-470c-a311-3fc203f18efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\scenes">
+      <UniqueIdentifier>{5716509d-3e54-458b-a40d-f23344649208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\scenes">
+      <UniqueIdentifier>{6034404d-a1f0-41f0-ae2b-c0c498c60c65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +134,6 @@
     </ClCompile>
     <ClCompile Include="source\core\rendering\GLRenderer.cpp">
       <Filter>Source Files\core\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\model\SandboxScene.cpp">
-      <Filter>Source Files\core\model</Filter>
     </ClCompile>
     <ClCompile Include="source\core\utility\MeshLoader.cpp">
       <Filter>Source Files\core\utility</Filter>
@@ -222,15 +219,6 @@
     <ClCompile Include="source\core\components\BoxCollider2D.cpp">
       <Filter>Source Files\core\components</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\model\IScene.cpp">
-      <Filter>Source Files\core\model</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\model\ChaosGameScene.cpp">
-      <Filter>Source Files\core\model</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\model\MainScene.cpp">
-      <Filter>Source Files\core\model</Filter>
-    </ClCompile>
     <ClCompile Include="source\core\components\FPSCameraMovement.cpp">
       <Filter>Source Files\core\components</Filter>
     </ClCompile>
@@ -243,8 +231,23 @@
     <ClCompile Include="source\core\gui\imgui_stdlib.cpp">
       <Filter>Source Files\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\model\DoomScene.cpp">
-      <Filter>Source Files\core\model</Filter>
+    <ClCompile Include="source\core\utility\MiasmaMapLoader.cpp">
+      <Filter>Source Files\core\utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\Quad3d.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\scenes\ChaosGameScene.cpp">
+      <Filter>Source Files\core\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\scenes\IScene.cpp">
+      <Filter>Source Files\core\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\scenes\MainScene.cpp">
+      <Filter>Source Files\core\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\scenes\SandboxScene.cpp">
+      <Filter>Source Files\core\scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -356,17 +359,11 @@
     <ClInclude Include="includes\core\rendering\GLRenderer.h">
       <Filter>Header Files\core\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\model\SandboxScene.h">
-      <Filter>Header Files\core\model</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\utility\tiny_obj_loader.h">
       <Filter>Header Files\core\utility</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\utility\MeshLoader.h">
       <Filter>Header Files\core\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\model\Rectangle.h">
-      <Filter>Header Files\core\model</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\gui\imgui_impl_glfw.h">
       <Filter>Header Files\core\gui</Filter>
@@ -455,17 +452,8 @@
     <ClInclude Include="includes\core\components\BoxCollider2D.h">
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\model\IScene.h">
-      <Filter>Header Files\core\model</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\model\ChaosGameScene.h">
-      <Filter>Header Files\core\model</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\utility\util.h">
       <Filter>Header Files\core\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\model\MainScene.h">
-      <Filter>Header Files\core\model</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\components\FPSCameraMovement.h">
       <Filter>Header Files\core\components</Filter>
@@ -479,9 +467,6 @@
     <ClInclude Include="includes\core\gui\imgui_stdlib.h">
       <Filter>Header Files\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\model\DoomScene.h">
-      <Filter>Header Files\core\model</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\model\Triangle.h">
       <Filter>Header Files\core\objects</Filter>
     </ClInclude>
@@ -490,6 +475,27 @@
     </ClInclude>
     <ClInclude Include="includes\core\model\Cube.h">
       <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\utility\MiasmaMapLoader.h">
+      <Filter>Header Files\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\Quad3D.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Rectangle.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\scenes\ChaosGameScene.h">
+      <Filter>Header Files\core\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\scenes\IScene.h">
+      <Filter>Header Files\core\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\scenes\MainScene.h">
+      <Filter>Header Files\core\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\scenes\SandboxScene.h">
+      <Filter>Header Files\core\scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
