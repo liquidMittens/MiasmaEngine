@@ -71,6 +71,11 @@ void Transform::rotate(float deg, glm::vec3 axis)
 	m_dirtyMatrix = true;
 }
 
+void Transform::rotate(glm::quat rot)
+{
+	m_transform = m_transform * glm::toMat4(rot);
+}
+
 void Transform::scale(glm::vec3 scaleVec)
 {
 	m_transform = glm::scale(m_transform, scaleVec);

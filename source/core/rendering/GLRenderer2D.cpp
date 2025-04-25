@@ -8,9 +8,9 @@
 #include "objects/GameObject.h"
 #include "components/Sprite2D.h"
 #include "components/AnimatedSprite2D.h"
+#include "core\scenes\IScene.h"
 #include "Text.h"
 #include "camera/Camera.h"
-#include "model/IScene.h"
 #include "app/GLWindow.h"
 #include "gui/GUIBuilder.h"
 #include <iostream>
@@ -119,6 +119,7 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 			}
 		}
 		GUIBuilder::gbSceneGraph(scene);
+		GUIBuilder::gbSceneObjectsInfo(scene);
 		GUIBuilder::gbRenderGUI();
 	}
 	else {

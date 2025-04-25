@@ -5,7 +5,7 @@
 ChaosGameScene::ChaosGameScene(SceneCreationInfo* creationInfo) :
 	IScene(creationInfo),
 	m_currentPlaceTime(0.0f),
-	pentagonMode(false),
+	pentagonMode(true),
 	lastPentagonVertexIndex(-1)
 {
 

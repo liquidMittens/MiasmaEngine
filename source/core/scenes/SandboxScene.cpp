@@ -15,6 +15,8 @@
 #include "BoxCollider.h"
 #include "CapsuleCollider.h"
 #include "FPSCameraMovement.h"
+#include "FollowTransform.h"
+#include "MoveObjectKeyboard.h"
 using namespace Miasma::Component;
  
 SandboxScene::SandboxScene(SceneCreationInfo* creationInfo) :
@@ -33,9 +35,11 @@ void SandboxScene::EnterScene()
 	// enters the scene and initializes the camera 
 	IScene::EnterScene();
 
-	m_camera->AddComponent<RigidBody>(m_camera.get());
-	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
-	m_camera->AddComponent<FPSCameraMovement>(m_camera.get(), m_glfwWindow);
+	//m_camera->AddComponent<RigidBody>(m_camera.get());
+	//m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
+	//m_camera->AddComponent<FPSCameraMovement>(m_camera.get(), m_glfwWindow);
+	m_camera->GetComponent<Camera>().setPosition(glm::vec3(0.0f, 25.0f, 40.0f));
+
 
 	// Create using a MeshRenderable
 	Material textureBlinnMaterial;
@@ -44,7 +48,7 @@ void SandboxScene::EnterScene()
 	// outline
 	Material textureOutline;
 	textureOutline.AddTexture(TextureManager::GetInstance().GetTextureInfo("cat"));
-	textureOutline.AttachShader(m_shaderManager.GetShaderFromMap("TextureOutline"));
+	textureOutline.AttachShader(m_shaderManager.GetShaderFromMap("ToonShader"));
 	// green
 	Material greenbasicTextureMaterial;
 	greenbasicTextureMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("green"));
@@ -61,10 +65,14 @@ void SandboxScene::EnterScene()
 	Material textureBlinnCottageMaterial;
 	textureBlinnCottageMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("cottage"));
 	textureBlinnCottageMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
+	// toon shader
+	Material textureToonShader;
+	textureToonShader.AddTexture(TextureManager::GetInstance().GetTextureInfo("cat"));
+	textureToonShader.AttachShader(m_shaderManager.GetShaderFromMap("ToonShader"));
 	// crate texture 
 	Material crateMaterial;
 	crateMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("crate1"));
-	crateMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BlinnPhong"));
+	crateMaterial.AttachShader(m_shaderManager.GetShaderFromMap("ToonShader"));
 	// create UI material
 	Material spriteReticle;
 	spriteReticle.AddTexture(TextureManager::GetInstance().GetTextureInfo("reticle"));
@@ -76,6 +84,10 @@ void SandboxScene::EnterScene()
 	Material sprite3dQuad;
 	sprite3dQuad.AddTexture(TextureManager::GetInstance().GetTextureInfo("enemy"));
 	sprite3dQuad.AttachShader(m_shaderManager.GetShaderFromMap("Billboard"));
+	// ufo material
+	Material ufoMaterial;
+	ufoMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("ufo"));
+	ufoMaterial.AttachShader(m_shaderManager.GetShaderFromMap("ToonShader"));
 
 	// Setup lights 
 	// create lights
@@ -124,6 +136,11 @@ void SandboxScene::EnterScene()
 	floorMeshCreateInfo.filename = "floor.obj";
 	floorMeshCreateInfo.meshName = "floor";
 	floorMeshCreateInfo.preTransform = glm::identity<glm::mat4>();
+	// ufo mesh
+	MeshRenderableCreateInfo ufoMeshCreateInfo;
+	ufoMeshCreateInfo.filename = "ufo.obj";
+	ufoMeshCreateInfo.meshName = "UFO";
+	ufoMeshCreateInfo.preTransform = glm::identity<glm::mat4>();
 
 	// make 4 GameObjects
 	std::shared_ptr<GameObject> catBlinnObject = std::make_shared<GameObject>();
@@ -135,12 +152,13 @@ void SandboxScene::EnterScene()
 	std::shared_ptr<GameObject> quadObject = std::make_shared<GameObject>();
 	std::shared_ptr<GameObject> quad3dObject = std::make_shared<GameObject>();
 	std::shared_ptr<GameObject> testText = std::make_shared<GameObject>();
+	std::shared_ptr<GameObject> ufoObject = std::make_shared<GameObject>();
 
 
 	// Setup MeshRenderable objects to be rendered
-	catBlinnObject->tag = "CatBlinnObject";
-	catBlinnObject->AddComponent<Miasma::Component::MeshRenderable>(catBlinnObject.get(), &catMesh, textureBlinnMaterial);
-	catBlinnObject->AddComponent<Miasma::Component::SpinObject>(catBlinnObject.get(), 2.0f);
+	catBlinnObject->tag = "CatToonObject";
+	catBlinnObject->AddComponent<Miasma::Component::MeshRenderable>(catBlinnObject.get(), &catMesh, textureToonShader);
+	catBlinnObject->AddComponent<Miasma::Component::SpinObject>(catBlinnObject.get(), 12.0f);
 	//catBlinnObject->GetComponent<SpinObject>().Start();
 	catBlinnObject->transform.translate({ 0.0f, 1.0f, 0.0f });
 	m_gameObjectsList.push_back(catBlinnObject);
@@ -161,6 +179,13 @@ void SandboxScene::EnterScene()
 	lightObject2->AddComponent<Miasma::Component::MeshRenderable>(lightObject2.get(), &lightTextureCreateInfo, greenbasicTextureMaterial);
 	lightObject2->transform.translate({ lightCreation2.pos });
 	m_gameObjectsList.push_back(lightObject2);
+
+	ufoObject->tag = "UFO";
+	ufoObject->AddComponent<Miasma::Component::MeshRenderable>(ufoObject.get(), &ufoMeshCreateInfo, ufoMaterial);
+	ufoObject->transform.translate({0.0f, 5.0f, 10.0f});
+	ufoObject->AddComponent<MoveObjectKeyboard>(ufoObject.get(), m_glfwWindow, 30.0f);
+	m_gameObjectsList.push_back(ufoObject);
+
 
 	/*cottageObject->tag = "CottageObject"; 
 	cottageObject->AddComponent<Miasma::Component::MeshRenderable>(cottageObject.get(), &cottageMeshCreateInfo, textureBlinnCottageMaterial);
@@ -207,11 +232,14 @@ void SandboxScene::EnterScene()
 	m_gameObjectsList.push_back(testText);
 
 	// add a texture to the screen
-	/*std::shared_ptr<GameObject> textureObject = std::make_shared<GameObject>();
+	std::shared_ptr<GameObject> textureObject = std::make_shared<GameObject>();
 	textureObject->tag = "TextureObject";
 	textureObject->transform.translate({ 100.0f, 192.0f, 1.0f });
 	textureObject->AddComponent<Sprite2D>(textureObject.get(), textureDefault);
-	m_gameObjectsList.push_back(textureObject);*/
+	m_gameObjectsList.push_back(textureObject);
+
+	//m_camera->AddComponent<FollowTransform>(m_camera.get(), ufoObject.get());
+
 }
 
 void SandboxScene::Update(float dt)

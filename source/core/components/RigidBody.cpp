@@ -18,7 +18,7 @@ RigidBody::RigidBody(GameObject* owner, rp3d::BodyType type) :
 	m_rigidBody = PhysicsController::GetInstance().GetPhysicsWorld()->createRigidBody(initialTransform);
 	if (m_rigidBody != nullptr) {
 		m_rigidBody->setType(type);
-		m_rigidBody->setMass(rp3d::decimal(140.0));
+		m_rigidBody->setMass(rp3d::decimal(150.0));
 		m_rigidBody->setLinearDamping(rp3d::decimal(5.0));
 		m_rigidBody->setAngularDamping(rp3d::decimal(0.0));
 		m_rigidBody->setLinearLockAxisFactor(rp3d::Vector3(1.0f, 1.0f, 1.0f));

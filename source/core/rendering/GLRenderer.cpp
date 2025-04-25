@@ -6,7 +6,7 @@
 #include "glText/gltext.h"
 #include "components/MeshRenderable.h"
 #include "camera/Camera.h"
-#include "model/IScene.h"
+#include "IScene.h"
 #include "components/PointLight.h"
 #include "app/GLWindow.h"
 #include "gui/GUIBuilder.h"
@@ -32,7 +32,7 @@ GLRenderer::~GLRenderer()
 void GLRenderer::Initialize(GLWindow* pWindow)
 {
 	// set up framebuffer
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.392f, 0.584f, 0.929f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glEnable(GL_STENCIL_TEST);
@@ -141,7 +141,8 @@ bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)
 			}
 		}
 		Miasma::UI::GUIBuilder::gbSceneInfoOverlay(camera);
-		Miasma::UI::GUIBuilder::gbSceneGraph(scene);
+		//Miasma::UI::GUIBuilder::gbSceneGraph(scene);
+		Miasma::UI::GUIBuilder::gbSceneObjectsInfo(scene);
 		Miasma::UI::GUIBuilder::gbRenderGUI();
 	}
 	else {

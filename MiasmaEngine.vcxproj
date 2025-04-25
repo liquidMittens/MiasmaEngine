@@ -162,8 +162,10 @@
     <ClCompile Include="source\core\components\CollisionBody.cpp" />
     <ClCompile Include="source\core\components\CollisionBody2D.cpp" />
     <ClCompile Include="source\core\components\Component.cpp" />
+    <ClCompile Include="source\core\components\FollowTransform.cpp" />
     <ClCompile Include="source\core\components\FPSCameraMovement.cpp" />
     <ClCompile Include="source\core\components\MeshRenderable.cpp" />
+    <ClCompile Include="source\core\components\MoveObjectKeyboard.cpp" />
     <ClCompile Include="source\core\components\PointLight.cpp" />
     <ClCompile Include="source\core\components\Quad3d.cpp" />
     <ClCompile Include="source\core\components\RigidBody.cpp" />
@@ -171,6 +173,7 @@
     <ClCompile Include="source\core\components\SpinObject.cpp" />
     <ClCompile Include="source\core\components\Sprite2D.cpp" />
     <ClCompile Include="source\core\components\Text.cpp" />
+    <ClCompile Include="source\core\components\ui\ScrollView.cpp" />
     <ClCompile Include="source\core\glad\glad.c" />
     <ClCompile Include="source\core\gui\GUIBuilder.cpp" />
     <ClCompile Include="source\core\gui\imgui.cpp" />
@@ -195,6 +198,7 @@
     <ClCompile Include="source\core\scenes\ChaosGameScene.cpp" />
     <ClCompile Include="source\core\scenes\IScene.cpp" />
     <ClCompile Include="source\core\scenes\MainScene.cpp" />
+    <ClCompile Include="source\core\scenes\MiasmaScene.cpp" />
     <ClCompile Include="source\core\scenes\SandboxScene.cpp" />
     <ClCompile Include="source\core\utility\MeshLoader.cpp" />
     <ClCompile Include="source\core\utility\MiasmaMapLoader.cpp" />
@@ -212,8 +216,10 @@
     <ClInclude Include="includes\core\components\CollisionBody.h" />
     <ClInclude Include="includes\core\components\CollisionBody2D.h" />
     <ClInclude Include="includes\core\components\Component.h" />
+    <ClInclude Include="includes\core\components\FollowTransform.h" />
     <ClInclude Include="includes\core\components\FPSCameraMovement.h" />
     <ClInclude Include="includes\core\components\MeshRenderable.h" />
+    <ClInclude Include="includes\core\components\MoveObjectKeyboard.h" />
     <ClInclude Include="includes\core\components\PointLight.h" />
     <ClInclude Include="includes\core\components\Quad3D.h" />
     <ClInclude Include="includes\core\components\RigidBody.h" />
@@ -221,6 +227,7 @@
     <ClInclude Include="includes\core\components\Sprite2D.h" />
     <ClInclude Include="includes\core\components\SpinObject.h" />
     <ClInclude Include="includes\core\components\Text.h" />
+    <ClInclude Include="includes\core\components\ui\ScrollView.h" />
     <ClInclude Include="includes\core\glad\glad.h" />
     <ClInclude Include="includes\core\GLFW\glfw3.h" />
     <ClInclude Include="includes\core\GLFW\glfw3native.h" />
@@ -263,12 +270,12 @@
     <ClInclude Include="includes\core\input\KeyboardInput.h" />
     <ClInclude Include="includes\core\managers\ShaderManager.h" />
     <ClInclude Include="includes\core\managers\TextureManager.h" />
-    <ClInclude Include="includes\core\model\Cube.h" />
-    <ClInclude Include="includes\core\model\Quad.h" />
-    <ClInclude Include="includes\core\model\Triangle.h" />
+    <ClInclude Include="includes\core\objects\Cube.h" />
     <ClInclude Include="includes\core\objects\GameObject.h" />
+    <ClInclude Include="includes\core\objects\Quad.h" />
     <ClInclude Include="includes\core\objects\Rectangle.h" />
     <ClInclude Include="includes\core\objects\Transform.h" />
+    <ClInclude Include="includes\core\objects\Triangle.h" />
     <ClInclude Include="includes\core\physics\PhysicsController.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer.h" />
     <ClInclude Include="includes\core\rendering\GLRenderer2D.h" />
@@ -278,6 +285,7 @@
     <ClInclude Include="includes\core\scenes\ChaosGameScene.h" />
     <ClInclude Include="includes\core\scenes\IScene.h" />
     <ClInclude Include="includes\core\scenes\MainScene.h" />
+    <ClInclude Include="includes\core\scenes\MiasmaScene.h" />
     <ClInclude Include="includes\core\scenes\SandboxScene.h" />
     <ClInclude Include="includes\core\utility\MeshLoader.h" />
     <ClInclude Include="includes\core\utility\MiasmaMapLoader.h" />
@@ -303,6 +311,8 @@
     <None Include="resources\shaders\Diffuse.vs" />
     <None Include="resources\shaders\TextureOutline.fs" />
     <None Include="resources\shaders\TextureOutline.vs" />
+    <None Include="resources\shaders\ToonShader.fs" />
+    <None Include="resources\shaders\ToonShader.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\stone.png" />

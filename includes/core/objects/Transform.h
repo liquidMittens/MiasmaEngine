@@ -2,6 +2,7 @@
 #define TRANSFORM_H_
 
 #include "glm/gtc/matrix_transform.hpp"
+#include <glm/gtx/quaternion.hpp>
 
 class Transform
 {
@@ -23,6 +24,7 @@ public:
 	void translate(const glm::vec3& pos);
 	void translate(const glm::vec2& pos);
 	void rotate(float deg, glm::vec3 axis);
+	void rotate(glm::quat rot);
 	void scale(glm::vec3 scaleVec);
 	void resetTransformMatrix();
 	bool isDirty() { return m_dirtyMatrix; }

@@ -8,7 +8,7 @@ struct GLFWwindow;
 namespace Miasma::Component
 {
 	constexpr float moveSpeed = 2500.0;
-	constexpr float jumpForce = 100000.0;
+	constexpr float jumpForce = 5000.0;
 	constexpr float zoomSensitivity = -0.5f;
 
 	class FPSCameraMovement : public Component

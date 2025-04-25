@@ -4,6 +4,7 @@
 #include <map>
 #include <string_view>
 #include "ShaderManager.h"
+#include <string>
 
 constexpr int SHADER_SIZE_MAX = 5000;
 constexpr auto SHADER_DIR = "resources\\shaders\\";

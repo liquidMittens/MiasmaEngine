@@ -73,9 +73,6 @@
     <Filter Include="Source Files\core\gui">
       <UniqueIdentifier>{c50ec420-569c-4f62-a866-c645b19bcb06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\app">
-      <UniqueIdentifier>{2880168e-cf20-465c-886e-442ee884aea4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\core\app">
       <UniqueIdentifier>{42fdb3ab-b4ac-4e99-a438-a84b9aab44a3}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,15 @@
     </Filter>
     <Filter Include="Header Files\core\scenes">
       <UniqueIdentifier>{6034404d-a1f0-41f0-ae2b-c0c498c60c65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\camera\app">
+      <UniqueIdentifier>{2880168e-cf20-465c-886e-442ee884aea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\components\ui">
+      <UniqueIdentifier>{fab185a2-82f3-4dd9-a19d-6473410eb3d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\components\ui">
+      <UniqueIdentifier>{aa8bf23d-a8ad-4bdd-aba7-89d85aaaa272}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +254,18 @@
     </ClCompile>
     <ClCompile Include="source\core\scenes\SandboxScene.cpp">
       <Filter>Source Files\core\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\scenes\MiasmaScene.cpp">
+      <Filter>Source Files\core\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\FollowTransform.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\MoveObjectKeyboard.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="source\core\components\ui\ScrollView.cpp">
+      <Filter>Source Files\core\components\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -396,16 +414,10 @@
       <Filter>Header Files\core\gui</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\app\GLWindow.h">
-      <Filter>Header Files\core\app</Filter>
+      <Filter>Header Files\core\camera\app</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\app\GameApp.h">
-      <Filter>Header Files\core\app</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\objects\GameObject.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\objects\Transform.h">
-      <Filter>Header Files\core\objects</Filter>
+      <Filter>Header Files\core\camera\app</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\components\BoxCollider.h">
       <Filter>Header Files\core\components</Filter>
@@ -467,23 +479,11 @@
     <ClInclude Include="includes\core\gui\imgui_stdlib.h">
       <Filter>Header Files\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\model\Triangle.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\model\Quad.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\model\Cube.h">
-      <Filter>Header Files\core\objects</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\utility\MiasmaMapLoader.h">
       <Filter>Header Files\core\utility</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\components\Quad3D.h">
       <Filter>Header Files\core\components</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\objects\Rectangle.h">
-      <Filter>Header Files\core\objects</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\scenes\ChaosGameScene.h">
       <Filter>Header Files\core\scenes</Filter>
@@ -496,6 +496,36 @@
     </ClInclude>
     <ClInclude Include="includes\core\scenes\SandboxScene.h">
       <Filter>Header Files\core\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\scenes\MiasmaScene.h">
+      <Filter>Header Files\core\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Cube.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\GameObject.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Quad.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Rectangle.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Transform.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\objects\Triangle.h">
+      <Filter>Header Files\core\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\FollowTransform.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\MoveObjectKeyboard.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\components\ui\ScrollView.h">
+      <Filter>Header Files\core\components\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -551,6 +581,12 @@
       <Filter>Resource Files\shaders</Filter>
     </None>
     <None Include="resources\shaders\AnimatedSprite.vs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\ToonShader.fs">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="resources\shaders\ToonShader.vs">
       <Filter>Resource Files\shaders</Filter>
     </None>
   </ItemGroup>

@@ -1,0 +1,57 @@
+#version 450 core
+
+struct PointLight {
+	vec3 color;
+	vec3 position;
+	float strength;
+};
+
+in vec2 fragmentTexCoord;
+in vec3 fragmentPosition;
+in vec3 fragmentNormal;
+
+uniform sampler2D textureSample;
+#define MAX_POINT_LIGHTS 2
+uniform PointLight light[MAX_POINT_LIGHTS];
+uniform vec3 cameraPosition;
+
+out vec4 finalColor;
+
+vec3 calculatePointLight(PointLight light, vec3 normalizedNormal, vec3 fragPos, vec3 viewDir);
+
+
+void main()
+{
+	// normalize fragment normal 
+	vec3 normalized_normal = normalize(fragmentNormal);
+	// get view direction
+	vec3 viewDir = normalize(cameraPosition - fragmentPosition);
+
+	// lighting
+	vec3 specPointlight;
+	for(unsigned int i = 0; i < MAX_POINT_LIGHTS; ++i) {
+		specPointlight += calculatePointLight(light[i], normalized_normal, fragmentPosition, viewDir);
+	}
+	finalColor = vec4(specPointlight, 1.0f);
+	if(finalColor.a <= 0.1f)
+		discard;
+}
+
+
+vec3 calculatePointLight(PointLight light, vec3 normalizedNormal, vec3 fragPos, vec3 viewDir) {
+	// get light direction (point)
+	vec3 lightDir = normalize(light.position - fragmentPosition);
+	// get light direction (directional)
+	//vec3 lightdirectionactual = vec3(1.0f, -1.0f, -0.3f);
+	//vec3 lightDir = normalize(-lightdirectionactual);
+	// diffuse shading 
+	float diffDot = max(dot(normalizedNormal, lightDir), 0.0f);
+
+	float levels = 3.0f;
+	diffDot = floor(diffDot * levels) / levels;
+
+	// ambient result (fragment texturecoord + ambient value)
+	vec3 diffuse = light.color * diffDot * texture(textureSample, fragmentTexCoord).rgb;
+	
+	return diffuse;
+}
