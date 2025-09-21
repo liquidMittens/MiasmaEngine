@@ -97,3 +97,11 @@ void RigidBody::ResetForce()
 		m_rigidBody->setLinearVelocity(rp3d::Vector3(0.0f, 0.0f, 0.0f));
 	}
 }
+
+void RigidBody::SetPosition(const glm::vec3& pos) 
+{
+	if (m_rigidBody != nullptr) {
+		gameObject->transform.SetPosition(pos);
+		UpdateTransformPosition(pos);
+	}
+}

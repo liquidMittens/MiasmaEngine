@@ -22,6 +22,8 @@ namespace Miasma::Component
 		const rp3d::Transform& GetCurrentTransform() { return m_rigidBody->getTransform(); }
 		rp3d::RigidBody* GetRigidBody() { return m_rigidBody; }
 
+		void SetPosition(const glm::vec3& pos);
+
 		/*
 			Manually updates the RigidBody's Transform.  This should only be used for objects with body type STATIC.
 		*/

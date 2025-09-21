@@ -120,12 +120,6 @@
     <ClCompile Include="source\core\camera\Camera.cpp">
       <Filter>Source Files\core\camera</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\input\InputManager.cpp">
-      <Filter>Source Files\core\input</Filter>
-    </ClCompile>
-    <ClCompile Include="source\core\input\KeyboardInput.cpp">
-      <Filter>Source Files\core\input</Filter>
-    </ClCompile>
     <ClCompile Include="source\core\managers\TextureManager.cpp">
       <Filter>Source Files\core\managers</Filter>
     </ClCompile>
@@ -267,6 +261,9 @@
     <ClCompile Include="source\core\components\ui\ScrollView.cpp">
       <Filter>Source Files\core\components\ui</Filter>
     </ClCompile>
+    <ClCompile Include="source\core\input\Input.cpp">
+      <Filter>Source Files\core\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\core\glad\glad.h">
@@ -353,13 +350,7 @@
     <ClInclude Include="includes\core\camera\Camera.h">
       <Filter>Header Files\core\camera</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\input\InputManager.h">
-      <Filter>Header Files\core\input</Filter>
-    </ClInclude>
     <ClInclude Include="includes\core\input\IInputInterface.h">
-      <Filter>Header Files\core\input</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\core\input\KeyboardInput.h">
       <Filter>Header Files\core\input</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\managers\TextureManager.h">
@@ -526,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="includes\core\components\ui\ScrollView.h">
       <Filter>Header Files\core\components\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\core\input\Input.h">
+      <Filter>Header Files\core\input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

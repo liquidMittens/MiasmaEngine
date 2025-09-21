@@ -5,8 +5,9 @@
 ChaosGameScene::ChaosGameScene(SceneCreationInfo* creationInfo) :
 	IScene(creationInfo),
 	m_currentPlaceTime(0.0f),
-	pentagonMode(true),
-	lastPentagonVertexIndex(-1)
+	pentagonMode(false),
+	lastPentagonVertexIndex(-1),
+	currentPosition(glm::vec2(0.0f))
 {
 
 }
@@ -19,7 +20,7 @@ ChaosGameScene::~ChaosGameScene()
 void ChaosGameScene::EnterScene()
 {
 	IScene::EnterScene();
-	pixelMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("whitedot"));
+	pixelMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("bluedot"));
 	pixelMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
 	m_cameraBoundsMax = m_camera->GetComponent<Camera>().viewport();
 	if (!pentagonMode) {

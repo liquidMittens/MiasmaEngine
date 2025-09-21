@@ -36,7 +36,7 @@ void GameApp::InitializeGameApp()
 		// create our scene and our GLRenderer
 		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE, false};
 		m_render2DMode = sceneInfo.scene2dRenderer;
-		m_currentScene = std::make_unique<MiasmaScene>(&sceneInfo);
+		m_currentScene = std::make_unique<ChaosGameScene>(&sceneInfo);
 		m_currentScene->EnterScene();
 		m_renderer = std::make_unique<Miasma::Renderer::GLRenderer>();
 		m_renderer->Initialize(m_glWindow.get());

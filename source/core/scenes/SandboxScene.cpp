@@ -35,11 +35,11 @@ void SandboxScene::EnterScene()
 	// enters the scene and initializes the camera 
 	IScene::EnterScene();
 
-	//m_camera->AddComponent<RigidBody>(m_camera.get());
-	//m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
-	//m_camera->AddComponent<FPSCameraMovement>(m_camera.get(), m_glfwWindow);
-	m_camera->GetComponent<Camera>().setPosition(glm::vec3(0.0f, 25.0f, 40.0f));
-
+	m_camera->AddComponent<RigidBody>(m_camera.get());
+	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);
+	m_camera->AddComponent<FPSCameraMovement>(m_camera.get(), m_glfwWindow);
+	//m_camera->transform.SetPosition(glm::vec3(0.0f, 10.0f, 0.0f));
+	m_camera->GetComponent<RigidBody>().SetPosition(glm::vec3(0.0f, 10.0f, 0.0f));
 
 	// Create using a MeshRenderable
 	Material textureBlinnMaterial;
@@ -180,11 +180,11 @@ void SandboxScene::EnterScene()
 	lightObject2->transform.translate({ lightCreation2.pos });
 	m_gameObjectsList.push_back(lightObject2);
 
-	ufoObject->tag = "UFO";
+	/*ufoObject->tag = "UFO";
 	ufoObject->AddComponent<Miasma::Component::MeshRenderable>(ufoObject.get(), &ufoMeshCreateInfo, ufoMaterial);
 	ufoObject->transform.translate({0.0f, 5.0f, 10.0f});
 	ufoObject->AddComponent<MoveObjectKeyboard>(ufoObject.get(), m_glfwWindow, 30.0f);
-	m_gameObjectsList.push_back(ufoObject);
+	m_gameObjectsList.push_back(ufoObject);*/
 
 
 	/*cottageObject->tag = "CottageObject"; 
@@ -237,9 +237,6 @@ void SandboxScene::EnterScene()
 	textureObject->transform.translate({ 100.0f, 192.0f, 1.0f });
 	textureObject->AddComponent<Sprite2D>(textureObject.get(), textureDefault);
 	m_gameObjectsList.push_back(textureObject);
-
-	//m_camera->AddComponent<FollowTransform>(m_camera.get(), ufoObject.get());
-
 }
 
 void SandboxScene::Update(float dt)
