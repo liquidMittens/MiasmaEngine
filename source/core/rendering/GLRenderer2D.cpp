@@ -15,6 +15,7 @@
 #include "gui/GUIBuilder.h"
 #include <iostream>
 #include <sstream>
+#include <format>
 using namespace Miasma::Renderer;
 
 

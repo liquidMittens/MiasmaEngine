@@ -1,6 +1,7 @@
 #include "ChaosGameScene.h"
 #include "objects/GameObject.h"
 #include <random>
+#include <format>
 
 ChaosGameScene::ChaosGameScene(SceneCreationInfo* creationInfo) :
 	IScene(creationInfo),

@@ -113,7 +113,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>.\includes;.\includes\core;.\includes\core\components;.\includes\core\gui;.\includes\core\ReactPhysics3D;.\includes\core\box2d;.\includes\core\utility;.\includes\core\objects;.\includes\core\rendering;.\includes\core\model;.\includes\core\scenes</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

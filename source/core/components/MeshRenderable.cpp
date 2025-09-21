@@ -2,6 +2,7 @@
 #include "core/glad/glad.h"
 #include "utility/MeshLoader.h"
 #include <iostream>
+#include <format>
 #include "objects/GameObject.h"
 using namespace Miasma::Component;
 
