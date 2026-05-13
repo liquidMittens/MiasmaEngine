@@ -100,14 +100,14 @@
     <Filter Include="Header Files\core\scenes">
       <UniqueIdentifier>{6034404d-a1f0-41f0-ae2b-c0c498c60c65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\camera\app">
-      <UniqueIdentifier>{2880168e-cf20-465c-886e-442ee884aea4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\core\components\ui">
       <UniqueIdentifier>{fab185a2-82f3-4dd9-a19d-6473410eb3d9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\core\components\ui">
       <UniqueIdentifier>{aa8bf23d-a8ad-4bdd-aba7-89d85aaaa272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\app">
+      <UniqueIdentifier>{2880168e-cf20-465c-886e-442ee884aea4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -405,10 +405,10 @@
       <Filter>Header Files\core\gui</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\app\GLWindow.h">
-      <Filter>Header Files\core\camera\app</Filter>
+      <Filter>Header Files\core\app</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\app\GameApp.h">
-      <Filter>Header Files\core\camera\app</Filter>
+      <Filter>Header Files\core\app</Filter>
     </ClInclude>
     <ClInclude Include="includes\core\components\BoxCollider.h">
       <Filter>Header Files\core\components</Filter>

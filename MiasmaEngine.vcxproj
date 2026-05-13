@@ -118,7 +118,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>.\libs\glfw-3.3.8\glfw3.lib;.\libs\ReactPhysics3D\lib\react3d_debug\reactphysics3d.lib;.\libs\box2d\box2d_debug\box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>.\libs\glfw-3.4\glfw3.lib;.\libs\ReactPhysics3D\lib\react3d_debug\reactphysics3d.lib;.\libs\box2d\box2d_debug\box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\</Command>
@@ -143,7 +143,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>.\libs\glfw-3.3.8\glfw3.lib;.\libs\ReactPhysics3D\lib\react3d_release\reactphysics3d.lib;.\libs\box2d\box2d_release\box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>.\libs\glfw-3.4\glfw3.lib;.\libs\ReactPhysics3D\lib\react3d_release\reactphysics3d.lib;.\libs\box2d\box2d_release\box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\</Command>

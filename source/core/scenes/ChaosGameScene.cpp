@@ -21,7 +21,7 @@ ChaosGameScene::~ChaosGameScene()
 void ChaosGameScene::EnterScene()
 {
 	IScene::EnterScene();
-	pixelMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("bluedot"));
+	pixelMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("whitedot"));
 	pixelMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
 	m_cameraBoundsMax = m_camera->GetComponent<Camera>().viewport();
 	if (!pentagonMode) {
