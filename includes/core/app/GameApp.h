@@ -2,12 +2,15 @@
 #define GAMEAPP_H_
 
 #include <memory>
+#include <string_view>
 #include "core/rendering/GLRenderer.h"
 #include "core/rendering/GLRenderer2D.h"
 using namespace Miasma::Renderer;
 #include "physics/PhysicsController.h"
 #include <GLFW/glfw3.h>
 using namespace Miasma::Physics;
+
+constexpr std::string_view BUILD_VER = "MiasmaEngine v0.1.1";
 
 struct GLFWwindow;
 class GLWindow;
