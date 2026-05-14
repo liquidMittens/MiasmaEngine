@@ -15,8 +15,8 @@ IScene::IScene(SceneCreationInfo* creationInfo)
 	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_gameObjectsList.push_back(m_camera);
 
-	m_shaderManager.LoadShaderList(SHADER_DIR);
-	TextureManager::GetInstance().LoadTexturesFromDirectory(TEXTURE_DIR);
+	m_shaderManager.LoadShaderList(creationInfo->shaderRootFolder);
+	TextureManager::GetInstance().LoadTexturesFromDirectory(creationInfo->assetsRootFolder);
 }
 
 IScene::~IScene()

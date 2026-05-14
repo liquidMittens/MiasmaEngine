@@ -34,7 +34,7 @@ void GameApp::InitializeGameApp()
 	bool createWindowResult = m_glWindow->CreateGLWindow();
 	if (createWindowResult) {
 		// create our scene and our GLRenderer
-		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE, false, "resources\\textures\\"};
+		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE, false, "resources\\textures\\", "resources\\shaders\\" };
 		m_render2DMode = sceneInfo.scene2dRenderer;
 		m_currentScene = std::make_unique<SandboxScene>(&sceneInfo);
 		m_currentScene->EnterScene();
