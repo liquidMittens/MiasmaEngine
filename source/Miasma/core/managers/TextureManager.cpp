@@ -6,6 +6,7 @@ namespace fs = std::filesystem;
 #define STB_IMAGE_IMPLEMENTATION
 #include <Miasma/core/stbimage/stb_image.h>
 #include <Miasma/core/rendering/Texture2D.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
 #include <format>
 
 std::unique_ptr<TextureManager> TextureManager::m_instance = nullptr;
@@ -18,13 +19,12 @@ TextureManager::~TextureManager()
 {
 }
 
-bool TextureManager::LoadTexturesFromDirectory(std::string dir)
+bool TextureManager::LoadTexturesFromDirectory(std::filesystem::path textureDir)
 {
 	bool success = false;
-	if (fs::is_directory(dir)) {
-		for (const auto& file : fs::recursive_directory_iterator(dir)) {
+	if (fs::exists(textureDir)) {
+		for (const auto& file : fs::recursive_directory_iterator(textureDir)) {
 			if (file.is_regular_file()) {
-				std::cout << std::format("Loading Texture: {}\n", file.path().filename().string());
 				LoadTexture(file.path().filename().string());
 			}
 		}
@@ -62,6 +62,7 @@ bool TextureManager::LoadTexture(std::string filename)
 				glTextureParameteri(textureId, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 				m_textureMap.insert(std::make_pair(originalFilenameNoExtension, std::unique_ptr<Texture2D>(new Texture2D(originalFilenameNoExtension, width, height, channel, textureData, textureId))));
+				utility::MiasmaLogger::Log(utility::LogLevel::Info, "Loaded Texture {}-{}", textureId, originalFilenameNoExtension);
 			}
 		}
 	}

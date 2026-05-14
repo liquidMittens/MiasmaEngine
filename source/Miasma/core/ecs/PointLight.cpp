@@ -15,7 +15,6 @@ PointLight::PointLight(GameObject* owner, LightCreationInfo* lightInfo) :
 
 PointLight::~PointLight()
 {
-	std::cout << "Light Destroyed\n";
 }
 
 

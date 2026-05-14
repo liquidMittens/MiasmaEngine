@@ -3,9 +3,10 @@
 #include <Miasma/core/objects/GameObject.h>
 #include <Miasma/core/ecs/RigidBody.h>
 #include <Miasma/core/GLFW/glfw3.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
 using namespace tdogl;
 using namespace Miasma::Component;
-
+using namespace utility;
 
 CLASS_DEFINITION(Component, FPSCameraMovement);
 
@@ -113,7 +114,6 @@ void FPSCameraMovement::OnMouseButton(GLFWwindow* window, int button, int action
 {
 	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
 		glfwSetCursorPos(window, 0, 0); //reset the mouse, so it doesn't go out of the window
-		std::cout << "clicked mouse button right\n";
 		m_mouseModeEnabled = !m_mouseModeEnabled;
 		if (m_mouseModeEnabled) {
 			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);

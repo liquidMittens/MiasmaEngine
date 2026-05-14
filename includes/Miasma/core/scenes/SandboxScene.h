@@ -14,7 +14,7 @@ public:
 	/*Scene(const Scene&) = delete;
 	Scene& operator=(const Scene&) = delete;*/
 
-	void EnterScene() override;
+	void EnterScene(Engine* eng) override;
 	void Update(float dt) override;
 	void ExitScene() override;
 

@@ -18,9 +18,9 @@ MainScene::~MainScene()
 
 }
 
-void MainScene::EnterScene()
+void MainScene::EnterScene(Engine* eng)
 {
-	IScene::EnterScene();
+	IScene::EnterScene(eng);
 
 	// create some objects
 	Material playerMaterial;

@@ -31,6 +31,10 @@ public:
 	void RunEngineLoop();
 	void ShutdownEngine();
 
+	// Scene Methods
+	template<typename TScene, typename... Args>
+	void ChangeScene(Args&&... args);
+
 	const std::filesystem::path& EngineAssetRoot() { return assetRootDirectory; }
 	const std::filesystem::path& EngineAssetTexureRoot() { return assetTexturesDirectory; }
 	const std::filesystem::path& EngineAssetShaderRoot() { return assetShadersDirectory; }

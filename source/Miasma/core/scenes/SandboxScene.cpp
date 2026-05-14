@@ -30,10 +30,10 @@ SandboxScene::~SandboxScene()
 
 }
 
-void SandboxScene::EnterScene()
+void SandboxScene::EnterScene(Engine* eng)
 {
 	// enters the scene and initializes the camera 
-	IScene::EnterScene();
+	IScene::EnterScene(eng);
 
 	m_camera->AddComponent<RigidBody>(m_camera.get());
 	m_camera->AddComponent<CapsuleCollider>(m_camera.get(), 1.0f, 3.0f);

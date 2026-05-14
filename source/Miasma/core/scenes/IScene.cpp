@@ -1,8 +1,10 @@
 #include <Miasma/core/scenes/IScene.h>
 #include <Miasma/core/app/GLWindow.h>
 #include <Miasma/core/objects/GameObject.h>
+#include <Miasma/core/app/Engine.h>
 #include <iostream>
 
+// TODO: change all scene creation info into bootstrap info?
 IScene::IScene(SceneCreationInfo* creationInfo)
 {
 	m_glfwWindow = creationInfo->pWindow->GetGLFWWindow();
@@ -14,19 +16,13 @@ IScene::IScene(SceneCreationInfo* creationInfo)
 	m_camera->tag = "MainCamera";
 	m_camera->GetComponent<Camera>().initcamera(90.0f, 0.1f, 1000.0f, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(m_screenSize.x, m_screenSize.y));
 	m_gameObjectsList.push_back(m_camera);
-
-	m_shaderManager.LoadShaderList(creationInfo->shaderRootFolder);
-	TextureManager::GetInstance().LoadTexturesFromDirectory(creationInfo->assetsRootFolder);
 }
 
-IScene::~IScene()
+void IScene::EnterScene(Engine* eng)
 {
-
-}
-
-void IScene::EnterScene()
-{
-
+	// setup the assets for the scene
+	m_shaderManager.LoadShaderList(eng->EngineAssetShaderRoot());
+	TextureManager::GetInstance().LoadTexturesFromDirectory(eng->EngineAssetTexureRoot());
 }
 
 void IScene::Update(float dt)

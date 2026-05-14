@@ -118,13 +118,4 @@ std::vector<ComponentType*> GameObject::GetComponentsOfType()
 	return componentsOfType;
 }
 
-//template<int idx, typename TType, float flt>
-//void GameObject::DoSomething()
-//{
-//	std::cout << "DoSomething()\n";
-//	int result = idx + (int)flt;
-//	std::cout << std::format("Result: {}\n", result);
-//	std::cout << "Typeid: " << typeid(TType).name();
-//}
-
 #endif

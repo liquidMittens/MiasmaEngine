@@ -10,6 +10,7 @@
 #include <Miasma/core/gui/GUIBuilder.h>
 
 class GLWindow;
+class Engine;
 using LightListType = std::vector<std::shared_ptr<GameObject>>;
 using GameObjectsList = std::vector<std::shared_ptr<GameObject>>;
 
@@ -35,11 +36,11 @@ class IScene
 public: 
 
 	IScene(SceneCreationInfo* creationInfo);
-	~IScene();
+	virtual ~IScene() = default;
 	IScene(const IScene&) = delete;
 	IScene& operator=(const IScene&) = delete;
 
-	virtual void EnterScene();
+	virtual void EnterScene(Engine* eng);
 	virtual void Update(float dt);
 	virtual void ExitScene();
 

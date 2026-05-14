@@ -13,10 +13,12 @@
 #include <Miasma/core/camera/Camera.h>
 #include <Miasma/core/app/GLWindow.h>
 #include <Miasma/core/gui/GUIBuilder.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
 #include <iostream>
 #include <sstream>
 #include <format>
 using namespace Miasma::Renderer;
+using namespace utility;
 
 
 GLRenderer2D::GLRenderer2D()
@@ -55,20 +57,26 @@ void GLRenderer2D::DrawTextObjects(Miasma::Component::Text* textComponent)
 bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 {
 	bool drewFrame = true;
-	if (scene) {
-		// get the camera 
-		tdogl::Camera camera = scene->GetCamera()->GetComponent<Camera>();
-		// clear buffer and depth buffer 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	// get the camera 
+	tdogl::Camera camera = nullptr;
 
+	// clear buffer and depth buffer 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glClearColor(0.392f, 0.584f, 0.929f, 1.0f);
+	
+	if (scene) {
+		camera = scene->GetCamera()->GetComponent<Camera>();
 		GUIBuilder::gbFeedInput();
 
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
+			// clear buffer and depth buffer 
+			glClearColor(0.392f, 0.584f, 0.929f, 1.0f);
+
 			Miasma::Component::Sprite2D& sprite2D = gameObject->GetComponent<Miasma::Component::Sprite2D>();
 			Miasma::Component::AnimatedSprite2D& animatedSprite = gameObject->GetComponent<AnimatedSprite2D>();
 			Miasma::Component::Text& textComponent = gameObject->GetComponent<Miasma::Component::Text>();
-			
+
 			if (!gameObject->IsActive()) {
 				continue;
 			}
@@ -102,7 +110,7 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "currentFrameIndex"), animatedSprite.GetCurrentFrameIndex());
 					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_COLUMNS"), animatedSprite.GetAnimationInfo().frameSizeX);
 					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_ROWS"), animatedSprite.GetAnimationInfo().frameSizeY);
-					std::cout << std::format("Current Frame: {}\n", animatedSprite.GetCurrentFrameIndex());
+					MiasmaLogger::Log(LogLevel::Info, "Current Frame: {}\n", animatedSprite.GetCurrentFrameIndex());
 				}
 
 				// set the model transform and sprite2D information
@@ -122,12 +130,6 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 		GUIBuilder::gbSceneGraph(scene);
 		GUIBuilder::gbSceneObjectsInfo(scene);
 		GUIBuilder::gbRenderGUI();
-	}
-	else {
-		if (!scene) {
-			std::cout << "ERROR: GLRenderer scene is NULL\n";
-			drewFrame = false;
-		}
 	}
 
 	return drewFrame;

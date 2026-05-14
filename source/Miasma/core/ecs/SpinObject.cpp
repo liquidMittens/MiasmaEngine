@@ -1,4 +1,4 @@
-#include <Miasma/core/ecs/SpinObject.h>:
+#include <Miasma/core/ecs/SpinObject.h>
 #include <Miasma/core/objects/GameObject.h>
 using namespace Miasma::Component;
 

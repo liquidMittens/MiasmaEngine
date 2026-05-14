@@ -44,15 +44,17 @@ void Engine::InitializeGameEngine()
 		// create our scene and our GLRenderer
 		SceneCreationInfo sceneInfo{ m_glWindow.get(), SCREEN_SIZE, false, "resources\\textures\\", "resources\\shaders\\" };
 		m_render2DMode = sceneInfo.scene2dRenderer;
-		m_currentScene = std::make_unique<SandboxScene>(&sceneInfo);
-		m_currentScene->EnterScene();
+
+		// TODO: move the scene loading somewhere else
+		ChangeScene<SandboxScene>(&sceneInfo);
+
 		m_renderer = std::make_unique<Miasma::Renderer::GLRenderer>();
 		m_renderer->Initialize(m_glWindow.get());
 		m_renderer2D = std::make_unique<Miasma::Renderer::GLRenderer2D>();
 		m_renderer2D->Initialize(m_glWindow.get());
 	}
 	else {
-		std::cout << "m_glWindow->CreateGLWindow() Failed\n";
+		MiasmaLogger::Log(LogLevel::Error, "m_glWindow->CreateGLWindow() Failed\n");
 	}
 }
 
@@ -66,7 +68,7 @@ void Engine::ProcessInput()
 	// switch mouse modes
 	if (glfwGetKey(m_glWindow.get()->GetGLFWWindow(), GLFW_KEY_TAB) == GLFW_PRESS) {
 		glfwSetCursorPos(m_glWindow.get()->GetGLFWWindow(), 0, 0); //reset the mouse, so it doesn't go out of the window
-		std::cout << "clicked TAB key\n";
+		
 		m_mouseModeEnabled = !m_mouseModeEnabled;
 		if (m_mouseModeEnabled) {
 			glfwSetInputMode(m_glWindow.get()->GetGLFWWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -81,16 +83,12 @@ void Engine::ProcessInput()
 void Engine::RunEngineLoop()
 {
 	bool runWindowLoop = true;
-	if (!m_currentScene) {
-		std::cout << "Scene Object is NULL leaving ExecuteGLWindowLoop!!\n";
-		runWindowLoop = false;
-	}
 	if (runWindowLoop && !m_renderer) {
-		std::cout << "GLRenderer is NULL leaving ExecuteGLWindowLoop!!\n";
+		MiasmaLogger::Log(LogLevel::Error, "GLRenderer is NULL leaving ExecuteGLWindowLoop!!\n");
 		runWindowLoop = false;
 	}
 	if (runWindowLoop && !m_renderer2D) {
-		std::cout << "GLRenderer2D is NULL leaving ExecuteGLWindowLoop!!\n";
+		MiasmaLogger::Log(LogLevel::Error, "GLRenderer2D is NULL leaving ExecuteGLWindowLoop!!\n");
 		runWindowLoop = false;
 	}
 
@@ -103,7 +101,8 @@ void Engine::RunEngineLoop()
 		// update scene and objects
 		ProcessInput();
 		PhysicsController::GetInstance().UpdatePhysicsSimulation((float)dt);
-		m_currentScene->Update((float)dt);
+		if(m_currentScene != nullptr)
+			m_currentScene->Update((float)dt);
 		glfwPollEvents();
 		// render and present
 		if (m_render2DMode) {
@@ -134,6 +133,21 @@ void Engine::ShutdownEngine()
 	}
 }
 
+template<typename TScene, typename... Args>
+void Engine::ChangeScene(Args&&... args)
+{
+	static_assert(std::is_base_of_v<IScene, TScene>);
+
+	if (m_currentScene)
+		m_currentScene->ExitScene();
+
+	m_currentScene =
+		std::make_unique<TScene>(std::forward<Args>(args)...);
+
+	m_currentScene->EnterScene(this);
+}
+
+
 #pragma region PRIVATE_ENGINE_METHODS
 
 void Engine::calculateFrameRate()
@@ -144,7 +158,7 @@ void Engine::calculateFrameRate()
 	if (m_deltaTime >= 1) {
 		int framerate{ std::max(1, int(m_numFrames / m_deltaTime)) };
 		std::stringstream title;
-		title << "OGLSandbox (FPS: " << framerate << " )";
+		title << "MiasmaEngine (FPS: " << framerate << " )";
 		glfwSetWindowTitle(m_glWindow->GetGLFWWindow(), title.str().c_str());
 		m_lastTime = m_currentTime;
 		m_numFrames = -1;
@@ -167,7 +181,7 @@ void Engine::loadEngineBootstrapConfig()
 	}
 	catch(const toml::parse_error& err)
 	{
-		std::cerr << std::format("Error loading {} - {}\n", BOOTSTRAP_CFG_FILE, err.description());
+		MiasmaLogger::Log(LogLevel::Error, "Error loading {} - {}\n", BOOTSTRAP_CFG_FILE, err.description());
 	}
 }
 

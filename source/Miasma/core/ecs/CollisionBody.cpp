@@ -1,9 +1,11 @@
 #include <Miasma/core/ecs/CollisionBody.h>
 #include <Miasma/core/objects/GameObject.h>
 #include <Miasma/core/physics/PhysicsController.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
 #include <iostream>
 using namespace Miasma::Component;
 using namespace Miasma::Physics;
+using namespace utility;
 
 CLASS_DEFINITION(Component, CollisionBody);
 
@@ -39,7 +41,7 @@ void CollisionBody::Update(float dt)
 	//m_transform = newTransform;
 	// update the gameobjects transform from the rigidbody
 	gameObject->transform.SetPosition(newPos.x, newPos.y, newPos.z);
-	std::cout << std::format("CollisionBody({}): pos: ({},{},{})\n", gameObject->tag, newTransform.getPosition().x, newTransform.getPosition().y, newTransform.getPosition().z);
+	MiasmaLogger::Log(LogLevel::Info, "CollisionBody({}): pos: ({},{},{})\n", gameObject->tag, newTransform.getPosition().x, newTransform.getPosition().y, newTransform.getPosition().z);
 }
 
 void CollisionBody::Shutdown()

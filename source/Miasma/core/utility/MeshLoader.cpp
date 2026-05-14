@@ -3,6 +3,9 @@
 #include <Miasma/core/utility/tiny_obj_loader.h>
 #include <iostream>
 #include <unordered_map>
+#include <format>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
+using namespace utility;
 
 
 void utility::MeshLoader::LoadMeshFromFile(MeshLoaderInformation& meshLoaderInformation, const std::string& filename, glm::mat4 preTransform)
@@ -20,7 +23,7 @@ void utility::MeshLoader::LoadMeshFromFile(MeshLoaderInformation& meshLoaderInfo
 	std::string meshFilename = MESH_DIR + filename;
 	
 	if (!tinyobj::LoadObj(&attributes, &shapes, &materials, &warning, &error, meshFilename.c_str(), MATERIAL_DIR)) {
-		std::cout << "utility::MeshLoader LoadMeshFromFile Failed: " << warning << error << '\n';
+		MiasmaLogger::Log(utility::LogLevel::Error, "utility::MeshLoader LoadMeshFromFile Failed: [{}]: {}\n", warning, error);
 	}
 
 	// this is our map to keep track of our non-unique vertex information

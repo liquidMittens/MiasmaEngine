@@ -4,7 +4,9 @@
 #include <iostream>
 #include <format>
 #include <Miasma/core/objects/GameObject.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
 using namespace Miasma::Component;
+using namespace utility;
 
 CLASS_DEFINITION(Component, MeshRenderable);
 
@@ -60,7 +62,7 @@ MeshRenderable::MeshRenderable(GameObject* owner, MeshRenderableCreateInfo* pCre
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(unsigned int), m_indices.data(), GL_STATIC_DRAW);
 	}
 	else {
-		std::cout << "MeshRenderable CreateInfo* is NULL\n";
+		MiasmaLogger::Log(LogLevel::Error, "MeshRenderable CreateInfo* is NULL\n");
 	}
 }
 
@@ -119,7 +121,7 @@ MeshRenderable::MeshRenderable(GameObject* owner, std::vector<float> vertices, s
 
 MeshRenderable::~MeshRenderable()
 {
-	std::cout << std::format("Cleaning up MeshRenderable{}\n", m_meshName.c_str());
+	MiasmaLogger::Log(LogLevel::Info, "Cleaning up MeshRenderable{}\n", m_meshName.c_str());
 	glDeleteBuffers(1, &m_ibo);
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteVertexArrays(1, &m_vao);

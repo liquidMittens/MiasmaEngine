@@ -5,6 +5,8 @@
 #include <iostream>
 #include <Miasma/core/camera/Camera.h>
 #include <Miasma/core/rendering/GLRenderer.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
+using namespace utility;
 
 GLWindow::GLWindow() :
 	m_window(nullptr),
@@ -22,11 +24,11 @@ bool GLWindow::CreateGLWindow()
 {
 	bool result = true;
 	if (!InitGLWindow()) {
-		std::cout << "Failed to create GLWindow!\n";
+		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLWindow!\n");
 		result = false;
 	}
 	if (!InitGLFWCursor()) {
-		std::cout << "Failed to create GLFWcursor!\n";
+		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLFWcursor!\n");
 		result = false;
 	}
 
@@ -49,14 +51,14 @@ bool GLWindow::InitGLWindow()
 
 	m_window = glfwCreateWindow((int)SCREEN_SIZE.x, (int)SCREEN_SIZE.y, "GLRenderer", NULL, NULL);
 	if (m_window == nullptr) {
-		std::cout << "Failed to create GLFWwindow object!\n";
+		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLFWwindow object!\n");
 		glfwTerminate();
 	}
 
 	if (result) {
 		glfwMakeContextCurrent(m_window);
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-			std::cout << "GLAD initialize failed!";
+			MiasmaLogger::Log(LogLevel::Error, "GLAD initialize failed!");
 			glfwTerminate();
 		}
 		if (result) {

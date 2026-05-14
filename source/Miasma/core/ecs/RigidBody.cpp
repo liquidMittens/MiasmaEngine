@@ -1,9 +1,12 @@
 #include <Miasma/core/ecs/RigidBody.h>
 #include <Miasma/core/objects/GameObject.h>
 #include <Miasma/core/physics/PhysicsController.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
 #include <iostream>
+#include <format>
 using namespace Miasma::Component;
 using namespace Miasma::Physics;
+using namespace utility;
 
 CLASS_DEFINITION(Component, RigidBody);
 
@@ -86,7 +89,7 @@ void RigidBody::ApplyForce(rp3d::Vector3 force)
 {
 	if (m_rigidBody != nullptr) {
 		rp3d::Vector3 currentForce = m_rigidBody->getForce(); 
-		std::cout << std::format("Camera force: {},{},{}\n", m_rigidBody->getForce().x, m_rigidBody->getForce().y, m_rigidBody->getForce().z);
+		MiasmaLogger::Log(LogLevel::Info, "Camera force: {},{},{}\n", m_rigidBody->getForce().x, m_rigidBody->getForce().y, m_rigidBody->getForce().z);
 		m_rigidBody->applyLocalForceAtCenterOfMass(force);
 	}
 }

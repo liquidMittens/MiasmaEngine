@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <Miasma/core/rendering/Texture2D.h>
+#include <filesystem>
 
 constexpr auto TEXTURE_DIR = "resources\\textures\\";
 
@@ -29,7 +30,7 @@ public:
 		return (*m_instance.get());
 	}
 
-	bool LoadTexturesFromDirectory(std::string dir);
+	bool LoadTexturesFromDirectory(std::filesystem::path textureDir);
 	Texture2D* GetTextureInfo(std::string_view texturename);
 
 private:

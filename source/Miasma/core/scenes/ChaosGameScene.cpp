@@ -1,7 +1,9 @@
 #include <Miasma/core/scenes/ChaosGameScene.h>
 #include <Miasma/core/objects/GameObject.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
 #include <random>
 #include <format>
+using namespace utility;
 
 ChaosGameScene::ChaosGameScene(SceneCreationInfo* creationInfo) :
 	IScene(creationInfo),
@@ -18,9 +20,9 @@ ChaosGameScene::~ChaosGameScene()
 
 }
 
-void ChaosGameScene::EnterScene()
+void ChaosGameScene::EnterScene(Engine* eng)
 {
-	IScene::EnterScene();
+	IScene::EnterScene(eng);
 	pixelMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("whitedot"));
 	pixelMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
 	m_cameraBoundsMax = m_camera->GetComponent<Camera>().viewport();
@@ -91,10 +93,6 @@ void ChaosGameScene::Update(float dt)
 		m_gameObjectsList.push_back(newPoint);
 		currentPosition = halfwayPosition;
 	}
-#ifdef _DEBUG
-	std::cout << std::format("points: {}\n", m_gameObjectsList.size());
-#endif
-
 }
 
 void ChaosGameScene::ExitScene()

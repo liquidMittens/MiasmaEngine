@@ -10,7 +10,7 @@ public:
 	MainScene(SceneCreationInfo* creationInfo);
 	~MainScene();
 
-	void EnterScene() override;
+	void EnterScene(Engine* eng) override;
 	void Update(float dt) override;
 	void ExitScene() override;
 

@@ -55,11 +55,15 @@ void GLRenderer::DrawTextObjects(Miasma::Component::Text* textComponent)
 bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)
 {
 	bool drewFrame = true;
+	// get the camera 
+	tdogl::Camera camera = nullptr;
+	
+	// clear buffer and depth buffer 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glClearColor(0.392f, 0.584f, 0.929f, 1.0f);
+	
 	if (scene) {
-		// get the camera 
-		tdogl::Camera camera = scene->GetCamera()->GetComponent<Camera>();
-		// clear buffer and depth buffer 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		camera = scene->GetCamera()->GetComponent<Camera>();
 
 		Miasma::UI::GUIBuilder::gbFeedInput();
 		//GUIBuilder::gbShowImGuiDemoWindow();
@@ -67,9 +71,7 @@ bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)
 		int lightIndex = 0;
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
-
 			glClearColor(0.392f, 0.584f, 0.929f, 1.0f);
-
 
 			MeshRenderable& mesh = gameObject->GetComponent<MeshRenderable>();
 			Sprite2D& sprite = gameObject->GetComponent<Sprite2D>();
@@ -148,12 +150,6 @@ bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)
 		//Miasma::UI::GUIBuilder::gbSceneGraph(scene);
 		Miasma::UI::GUIBuilder::gbSceneObjectsInfo(scene);
 		Miasma::UI::GUIBuilder::gbRenderGUI();
-	}
-	else {
-		if (!scene) {
-			std::cout << "ERROR: GLRenderer scene is NULL\n";
-			drewFrame = false;
-		}
 	}
 	return drewFrame;
 }

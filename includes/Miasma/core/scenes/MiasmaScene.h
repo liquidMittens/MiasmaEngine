@@ -8,7 +8,7 @@ public:
 	MiasmaScene(SceneCreationInfo* creationInfo);
 	~MiasmaScene();
 
-	void EnterScene() override;
+	void EnterScene(Engine* eng) override;
 	void Update(float dt) override;
 	void ExitScene() override;
 

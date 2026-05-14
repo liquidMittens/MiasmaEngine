@@ -6,6 +6,8 @@ namespace fs = std::filesystem;
 using std::ifstream;
 #include <Miasma/core/glad/glad.h>
 #include <Miasma/core/GLFW/glfw3.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
+using namespace utility;
 
 ShaderManager::ShaderManager()
 {
@@ -20,16 +22,14 @@ ShaderManager::~ShaderManager()
 	}
 }
 
-void ShaderManager::LoadShaderList(std::string_view dirPath)
+void ShaderManager::LoadShaderList(std::filesystem::path shaderPath)
 {
-	if (fs::is_directory(dirPath)) {
-		for (const auto& file : fs::recursive_directory_iterator(dirPath)) {
+	if (fs::exists(shaderPath)) {
+		for (const auto& file : fs::recursive_directory_iterator(shaderPath)) {
 			if (file.is_regular_file()) {
 				std::string filenoExt = file.path().filename().replace_extension().string();
-				std::cout << "Found shader: " << filenoExt << '\n';
 				// we haven't loaded this shader yet so lets read, compile, and add to the map
 				if (m_shaderMap.find(filenoExt) == m_shaderMap.end()) {
-					std::cout << "LOADED shader: " << filenoExt << '\n';
 					LoadShader(filenoExt);
 				}
 			}
@@ -67,7 +67,7 @@ void ShaderManager::LoadShader(const std::string& shaderName)
 			glGetShaderiv(vsInt, GL_COMPILE_STATUS, &success);
 			if (!success) {
 				glGetShaderInfoLog(vsInt, 1024, NULL, errorBuffer);
-				std::cout << "Error compiling vertex shader: " + vertexShaderFilename << " msg: " << errorBuffer << '\n';
+				MiasmaLogger::Log(LogLevel::Error, "Error compiling vertex shader: {} msg: {}\n", vertexShaderFilename, errorBuffer);
 			}
 			// fragment shader
 			sourcePtr = fragmentBuffer;
@@ -78,7 +78,7 @@ void ShaderManager::LoadShader(const std::string& shaderName)
 			glGetShaderiv(fsInt, GL_COMPILE_STATUS, &success);
 			if (!success) {
 				glGetShaderInfoLog(fsInt, 1024, NULL, errorBuffer);
-				std::cout << "Error compiling fragment shader: " + fragmentShaderFilename << " msg: " << errorBuffer << '\n';
+				MiasmaLogger::Log(LogLevel::Error, "Error compiling fragment shader: {} msg: {}\n", fragmentShaderFilename, errorBuffer);
 			}
 
 			// create program
@@ -89,7 +89,7 @@ void ShaderManager::LoadShader(const std::string& shaderName)
 			glGetProgramiv(newProgram, GL_LINK_STATUS, &success);
 			if (!success) {
 				glGetProgramInfoLog(newProgram, 1024, NULL, errorBuffer);
-				std::cout << "Error Linking Program for: " + shaderName << " msg: " << errorBuffer << '\n';
+				MiasmaLogger::Log(LogLevel::Error, "Error Linking Program for: {} msg: {}\n", shaderName, errorBuffer);
 			}
 
 			// we're linked we dont need to keep the shader compiled code objects anymore
@@ -100,6 +100,7 @@ void ShaderManager::LoadShader(const std::string& shaderName)
 			ShaderInfo newShader = { newProgram, shaderName };
 			// add this new program to the shader manager and use shaderEnum as the calling key
 			m_shaderMap.insert(std::make_pair(shaderName, newShader));
+			MiasmaLogger::Log(utility::LogLevel::Info, "Compiled shader {}-{}", newProgram, shaderName);
 		}
 	}
 }
@@ -113,7 +114,7 @@ ShaderInfo ShaderManager::GetShaderFromMap(std::string_view shaderName)
 			shader = (*shaderIter).second;
 		}
 		else {
-			std::cout << "ERR: Could not load shader(" << shaderName.data() << ")\n";
+			MiasmaLogger::Log(utility::LogLevel::Error, "ERR: Could not load shader: {}\n", shaderName);
 		}
 	}
 	return shader;

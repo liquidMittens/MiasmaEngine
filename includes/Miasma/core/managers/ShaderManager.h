@@ -2,6 +2,7 @@
 #define SHADERMANAGER_H_
 
 #include <map>
+#include <filesystem>
 #include <string_view>
 #include <string>
 
@@ -34,7 +35,7 @@ public:
 	ShaderManager();
 	~ShaderManager();
 
-	void LoadShaderList(std::string_view dirPath);
+	void LoadShaderList(std::filesystem::path shaderPath);
 	void LoadShader(const std::string& shaderName);
 	ShaderInfo GetShaderFromMap(std::string_view shaderName);
 
