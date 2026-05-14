@@ -16,510 +16,516 @@
     <Filter Include="Resource Files\shaders">
       <UniqueIdentifier>{2ef92d97-5abc-4213-874f-aea1c3eb3fb0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core">
-      <UniqueIdentifier>{10e67532-87d9-4907-80e8-7526c4fde93b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core">
-      <UniqueIdentifier>{ca03f999-e1c0-491d-a5ce-05d6e3d3963c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\glad">
-      <UniqueIdentifier>{167e2f69-85f9-48ee-912f-d6879a91c048}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\GLFW">
-      <UniqueIdentifier>{6176d8e1-9890-45d0-9d53-43b3399c9b76}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\glad">
-      <UniqueIdentifier>{a57a67ae-ec84-4f21-b5b5-cbeb411e1ec3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\textures">
       <UniqueIdentifier>{1554369b-cc9e-4f61-8ebe-79b27fa9da35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\rendering">
+    <Filter Include="Header Files\Miasma">
+      <UniqueIdentifier>{13d244ac-f236-4fd2-930f-100170c9b2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Miasma\core">
+      <UniqueIdentifier>{10e67532-87d9-4907-80e8-7526c4fde93b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Miasma\core\glad">
+      <UniqueIdentifier>{167e2f69-85f9-48ee-912f-d6879a91c048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Miasma\core\rendering">
       <UniqueIdentifier>{329a47d7-cbc2-4693-86bc-d56b4f33ee92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\rendering">
-      <UniqueIdentifier>{ff64f500-b5be-4c7f-a6d0-54258cadf6e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\glm">
+    <Filter Include="Header Files\Miasma\core\glm">
       <UniqueIdentifier>{62cf155a-7a1b-48bb-a445-603949ae1308}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\camera">
+    <Filter Include="Header Files\Miasma\core\camera">
       <UniqueIdentifier>{e7009870-77a4-49d0-88cf-46544155dc6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\camera">
-      <UniqueIdentifier>{5250c50e-c7fe-4163-91cc-0bb258e2a4b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\input">
-      <UniqueIdentifier>{32eb038f-be58-4a9c-ba3c-7c67ccd2d770}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\utility">
-      <UniqueIdentifier>{4013f865-3d67-4d33-80b9-874fcb44fb74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\utility">
+    <Filter Include="Header Files\Miasma\core\utility">
       <UniqueIdentifier>{eda59ae3-0b8d-4d22-9ef7-792257b92445}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\input">
+    <Filter Include="Header Files\Miasma\core\input">
       <UniqueIdentifier>{81c0a389-cc95-4da0-a56e-0bce82066000}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\managers">
+    <Filter Include="Header Files\Miasma\core\managers">
       <UniqueIdentifier>{fdf1fbc1-25ef-4b3a-a943-e6bf1b74f871}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\managers">
-      <UniqueIdentifier>{3f4c3b1a-a4b0-4b0e-8e79-6712b37049ba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\gui">
+    <Filter Include="Header Files\Miasma\core\gui">
       <UniqueIdentifier>{c93a62f8-7902-48a4-b60e-2b016d6534ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\gui">
-      <UniqueIdentifier>{c50ec420-569c-4f62-a866-c645b19bcb06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\app">
-      <UniqueIdentifier>{42fdb3ab-b4ac-4e99-a438-a84b9aab44a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\objects">
+    <Filter Include="Header Files\Miasma\core\objects">
       <UniqueIdentifier>{6f23e811-002b-4950-9b05-d921c09f7514}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\objects">
-      <UniqueIdentifier>{74a297a0-970e-4b53-9b98-11e1b3f0f99d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\components">
-      <UniqueIdentifier>{bf5e14a5-cf57-4011-b3d1-dbcc7412120c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\components">
-      <UniqueIdentifier>{15da9f3a-f472-4e9b-9165-6d44997d26bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\physics">
+    <Filter Include="Header Files\Miasma\core\physics">
       <UniqueIdentifier>{627cdc94-5cbf-453f-875a-0598c6b00ddd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\physics">
-      <UniqueIdentifier>{c29c64b1-63f3-470c-a311-3fc203f18efc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\core\scenes">
-      <UniqueIdentifier>{5716509d-3e54-458b-a40d-f23344649208}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\core\scenes">
+    <Filter Include="Header Files\Miasma\core\scenes">
       <UniqueIdentifier>{6034404d-a1f0-41f0-ae2b-c0c498c60c65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\components\ui">
+    <Filter Include="Header Files\Miasma\core\app">
+      <UniqueIdentifier>{2880168e-cf20-465c-886e-442ee884aea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma">
+      <UniqueIdentifier>{008fc5a9-5c6c-4d31-8dfa-ed96d13155e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core">
+      <UniqueIdentifier>{ca03f999-e1c0-491d-a5ce-05d6e3d3963c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\glad">
+      <UniqueIdentifier>{a57a67ae-ec84-4f21-b5b5-cbeb411e1ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\rendering">
+      <UniqueIdentifier>{ff64f500-b5be-4c7f-a6d0-54258cadf6e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\camera">
+      <UniqueIdentifier>{5250c50e-c7fe-4163-91cc-0bb258e2a4b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\input">
+      <UniqueIdentifier>{32eb038f-be58-4a9c-ba3c-7c67ccd2d770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\utility">
+      <UniqueIdentifier>{4013f865-3d67-4d33-80b9-874fcb44fb74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\managers">
+      <UniqueIdentifier>{3f4c3b1a-a4b0-4b0e-8e79-6712b37049ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\gui">
+      <UniqueIdentifier>{c50ec420-569c-4f62-a866-c645b19bcb06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\app">
+      <UniqueIdentifier>{42fdb3ab-b4ac-4e99-a438-a84b9aab44a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\objects">
+      <UniqueIdentifier>{74a297a0-970e-4b53-9b98-11e1b3f0f99d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\physics">
+      <UniqueIdentifier>{c29c64b1-63f3-470c-a311-3fc203f18efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\scenes">
+      <UniqueIdentifier>{5716509d-3e54-458b-a40d-f23344649208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Miasma\core\ecs">
+      <UniqueIdentifier>{15da9f3a-f472-4e9b-9165-6d44997d26bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Miasma\core\ecs\ui">
       <UniqueIdentifier>{fab185a2-82f3-4dd9-a19d-6473410eb3d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\components\ui">
-      <UniqueIdentifier>{aa8bf23d-a8ad-4bdd-aba7-89d85aaaa272}</UniqueIdentifier>
+    <Filter Include="Header Files\Miasma\core\glfw">
+      <UniqueIdentifier>{6176d8e1-9890-45d0-9d53-43b3399c9b76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\app">
-      <UniqueIdentifier>{2880168e-cf20-465c-886e-442ee884aea4}</UniqueIdentifier>
+    <Filter Include="Source Files\Miasma\core\ecs">
+      <UniqueIdentifier>{bf5e14a5-cf57-4011-b3d1-dbcc7412120c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Miasma\core\ecs\ui">
+      <UniqueIdentifier>{aa8bf23d-a8ad-4bdd-aba7-89d85aaaa272}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\glad\glad.c">
-      <Filter>Source Files\core\glad</Filter>
+    <ClCompile Include="source\Miasma\core\app\GameApp.cpp">
+      <Filter>Source Files\Miasma\core\app</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\camera\Camera.cpp">
-      <Filter>Source Files\core\camera</Filter>
+    <ClCompile Include="source\Miasma\core\app\GLWindow.cpp">
+      <Filter>Source Files\Miasma\core\app</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\managers\TextureManager.cpp">
-      <Filter>Source Files\core\managers</Filter>
+    <ClCompile Include="source\Miasma\core\camera\Camera.cpp">
+      <Filter>Source Files\Miasma\core\camera</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\rendering\Texture2D.cpp">
-      <Filter>Source Files\core\rendering</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\ui\ScrollView.cpp">
+      <Filter>Source Files\Miasma\core\ecs\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\rendering\Material.cpp">
-      <Filter>Source Files\core\rendering</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\AnimatedSprite2D.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\managers\ShaderManager.cpp">
-      <Filter>Source Files\core\managers</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\BoxCollider.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\rendering\GLRenderer.cpp">
-      <Filter>Source Files\core\rendering</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\BoxCollider2D.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\utility\MeshLoader.cpp">
-      <Filter>Source Files\core\utility</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\CapsuleCollider.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\imgui.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\Collider.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\imgui_demo.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\CollisionBody.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\imgui_draw.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\CollisionBody2D.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\imgui_tables.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\Component.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\imgui_widgets.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\FollowTransform.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\imgui_impl_glfw.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\FPSCameraMovement.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\imgui_impl_opengl3.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\MeshRenderable.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\GUIBuilder.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\MoveObjectKeyboard.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\app\GLWindow.cpp">
-      <Filter>Source Files\core\app</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\PointLight.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\app\GameApp.cpp">
-      <Filter>Source Files\core\app</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\Quad3d.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\objects\GameObject.cpp">
-      <Filter>Source Files\core\objects</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\RigidBody.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\objects\Transform.cpp">
-      <Filter>Source Files\core\objects</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\RigidBody2D.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\BoxCollider.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\SpinObject.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\Collider.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\Sprite2D.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\Component.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\ecs\Text.cpp">
+      <Filter>Source Files\Miasma\core\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\MeshRenderable.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\glad\glad.c">
+      <Filter>Source Files\Miasma\core\glad</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\PointLight.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\gui\GUIBuilder.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\SpinObject.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\gui\imgui.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\rendering\GLRenderer2D.cpp">
-      <Filter>Source Files\core\rendering</Filter>
+    <ClCompile Include="source\Miasma\core\gui\imgui_demo.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\Sprite2D.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\gui\imgui_draw.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\physics\PhysicsController.cpp">
-      <Filter>Source Files\core\physics</Filter>
+    <ClCompile Include="source\Miasma\core\gui\imgui_impl_glfw.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\CollisionBody.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\gui\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\RigidBody.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\gui\imgui_stdlib.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\CapsuleCollider.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\gui\imgui_tables.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\CollisionBody2D.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\gui\imgui_widgets.cpp">
+      <Filter>Source Files\Miasma\core\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\RigidBody2D.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\input\Input.cpp">
+      <Filter>Source Files\Miasma\core\input</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\BoxCollider2D.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\managers\ShaderManager.cpp">
+      <Filter>Source Files\Miasma\core\managers</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\FPSCameraMovement.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\managers\TextureManager.cpp">
+      <Filter>Source Files\Miasma\core\managers</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\AnimatedSprite2D.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\objects\GameObject.cpp">
+      <Filter>Source Files\Miasma\core\objects</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\Text.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\objects\Transform.cpp">
+      <Filter>Source Files\Miasma\core\objects</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\gui\imgui_stdlib.cpp">
-      <Filter>Source Files\core\gui</Filter>
+    <ClCompile Include="source\Miasma\core\physics\PhysicsController.cpp">
+      <Filter>Source Files\Miasma\core\physics</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\utility\MiasmaMapLoader.cpp">
-      <Filter>Source Files\core\utility</Filter>
+    <ClCompile Include="source\Miasma\core\rendering\GLRenderer.cpp">
+      <Filter>Source Files\Miasma\core\rendering</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\Quad3d.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\rendering\GLRenderer2D.cpp">
+      <Filter>Source Files\Miasma\core\rendering</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\scenes\ChaosGameScene.cpp">
-      <Filter>Source Files\core\scenes</Filter>
+    <ClCompile Include="source\Miasma\core\rendering\Material.cpp">
+      <Filter>Source Files\Miasma\core\rendering</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\scenes\IScene.cpp">
-      <Filter>Source Files\core\scenes</Filter>
+    <ClCompile Include="source\Miasma\core\rendering\Texture2D.cpp">
+      <Filter>Source Files\Miasma\core\rendering</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\scenes\MainScene.cpp">
-      <Filter>Source Files\core\scenes</Filter>
+    <ClCompile Include="source\Miasma\core\scenes\ChaosGameScene.cpp">
+      <Filter>Source Files\Miasma\core\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\scenes\SandboxScene.cpp">
-      <Filter>Source Files\core\scenes</Filter>
+    <ClCompile Include="source\Miasma\core\scenes\IScene.cpp">
+      <Filter>Source Files\Miasma\core\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\scenes\MiasmaScene.cpp">
-      <Filter>Source Files\core\scenes</Filter>
+    <ClCompile Include="source\Miasma\core\scenes\MainScene.cpp">
+      <Filter>Source Files\Miasma\core\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\FollowTransform.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\scenes\MiasmaScene.cpp">
+      <Filter>Source Files\Miasma\core\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\MoveObjectKeyboard.cpp">
-      <Filter>Source Files\core\components</Filter>
+    <ClCompile Include="source\Miasma\core\scenes\SandboxScene.cpp">
+      <Filter>Source Files\Miasma\core\scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\components\ui\ScrollView.cpp">
-      <Filter>Source Files\core\components\ui</Filter>
+    <ClCompile Include="source\Miasma\core\utility\MeshLoader.cpp">
+      <Filter>Source Files\Miasma\core\utility</Filter>
     </ClCompile>
-    <ClCompile Include="source\core\input\Input.cpp">
-      <Filter>Source Files\core\input</Filter>
+    <ClCompile Include="source\Miasma\core\utility\MiasmaMapLoader.cpp">
+      <Filter>Source Files\Miasma\core\utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="includes\core\glad\glad.h">
-      <Filter>Header Files\core\glad</Filter>
+    <ClInclude Include="includes\Miasma\core\app\GameApp.h">
+      <Filter>Header Files\Miasma\core\app</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\GLFW\glfw3.h">
-      <Filter>Header Files\core\GLFW</Filter>
+    <ClInclude Include="includes\Miasma\core\app\GLWindow.h">
+      <Filter>Header Files\Miasma\core\app</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\GLFW\glfw3native.h">
-      <Filter>Header Files\core\GLFW</Filter>
+    <ClInclude Include="includes\Miasma\core\camera\Camera.h">
+      <Filter>Header Files\Miasma\core\camera</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\rendering\IRenderInterface.h">
-      <Filter>Header Files\core\rendering</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\ui\ScrollView.h">
+      <Filter>Header Files\Miasma\core\ecs\ui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\common.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\AnimatedSprite2D.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\exponential.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\BoxCollider.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\ext.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\BoxCollider2D.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\fwd.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\CapsuleCollider.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\geometric.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\Collider.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\glm.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\CollisionBody.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\integer.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\CollisionBody2D.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat2x2.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\Component.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat2x3.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\FollowTransform.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat2x4.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\FPSCameraMovement.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat3x2.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\MeshRenderable.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat3x3.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\MoveObjectKeyboard.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat3x4.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\PointLight.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat4x2.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\Quad3D.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat4x3.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\RigidBody.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\mat4x4.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\RigidBody2D.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\matrix.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\SpinObject.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\packing.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\Sprite2D.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\trigonometric.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\ecs\Text.h">
+      <Filter>Header Files\Miasma\core\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\vec2.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\glad\glad.h">
+      <Filter>Header Files\Miasma\core\glad</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\vec3.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\glfw\glfw3.h">
+      <Filter>Header Files\Miasma\core\glfw</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\vec4.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\glfw\glfw3native.h">
+      <Filter>Header Files\Miasma\core\glfw</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\glm\vector_relational.hpp">
-      <Filter>Header Files\core\glm</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\common.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\camera\Camera.h">
-      <Filter>Header Files\core\camera</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\exponential.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\input\IInputInterface.h">
-      <Filter>Header Files\core\input</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\ext.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\managers\TextureManager.h">
-      <Filter>Header Files\core\managers</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\fwd.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\rendering\Texture2D.h">
-      <Filter>Header Files\core\rendering</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\geometric.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\rendering\Material.h">
-      <Filter>Header Files\core\rendering</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\glm.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\managers\ShaderManager.h">
-      <Filter>Header Files\core\managers</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\integer.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\rendering\GLRenderer.h">
-      <Filter>Header Files\core\rendering</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat2x2.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\utility\tiny_obj_loader.h">
-      <Filter>Header Files\core\utility</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat2x3.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\utility\MeshLoader.h">
-      <Filter>Header Files\core\utility</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat2x4.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imgui_impl_glfw.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat3x2.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imgui_impl_opengl3.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat3x3.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imconfig.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat3x4.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imgui.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat4x2.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imgui_impl_opengl3_loader.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat4x3.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imgui_internal.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\mat4x4.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imstb_rectpack.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\matrix.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imstb_textedit.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\packing.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imstb_truetype.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\trigonometric.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\GUIBuilder.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\vec2.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\app\GLWindow.h">
-      <Filter>Header Files\core\app</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\vec3.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\app\GameApp.h">
-      <Filter>Header Files\core\app</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\vec4.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\BoxCollider.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\glm\vector_relational.hpp">
+      <Filter>Header Files\Miasma\core\glm</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\Collider.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\GUIBuilder.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\Component.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imconfig.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\MeshRenderable.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imgui.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\PointLight.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imgui_impl_glfw.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\SpinObject.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imgui_impl_opengl3.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\rendering\GLRenderer2D.h">
-      <Filter>Header Files\core\rendering</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imgui_impl_opengl3_loader.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\Sprite2D.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imgui_internal.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\physics\PhysicsController.h">
-      <Filter>Header Files\core\physics</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imgui_stdlib.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\CollisionBody.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imstb_rectpack.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\RigidBody.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imstb_textedit.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\CapsuleCollider.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\gui\imstb_truetype.h">
+      <Filter>Header Files\Miasma\core\gui</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\CollisionBody2D.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\input\IInputInterface.h">
+      <Filter>Header Files\Miasma\core\input</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\RigidBody2D.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\input\Input.h">
+      <Filter>Header Files\Miasma\core\input</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\BoxCollider2D.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\managers\ShaderManager.h">
+      <Filter>Header Files\Miasma\core\managers</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\utility\util.h">
-      <Filter>Header Files\core\utility</Filter>
+    <ClInclude Include="includes\Miasma\core\managers\TextureManager.h">
+      <Filter>Header Files\Miasma\core\managers</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\FPSCameraMovement.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\objects\Cube.h">
+      <Filter>Header Files\Miasma\core\objects</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\AnimatedSprite2D.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\objects\GameObject.h">
+      <Filter>Header Files\Miasma\core\objects</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\Text.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\objects\Quad.h">
+      <Filter>Header Files\Miasma\core\objects</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\gui\imgui_stdlib.h">
-      <Filter>Header Files\core\gui</Filter>
+    <ClInclude Include="includes\Miasma\core\objects\Rectangle.h">
+      <Filter>Header Files\Miasma\core\objects</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\utility\MiasmaMapLoader.h">
-      <Filter>Header Files\core\utility</Filter>
+    <ClInclude Include="includes\Miasma\core\objects\Transform.h">
+      <Filter>Header Files\Miasma\core\objects</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\Quad3D.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\objects\Triangle.h">
+      <Filter>Header Files\Miasma\core\objects</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\scenes\ChaosGameScene.h">
-      <Filter>Header Files\core\scenes</Filter>
+    <ClInclude Include="includes\Miasma\core\physics\PhysicsController.h">
+      <Filter>Header Files\Miasma\core\physics</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\scenes\IScene.h">
-      <Filter>Header Files\core\scenes</Filter>
+    <ClInclude Include="includes\Miasma\core\rendering\GLRenderer.h">
+      <Filter>Header Files\Miasma\core\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\scenes\MainScene.h">
-      <Filter>Header Files\core\scenes</Filter>
+    <ClInclude Include="includes\Miasma\core\rendering\GLRenderer2D.h">
+      <Filter>Header Files\Miasma\core\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\scenes\SandboxScene.h">
-      <Filter>Header Files\core\scenes</Filter>
+    <ClInclude Include="includes\Miasma\core\rendering\IRenderInterface.h">
+      <Filter>Header Files\Miasma\core\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\scenes\MiasmaScene.h">
-      <Filter>Header Files\core\scenes</Filter>
+    <ClInclude Include="includes\Miasma\core\rendering\Material.h">
+      <Filter>Header Files\Miasma\core\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\Cube.h">
-      <Filter>Header Files\core\objects</Filter>
+    <ClInclude Include="includes\Miasma\core\rendering\Texture2D.h">
+      <Filter>Header Files\Miasma\core\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\GameObject.h">
-      <Filter>Header Files\core\objects</Filter>
+    <ClInclude Include="includes\Miasma\core\scenes\ChaosGameScene.h">
+      <Filter>Header Files\Miasma\core\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\Quad.h">
-      <Filter>Header Files\core\objects</Filter>
+    <ClInclude Include="includes\Miasma\core\scenes\IScene.h">
+      <Filter>Header Files\Miasma\core\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\Rectangle.h">
-      <Filter>Header Files\core\objects</Filter>
+    <ClInclude Include="includes\Miasma\core\scenes\MainScene.h">
+      <Filter>Header Files\Miasma\core\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\Transform.h">
-      <Filter>Header Files\core\objects</Filter>
+    <ClInclude Include="includes\Miasma\core\scenes\MiasmaScene.h">
+      <Filter>Header Files\Miasma\core\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\objects\Triangle.h">
-      <Filter>Header Files\core\objects</Filter>
+    <ClInclude Include="includes\Miasma\core\scenes\SandboxScene.h">
+      <Filter>Header Files\Miasma\core\scenes</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\FollowTransform.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\utility\MeshLoader.h">
+      <Filter>Header Files\Miasma\core\utility</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\MoveObjectKeyboard.h">
-      <Filter>Header Files\core\components</Filter>
+    <ClInclude Include="includes\Miasma\core\utility\MiasmaMapLoader.h">
+      <Filter>Header Files\Miasma\core\utility</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\components\ui\ScrollView.h">
-      <Filter>Header Files\core\components\ui</Filter>
+    <ClInclude Include="includes\Miasma\core\utility\tiny_obj_loader.h">
+      <Filter>Header Files\Miasma\core\utility</Filter>
     </ClInclude>
-    <ClInclude Include="includes\core\input\Input.h">
-      <Filter>Header Files\core\input</Filter>
+    <ClInclude Include="includes\Miasma\core\utility\util.h">
+      <Filter>Header Files\Miasma\core\utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
