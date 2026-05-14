@@ -24,6 +24,7 @@ struct SceneCreationInfo
 	GLWindow* pWindow;
 	glm::vec2 screenSize;
 	bool scene2dRenderer;
+	std::string assetsRootFolder;
 };
 
 class IScene
