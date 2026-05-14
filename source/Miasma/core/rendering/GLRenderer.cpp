@@ -67,6 +67,10 @@ bool GLRenderer::DrawScene(std::unique_ptr<IScene>& scene)
 		int lightIndex = 0;
 		// loop through and render all of our meshes
 		for (auto& gameObject : scene->GetGameObjectsList()) {
+
+			glClearColor(0.392f, 0.584f, 0.929f, 1.0f);
+
+
 			MeshRenderable& mesh = gameObject->GetComponent<MeshRenderable>();
 			Sprite2D& sprite = gameObject->GetComponent<Sprite2D>();
 			Miasma::Component::Text& textComponent = gameObject->GetComponent<Miasma::Component::Text>();
