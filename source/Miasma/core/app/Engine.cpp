@@ -1,16 +1,21 @@
-#include <Miasma/core/app/GameApp.h>
+#include <Miasma/core/app/Engine.h>
 #include <Miasma/core/app/GLWindow.h>
 #include <Miasma/core/scenes/IScene.h>
 #include <Miasma/core/scenes/SandboxScene.h>
 #include <Miasma/core/scenes/ChaosGameScene.h>
 #include <Miasma/core/scenes/MiasmaScene.h>
 #include <Miasma/core/scenes/MainScene.h>
+#include <Miasma/core/utility/toml.hpp>
 #include <iostream>
+#include <cerrno>
 #include <sstream>
+#include <filesystem>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
+using namespace utility;
 
-std::unique_ptr<IScene> GameApp::m_currentScene = nullptr;
+std::unique_ptr<IScene> Engine::m_currentScene = nullptr;
 
-GameApp::GameApp() :
+Engine::Engine() :
 	m_lastTime(0.0),
 	m_currentTime(0.0),
 	m_numFrames(0),
@@ -22,13 +27,16 @@ GameApp::GameApp() :
 
 }
 
-GameApp::~GameApp()
+Engine::~Engine()
 {
 
 }
 
-void GameApp::InitializeGameApp()
+void Engine::InitializeGameEngine()
 {
+	// read the engine bootstrap file
+	loadEngineBootstrapConfig();
+
 	// create out window
 	m_glWindow = std::unique_ptr<GLWindow>(new GLWindow());
 	bool createWindowResult = m_glWindow->CreateGLWindow();
@@ -48,7 +56,7 @@ void GameApp::InitializeGameApp()
 	}
 }
 
-void GameApp::ProcessInput()
+void Engine::ProcessInput()
 {
 	// quit application
 	if (glfwGetKey(m_glWindow.get()->GetGLFWWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -70,7 +78,7 @@ void GameApp::ProcessInput()
 
 }
 
-void GameApp::RunGameAppLoop()
+void Engine::RunEngineLoop()
 {
 	bool runWindowLoop = true;
 	if (!m_currentScene) {
@@ -109,7 +117,26 @@ void GameApp::RunGameAppLoop()
 	}
 }
 
-void GameApp::calculateFrameRate()
+void Engine::ShutdownEngine()
+{
+	if (m_currentScene) {
+		m_currentScene->ExitScene();
+	}
+	if (m_renderer) {
+		m_renderer->Shutdown();
+	}
+	if (m_renderer2D) {
+		m_renderer2D->Shutdown();
+	}
+	PhysicsController::GetInstance().ShutdownPhysicsController();
+	if (m_glWindow) {
+		m_glWindow->ShutdownGLWindow();
+	}
+}
+
+#pragma region PRIVATE_ENGINE_METHODS
+
+void Engine::calculateFrameRate()
 {
 	m_currentTime = glfwGetTime();
 	m_deltaTime = m_currentTime - m_lastTime;
@@ -126,19 +153,22 @@ void GameApp::calculateFrameRate()
 	++m_numFrames;
 }
 
-void GameApp::ShutdownGameApp()
+void Engine::loadEngineBootstrapConfig()
 {
-	if (m_currentScene) {
-		m_currentScene->ExitScene();
+	toml::table bootstrapTable;
+	try
+	{
+		bootstrapTable = toml::parse_file(BOOTSTRAP_CFG_FILE);
+		auto assetsTable = bootstrapTable["assets"];
+		assetTexturesDirectory = std::filesystem::path( assetsTable["assetTexturesRoot"].value_or("./resources/textures"));
+		assetShadersDirectory = std::filesystem::path(assetsTable["assetShadersRoot"].value_or("./resources/shaders"));
+		assetModelsDirectory = std::filesystem::path(assetsTable["assetModelsRoot"].value_or("./resources/models"));
+		assetMaterialsDirectory = std::filesystem::path(assetsTable["assetMaterialsRoot"].value_or("./resources/materials"));
 	}
-	if (m_renderer) {
-		m_renderer->Shutdown();
-	}
-	if (m_renderer2D) {
-		m_renderer2D->Shutdown();
-	}
-	PhysicsController::GetInstance().ShutdownPhysicsController();
-	if (m_glWindow) {
-		m_glWindow->ShutdownGLWindow();
+	catch(const toml::parse_error& err)
+	{
+		std::cerr << std::format("Error loading {} - {}\n", BOOTSTRAP_CFG_FILE, err.description());
 	}
 }
+
+#pragma endregion PRIVATE_ENGINE_METHODS

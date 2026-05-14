@@ -120,7 +120,7 @@
     <ClCompile Include="source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Miasma\core\app\GameApp.cpp">
+    <ClCompile Include="source\Miasma\core\app\Engine.cpp">
       <Filter>Source Files\Miasma\core\app</Filter>
     </ClCompile>
     <ClCompile Include="source\Miasma\core\app\GLWindow.cpp">
@@ -272,7 +272,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="includes\Miasma\core\app\GameApp.h">
+    <ClInclude Include="includes\Miasma\core\app\Engine.h">
       <Filter>Header Files\Miasma\core\app</Filter>
     </ClInclude>
     <ClInclude Include="includes\Miasma\core\app\GLWindow.h">
@@ -525,6 +525,12 @@
       <Filter>Header Files\Miasma\core\utility</Filter>
     </ClInclude>
     <ClInclude Include="includes\Miasma\core\utility\util.h">
+      <Filter>Header Files\Miasma\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Miasma\core\utility\toml.hpp">
+      <Filter>Header Files\Miasma\core\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Miasma\core\utility\MiasmaLogger.hpp">
       <Filter>Header Files\Miasma\core\utility</Filter>
     </ClInclude>
   </ItemGroup>

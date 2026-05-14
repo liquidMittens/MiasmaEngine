@@ -121,10 +121,11 @@
       <AdditionalDependencies>.\libs\glfw-3.4\glfw3.lib;.\libs\ReactPhysics3D\lib\react3d_debug\reactphysics3d.lib;.\libs\box2d\box2d_debug\box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\</Command>
+      <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\
+xcopy /y $(ProjectDir)resources\engine.toml $(OutDir)</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copying resource to Debug Output Directory</Message>
+      <Message>Copying resources and engine.toml to Debug Output Directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,13 +147,14 @@
       <AdditionalDependencies>.\libs\glfw-3.4\glfw3.lib;.\libs\ReactPhysics3D\lib\react3d_release\reactphysics3d.lib;.\libs\box2d\box2d_release\box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\</Command>
-      <Message>Copying resource to Release Output Directory</Message>
+      <Command>xcopy /e /s /y $(ProjectDir)resources $(OutDir)resources\
+xcopy /k /y $(ProjectDir)resources\engine.toml $(OutDir)\</Command>
+      <Message>Copying resource and engine.toml to Release Output Directory</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\Miasma\core\app\GameApp.cpp" />
+    <ClCompile Include="source\Miasma\core\app\Engine.cpp" />
     <ClCompile Include="source\Miasma\core\app\GLWindow.cpp" />
     <ClCompile Include="source\Miasma\core\camera\Camera.cpp" />
     <ClCompile Include="source\Miasma\core\ecs\AnimatedSprite2D.cpp" />
@@ -204,7 +206,7 @@
     <ClCompile Include="source\Miasma\core\utility\MiasmaMapLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="includes\Miasma\core\app\GameApp.h" />
+    <ClInclude Include="includes\Miasma\core\app\Engine.h" />
     <ClInclude Include="includes\Miasma\core\app\GLWindow.h" />
     <ClInclude Include="includes\Miasma\core\camera\Camera.h" />
     <ClInclude Include="includes\Miasma\core\ecs\AnimatedSprite2D.h" />
@@ -286,8 +288,10 @@
     <ClInclude Include="includes\Miasma\core\scenes\MiasmaScene.h" />
     <ClInclude Include="includes\Miasma\core\scenes\SandboxScene.h" />
     <ClInclude Include="includes\Miasma\core\utility\MeshLoader.h" />
+    <ClInclude Include="includes\Miasma\core\utility\MiasmaLogger.hpp" />
     <ClInclude Include="includes\Miasma\core\utility\MiasmaMapLoader.h" />
     <ClInclude Include="includes\Miasma\core\utility\tiny_obj_loader.h" />
+    <ClInclude Include="includes\Miasma\core\utility\toml.hpp" />
     <ClInclude Include="includes\Miasma\core\utility\util.h" />
   </ItemGroup>
   <ItemGroup>

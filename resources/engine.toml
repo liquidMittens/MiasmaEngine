@@ -1,0 +1,6 @@
+# miasma engine config
+
+
+
+[scenes]
+sceneList = ["MainScene", "MiasmaScene", "SandboxScene" ]
