@@ -2,6 +2,7 @@
 #include <Miasma/core/app/GLWindow.h>
 #include <Miasma/core/objects/GameObject.h>
 #include <Miasma/core/app/Engine.h>
+#include <Miasma/core/utility/MiasmaLogger.hpp>
 #include <iostream>
 
 // TODO: change all scene creation info into bootstrap info?
@@ -25,6 +26,7 @@ void IScene::EnterScene(Engine* eng)
 	TextureManager::GetInstance().LoadTexturesFromDirectory(eng->EngineAssetTexureRoot());
 	m_sceneName = SCENE_TO_STRING(IScene);
 	m_engine = eng;
+	m_engine->onSceneLoadedEvent.addListener([](std::string ev) { utility::MiasmaLogger::Log(utility::LogLevel::Info, "[IScene] Loaded: {}", ev); });
 }
 
 void IScene::Update(float dt)

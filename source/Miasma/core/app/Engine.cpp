@@ -146,7 +146,7 @@ void Engine::ChangeScene(std::string_view sceneName)
 	if (m_currentScene) {
 		m_currentScene->EnterScene(this);
 		MiasmaLogger::Log(LogLevel::Info, "Loading Scene [{}]", m_currentScene->GetSceneName());
-		onSceneLoadedEvent.invoke(m_currentScene->GetSceneName());
+		onSceneLoadedEvent.invoke(std::format("Loaded Scene: {}", m_currentScene->GetSceneName()));
 	}
 }
 
