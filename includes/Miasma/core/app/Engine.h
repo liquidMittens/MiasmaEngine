@@ -14,7 +14,7 @@ using namespace Miasma::Renderer;
 using namespace Miasma::Physics;
 #include <Miasma/core/events/event.hpp>
 
-constexpr std::string_view BUILD_VER = "MiasmaEngine v0.1.1";
+constexpr std::string_view BUILD_VER = "MiasmaEngine v0.2.0";
 // bootstrap config location for now
 const std::filesystem::path ENGINE_DEFAULT_ROOT = "./resources";
 constexpr auto BOOTSTRAP_CFG_FILE = ".\\engine.toml";
