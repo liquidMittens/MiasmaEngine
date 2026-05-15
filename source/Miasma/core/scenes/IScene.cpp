@@ -24,6 +24,7 @@ void IScene::EnterScene(Engine* eng)
 	m_shaderManager.LoadShaderList(eng->EngineAssetShaderRoot());
 	TextureManager::GetInstance().LoadTexturesFromDirectory(eng->EngineAssetTexureRoot());
 	m_sceneName = SCENE_TO_STRING(IScene);
+	m_engine = eng;
 }
 
 void IScene::Update(float dt)

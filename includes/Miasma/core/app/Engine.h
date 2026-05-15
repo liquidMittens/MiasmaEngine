@@ -12,6 +12,7 @@ using namespace Miasma::Renderer;
 #include <Miasma/core/physics/PhysicsController.h>
 #include <Miasma/core/glfw/glfw3.h>
 using namespace Miasma::Physics;
+#include <Miasma/core/events/event.hpp>
 
 constexpr std::string_view BUILD_VER = "MiasmaEngine v0.1.1";
 // bootstrap config location for now
@@ -43,6 +44,14 @@ public:
 	const std::filesystem::path& EngineAssetShaderRoot() { return assetShadersDirectory; }
 	const std::filesystem::path& EngineAssetModelsRoot() { return assetModelsDirectory; }
 	const std::filesystem::path& EngineAssetMaterialsRoot() { return assetMaterialsDirectory; }
+
+#pragma region SCENE_EVENTS
+	/// <summary>
+	/// Event that fires when a new Scene is loaded.
+	/// </summary>
+	pulse::Event<std::string> onSceneLoadedEvent;
+
+#pragma endregion SCENE_EVENTS
 
 private:
 	std::unique_ptr<GLWindow> m_glWindow;

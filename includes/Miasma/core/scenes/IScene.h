@@ -60,6 +60,7 @@ protected:
 	glm::vec2 m_screenSize;
 	bool m_2dRenderer;
 	std::string m_sceneName;
+	Engine* m_engine;
 };
 
 #endif

@@ -115,6 +115,9 @@
     <Filter Include="Source Files\Miasma\core\ecs\ui">
       <UniqueIdentifier>{aa8bf23d-a8ad-4bdd-aba7-89d85aaaa272}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Miasma\core\events">
+      <UniqueIdentifier>{a9d2771e-5c12-419d-8e08-89482ae0ff17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -535,6 +538,9 @@
     </ClInclude>
     <ClInclude Include="includes\Miasma\core\scenes\SceneRegistry.hpp">
       <Filter>Header Files\Miasma\core\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="includes\Miasma\core\events\event.hpp">
+      <Filter>Header Files\Miasma\core\events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

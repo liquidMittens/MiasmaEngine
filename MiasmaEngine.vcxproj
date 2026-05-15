@@ -229,6 +229,7 @@ xcopy /k /y $(ProjectDir)resources\engine.toml $(OutDir)\</Command>
     <ClInclude Include="includes\Miasma\core\ecs\Sprite2D.h" />
     <ClInclude Include="includes\Miasma\core\ecs\Text.h" />
     <ClInclude Include="includes\Miasma\core\ecs\ui\ScrollView.h" />
+    <ClInclude Include="includes\Miasma\core\events\event.hpp" />
     <ClInclude Include="includes\Miasma\core\glad\glad.h" />
     <ClInclude Include="includes\Miasma\core\glfw\glfw3.h" />
     <ClInclude Include="includes\Miasma\core\glfw\glfw3native.h" />

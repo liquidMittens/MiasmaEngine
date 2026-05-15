@@ -48,7 +48,7 @@ void Engine::InitializeGameEngine()
 		m_render2DMode = sceneInfo.scene2dRenderer;
 		// init the scene registry
 		sceneRegistry.CreateSceneRegistry(&sceneInfo);
-		ChangeScene("MainScene");
+		ChangeScene("SandboxScene");
 
 		m_renderer = std::make_unique<Miasma::Renderer::GLRenderer>();
 		m_renderer->Initialize(m_glWindow.get());
@@ -146,6 +146,7 @@ void Engine::ChangeScene(std::string_view sceneName)
 	if (m_currentScene) {
 		m_currentScene->EnterScene(this);
 		MiasmaLogger::Log(LogLevel::Info, "Loading Scene [{}]", m_currentScene->GetSceneName());
+		onSceneLoadedEvent.invoke(m_currentScene->GetSceneName());
 	}
 }
 
