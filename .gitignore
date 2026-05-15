@@ -449,3 +449,6 @@ FodyWeavers.xsd
     About
 
 /*.sln
+
+# lib files
+libs/MiasmaEngine/**
