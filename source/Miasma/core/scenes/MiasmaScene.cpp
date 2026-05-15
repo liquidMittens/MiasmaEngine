@@ -18,6 +18,8 @@ MiasmaScene::~MiasmaScene()
 void MiasmaScene::EnterScene(Engine* eng)
 {
 	IScene::EnterScene(eng);
+	m_sceneName = SCENE_TO_STRING(MiasmaScene);
+
 	// create some objects
 	Material playerMaterial;
 	playerMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("borderedbackground"));

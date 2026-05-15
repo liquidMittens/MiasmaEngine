@@ -1,6 +1,10 @@
 # miasma engine config
 
-
+[assets]
+assetTexturesRoot = "./resources/textures"
+assetShadersRoot = "./resources/shaders"
+assetModelsRoot = "./resources/models"
+assetMaterialsRoot = "./resources/materials"
 
 [scenes]
-sceneList = ["MainScene", "MiasmaScene", "SandboxScene" ]
+startup = "SandboxScene"

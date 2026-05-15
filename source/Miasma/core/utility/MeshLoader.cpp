@@ -23,7 +23,7 @@ void utility::MeshLoader::LoadMeshFromFile(MeshLoaderInformation& meshLoaderInfo
 	std::string meshFilename = MESH_DIR + filename;
 	
 	if (!tinyobj::LoadObj(&attributes, &shapes, &materials, &warning, &error, meshFilename.c_str(), MATERIAL_DIR)) {
-		MiasmaLogger::Log(utility::LogLevel::Error, "utility::MeshLoader LoadMeshFromFile Failed: [{}]: {}\n", warning, error);
+		MiasmaLogger::Log(utility::LogLevel::Error, "utility::MeshLoader LoadMeshFromFile Failed: [{}]: {}", warning, error);
 	}
 
 	// this is our map to keep track of our non-unique vertex information

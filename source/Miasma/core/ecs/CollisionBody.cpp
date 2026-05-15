@@ -41,7 +41,7 @@ void CollisionBody::Update(float dt)
 	//m_transform = newTransform;
 	// update the gameobjects transform from the rigidbody
 	gameObject->transform.SetPosition(newPos.x, newPos.y, newPos.z);
-	MiasmaLogger::Log(LogLevel::Info, "CollisionBody({}): pos: ({},{},{})\n", gameObject->tag, newTransform.getPosition().x, newTransform.getPosition().y, newTransform.getPosition().z);
+	MiasmaLogger::Log(LogLevel::Info, "CollisionBody({}): pos: ({},{},{})", gameObject->tag, newTransform.getPosition().x, newTransform.getPosition().y, newTransform.getPosition().z);
 }
 
 void CollisionBody::Shutdown()

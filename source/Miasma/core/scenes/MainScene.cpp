@@ -21,6 +21,7 @@ MainScene::~MainScene()
 void MainScene::EnterScene(Engine* eng)
 {
 	IScene::EnterScene(eng);
+	m_sceneName = SCENE_TO_STRING(MainScene);
 
 	// create some objects
 	Material playerMaterial;

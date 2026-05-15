@@ -24,11 +24,11 @@ bool GLWindow::CreateGLWindow()
 {
 	bool result = true;
 	if (!InitGLWindow()) {
-		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLWindow!\n");
+		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLWindow!");
 		result = false;
 	}
 	if (!InitGLFWCursor()) {
-		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLFWcursor!\n");
+		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLFWcursor!");
 		result = false;
 	}
 
@@ -51,7 +51,7 @@ bool GLWindow::InitGLWindow()
 
 	m_window = glfwCreateWindow((int)SCREEN_SIZE.x, (int)SCREEN_SIZE.y, "GLRenderer", NULL, NULL);
 	if (m_window == nullptr) {
-		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLFWwindow object!\n");
+		MiasmaLogger::Log(LogLevel::Error, "Failed to create GLFWwindow object!");
 		glfwTerminate();
 	}
 

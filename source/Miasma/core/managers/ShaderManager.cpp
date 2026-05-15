@@ -67,7 +67,7 @@ void ShaderManager::LoadShader(const std::string& shaderName)
 			glGetShaderiv(vsInt, GL_COMPILE_STATUS, &success);
 			if (!success) {
 				glGetShaderInfoLog(vsInt, 1024, NULL, errorBuffer);
-				MiasmaLogger::Log(LogLevel::Error, "Error compiling vertex shader: {} msg: {}\n", vertexShaderFilename, errorBuffer);
+				MiasmaLogger::Log(LogLevel::Error, "Error compiling vertex shader: {} msg: {}", vertexShaderFilename, errorBuffer);
 			}
 			// fragment shader
 			sourcePtr = fragmentBuffer;
@@ -78,7 +78,7 @@ void ShaderManager::LoadShader(const std::string& shaderName)
 			glGetShaderiv(fsInt, GL_COMPILE_STATUS, &success);
 			if (!success) {
 				glGetShaderInfoLog(fsInt, 1024, NULL, errorBuffer);
-				MiasmaLogger::Log(LogLevel::Error, "Error compiling fragment shader: {} msg: {}\n", fragmentShaderFilename, errorBuffer);
+				MiasmaLogger::Log(LogLevel::Error, "Error compiling fragment shader: {} msg: {}", fragmentShaderFilename, errorBuffer);
 			}
 
 			// create program
@@ -89,7 +89,7 @@ void ShaderManager::LoadShader(const std::string& shaderName)
 			glGetProgramiv(newProgram, GL_LINK_STATUS, &success);
 			if (!success) {
 				glGetProgramInfoLog(newProgram, 1024, NULL, errorBuffer);
-				MiasmaLogger::Log(LogLevel::Error, "Error Linking Program for: {} msg: {}\n", shaderName, errorBuffer);
+				MiasmaLogger::Log(LogLevel::Error, "Error Linking Program for: {} msg: {}", shaderName, errorBuffer);
 			}
 
 			// we're linked we dont need to keep the shader compiled code objects anymore
@@ -114,7 +114,7 @@ ShaderInfo ShaderManager::GetShaderFromMap(std::string_view shaderName)
 			shader = (*shaderIter).second;
 		}
 		else {
-			MiasmaLogger::Log(utility::LogLevel::Error, "ERR: Could not load shader: {}\n", shaderName);
+			MiasmaLogger::Log(utility::LogLevel::Error, "ERR: Could not load shader: {}", shaderName);
 		}
 	}
 	return shader;

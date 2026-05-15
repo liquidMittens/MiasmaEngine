@@ -23,6 +23,7 @@ ChaosGameScene::~ChaosGameScene()
 void ChaosGameScene::EnterScene(Engine* eng)
 {
 	IScene::EnterScene(eng);
+	m_sceneName = SCENE_TO_STRING(ChaosGameScene);
 	pixelMaterial.AddTexture(TextureManager::GetInstance().GetTextureInfo("whitedot"));
 	pixelMaterial.AttachShader(m_shaderManager.GetShaderFromMap("BasicSprite"));
 	m_cameraBoundsMax = m_camera->GetComponent<Camera>().viewport();

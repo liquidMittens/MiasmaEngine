@@ -19,6 +19,7 @@ constexpr float moveSpeed = 2500.0;
 constexpr float jumpForce = 100000.0;
 constexpr float zoomSensitivity = -0.5f;
 
+#define SCENE_TO_STRING( x ) #x
 
 struct SceneCreationInfo
 {
@@ -48,6 +49,7 @@ public:
 	GameObjectsList GetGameObjectsList() { return m_gameObjectsList; }
 	LightListType GetLights() { return m_lights; }
 	GLFWwindow* GetGLFWWindow() { return m_glfwWindow; }
+	const std::string& GetSceneName() { return m_sceneName; }
 
 protected:
 	std::shared_ptr<GameObject> m_camera;
@@ -57,6 +59,7 @@ protected:
 	GLFWwindow* m_glfwWindow;
 	glm::vec2 m_screenSize;
 	bool m_2dRenderer;
+	std::string m_sceneName;
 };
 
 #endif

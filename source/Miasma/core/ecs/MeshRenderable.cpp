@@ -62,7 +62,7 @@ MeshRenderable::MeshRenderable(GameObject* owner, MeshRenderableCreateInfo* pCre
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(unsigned int), m_indices.data(), GL_STATIC_DRAW);
 	}
 	else {
-		MiasmaLogger::Log(LogLevel::Error, "MeshRenderable CreateInfo* is NULL\n");
+		MiasmaLogger::Log(LogLevel::Error, "MeshRenderable CreateInfo* is NULL");
 	}
 }
 
@@ -121,7 +121,7 @@ MeshRenderable::MeshRenderable(GameObject* owner, std::vector<float> vertices, s
 
 MeshRenderable::~MeshRenderable()
 {
-	MiasmaLogger::Log(LogLevel::Info, "Cleaning up MeshRenderable{}\n", m_meshName.c_str());
+	MiasmaLogger::Log(LogLevel::Info, "Cleaning up MeshRenderable{}", m_meshName.c_str());
 	glDeleteBuffers(1, &m_ibo);
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteVertexArrays(1, &m_vao);

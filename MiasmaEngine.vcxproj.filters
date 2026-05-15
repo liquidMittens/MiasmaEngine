@@ -533,6 +533,9 @@
     <ClInclude Include="includes\Miasma\core\utility\MiasmaLogger.hpp">
       <Filter>Header Files\Miasma\core\utility</Filter>
     </ClInclude>
+    <ClInclude Include="includes\Miasma\core\scenes\SceneRegistry.hpp">
+      <Filter>Header Files\Miasma\core\scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\BasicColor.fs">

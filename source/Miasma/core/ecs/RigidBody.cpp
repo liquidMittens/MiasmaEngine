@@ -89,7 +89,7 @@ void RigidBody::ApplyForce(rp3d::Vector3 force)
 {
 	if (m_rigidBody != nullptr) {
 		rp3d::Vector3 currentForce = m_rigidBody->getForce(); 
-		MiasmaLogger::Log(LogLevel::Info, "Camera force: {},{},{}\n", m_rigidBody->getForce().x, m_rigidBody->getForce().y, m_rigidBody->getForce().z);
+		MiasmaLogger::Log(LogLevel::Info, "Camera force: {},{},{}", m_rigidBody->getForce().x, m_rigidBody->getForce().y, m_rigidBody->getForce().z);
 		m_rigidBody->applyLocalForceAtCenterOfMass(force);
 	}
 }

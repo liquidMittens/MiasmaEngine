@@ -110,7 +110,7 @@ bool GLRenderer2D::DrawScene(std::unique_ptr<IScene>& scene)
 					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "currentFrameIndex"), animatedSprite.GetCurrentFrameIndex());
 					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_COLUMNS"), animatedSprite.GetAnimationInfo().frameSizeX);
 					glUniform1i(glGetUniformLocation(animatedSprite.GetMaterial().GetShader().shaderId, "MAX_ROWS"), animatedSprite.GetAnimationInfo().frameSizeY);
-					MiasmaLogger::Log(LogLevel::Info, "Current Frame: {}\n", animatedSprite.GetCurrentFrameIndex());
+					MiasmaLogger::Log(LogLevel::Info, "Current Frame: {}", animatedSprite.GetCurrentFrameIndex());
 				}
 
 				// set the model transform and sprite2D information

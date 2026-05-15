@@ -4,6 +4,8 @@
 #include <memory>
 #include <string_view>
 #include <filesystem>
+#include <unordered_set>
+#include <Miasma/core/scenes/SceneRegistry.hpp>
 #include <Miasma/core/rendering/GLRenderer.h>
 #include <Miasma/core/rendering/GLRenderer2D.h>
 using namespace Miasma::Renderer;
@@ -32,8 +34,9 @@ public:
 	void ShutdownEngine();
 
 	// Scene Methods
-	template<typename TScene, typename... Args>
-	void ChangeScene(Args&&... args);
+	void ChangeScene(std::string_view sceneName);
+	template<typename TScene>
+	void RegisterScene(std::string sceneName);
 
 	const std::filesystem::path& EngineAssetRoot() { return assetRootDirectory; }
 	const std::filesystem::path& EngineAssetTexureRoot() { return assetTexturesDirectory; }
@@ -43,19 +46,20 @@ public:
 
 private:
 	std::unique_ptr<GLWindow> m_glWindow;
+	std::unique_ptr<SceneCreationInfo> m_sceneCreationInfo;
 	std::unique_ptr<Miasma::Renderer::GLRenderer> m_renderer;
 	std::unique_ptr<Miasma::Renderer::GLRenderer2D> m_renderer2D;
 	static std::unique_ptr<IScene> m_currentScene;
 
 	// bootstrap variables
 	std::string assetRootDirectory;
+	std::string startUpSceneName;
 	// asset variables
 	std::filesystem::path assetTexturesDirectory;
 	std::filesystem::path assetShadersDirectory;
 	std::filesystem::path assetModelsDirectory;
 	std::filesystem::path assetMaterialsDirectory;
 
-	
 	// variables for calculating framerate
 	// fps counter
 	double m_lastTime, m_currentTime;
@@ -64,10 +68,15 @@ private:
 	double m_deltaTime;
 	bool m_render2DMode;
 	bool m_mouseModeEnabled;
+	
+	// scene registry
+	SceneRegistry sceneRegistry;
 
 	void calculateFrameRate();
 	// engine bootstrapper method
 	void loadEngineBootstrapConfig();
+	// validate method for engine toml file
+	void validateEngineBootstrapConfig();
 };
 
 #endif
