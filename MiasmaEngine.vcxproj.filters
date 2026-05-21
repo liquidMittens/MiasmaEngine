@@ -120,9 +120,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\Miasma\core\app\Engine.cpp">
       <Filter>Source Files\Miasma\core\app</Filter>
     </ClCompile>
